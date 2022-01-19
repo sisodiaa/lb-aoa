@@ -1,0 +1,21 @@
+# .rubocop.yml
+
+# We want Exclude directives from different
+# config files to get merged, not overwritten
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
+  # Performance cops are bundled with Standard
+  - rubocop-performance
+  # Standard's config uses this custom cop,
+  # so it must be loaded
+  - standard/cop/block_single_line_braces
+
+inherit_gem:
+  standard: config/base.yml
+
+inherit_from:
+  - .rubocop_rails.yml
+  - .rubocop_strict.yml
