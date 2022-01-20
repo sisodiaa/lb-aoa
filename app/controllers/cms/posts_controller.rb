@@ -2,11 +2,15 @@ module CMS
   class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
 
-    def index; end
+    def index
+      @posts = Post.all
+    end
 
     def show; end
 
-    def new; end
+    def new
+      @post = Post.new
+    end
 
     def create
       @post = Post.new(post_params)
@@ -14,7 +18,7 @@ module CMS
       if @post.save
         redirect_to cms_post_path(@post), notice: "Post was successfully created."
       else
-        render :new
+        render :new, status: :unprocessable_entity
       end
     end
 
@@ -24,16 +28,17 @@ module CMS
       if @post.update(post_params)
         redirect_to cms_post_path(@post), notice: "Post was successfully updated."
       else
-        render :edit
+        render :edit, status: :unprocessable_entity
       end
     end
 
     def destroy
       @post.destroy
-      redirect_to cms_posts_url, notice: "Post was successfully destroyed."
+      redirect_to cms_posts_url, status: :see_other, notice: "Post was successfully destroyed."
     end
 
     private
+
     def set_post
       @post = Post.find(params[:id])
     end
