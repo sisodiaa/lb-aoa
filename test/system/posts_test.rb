@@ -38,6 +38,8 @@ class PostsTest < ApplicationSystemTestCase
     click_on "New Post"
 
     fill_in "Title", with: "Do not pluck flowers"
+    content = 'Be a responsible resident, and care for flowers & trees.'
+    find(:xpath, "//trix-editor[@id='post_content']").set(content)
     click_on "Create Post"
   end
 

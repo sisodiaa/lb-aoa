@@ -84,7 +84,6 @@ class PostTest < ActiveSupport::TestCase
   end
 
   test "that content is present" do
-    skip
     @draft_post.content = ""
     assert_not @draft_post.valid?, "Content is missing"
   end

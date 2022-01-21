@@ -24,6 +24,7 @@ module CMS
       assert_difference("Post.count") do
         post cms_posts_url, params: {
           post: {
+            content: '<h1><em>Rich text</em> using HTML</h1>',
             title: "New title of a new post"
           }
         }
