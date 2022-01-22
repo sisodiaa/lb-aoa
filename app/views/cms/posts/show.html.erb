@@ -1,3 +1,9 @@
-<div class="notice"><%= flash[:notice] %></div>
+<div class="max-w-4xl mx-auto p-8 border-2 rounded-lg border-slate-100">
+  <h1 class="text-4xl mb-6 text-zinc-900"><%= @post.title %></h1>
 
-<div><%= @post.title %></div>
+  <div class="text-gray-800">
+    <%= @post.content %>
+  </div>
+
+  <%= link_to "Edit", edit_cms_post_path(@post), class: "block mt-6 btn btn--normal btn--secondary" %>
+</div>

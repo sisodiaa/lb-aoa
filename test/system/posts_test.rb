@@ -59,7 +59,7 @@ class PostsTest < ApplicationSystemTestCase
   def delete_first_post
     visit cms_posts_url
     page.accept_confirm do
-      click_on "Destroy", match: :first
+      click_on "Delete", match: :first
     end
   end
 end

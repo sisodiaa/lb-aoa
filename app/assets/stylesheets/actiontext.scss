@@ -31,7 +31,9 @@
   & ol {
     @apply list-decimal list-inside;
   }
+}
 
+trix-editor {
   @apply bg-white border border-gray-300 text-gray-900 rounded-lg
          focus:ring-blue-500 focus:border-blue-500 min-h-[15rem];
 }
