@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   include AASM
 
+  has_many :documents, as: :documentable, dependent: :destroy
+
   has_rich_text :content
 
   enum publication_state: {

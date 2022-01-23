@@ -1,0 +1,11 @@
+image:
+  annotation: A square placeholder image
+  documentable: plantation (Post)
+
+pdf:
+  annotation: A cheatsheet for Vim editor
+  documentable: plantation (Post)
+
+jpg:
+  annotation: lorem ipsum
+  documentable: club_chiller (Post)
