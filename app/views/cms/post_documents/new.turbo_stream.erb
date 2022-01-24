@@ -1,0 +1,5 @@
+<%= turbo_stream.replace(
+  dom_id(@document, :post),
+  partial: "form",
+  locals: { post: @post, document: @document }
+)%>

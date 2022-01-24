@@ -1,0 +1,5 @@
+<%= turbo_stream.remove dom_id(@document, :post) %>
+
+<%= turbo_stream.replace "flash-messages" do %>
+  <%= flash_messages %>
+<% end %>

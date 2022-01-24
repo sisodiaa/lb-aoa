@@ -10,7 +10,7 @@ class Document < ApplicationRecord
   validate :type_of_attachment, if: :attached?
 
   def presence_of_attachment
-    errors.add(:file, "can't be absent") unless attached?
+    errors.add(:file, "is not choosed") unless attached?
   end
 
   def size_of_attachment

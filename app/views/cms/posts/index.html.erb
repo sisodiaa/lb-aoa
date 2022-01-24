@@ -32,6 +32,7 @@
                   Visibility
                 </th>
                 <th class="relative py-3 px-6"></th>
+                <th class="relative py-3 px-6"></th>
               </tr>
             </thead>
 
@@ -48,19 +49,19 @@
                     <%= post.visibility_state %>
                   </td>
                   <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <div class="inline-flex rounded-md shadow-sm">
+                    <div class="inline-flex rounded-md shadow-sm" role="group">
                       <%= link_to(
                         "Show", 
                         cms_post_path(post),
-                        class: "py-2 px-4 text-sm font-medium text-gray-900
-                                bg-white rounded-l-lg border border-gray-200
+                        class: "py-2 px-3 text-xs font-medium text-gray-900
+                                bg-white rounded-l-md border border-gray-200
                                 hover:bg-gray-100 hover:text-blue-700 focus:z-10
                                 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
                       )%>
                       <%= link_to(
                         "Edit", 
                         edit_cms_post_path(post),
-                        class: "py-2 px-4 text-sm font-medium text-gray-900
+                        class: "py-2 px-3 text-xs font-medium text-gray-900
                                 bg-white border-t border-b border-gray-200
                                 hover:bg-gray-100 hover:text-blue-700 focus:z-10
                                 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
@@ -72,12 +73,21 @@
                           turbo_method: :delete,
                           turbo_confirm: 'Are you sure?'
                         },
-                        class: "py-2 px-4 text-sm font-medium text-gray-900
+                        class: "py-2 px-3 text-xs font-medium text-gray-900
                                 bg-white rounded-r-md border border-gray-200
                                 hover:bg-gray-100 hover:text-blue-700 focus:z-10
                                 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
                       )%>
                     </div>
+                  </td>
+                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
+                    <%= link_to(
+                      "Attachments", 
+                      cms_post_documents_path(post),
+                      class: "text-white bg-indigo-800 hover:bg-indigo-900
+                              focus:ring-4 focus:ring-indigo-300 font-medium
+                              rounded-md text-xs px-3 py-2 text-center mr-2 mb-2"
+                    )%>
                   </td>
                 </tr>
               <% end %>

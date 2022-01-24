@@ -13,7 +13,9 @@
   <body>
     <%= render "shared/navbar" %>
 
-    <%= flash_messages %>
+    <%= turbo_frame_tag "flash-messages" do %>
+      <%= flash_messages %>
+    <% end %>
 
     <div class="relative container mx-auto pt-6">
       <%= yield %>

@@ -1,0 +1,9 @@
+<%= turbo_stream.append(
+  "post-documents",
+  partial: "post_document",
+  locals: { document: @document, post: @post }
+)%>
+
+<%= turbo_stream.replace "flash-messages" do %>
+  <%= flash_messages %>
+<% end %>
