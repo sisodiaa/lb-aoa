@@ -18,7 +18,12 @@ module CMS
       if @post.save
         redirect_to cms_post_path(@post), notice: "Post was successfully created."
       else
-        render :new, status: :unprocessable_entity
+        respond_to do |format|
+          format.turbo_stream do
+            render :new
+          end
+          format.html { render :new, status: :unprocessable_entity }
+        end
       end
     end
 
@@ -33,8 +38,17 @@ module CMS
     end
 
     def destroy
-      @post.destroy
-      redirect_to cms_posts_url, status: :see_other, notice: "Post was successfully destroyed."
+      respond_to do |format|
+        if @post.destroy
+          format.turbo_stream do
+            flash.now[:notice] = "Post was successfully destroyed."
+          end
+          format.html do
+            flash[:notice] = "Post was successfully destroyed."
+            redirect_to cms_posts_url, status: :see_other
+          end
+        end
+      end
     end
 
     private

@@ -1,5 +1,6 @@
 <%= form_with(
   model: [:cms, post],
+  id: dom_id(post),
   class: "lg:w-1/2 p-5 rounded border border-slate-200 bg-fuchsia-50"
 ) do |form| %>
   <% if post.errors.any? %>

@@ -29,7 +29,8 @@ module CMS
 
     test "destroying a Post" do
       delete_first_post
-      assert_text "Post was successfully destroyed"
+      assert_selector "tbody tr", count: 20
+      assert_selector :css, "[role='toast']", text: "Post was successfully destroyed."
     end
 
     private
