@@ -17,24 +17,15 @@ module FlashMessagesHelper
 
   def toast(type, message)
     tag.div(
-      id: toast_id(type),
       class: "flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow "\
-             "absolute top-20 right-4",
-      role: "alert"
+             "absolute top-20 right-4 transition-opacity duration-1000 z-20",
+      role: "toast",
+      data: {controller: "toast", "toast-target": "notification"}
     ) do
       concat(toast_icon_wrapper(type))
       concat(toast_body(message))
       concat(toast_close(type))
     end
-  end
-
-  def toast_id(type)
-    {
-      notice: "toast-default",
-      success: "toast-success",
-      error: "toast-danger",
-      alert: "toast-warning"
-    }.stringify_keys[type.to_s] || type.to_s
   end
 
   def toast_icon_wrapper(type)
@@ -56,7 +47,7 @@ module FlashMessagesHelper
              "rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100"\
              "inline-flex h-8 w-8",
       type: "button",
-      data: {collapse_toggle: toast_id(type).to_s},
+      data: {action: "click->toast#close"},
       aria: {label: "Close"}
     ) do
       concat(tag.span("Close", class: "sr-only"))

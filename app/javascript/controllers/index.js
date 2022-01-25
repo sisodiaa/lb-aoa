@@ -9,3 +9,6 @@ application.register("hello", HelloController)
 
 import ResetFormController from "./reset_form_controller.js"
 application.register("reset-form", ResetFormController)
+
+import ToastController from "./toast_controller.js"
+application.register("toast", ToastController)
