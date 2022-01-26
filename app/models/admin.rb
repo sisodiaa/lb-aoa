@@ -5,8 +5,8 @@ class Admin < ApplicationRecord
     :recoverable, :rememberable, :validatable, :lockable, :timeoutable
 
   enum affiliation: {
-    staff_member: 0,
-    board_member: 1
+    board_member: 0,
+    staff_member: 1
   }
 
   enum status: {
