@@ -13,7 +13,7 @@
   }
 
   .btn--normal {
-    @apply text-sm px-5 py-2.5 mr-2 mb-2 w-32 min-w-min;
+    @apply text-sm px-5 py-2.5 mr-2 mb-2 w-32 min-w-max;
   }
 
   .btn--primary {

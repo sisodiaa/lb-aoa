@@ -1,0 +1,56 @@
+<div class="p-4 mx-auto max-w-md bg-white rounded-lg border border-gray-200
+            shadow-md sm:p-6 lg:p-8">
+  <%= form_for(
+    resource,
+    as: resource_name,
+    url: unlock_path(resource_name),
+    html: { method: :post }
+  ) do |f| %>
+    <div class="space-y-6">
+      <%= render "accounts/admins/shared/error_messages", resource: resource %>
+
+      <h3 class="pt-0 text-xl font-medium text-gray-900">
+        Unlock your account
+      </h3>
+
+      <div class="field">
+        <%= f.label :email, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-gray-400">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <use href="/assets/feather-sprite.svg#mail" />
+            </svg>
+          </div>
+
+          <%= f.email_field(
+            :email,
+            autofocus: true,
+            autocomplete: "email",
+            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                    w-full pl-10 p-2.5"
+          )%>
+        </div>
+      </div>
+
+      <%= f.button class: "btn btn--normal btn--secondary w-full" do %>
+          <span class="inline-block mr-1">Resend unlock instructions</span>
+          <svg
+            class="inline-block w-4 h-4 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <use href="/assets/feather-sprite.svg#send" />
+          </svg>
+      <% end %>
+
+      <div class="text-sm text-indigo-500">
+        <%= render "accounts/admins/shared/links" %>
+      </div>
+    </div>
+  <% end %>
+</div>
