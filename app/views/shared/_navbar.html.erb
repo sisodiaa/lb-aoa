@@ -82,13 +82,14 @@
           </a>
         </li>
         <li>
-          <a
-            href="#"
-            class="block py-2 pr-4 pl-3 text-gray-300 hover:bg-lb-soft-300
-                   hover:rounded md:hover:bg-transparent md:border-0
-                   md:hover:text-gray-50 md:p-0">
-            Contact
-          </a>
+          <%= link_to(
+            "Sign out",
+            destroy_admin_session_path,
+            data: {turbo_method: :delete},
+            class: "block py-2 pr-4 pl-3 text-gray-300 hover:bg-lb-soft-300
+                    hover:rounded md:hover:bg-transparent md:border-0
+                    md:hover:text-gray-50 md:p-0"
+          )%>
         </li>
       </ul>
     </div>
