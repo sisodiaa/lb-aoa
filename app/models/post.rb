@@ -7,7 +7,7 @@ class Post < ApplicationRecord
 
   enum publication_state: {
     draft: 0,
-    finished: 1
+    published: 1
   }
 
   enum visibility_state: {
@@ -25,10 +25,10 @@ class Post < ApplicationRecord
     no_direct_assignment: true
   ) do
     state :draft, initial: true
-    state :finished
+    state :published
 
     event :publish do
-      transitions from: :draft, to: :finished
+      transitions from: :draft, to: :published
     end
   end
 
@@ -43,15 +43,11 @@ class Post < ApplicationRecord
 
     # Casting can only be performed on a published post
     event :broadcast do
-      transitions from: :members, to: :visitors, if: :publication_finished?
+      transitions from: :members, to: :visitors, if: :published?
     end
 
     event :narrowcast do
-      transitions from: :visitors, to: :members, if: :publication_finished?
+      transitions from: :visitors, to: :members, if: :published?
     end
-  end
-
-  def publication_finished?
-    finished?
   end
 end
