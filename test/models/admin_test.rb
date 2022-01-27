@@ -19,6 +19,10 @@ class AdminTest < ActiveSupport::TestCase
     assert_not @confirmed_board_admin.valid?, "Last name is not present"
   end
 
+  test "that full name concatenate first name and last name" do
+    assert_equal "Admin One", @confirmed_board_admin.full_name
+  end
+
   test "that ArgumentError is raised upon invalid assignment to affiliation" do
     assert_raises ArgumentError do
       @confirmed_board_admin.affiliation = "resident"
