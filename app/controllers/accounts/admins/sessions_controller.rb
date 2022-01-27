@@ -14,9 +14,16 @@ class Accounts::Admins::SessionsController < Devise::SessionsController
   # end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super do
+      respond_to do |format|
+        format.turbo_stream do
+          redirect_to after_sign_out_path_for(resource_name), status: :see_other
+          return
+        end
+      end
+    end
+  end
 
   # protected
 
