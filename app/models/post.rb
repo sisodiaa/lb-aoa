@@ -11,8 +11,8 @@ class Post < ApplicationRecord
   }
 
   enum visibility_state: {
-    members: 0,
-    visitors: 1
+    visitors: 0,
+    members: 1
   }
 
   validates :title, presence: true, length: {maximum: 256}
