@@ -16,7 +16,23 @@ Rails.application.routes.draw do
         to: "admins/registrations#update",
         as: "admin_registration",
         via: %i[put patch]
+
+      scope "/management" do
+        unauthenticated do
+          root to: "admins/sessions#new", as: :management_root
+        end
+      end
     end
+  end
+
+  devise_scope :admin do
+    authenticated :admin do
+      root to: "management/dashboard#index", as: :admin_root
+    end
+  end
+
+  namespace :management do
+    get "dashboard", to: "dashboard#index", as: "dashboard"
   end
 
   namespace :cms do

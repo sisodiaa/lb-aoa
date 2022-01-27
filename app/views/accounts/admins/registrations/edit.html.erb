@@ -1,43 +1,154 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="p-4 mx-auto max-w-md bg-white rounded-lg border border-gray-200
+            shadow-md sm:p-6 lg:p-8">
+  <%= form_for(
+    resource,
+    as: resource_name,
+    url: registration_path(resource_name),
+    html: {method: :put}
+  ) do |f| %>
+    <div class="space-y-6">
+      <%= render "accounts/admins/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "accounts/admins/shared/error_messages", resource: resource %>
+      <ul role="list" class="list-inside list-none bg-green-50 text-green-600 text-sm rounded-lg p-6 mb-6">
+        <li class="font-light">Password should be at least 8 characters long</li>
+      </ul>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <h3 class="pt-0 text-xl font-medium text-gray-900">
+        Update <%= resource_name.to_s.humanize %> password
+      </h3>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <div class="field">
+        <p class="block mb-2 text-sm font-medium text-gray-900">Admin</p>
+
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-gray-400">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <use href="/assets/feather-sprite.svg#user" />
+            </svg>
+          </div>
+
+          <p class="bg-stone-200 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                    w-full pl-10 p-2.5 cursor-not-allowed">
+            <%= resource.full_name %>
+          </p>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :email, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-gray-400">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <use href="/assets/feather-sprite.svg#mail" />
+            </svg>
+          </div>
+
+          <%= f.email_field(
+            :email,
+            disabled: true,
+            class: "bg-stone-200 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                    w-full pl-10 p-2.5 cursor-not-allowed"
+          )%>
+        </div>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :password, "New Password", class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-gray-400">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <use href="/assets/feather-sprite.svg#key" />
+            </svg>
+          </div>
+
+          <%= f.password_field(
+            :password,
+            autocomplete: "new-password",
+            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                    w-full pl-10 p-2.5"
+          )%>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-gray-400">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <use href="/assets/feather-sprite.svg#key" />
+            </svg>
+          </div>
+
+          <%= f.password_field(
+            :password_confirmation,
+            autocomplete: "new-password",
+            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                    w-full pl-10 p-2.5"
+          )%>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :current_password, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-gray-400">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <use href="/assets/feather-sprite.svg#key" />
+            </svg>
+          </div>
+
+          <%= f.password_field(
+            :current_password,
+            autocomplete: "current-password",
+            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                    w-full pl-10 p-2.5"
+          )%>
+        </div>
+      </div>
+
+      <%= f.button class: "btn btn--normal btn--secondary w-full" do %>
+        <span class="inline-block mr-1">Update</span>
+
+        <svg
+          class="inline-block w-4 h-4 fill-[none] stroke-current stroke-2"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <use href="/assets/feather-sprite.svg#edit-3" />
+        </svg>
+      <% end %>
+    </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>
