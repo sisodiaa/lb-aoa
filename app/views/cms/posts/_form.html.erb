@@ -4,7 +4,7 @@
   class: "lg:w-1/2 p-5 rounded border border-slate-200 bg-fuchsia-50"
 ) do |form| %>
   <% if post.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-600 rounded-lg p-6 mb-6">
+    <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
       <h2 class="font-medium mb-2">
         <%= pluralize(post.errors.count, "error") %> prohibited this post from being saved
       </h2>

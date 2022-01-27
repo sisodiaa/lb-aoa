@@ -7,7 +7,7 @@
   }
 ) do |form| %>
   <% if document.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-600 rounded-lg p-6 mb-6">
+    <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
       <h2 class="font-medium mb-2">
         <%= pluralize(document.errors.count, "error") %> prohibited this document from being attached
       </h2>
