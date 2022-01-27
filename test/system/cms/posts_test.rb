@@ -3,11 +3,17 @@ require "application_system_test_case"
 module CMS
   class PostsTest < ApplicationSystemTestCase
     setup do
+      Warden.test_mode!
+      @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_post = posts(:plantation)
+
+      login_as @confirmed_board_admin, scope: :admin
     end
 
     teardown do
-      @draft_post = nil
+      logout :admin
+      @confirmed_board_admin = @draft_post = nil
+      Warden.test_reset!
     end
 
     test "creating a Post" do

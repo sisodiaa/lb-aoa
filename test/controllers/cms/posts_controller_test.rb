@@ -3,62 +3,90 @@ require "test_helper"
 module CMS
   class PostsControllerTest < ActionDispatch::IntegrationTest
     setup do
+      @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_post = posts(:plantation)
     end
 
     teardown do
-      @draft_post = nil
+      @confirmed_board_admin = @draft_post = nil
+    end
+
+    test "#authenticate_admin!" do
+      get cms_posts_path
+      assert_redirected_to new_admin_session_path
     end
 
     test "should get index" do
-      get cms_posts_url
-      assert_response :success
+      authorised_admin do
+        get cms_posts_url
+        assert_response :success
+      end
     end
 
     test "should get new" do
-      get new_cms_post_url
-      assert_response :success
+      authorised_admin do
+        get new_cms_post_url
+        assert_response :success
+      end
     end
 
     test "should create post" do
-      assert_difference("Post.count") do
-        post cms_posts_url, params: {
-          post: {
-            content: '<h1><em>Rich text</em> using HTML</h1>',
-            title: "New title of a new post"
+      authorised_admin do
+        assert_difference("Post.count") do
+          post cms_posts_url, params: {
+            post: {
+              content: "<h1><em>Rich text</em> using HTML</h1>",
+              title: "New title of a new post"
+            }
           }
-        }
-      end
+        end
 
-      assert_redirected_to cms_post_url(Post.last)
+        assert_redirected_to cms_post_url(Post.last)
+      end
     end
 
     test "should show post" do
-      get cms_post_url(@draft_post)
-      assert_response :success
+      authorised_admin do
+        get cms_post_url(@draft_post)
+        assert_response :success
+      end
     end
 
     test "should get edit" do
-      get edit_cms_post_url(@draft_post)
-      assert_response :success
+      authorised_admin do
+        get edit_cms_post_url(@draft_post)
+        assert_response :success
+      end
     end
 
     test "should update post" do
-      patch cms_post_url(@draft_post), params: {
-        post: {
-          title: "Updating the title of the post"
+      authorised_admin do
+        patch cms_post_url(@draft_post), params: {
+          post: {
+            title: "Updating the title of the post"
+          }
         }
-      }
 
-      assert_redirected_to cms_post_url(@draft_post)
+        assert_redirected_to cms_post_url(@draft_post)
+      end
     end
 
     test "should destroy post" do
-      assert_difference("Post.count", -1) do
-        delete cms_post_url(@draft_post)
-      end
+      authorised_admin do
+        assert_difference("Post.count", -1) do
+          delete cms_post_url(@draft_post)
+        end
 
-      assert_redirected_to cms_posts_url
+        assert_redirected_to cms_posts_url
+      end
+    end
+
+    private
+
+    def authorised_admin
+      sign_in @confirmed_board_admin, scope: :admin
+      yield if block_given?
+      sign_out :admin
     end
   end
 end

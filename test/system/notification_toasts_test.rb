@@ -2,17 +2,21 @@ require "application_system_test_case"
 
 class NotificationToastsTest < ApplicationSystemTestCase
   setup do
+    Warden.test_mode!
+    @confirmed_board_admin = admins(:confirmed_board_admin)
     @draft_post = posts(:plantation)
 
     @draft_post.documents.each do |document|
       attach_file_to_record(document.file)
     end
-
+    login_as @confirmed_board_admin, scope: :admin
     update_post
   end
 
   teardown do
-    @draft_post = nil
+    logout :admin
+    @confirmed_board_admin = @draft_post = nil
+    Warden.test_reset!
   end
 
   test "alert is shown in a toast notification" do

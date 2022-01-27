@@ -1,5 +1,6 @@
 module CMS
   class PostDocumentsController < ApplicationController
+    before_action :authenticate_admin!
     before_action :set_post
 
     def index
