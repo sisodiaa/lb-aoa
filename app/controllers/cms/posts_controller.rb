@@ -52,6 +52,10 @@ module CMS
       end
     end
 
+    def pundit_user
+      current_admin
+    end
+
     private
 
     def set_post

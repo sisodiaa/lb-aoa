@@ -1,9 +1,27 @@
 <div class="max-w-4xl mx-auto p-8 border-2 rounded-lg border-slate-100">
   <h1 class="text-4xl mb-6 text-zinc-900"><%= @post.title %></h1>
 
-  <div class="text-gray-800">
+  <div class="text-gray-800 mb-6">
     <%= @post.content %>
   </div>
 
-  <%= link_to "Edit", edit_cms_post_path(@post), class: "block mt-6 btn btn--normal btn--secondary" %>
+  <%= turbo_frame_tag "post-publication-section" do %>
+    <div class="inline-flex">
+      <%= link_to(
+        "Edit",
+        edit_cms_post_path(@post),
+        class: "btn btn--normal btn--secondary"
+      )%>
+
+      <% if CMS::PublicationPolicy.new(current_admin, @post).update? %>
+        <%= button_to(
+          "Publish Post",
+          publish_cms_post_path(@post),
+          method: :patch,
+          params: {post: {publication_state: "published"}},
+          class: "mr-3 btn btn--normal btn--success"
+        )%>
+      <% end %>
+    </div>
+  <% end %>
 </div>

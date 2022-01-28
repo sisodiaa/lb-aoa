@@ -41,5 +41,7 @@ Rails.application.routes.draw do
     end
   end
 
+  patch "cms/posts/:id/publish", to: "cms/publications#update", as: "publish_cms_post"
+
   root to: "cms/posts#index"
 end
