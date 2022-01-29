@@ -17,14 +17,20 @@
   }
 
   .btn--primary {
-    @apply from-lb-300 via-lb-400 to-lb-500
-           hover:from-lb-400 hover:via-lb-500 hover:to-lb-600
+    @apply from-lb-200 via-lb-400 to-lb-600
+           hover:from-lb-300 hover:via-lb-500 hover:to-lb-700
            focus:ring-lb-50;
   }
 
   .btn--secondary {
-    @apply from-indigo-500 via-indigo-600 to-indigo-700
-           hover:from-indigo-600 hover:via-indigo-700 hover:to-indigo-800
+    @apply from-indigo-400 via-indigo-500 to-indigo-600
+           hover:from-indigo-500 hover:via-indigo-600 hover:to-indigo-700
+           focus:ring-indigo-50;
+  }
+
+  .btn--success {
+    @apply from-green-400 via-green-500 to-green-600
+           hover:from-green-500 hover:via-green-600 hover:to-green-700
            focus:ring-indigo-50;
   }
 }
