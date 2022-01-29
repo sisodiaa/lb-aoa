@@ -28,9 +28,13 @@ module CMS
       end
     end
 
-    def edit; end
+    def edit
+      authorize @post, policy_class: CMS::PostPolicy
+    end
 
     def update
+      authorize @post, policy_class: CMS::PostPolicy
+
       if @post.update(post_params)
         redirect_to cms_post_path(@post), notice: "Post was successfully updated."
       else
@@ -39,6 +43,8 @@ module CMS
     end
 
     def destroy
+      authorize @post, policy_class: CMS::PostPolicy
+
       respond_to do |format|
         if @post.destroy
           format.turbo_stream do

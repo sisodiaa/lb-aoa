@@ -3,3 +3,7 @@ en:
    default: 'You cannot perform this action.'
    cms/publication_policy:
      update?: 'You can not perform this action on a published post.'
+   cms/post_policy:
+     edit?: 'You can not perform this action on a published post.'
+     update?: 'You can not perform this action on a published post.'
+     destroy?: 'You can not perform this action on a published post.'
