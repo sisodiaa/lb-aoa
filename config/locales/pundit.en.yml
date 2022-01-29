@@ -7,3 +7,6 @@ en:
      edit?: 'You can not perform this action on a published post.'
      update?: 'You can not perform this action on a published post.'
      destroy?: 'You can not perform this action on a published post.'
+   cms/post_documents_policy:
+     create?: 'You can not perform this action on a published post.'
+     destroy?: 'You can not perform this action on a published post.'

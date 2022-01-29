@@ -6,10 +6,16 @@ module CMS
       Warden.test_mode!
       @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_post = posts(:plantation)
+      @published_post = posts(:club_chiller)
 
       @draft_post.documents.each do |document|
         attach_file_to_record(document.file)
       end
+
+      @published_post.documents.each do |document|
+        attach_file_to_record(document.file)
+      end
+
       login_as @confirmed_board_admin, scope: :admin
     end
 
@@ -40,6 +46,13 @@ module CMS
       delete_first_attachment
       assert_selector "li.post-document", count: 1
       assert_text "Attachment was successfully removed"
+    end
+
+    test "Remove button and form are not shown for published post" do
+      visit cms_post_documents_path(@published_post)
+
+      assert_no_selector "form"
+      assert_no_selector "a", text: "Remove"
     end
 
     private

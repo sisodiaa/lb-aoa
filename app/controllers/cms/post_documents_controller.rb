@@ -8,6 +8,8 @@ module CMS
     end
 
     def create
+      authorize @post, policy_class: CMS::PostDocumentsPolicy
+
       @document = @post.documents.build(document_params)
 
       respond_to do |format|
@@ -29,6 +31,8 @@ module CMS
     end
 
     def destroy
+      authorize @post, policy_class: CMS::PostDocumentsPolicy
+
       @document = @post.documents.find(params[:id])
 
       respond_to do |format|
@@ -42,6 +46,10 @@ module CMS
           end
         end
       end
+    end
+
+    def pundit_user
+      current_admin
     end
 
     private

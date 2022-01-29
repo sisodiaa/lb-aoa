@@ -5,11 +5,13 @@ module CMS
     setup do
       @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_post = posts(:plantation)
+      @published_post = posts(:club_chiller)
       @document = documents(:image)
+      @published_post_document = documents(:jpg)
     end
 
     teardown do
-      @confirmed_board_admin = @draft_post = @document = nil
+      @confirmed_board_admin = @draft_post = @published_post = @document = nil
     end
 
     test "#authenticate_admin!" do
@@ -42,6 +44,24 @@ module CMS
 
         assert_redirected_to cms_post_documents_path(@draft_post)
         assert_equal "Attachment was successfully removed", flash[:notice]
+      end
+    end
+
+    # authorisation cases
+
+    test "#create - published post" do
+      authorised_admin do
+        post cms_post_documents_path(@published_post)
+        assert_equal "You can not perform this action on a published post.",
+          flash[:error]
+      end
+    end
+
+    test "#destroy - published post" do
+      authorised_admin do
+        delete cms_post_document_path(@published_post, @published_post_document)
+        assert_equal "You can not perform this action on a published post.",
+          flash[:error]
       end
     end
 
