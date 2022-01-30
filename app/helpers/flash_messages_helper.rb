@@ -11,6 +11,7 @@ module FlashMessagesHelper
     ) do
       flash.each do |type, message|
         concat(toast(type, message))
+        flash.discard(type)
       end
     end
   end
