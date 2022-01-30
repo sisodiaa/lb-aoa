@@ -20,5 +20,10 @@ module Front
       assert_selector ".trix-content"
       assert_selector "turbo-frame#attachments li", count: 1
     end
+
+    test "#index" do
+      visit posts_url
+      assert_selector ".post", count: 9
+    end
   end
 end

@@ -1,0 +1,40 @@
+<div class="post lg:basis-1/2 lg:odd:pr-4 lg:even:pl-4">
+  <div class="sm:rounded-lg sm:py-4 sm:px-6 sm:shadow bg-white">
+    <h1 class="mb-1 font-serif font-medium text-xl md:text-2xl">
+      <%= post.title %>
+    </h1>
+
+    <div class="inline-flex items-center justify-center text-slate-400 mb-2">
+      <svg
+        class="w-3 h-3 fill-[none] stroke-current stroke-2"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+        <use href="/assets/feather-sprite.svg#calendar" />
+      </svg>
+
+      <span class="inline-block mx-2 text-xs">
+        <%= post.published_at.strftime("%d %B %Y") %>
+      </span>
+    </div>
+
+    <p class="font-light text-sm lg:text-base text-slate-500 mb-1">
+      <%= truncate(strip_tags(post.content.to_s), length: 175) %>
+    </p>
+
+    <%= link_to(
+      post_path(post),
+      class: "inline-flex items-center justify-center text-lb-100"
+    ) do %>
+      <span class="inline-block mr-1 text-xs lg:text-sm">
+        Read more
+      </span>
+
+      <svg
+        class="w-3 h-3 fill-[none] stroke-current stroke-2"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+        <use href="/assets/feather-sprite.svg#chevrons-right" />
+      </svg>
+    <% end %>
+  </div>
+</div>
