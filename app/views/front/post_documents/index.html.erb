@@ -1,0 +1,5 @@
+<%= turbo_frame_tag :attachments do %>
+  <ul>
+    <%= render partial: "document", collection: @documents %>
+  </ul>
+<% end %>

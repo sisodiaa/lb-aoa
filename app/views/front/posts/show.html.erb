@@ -1,0 +1,38 @@
+<div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
+  <h1 class="font-serif text-4xl mb-2 text-zinc-900"><%= @post.title %></h1>
+
+  <div class="inline-flex items-center justify-center text-slate-400 mb-10">
+    <svg
+      class="w-4 h-4 fill-[none] stroke-current stroke-2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <use href="/assets/feather-sprite.svg#calendar" />
+    </svg>
+
+    <span class="inline-block mx-2 text-base">
+      <%= @post.published_at.strftime("%d %B %Y") %>
+    </span>
+  </div>
+
+  <div class="text-gray-800 mb-8">
+    <%= @post.content %>
+  </div>
+
+  <div class="py-2">
+    <h2 class="mb-2 pl-2 text-indigo-700 font-medium">
+      Attachments
+    </h2>
+
+    <%= turbo_frame_tag(
+      :attachments,
+      src: post_documents_path(@post),
+      loading: :lazy
+    ) do %>
+      <div class="flex w-full rounded-xl animate-pulse bg-indigo-50 py-3 px-2
+                  text-indigo-500 font-light text-base">
+        Loading attachments...
+      </div>
+    <% end %>
+  </div>
+</div>
+

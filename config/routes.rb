@@ -43,5 +43,11 @@ Rails.application.routes.draw do
 
   patch "cms/posts/:id/publish", to: "cms/publications#update", as: "publish_cms_post"
 
-  root to: "cms/posts#index"
+  scope module: "front" do
+    resources :posts, only: %i[index show] do
+      resources :documents, only: :index, controller: "post_documents"
+    end
+  end
+
+  root to: "front/posts#index"
 end
