@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   namespace :management do
     get "dashboard", to: "dashboard#index", as: "dashboard"
+    get "drafts", to: "dashboard#drafts", as: "drafts"
   end
 
   namespace :cms do
