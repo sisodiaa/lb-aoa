@@ -1,5 +1,7 @@
 module Front
   class PostsController < ApplicationController
+    layout "front"
+
     def index
       @page = params[:page] || 1
     end
