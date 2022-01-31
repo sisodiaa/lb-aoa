@@ -21,7 +21,10 @@
           src: management_drafts_path,
           class: "space-y-3"
         ) do %>
-          Loading...
+          <%= render(
+            partial: "shared/spinner",
+            locals: { text: "text-indigo-50", fill: "fill-indigo-600" }
+          )%>
         <% end %>
       </div>
     </div>
@@ -37,7 +40,10 @@
           src: management_published_posts_path,
           class: "space-y-3"
         ) do %>
-          Loading...
+          <%= render(
+            partial: "shared/spinner",
+            locals: { text: "text-indigo-50", fill: "fill-indigo-600" }
+          )%>
         <% end %>
 
       </div>
