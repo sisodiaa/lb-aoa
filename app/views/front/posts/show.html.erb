@@ -1,4 +1,17 @@
 <div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
+  <%= link_to :back, class: "inline-flex items-center justify-center text-slate-400 mb-6" do %>
+    <svg
+      class="w-7 h-7 fill-[none] stroke-current stroke-2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <use href="/assets/feather-sprite.svg#arrow-left-circle" />
+    </svg>
+
+    <span class="inline-block ml-3 text-xl font-light">
+      Back
+    </span>
+  <% end %>
+
   <h1 class="font-serif text-4xl mb-2 text-zinc-900"><%= @post.title %></h1>
 
   <div class="inline-flex items-center justify-center text-slate-400 mb-10">
