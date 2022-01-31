@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include Pundit
+  include Pagy::Backend
 
   rescue_from Pundit::NotAuthorizedError, with: :unauthorised_request
 
@@ -23,7 +24,7 @@ class ApplicationController < ActionController::Base
           scope: "pundit", default: :default
       end
 
-      format.any do
+      format.html do
         flash[:error] = t "#{policy_name}.#{exception.query}",
           scope: "pundit", default: :default
       end
