@@ -1,5 +1,13 @@
-<div class="mx-auto w-10/12 sm:w-9/12 md:w-8/12 lg:w-11/12 xl:w-10/12 2xl:w-9/12
-            space-y-12 sm:space-y-8 lg:space-y-0
-            lg:flex lg:flex-wrap lg:gap-y-10">
-  <%= render @posts %>
-</div>
+<%= turbo_frame_tag "posts" do %>
+  <div class="mx-auto w-10/12 sm:w-9/12 md:w-8/12 lg:w-11/12 xl:w-10/12 2xl:w-9/12">
+    <%= turbo_frame_tag(
+      :published_posts,
+      src: published_posts_path(page: @page),
+      class: "space-y-12 sm:space-y-8 lg:space-y-0 lg:flex lg:flex-wrap lg:gap-y-10"
+    ) do %>
+      <% 2.times do %>
+        <%= render partial: "skeleton" %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

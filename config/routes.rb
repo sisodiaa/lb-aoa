@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
   scope module: "front" do
     resources :posts, only: %i[index show] do
+      get "published", on: :collection
       resources :documents, only: :index, controller: "post_documents"
     end
   end
