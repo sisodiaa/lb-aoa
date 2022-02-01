@@ -7,6 +7,8 @@ module Management
       @published_posts = Post.published.order(published_at: :desc)
     end
 
+    def posts; end
+
     def drafts
       @pagy, @posts = pagy(Post.draft.order(created_at: :asc), items: 5)
     end

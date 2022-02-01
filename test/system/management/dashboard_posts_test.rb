@@ -17,26 +17,30 @@ module Management
     test "dashboard for posts" do
       visit management_dashboard_path
 
-      within("#drafts") do
-        assert_selector ".draft", count: 5
-        assert_selector "p", text: "1 to 5 of 12 draft posts"
-        click_link "Next"
+      within("#posts-component") do
+        click_link "Show Posts"
 
-        assert_selector ".draft", count: 5
-        assert_selector "p", text: "6 to 10 of 12 draft posts"
-        click_link "Next"
+        within("#drafts") do
+          assert_selector ".draft", count: 5
+          assert_selector "p", text: "1 to 5 of 12 draft posts"
+          click_link "Next"
 
-        assert_selector ".draft", count: 2
-        assert_selector "p", text: "11 to 12 of 12 draft posts"
-      end
+          assert_selector ".draft", count: 5
+          assert_selector "p", text: "6 to 10 of 12 draft posts"
+          click_link "Next"
 
-      within("#published_posts") do
-        assert_selector ".published_post", count: 5
-        assert_selector "p", text: "1 to 5 of 9 published posts"
-        click_link "Next"
+          assert_selector ".draft", count: 2
+          assert_selector "p", text: "11 to 12 of 12 draft posts"
+        end
 
-        assert_selector ".published_post", count: 4
-        assert_selector "p", text: "6 to 9 of 9 published posts"
+        within("#published_posts") do
+          assert_selector ".published_post", count: 5
+          assert_selector "p", text: "1 to 5 of 9 published posts"
+          click_link "Next"
+
+          assert_selector ".published_post", count: 4
+          assert_selector "p", text: "6 to 9 of 9 published posts"
+        end
       end
     end
 
@@ -45,15 +49,21 @@ module Management
       # this test is just to check delete works
       visit management_dashboard_path
 
-      within("#drafts") do
-        assert_selector ".draft", count: 5
+      within("#posts-component") do
+        click_link "Show Posts"
 
-        page.accept_confirm do
-          click_on "Delete", match: :first
+        within("#drafts") do
+          assert_selector ".draft", count: 5
+
+          page.accept_confirm do
+            click_on "Delete", match: :first
+          end
+
+          assert_selector ".draft", count: 4
         end
-
-        assert_selector ".draft", count: 4
       end
+
+      assert_selector :css, "[role='toast']", text: "Post was successfully destroyed."
     end
   end
 end

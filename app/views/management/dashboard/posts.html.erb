@@ -1,0 +1,42 @@
+<%= turbo_frame_tag :posts do %>
+  <div class="flex flex-wrap">
+    <div class="basis-1/2 pr-4">
+      <div class="px-2 py-2 bg-indigo-100 rounded-lg shadow">
+        <h1 class="mb-4 text-2xl text-indigo-800 font-bold">
+          Draft Posts
+        </h1>
+
+        <%= turbo_frame_tag(
+          :drafts,
+          src: management_drafts_path,
+          class: "space-y-3"
+        ) do %>
+          <%= render(
+            partial: "shared/spinner",
+            locals: { text: "text-indigo-50", fill: "fill-indigo-600" }
+          )%>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="basis-1/2 pl-4">
+      <div class="px-2 py-2 space-y-3 bg-indigo-100 rounded-lg shadow">
+        <h1 class="mb-4 text-2xl text-indigo-800 font-bold">
+          Published Posts
+        </h1>
+
+        <%= turbo_frame_tag(
+          :published_posts,
+          src: management_published_posts_path,
+          class: "space-y-3"
+        ) do %>
+          <%= render(
+            partial: "shared/spinner",
+            locals: { text: "text-indigo-50", fill: "fill-indigo-600" }
+          )%>
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+<% end %>
