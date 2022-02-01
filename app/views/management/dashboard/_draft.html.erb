@@ -1,4 +1,6 @@
-<div class="p-2 bg-white rounded-lg shadow border-b border-b-indigo-100">
+<div
+    id="<%= dom_id(post) %>"
+    class="draft p-2 bg-white rounded-lg shadow border-b border-b-indigo-100">
   <h1 class="text-lg text-gray-800"><%= post.title %></h1>
 
   <div class="flex justify-between mt-2">
@@ -24,7 +26,6 @@
       <%= link_to(
         "Delete", 
         cms_post_path(post),
-        target: "_top",
         data: {
           turbo_method: :delete,
           turbo_confirm: 'Are you sure?'

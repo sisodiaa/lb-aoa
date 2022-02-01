@@ -8,11 +8,11 @@ module Management
     end
 
     def drafts
-      @pagy, @posts = pagy(Post.draft.order(created_at: :asc), items: 10)
+      @pagy, @posts = pagy(Post.draft.order(created_at: :asc), items: 5)
     end
 
     def published_posts
-      @pagy, @posts = pagy(Post.published.order(published_at: :desc), items: 10)
+      @pagy, @posts = pagy(Post.published.order(published_at: :desc), items: 5)
     end
   end
 end
