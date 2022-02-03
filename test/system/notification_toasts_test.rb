@@ -7,7 +7,7 @@ class NotificationToastsTest < ApplicationSystemTestCase
     @draft_post = posts(:plantation)
 
     @draft_post.documents.each do |document|
-      attach_file_to_record(document.file)
+      attach_file_to_record document.file, "square.png", "image/png"
     end
     login_as @confirmed_board_admin, scope: :admin
     update_post

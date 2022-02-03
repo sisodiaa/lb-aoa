@@ -13,11 +13,11 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 
-  def attach_file_to_record(record)
+  def attach_file_to_record(record, file_name, content_type)
     record.attach(
-      io: File.open(Rails.root.to_s + "/test/fixtures/files/square.png"),
-      filename: "square.png",
-      content_type: "image/png"
+      io: File.open(Rails.root.to_s + "/test/fixtures/files/" + file_name),
+      filename: file_name,
+      content_type: content_type
     )
   end
 end

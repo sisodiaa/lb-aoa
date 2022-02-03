@@ -5,7 +5,7 @@ module Front
     setup do
       @published_post = posts(:club_chiller)
       @published_post.documents.each do |document|
-        attach_file_to_record(document.file)
+        attach_file_to_record document.file, "square.png", "image/png"
       end
     end
 
