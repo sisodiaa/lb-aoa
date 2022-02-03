@@ -46,6 +46,10 @@ Rails.application.routes.draw do
 
   patch "cms/posts/:id/publish", to: "cms/publications#update", as: "publish_cms_post"
 
+  namespace :tms do
+    resources :tenders
+  end
+
   scope module: "front" do
     resources :posts, only: %i[index show] do
       get "published", on: :collection
