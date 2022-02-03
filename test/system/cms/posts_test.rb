@@ -39,6 +39,21 @@ module CMS
       assert_selector :css, "[role='toast']", text: "Post was successfully destroyed."
     end
 
+    test "show Publish Post button for drafts" do
+      visit cms_post_url(@draft_post)
+      within("#post-publication-section") do
+        assert_selector "button", text: "Publish Post"
+      end
+    end
+
+    test "do not show Edit and Publish Post button for published posts" do
+      visit cms_post_url(posts(:lotus))
+      within("#post-publication-section") do
+        assert_no_selector "a", text: "Edit"
+        assert_no_selector "button", text: "Publish Post"
+      end
+    end
+
     private
 
     def create_new_post
