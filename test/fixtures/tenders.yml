@@ -1,0 +1,57 @@
+boom_barriers:
+  reference_id: SEP-tech-49
+  reference_token: SEP-tech-49
+  title: boom barriers for the society gates
+  opening: <%= Time.current + 1.day %>
+  closing: <%= Time.current + 3.day %>
+  notice_state: 0
+  publication_state: 0
+
+cctv_cables:
+  reference_id: SEP-tech-79
+  reference_token: SEP-tech-79
+  title: CCTV cables
+  opening: <%= Time.current + 1.day %>
+  closing: <%= Time.current + 3.day %>
+  notice_state: 0
+  publication_state: 0
+
+air_quality_monitors:
+  reference_id: tech-club_house-0920
+  reference_token: tech-club_house-0920
+  title: supply air quality monitors
+  published_at: <%= Time.current %>
+  opening: <%= Time.current + 1.day %>
+  closing: <%= Time.current + 3.day %>
+  notice_state: 0
+  publication_state: 1
+
+barb_wire:
+  reference_id: soc-980-wire-barb
+  reference_token: soc-980-wire-barb
+  title: Barb wire for fencing
+  published_at: <%= Time.current - 5.day %>
+  opening: <%= Time.current - 1.day %>
+  closing: <%= Time.current + 2.day %>
+  notice_state: 1
+  publication_state: 1
+
+water_purifier:
+  reference_id: water-lb-28
+  reference_token: water-lb-28
+  title: Installation for water purifier for each tower
+  published_at: <%= Time.current - 5.day %>
+  opening: <%= Time.current - 3.day %>
+  closing: <%= Time.current - 1.day %>
+  notice_state: 2
+  publication_state: 1
+
+elevator_buttons:
+  reference_id: lb-elevator-21
+  reference_token: lb-elevator-21
+  title: Replacement of elevator buttons
+  published_at: <%= Time.current - 6.day %>
+  opening: <%= Time.current - 4.day %>
+  closing: <%= Time.current - 1.day %>
+  notice_state: archived
+  publication_state: 1

@@ -242,3 +242,75 @@ wash_basin:
     Donec sed odio operae, eu vulputate felis rhoncus.
     Praeterea iter est quasdam res quas ex communi
     </p>
+
+boom_barriers:
+  record: boom_barriers (Tender)
+  name: detail
+  body: |-
+    <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
+    <br>
+    <p>
+    Cras mattis iudicium purus sit amet fermentum.
+    Donec sed odio operae, eu vulputate felis rhoncus.
+    Praeterea iter est quasdam res quas ex communi
+    </p>
+
+cctv_cables:
+  record: cctv_cables (Tender)
+  name: detail
+  body: |-
+    <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
+    <br>
+    <p>
+    Cras mattis iudicium purus sit amet fermentum.
+    Donec sed odio operae, eu vulputate felis rhoncus.
+    Praeterea iter est quasdam res quas ex communi
+    </p>
+
+air_quality_monitors:
+  record: air_quality_monitors (Tender)
+  name: detail
+  body: |-
+    <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
+    <br>
+    <p>
+    Cras mattis iudicium purus sit amet fermentum.
+    Donec sed odio operae, eu vulputate felis rhoncus.
+    Praeterea iter est quasdam res quas ex communi
+    </p>
+
+barb_wire:
+  record: barb_wire (Tender)
+  name: detail
+  body: |-
+    <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
+    <br>
+    <p>
+    Cras mattis iudicium purus sit amet fermentum.
+    Donec sed odio operae, eu vulputate felis rhoncus.
+    Praeterea iter est quasdam res quas ex communi
+    </p>
+
+water_purifier:
+  record: water_purifier (Tender)
+  name: detail
+  body: |-
+    <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
+    <br>
+    <p>
+    Cras mattis iudicium purus sit amet fermentum.
+    Donec sed odio operae, eu vulputate felis rhoncus.
+    Praeterea iter est quasdam res quas ex communi
+    </p>
+
+elevator_buttons:
+  record: elevator_buttons (Tender)
+  name: detail
+  body: |-
+    <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
+    <br>
+    <p>
+    Cras mattis iudicium purus sit amet fermentum.
+    Donec sed odio operae, eu vulputate felis rhoncus.
+    Praeterea iter est quasdam res quas ex communi
+    </p>
