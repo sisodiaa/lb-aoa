@@ -35,6 +35,11 @@ class TenderTest < ActiveSupport::TestCase
     assert_not @draft_tender.valid?, "Title is required"
   end
 
+  test "that description is present" do
+    @draft_tender.description = ""
+    assert_not @draft_tender.valid?, "Description is missing"
+  end
+
   test "that publish event changes the publication_state" do
     assert @draft_tender.draft?
     assert_not @draft_tender.published?

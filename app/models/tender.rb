@@ -4,6 +4,7 @@ class Tender < ApplicationRecord
   before_validation :parameterize_token
 
   has_many :documents, as: :documentable, dependent: :destroy
+  has_rich_text :description
 
   enum publication_state: {
     draft: 0,
@@ -18,7 +19,11 @@ class Tender < ApplicationRecord
   }
 
   validates :reference_id, presence: true, uniqueness: true
+  validates :reference_token, presence: true, uniqueness: true
   validates :title, presence: true
+  validates :description, presence: true
+  validates :opens_on, presence: true
+  validates :closes_on, presence: true
   validates :documents, presence: true, on: :notice_publication
   validates_with TenderTimeFrameValidator, on: :notice_publication
 
@@ -41,15 +46,25 @@ class Tender < ApplicationRecord
   end
 
   def opens_on=(opens_on)
+    Rails.logger.debug "Opens on: #{opens_on}"
     self.opening = Time.zone.parse(opens_on)
   rescue ArgumentError
     self.opening = nil
   end
 
+  def opens_on
+    opening
+  end
+
   def closes_on=(closes_on)
+    Rails.logger.debug "Closes on: #{closes_on}"
     self.closing = Time.zone.parse(closes_on)
   rescue ArgumentError
     self.closing = nil
+  end
+
+  def closes_on
+    closing
   end
 
   private
