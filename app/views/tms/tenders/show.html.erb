@@ -1,10 +1,15 @@
 <div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
-  <h1 class="text-2xl lg:text-3xl xl:text-4xl mb-1 text-zinc-900"><%= @tender.title %></h1>
+  <h1 class="text-2xl lg:text-3xl xl:text-4xl mb-1 text-zinc-900">
+    <%= @tender.title %>
+  </h1>
 
-  <h2 class="font-mono text-xs lg:text-sm mb-1 xl:mb-2 text-zinc-500"><%= @tender.reference_token %></h1>
+  <h2 class="font-mono text-xs lg:text-sm mb-1 xl:mb-2 text-zinc-500">
+    <%= @tender.reference_token %>
+  </h2>
 
   <div class="inline-flex mb-4 xl:mb-6">
-    <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base font-normal leading-none text-zinc-500">
+    <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base
+                font-normal leading-none text-zinc-500">
       <%= @tender.opens_on.strftime("%d %b %Y, %H:%M") %>
     </time>
 
@@ -17,7 +22,8 @@
       </svg>
     </span>
 
-    <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base font-normal leading-none text-zinc-500">
+    <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base
+                font-normal leading-none text-zinc-500">
       <%= @tender.closes_on.strftime("%d %b %Y, %H:%M") %>
     </time>
   </div>
@@ -33,7 +39,14 @@
     </span>
   </div>
 
-  <div class="text-gray-800 lg:text-lg">
+  <div class="text-gray-800 mb-8">
     <%= @tender.description %>
   </div>
+
+  <%= link_to(
+    "Edit",
+    edit_tms_tender_path(@tender),
+    target: "_top",
+    class: "block btn btn--normal btn--secondary w-32"
+  )%>
 </div>

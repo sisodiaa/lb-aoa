@@ -245,7 +245,7 @@ wash_basin:
 
 boom_barriers:
   record: boom_barriers (Tender)
-  name: detail
+  name: description
   body: |-
     <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
     <br>
@@ -257,7 +257,7 @@ boom_barriers:
 
 cctv_cables:
   record: cctv_cables (Tender)
-  name: detail
+  name: description
   body: |-
     <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
     <br>
@@ -269,7 +269,7 @@ cctv_cables:
 
 air_quality_monitors:
   record: air_quality_monitors (Tender)
-  name: detail
+  name: description
   body: |-
     <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
     <br>
@@ -281,7 +281,7 @@ air_quality_monitors:
 
 barb_wire:
   record: barb_wire (Tender)
-  name: detail
+  name: description
   body: |-
     <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
     <br>
@@ -293,7 +293,7 @@ barb_wire:
 
 water_purifier:
   record: water_purifier (Tender)
-  name: detail
+  name: description
   body: |-
     <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
     <br>
@@ -305,7 +305,7 @@ water_purifier:
 
 elevator_buttons:
   record: elevator_buttons (Tender)
-  name: detail
+  name: description
   body: |-
     <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
     <br>

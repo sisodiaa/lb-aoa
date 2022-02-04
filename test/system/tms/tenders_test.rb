@@ -30,6 +30,12 @@ module TMS
       assert_selector "[role='toast']", text: "Tender was successfully created."
     end
 
+    test "updating a post" do
+      edit_post
+      assert_selector "[role='toast']", text: "Tender was successfully updated."
+      assert_selector "h1", text: "Edited title for system test"
+    end
+
     private
 
     def new_tender_with_blank_form
@@ -47,6 +53,13 @@ module TMS
       fill_in "tender_closes_on", with: DateTime.now + 5.days
 
       click_on "Create Tender"
+    end
+
+    def edit_post
+      visit edit_tms_tender_url(@draft_tender)
+
+      fill_in "tender_title", with: "Edited title for system test"
+      click_on "Update Tender"
     end
   end
 end
