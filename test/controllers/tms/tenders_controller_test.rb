@@ -23,6 +23,10 @@ module TMS
       end
     end
 
+    test "to_param" do
+      assert_equal "/tms/tenders/#{@draft_tender.id}-SEP_21-tech-79", tms_tender_path(@draft_tender)
+    end
+
     private
 
     def authenticated_admin

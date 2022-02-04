@@ -1,0 +1,39 @@
+<div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
+  <h1 class="text-2xl lg:text-3xl xl:text-4xl mb-1 text-zinc-900"><%= @tender.title %></h1>
+
+  <h2 class="font-mono text-xs lg:text-sm mb-1 xl:mb-2 text-zinc-500"><%= @tender.reference_token %></h1>
+
+  <div class="inline-flex mb-4 xl:mb-6">
+    <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base font-normal leading-none text-zinc-500">
+      <%= @tender.opens_on.strftime("%d %b %Y, %H:%M") %>
+    </time>
+
+    <span class="inline-flex items-center justify-center text-slate-400 mx-1">
+      <svg
+        class="w-4 lg:w-5 xl:w-6 h-4 lg:h-5 xl:h-6 fill-[none] stroke-current stroke-2"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+        <use href="/assets/feather-sprite.svg#git-commit" />
+      </svg>
+    </span>
+
+    <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base font-normal leading-none text-zinc-500">
+      <%= @tender.closes_on.strftime("%d %b %Y, %H:%M") %>
+    </time>
+  </div>
+
+  <div class="flex mb-8 xl:mb-12">
+    <span class="bg-purple-100 text-purple-800 text-xs font-semibold mr-2
+                 px-2.5 py-0.5 rounded capitalize">
+      <%= @tender.publication_state %>
+    </span>
+    <span class="bg-purple-100 text-purple-800 text-xs font-semibold mr-2
+                 px-2.5 py-0.5 rounded capitalize">
+      <%= @tender.notice_state %>
+    </span>
+  </div>
+
+  <div class="text-gray-800 lg:text-lg">
+    <%= @tender.description %>
+  </div>
+</div>

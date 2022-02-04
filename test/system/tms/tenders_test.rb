@@ -25,10 +25,27 @@ module TMS
       assert_selector "#error_explanation li", text: "Closes on can't be blank"
     end
 
+    test "creating a Tender" do
+      create_new_tender
+      assert_selector "[role='toast']", text: "Tender was successfully created."
+    end
+
     private
 
     def new_tender_with_blank_form
       visit new_tms_tender_url
+      click_on "Create Tender"
+    end
+
+    def create_new_tender
+      visit new_tms_tender_url
+      fill_in "tender_reference_token", with: "lb/2022/jan-15/clamp"
+      fill_in "Title", with: "Clamps for Vechicles"
+      description = "We need clamps for our society"
+      find(:xpath, "//trix-editor[@id='tender__description']").set(description)
+      fill_in "tender_opens_on", with: DateTime.now + 2.days
+      fill_in "tender_closes_on", with: DateTime.now + 5.days
+
       click_on "Create Tender"
     end
   end

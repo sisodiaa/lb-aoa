@@ -2,6 +2,10 @@ module TMS
   class TendersController < ApplicationController
     before_action :authenticate_admin!
 
+    def show
+      @tender = Tender.find(params[:id])
+    end
+
     def new
       @tender = Tender.new
     end
@@ -24,7 +28,8 @@ module TMS
     private
 
     def tender_params
-      params.require(:tender).permit(:reference_token, :title, :description, :opens_on, :closes_on)
+      params.require(:tender).permit(:reference_token, :title, :description,
+        :opens_on, :closes_on)
     end
   end
 end

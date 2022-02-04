@@ -45,8 +45,11 @@ class Tender < ApplicationRecord
     end
   end
 
+  def to_param
+    "#{id}-#{reference_id}"
+  end
+
   def opens_on=(opens_on)
-    Rails.logger.debug "Opens on: #{opens_on}"
     self.opening = Time.zone.parse(opens_on)
   rescue ArgumentError
     self.opening = nil
@@ -57,7 +60,6 @@ class Tender < ApplicationRecord
   end
 
   def closes_on=(closes_on)
-    Rails.logger.debug "Closes on: #{closes_on}"
     self.closing = Time.zone.parse(closes_on)
   rescue ArgumentError
     self.closing = nil

@@ -8,8 +8,8 @@ boom_barriers:
   publication_state: 0
 
 cctv_cables:
-  reference_id: SEP-tech-79
-  reference_token: SEP-tech-79
+  reference_id: SEP_21-tech-79
+  reference_token: SEP_21/tech-79
   title: CCTV cables
   opening: <%= Time.current + 1.day %>
   closing: <%= Time.current + 3.day %>
