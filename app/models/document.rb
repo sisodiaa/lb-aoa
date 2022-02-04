@@ -26,7 +26,13 @@ class Document < ApplicationRecord
   end
 
   def content_type_acceptable?
-    acceptable_types = ["image/jpeg", "image/png", "application/pdf"]
+    acceptable_types = [
+      "image/jpeg",
+      "image/png",
+      "application/pdf",
+      "application/vnd.ms-excel",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    ]
     acceptable_types.include?(file.content_type)
   end
 end

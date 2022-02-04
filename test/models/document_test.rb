@@ -41,8 +41,25 @@ class DocumentTest < ActiveSupport::TestCase
     end
   end
 
-  test "that only pdf and images are allowed as attachment" do
+  test "that only pdf, images, and excel files are allowed as attachment" do
     attach_file_to_record @image_document.file, "square.png", "image/png"
+    assert @image_document.valid?
+
+    # stub the content type to jpg format
+    @image_document.file.stub(:content_type, "image/jpeg") do
+      assert @image_document.valid?
+    end
+
+    # stub the content type to pdf format
+    @image_document.file.stub(:content_type, "application/pdf") do
+      assert @image_document.valid?
+    end
+
+    # stub the content type to excel format
+    @image_document.file.stub(:content_type, "application/vnd.ms-excel") do
+      assert @image_document.valid?
+    end
+
     # stub the content type to zip format
     @image_document.file.stub(:content_type, "application/zip") do
       assert_not @image_document.valid?, "Attachment should be image or pdf"
