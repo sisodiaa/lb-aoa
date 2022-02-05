@@ -1,0 +1,5 @@
+<%= turbo_stream.remove dom_id(@document, :tender) %>
+
+<%= turbo_stream.update "flash-messages" do %>
+  <%= flash_messages %>
+<% end %>

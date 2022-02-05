@@ -47,7 +47,9 @@ Rails.application.routes.draw do
   patch "cms/posts/:id/publish", to: "cms/publications#update", as: "publish_cms_post"
 
   namespace :tms do
-    resources :tenders
+    resources :tenders do
+      resources :documents, only: %i[index create destroy], controller: "tender_documents"
+    end
   end
 
   scope module: "front" do

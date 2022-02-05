@@ -1,16 +1,14 @@
-module CMS
-  class PostDocumentsController < ApplicationController
+module TMS
+  class TenderDocumentsController < ApplicationController
     before_action :authenticate_admin!
-    before_action :set_post
+    before_action :set_tender
 
     def index
-      @document = @post.documents.new
+      @document = @tender.documents.new
     end
 
     def create
-      authorize @post, policy_class: CMS::PostDocumentsPolicy
-
-      @document = @post.documents.build(document_params)
+      @document = @tender.documents.build(document_params)
 
       respond_to do |format|
         if @document.save
@@ -19,7 +17,7 @@ module CMS
           end
           format.html do
             flash[:notice] = "File was successfully attached"
-            redirect_to cms_post_documents_path(@post)
+            redirect_to tms_tender_documents_path(@tender)
           end
         else
           format.turbo_stream do
@@ -31,9 +29,7 @@ module CMS
     end
 
     def destroy
-      authorize @post, policy_class: CMS::PostDocumentsPolicy
-
-      @document = @post.documents.find(params[:id])
+      @document = @tender.documents.find(params[:id])
 
       respond_to do |format|
         if @document.destroy
@@ -42,20 +38,16 @@ module CMS
           end
           format.html do
             flash[:notice] = "Attachment was successfully removed"
-            redirect_to cms_post_documents_path(@post), status: :see_other
+            redirect_to tms_tender_documents_path(@tender), status: :see_other
           end
         end
       end
     end
 
-    def pundit_user
-      current_admin
-    end
-
     private
 
-    def set_post
-      @post = Post.find(params[:post_id])
+    def set_tender
+      @tender = Tender.find(params[:tender_id])
     end
 
     def document_params

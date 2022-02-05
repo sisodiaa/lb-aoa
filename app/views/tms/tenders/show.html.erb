@@ -43,10 +43,19 @@
     <%= @tender.description %>
   </div>
 
-  <%= link_to(
-    "Edit",
-    edit_tms_tender_path(@tender),
-    target: "_top",
-    class: "block btn btn--normal btn--secondary w-32"
-  )%>
+  <div class="inline-flex">
+    <%= link_to(
+      "Edit",
+      edit_tms_tender_path(@tender),
+      target: "_top",
+      class: "block btn btn--normal btn--secondary w-32"
+    )%>
+
+    <%= link_to(
+      "Attachments",
+      tms_tender_documents_path(@tender),
+      target: "_top",
+      class: "block btn btn--normal btn--secondary w-32"
+    )%>
+  </div>
 </div>
