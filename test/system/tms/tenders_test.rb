@@ -16,6 +16,17 @@ module TMS
       Warden.test_reset!
     end
 
+    test "show all tenders" do
+      visit tms_tenders_path
+
+      within("#_tenders") do
+        assert_selector ".tender", count: 5
+        click_on "Next"
+
+        assert_selector ".tender", count: 1
+      end
+    end
+
     test "showing error when blank form is submitted" do
       new_tender_with_blank_form
       assert_selector "#error_explanation li", text: "Reference can't be blank"

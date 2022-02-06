@@ -1,0 +1,16 @@
+<%= turbo_frame_tag :tenders do %>
+  <div class="flex flex-wrap">
+    <div class="basis-1/2 pr-4">
+      <%= turbo_frame_tag(
+        "draft_tenders",
+        src: tms_tenders_path(status: "draft"),
+        class: "space-y-3"
+      ) do %>
+        <%= render(
+          partial: "shared/spinner",
+          locals: { text: "text-purple-50", fill: "fill-purple-600" }
+        )%>
+      <% end %>
+    </div>
+  </div>
+<% end %>

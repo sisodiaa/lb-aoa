@@ -35,6 +35,16 @@
   .btn--success {
     @apply from-green-400 via-green-500 to-green-600
            hover:from-green-500 hover:via-green-600 hover:to-green-700
-           focus:ring-indigo-50;
+           focus:ring-green-50;
   }
+
+  .btn--purple {
+    @apply from-purple-400 via-purple-500 to-purple-600
+           hover:from-purple-500 hover:via-purple-600 hover:to-purple-700
+           focus:ring-purple-50;
+  }
+}
+
+.field_with_errors > label {
+  @apply text-red-500;
 }

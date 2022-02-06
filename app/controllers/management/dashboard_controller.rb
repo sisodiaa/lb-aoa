@@ -9,6 +9,8 @@ module Management
 
     def posts; end
 
+    def tenders; end
+
     def drafts
       @pagy, @posts = pagy(Post.draft.order(created_at: :asc), items: 5)
     end

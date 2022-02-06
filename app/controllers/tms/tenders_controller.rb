@@ -3,6 +3,11 @@ module TMS
     before_action :authenticate_admin!
     before_action :set_tender, only: [:show, :edit, :update]
 
+    def index
+      @status = params[:status]
+      @pagy, @tenders = pagy(tender_list, items: 5)
+    end
+
     def show; end
 
     def new
@@ -40,6 +45,13 @@ module TMS
     end
 
     private
+
+    def tender_list
+      return Tender.draft.order(created_at: :asc) if params[:status] == "draft"
+      Tender.published.try!(params[:status].to_sym)
+    rescue NoMethodError
+      Tender.all
+    end
 
     def set_tender
       @tender = Tender.find(params[:id])

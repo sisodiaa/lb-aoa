@@ -4,7 +4,7 @@
 
 <div
   id="posts-component"
-  class="relative w-full bg-indigo-50 rounded-lg pt-4 pb-2 px-6"
+  class="relative w-full bg-indigo-50 rounded-lg pt-4 pb-2 px-6 mb-32"
   data-controller="dashboard--component"
   data-dashboard--component-title-value="posts">
   <h1 class="absolute -top-20 left-1 text-indigo-50 text-8xl font-bold
@@ -33,6 +33,49 @@
   <%= turbo_frame_tag(
     :posts,
     src: management_posts_path,
+    loading: :lazy,
+    class: "hidden",
+    data: { "dashboard--component-target": "lists"}
+  ) do %>
+    <%= render(
+      partial: "shared/spinner",
+      locals: { text: "text-indigo-50", fill: "fill-indigo-600" }
+    )%>
+  <% end %>
+</div>
+
+<div
+  id="tenders-component"
+  class="relative w-full bg-purple-50 rounded-lg pt-4 pb-2 px-6"
+  data-controller="dashboard--component"
+  data-dashboard--component-title-value="tenders">
+  <h1 class="absolute -top-20 right-1 text-purple-50 text-8xl font-bold
+            font-serif uppercase tracking-tighter">
+    Tenders
+  </h1>
+  <div class="flex justify-between"
+       data-dashboard--component-target="header">
+    <%= link_to(
+      "Create Tender Notice",
+      new_tms_tender_path,
+      target: "_top",
+      class: "block btn btn--small btn--purple w-32"
+    )%>
+
+    <%= link_to(
+      "Show Tender Notices",
+      "#",
+      class: "block btn btn--small btn--purple w-32",
+      data: {
+        action: "click->dashboard--component#toggle",
+        "dashboard--component-target": "toggleButton"
+      }
+    ) %>
+  </div>
+
+  <%= turbo_frame_tag(
+    :tenders,
+    src: management_tenders_path,
     loading: :lazy,
     class: "hidden",
     data: { "dashboard--component-target": "lists"}

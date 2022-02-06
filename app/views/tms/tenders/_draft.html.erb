@@ -1,0 +1,46 @@
+<div
+    id="<%= dom_id(tender) %>"
+    class="draft p-2 bg-white rounded-lg shadow border-b border-b-indigo-100">
+  <h1 class="text-lg text-gray-800"><%= tender.title %></h1>
+
+  <div class="flex justify-between mt-2">
+    <div class="inline-flex rounded-md shadow-sm" role="group">
+      <%= link_to(
+        "Show", 
+        tms_tender_path(tender),
+        target: "_top",
+        class: "py-1 px-3 text-xs font-medium text-gray-600
+                bg-white rounded-l-md border border-gray-200
+                hover:bg-gray-100 hover:text-purple-700 focus:z-10
+                focus:ring-2 focus:ring-purple-700 focus:text-purple-700"
+      )%>
+      <%= link_to(
+        "Edit", 
+        edit_tms_tender_path(tender),
+        target: "_top",
+        class: "py-1 px-3 text-xs font-medium text-gray-600
+                bg-white border-t border-b border-gray-200
+                hover:bg-gray-100 hover:text-purple-700 focus:z-10
+                focus:ring-2 focus:ring-purple-700 focus:text-purple-700"
+      )%>
+      <%= link_to(
+        "Delete", 
+        "#",
+        class: "py-1 px-3 text-xs font-medium text-gray-600
+                bg-white rounded-r-md border border-gray-200
+                hover:bg-gray-100 hover:text-purple-700 focus:z-10
+                focus:ring-2 focus:ring-purple-700 focus:text-purple-700"
+      )%>
+    </div>
+
+    <%= link_to(
+      "Attachments", 
+      tms_tender_documents_path(tender),
+      target: "_top",
+      class: "block text-white bg-purple-500 hover:bg-purple-600
+              focus:ring-4 focus:ring-purple-300 font-medium
+              rounded-md text-xs px-3 py-1 text-center border
+              border-purple-400"
+    )%>
+  </div>
+</div>

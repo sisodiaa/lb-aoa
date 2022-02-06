@@ -36,6 +36,7 @@ Rails.application.routes.draw do
     get "posts", to: "dashboard#posts", as: "posts"
     get "drafts", to: "dashboard#drafts", as: "drafts"
     get "published_posts", to: "dashboard#published_posts", as: "published_posts"
+    get "tenders", to: "dashboard#tenders", as: "tenders"
   end
 
   namespace :cms do

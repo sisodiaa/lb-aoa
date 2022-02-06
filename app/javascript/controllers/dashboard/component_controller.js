@@ -18,5 +18,13 @@ export default class extends Controller {
         this.toggleButtonTarget.innerHTML = "Show Posts";
       }
     }
+
+    if (this.titleValue === "tenders") {
+      if (this.toggleButtonTarget.innerHTML === "Show Tender Notices") {
+        this.toggleButtonTarget.innerHTML = "Hide Tender Notices";
+      } else {
+        this.toggleButtonTarget.innerHTML = "Show Tender Notices";
+      }
+    }
   }
 }
