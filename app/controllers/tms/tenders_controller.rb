@@ -1,7 +1,7 @@
 module TMS
   class TendersController < ApplicationController
     before_action :authenticate_admin!
-    before_action :set_tender, only: [:show, :edit, :update]
+    before_action :set_tender, only: [:show, :edit, :update, :destroy]
 
     def index
       @status = params[:status]
@@ -40,6 +40,20 @@ module TMS
             render :edit
           end
           format.html { render :edit, status: :unprocessable_entity }
+        end
+      end
+    end
+
+    def destroy
+      respond_to do |format|
+        if @tender.destroy
+          format.turbo_stream do
+            flash.now[:notice] = "Tender was successfully destroyed."
+          end
+          format.html do
+            flash[:notice] = "Tender was successfully destroyed."
+            redirect_to tms_tenders_url, status: :see_other
+          end
         end
       end
     end

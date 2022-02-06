@@ -42,9 +42,15 @@ module TMS
     end
 
     test "updating a post" do
-      edit_post
+      edit_tender
       assert_selector "[role='toast']", text: "Tender was successfully updated."
       assert_selector "h1", text: "Edited title for system test"
+    end
+
+    test "destroying a Tender" do
+      delete_first_tender
+      assert_selector ".tender", count: 4
+      assert_selector :css, "[role='toast']", text: "Tender was successfully destroyed."
     end
 
     private
@@ -66,11 +72,18 @@ module TMS
       click_on "Create Tender"
     end
 
-    def edit_post
+    def edit_tender
       visit edit_tms_tender_url(@draft_tender)
 
       fill_in "tender_title", with: "Edited title for system test"
       click_on "Update Tender"
+    end
+
+    def delete_first_tender
+      visit tms_tenders_url
+      page.accept_confirm do
+        click_on "Delete", match: :first
+      end
     end
   end
 end

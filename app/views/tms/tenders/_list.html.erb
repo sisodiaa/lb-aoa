@@ -27,7 +27,11 @@
         )%>
         <%= link_to(
           "Delete", 
-          "#",
+          tms_tender_path(tender),
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: 'Are you sure?'
+          },
           class: "py-1 px-3 text-xs font-medium text-gray-600
                   bg-white rounded-r-md border border-gray-200
                   hover:bg-gray-100 hover:text-purple-700 focus:z-10

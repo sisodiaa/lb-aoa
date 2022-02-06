@@ -27,6 +27,16 @@ module TMS
       assert_equal "/tms/tenders/#{@draft_tender.id}-SEP_21-tech-79", tms_tender_path(@draft_tender)
     end
 
+    test "should destroy tender" do
+      authenticated_admin do
+        assert_difference("Tender.count", -1) do
+          delete tms_tender_url(@draft_tender)
+        end
+
+        assert_redirected_to tms_tenders_url
+      end
+    end
+
     private
 
     def authenticated_admin
