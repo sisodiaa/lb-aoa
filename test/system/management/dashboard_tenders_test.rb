@@ -28,26 +28,25 @@ module Management
     end
 
     test "delete button is working" do
-      skip
-      # this is not the correct flow,
-      # this test is just to check delete works
       visit management_dashboard_path
 
-      within("#posts-component") do
-        click_link "Show Posts"
+      within("#tenders-component") do
+        click_link "Show Tender Notices"
 
-        within("#drafts") do
-          assert_selector ".draft", count: 5
+        within("#draft_tenders") do
+          assert_selector ".tender", count: 2
+          assert_selector "p", text: "1 to 2 of 2 draft tenders"
 
           page.accept_confirm do
             click_on "Delete", match: :first
           end
 
-          assert_selector ".draft", count: 4
+          assert_selector ".tender", count: 1
+          assert_selector "p", text: "1 to 1 of 1 draft tenders"
         end
       end
 
-      assert_selector :css, "[role='toast']", text: "Post was successfully destroyed."
+      assert_selector :css, "[role='toast']", text: "Tender was successfully destroyed."
     end
   end
 end

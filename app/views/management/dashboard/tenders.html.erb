@@ -1,6 +1,10 @@
 <%= turbo_frame_tag :tenders do %>
   <div class="flex flex-wrap">
-    <div class="basis-1/2 pr-4">
+    <div class="basis-1/2 pr-4"
+       data-controller="dashboard--list"
+       data-dashboard--list-target="list"
+       data-dashboard--list-source-value="<%= tms_tenders_url(status: "draft") %>"
+       data-dashboard--list-item-value="">
       <%= turbo_frame_tag(
         "draft_tenders",
         src: tms_tenders_path(status: "draft"),

@@ -1,23 +1,14 @@
-<div class="mx-auto w-1/2">
-  <%= turbo_frame_tag "#{@status}_tenders" do %>
-    <div class="px-2 py-2 bg-purple-100 rounded-lg shadow">
-      <h1 class="mb-4 text-2xl text-pruple-800 font-bold capitalize">
-        <%= @status %> tenders
-      </h1>
-
-      <div class="space-y-3">
-        <%= render partial: "item", collection: @tenders, as: :tender %>
-
-        <%= render(
-          partial: "navigation_controls",
-          locals: {
-            pagy: @pagy,
-            prev_path: @pagy.prev ? tms_tenders_path(status: @status, page: @pagy.prev) : "#",
-            next_path: @pagy.next ? tms_tenders_path(status: @status, page: @pagy.next) : "#",
-            status: "#{@status} tenders"
-          }
-        )%>
-      </div>
-    </div>
+<div
+  class="mx-auto w-1/2"
+  data-controller="dashboard--list"
+  data-dashboard--list-target="list"
+  data-dashboard--list-source-value=""
+  data-dashboard--list-item-value="">
+  <%= turbo_frame_tag(
+    "#{@status}_tenders"
+  )do %>
+    <%= render partial: "list", locals: {
+      status: @status, tenders: @tenders, pagy: @pagy 
+    } %>
   <% end %>
 </div>

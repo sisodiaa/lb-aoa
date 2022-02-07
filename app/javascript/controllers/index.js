@@ -7,6 +7,9 @@ import { application } from "./application"
 import Dashboard__ComponentController from "./dashboard/component_controller.js"
 application.register("dashboard--component", Dashboard__ComponentController)
 
+import Dashboard__ListController from "./dashboard/list_controller.js"
+application.register("dashboard--list", Dashboard__ListController)
+
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 

@@ -1,6 +1,7 @@
 <div
     id="<%= dom_id(tender) %>"
-    class="tender p-2 bg-white rounded-lg shadow border-b border-b-indigo-100">
+    class="tender p-2 bg-white rounded-lg shadow border-b border-b-indigo-100"
+    data-dashboard--list-target="item">
   <h1 class="text-lg text-gray-800"><%= tender.title %></h1>
 
   <div class="flex justify-between mt-2">
@@ -30,7 +31,8 @@
           tms_tender_path(tender),
           data: {
             turbo_method: :delete,
-            turbo_confirm: 'Are you sure?'
+            turbo_confirm: 'Are you sure?',
+            action: "click->dashboard--list#markItem"
           },
           class: "py-1 px-3 text-xs font-medium text-gray-600
                   bg-white rounded-r-md border border-gray-200

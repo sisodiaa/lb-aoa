@@ -6,6 +6,11 @@ module TMS
     def index
       @status = params[:status]
       @pagy, @tenders = pagy(tender_list, items: 5)
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html
+      end
     end
 
     def show; end

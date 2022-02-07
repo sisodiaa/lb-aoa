@@ -48,9 +48,23 @@ module TMS
     end
 
     test "destroying a Tender" do
-      delete_first_tender
-      assert_selector ".tender", count: 4
+      visit tms_tenders_url
+
+      within("#_tenders") do
+        assert_selector ".tender", count: 5
+        assert_selector "p", text: "1 to 5 of 6 tenders"
+      end
+
+      page.accept_confirm do
+        click_on "Delete", match: :first
+      end
+
       assert_selector :css, "[role='toast']", text: "Tender was successfully destroyed."
+
+      within("#_tenders") do
+        assert_selector ".tender", count: 5
+        assert_selector "p", text: "1 to 5 of 5 tenders"
+      end
     end
 
     private
@@ -77,13 +91,6 @@ module TMS
 
       fill_in "tender_title", with: "Edited title for system test"
       click_on "Update Tender"
-    end
-
-    def delete_first_tender
-      visit tms_tenders_url
-      page.accept_confirm do
-        click_on "Delete", match: :first
-      end
     end
   end
 end
