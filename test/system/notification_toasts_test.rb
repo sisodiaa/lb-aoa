@@ -25,7 +25,6 @@ class NotificationToastsTest < ApplicationSystemTestCase
 
   test "toast notification fades away after 5 seconds" do
     assert_selector :css, "[role='toast']"
-    sleep 5
     assert_no_selector :css, "[role='toast']"
   end
 
@@ -34,7 +33,6 @@ class NotificationToastsTest < ApplicationSystemTestCase
     within :css, "[role='toast']" do
       find("button[type='button']").click
     end
-    sleep 1
     assert_no_selector :css, "[role='toast']"
   end
 
