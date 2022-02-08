@@ -53,6 +53,8 @@ Rails.application.routes.draw do
     end
   end
 
+  patch "tms/tenders/:id/publish", to: "tms/publications#update", as: "publish_tms_tender"
+
   scope module: "front" do
     resources :posts, only: %i[index show] do
       get "published", on: :collection

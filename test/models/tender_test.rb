@@ -51,8 +51,8 @@ class TenderTest < ActiveSupport::TestCase
   end
 
   test "that only an upcoming notice gets published" do
-    @published_tender.opening = Time.current - 3.days
-    assert_raise(AASM::InvalidTransition) { @published_tender.publish }
+    @draft_tender.opening = Time.current - 3.days
+    assert_raise(AASM::InvalidTransition) { @draft_tender.publish }
   end
 
   test "that manual assignment of publication_state will raise error" do

@@ -1,0 +1,55 @@
+module TMS
+  class PublicationsController < ApplicationController
+    before_action :authenticate_admin!
+    rescue_from AASM::InvalidTransition, with: :tender_not_publishable
+
+    def update
+      @tender = Tender.find(params[:id])
+
+      @tender.publish if tender_publishable?
+
+      respond_to do |format|
+        if @tender.published? && @tender.save
+          format.turbo_stream do
+            flash.now[:success] = "Tender was successfully published."
+          end
+
+          format.html do
+            flash[:success] = "Tender was successfully published."
+            redirect_to tms_tender_path(@tender)
+          end
+        else
+          format.turbo_stream do
+            flash.now[:error] = "Tender was not published."
+          end
+
+          format.html do
+            flash[:error] = "Tender was not published."
+            render "tms/tender#show", status: :unprocessable_entity
+          end
+        end
+      end
+    end
+
+    private
+
+    def tender_publishable?
+      params.dig(:tender, :publication_state) == "published" &&
+        @tender.valid?(:notice_publication)
+    end
+
+    def tender_not_publishable
+      respond_to do |format|
+        format.turbo_stream do
+          flash.now[:error] = "Tender was not published."
+          render :update
+        end
+
+        format.html do
+          flash[:error] = "Tender was not published."
+          render "tms/tender#show", status: :unprocessable_entity
+        end
+      end
+    end
+  end
+end
