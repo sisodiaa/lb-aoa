@@ -2,6 +2,8 @@ class Tender < ApplicationRecord
   include AASM
 
   before_validation :parameterize_token
+  after_update :schedule_open_tender_job, if: :upcoming?
+  after_update :schedule_close_tender_job, if: :current?
 
   has_many :documents, as: :documentable, dependent: :destroy
   has_rich_text :description
@@ -77,5 +79,13 @@ class Tender < ApplicationRecord
 
   def upcoming_tender?
     DateTime.current <= opening
+  end
+
+  def schedule_open_tender_job
+    OpenTenderJob.set(wait_until: opening).perform_later(reference_id)
+  end
+
+  def schedule_close_tender_job
+    CloseTenderJob.set(wait_until: closing).perform_later(reference_id)
   end
 end
