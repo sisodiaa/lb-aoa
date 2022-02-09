@@ -25,6 +25,10 @@ module Front
       visit upcoming_tenders_url
       assert_selector ".skeleton"
       assert_selector ".tender", count: 1
+
+      visit current_tenders_url
+      assert_selector ".skeleton"
+      assert_selector ".tender", count: 1
     end
   end
 end

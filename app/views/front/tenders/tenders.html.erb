@@ -14,4 +14,16 @@
       }
     )%>
   <% end %>
+  
+  <% if @status == "current" %>
+    <%= render(
+      partial: "shared/navigation_controls",
+      locals: {
+        frame: "tenders",
+        pagy: @pagy,
+        prev_path: @pagy.prev ? current_tenders_path(page: @pagy.prev) : "#",
+        next_path: @pagy.next ? current_tenders_path(page: @pagy.next) : "#"
+      }
+    )%>
+  <% end %>
 <% end %>

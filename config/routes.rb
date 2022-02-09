@@ -68,6 +68,7 @@ Rails.application.routes.draw do
 
     resources :tenders, only: %i[] do
       get "upcoming", to: "tenders#index", status: "upcoming", on: :collection
+      get "current", to: "tenders#index", status: "current", on: :collection
     end
   end
 

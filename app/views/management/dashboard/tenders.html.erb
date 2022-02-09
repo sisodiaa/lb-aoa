@@ -1,5 +1,5 @@
 <%= turbo_frame_tag :tenders do %>
-  <div class="flex flex-wrap">
+  <div class="flex flex-wrap gap-y-8">
     <div class="basis-1/2 pr-4"
        data-controller="dashboard--list"
        data-dashboard--list-target="list"
@@ -20,11 +20,28 @@
     <div class="basis-1/2 pl-4"
        data-controller="dashboard--list"
        data-dashboard--list-target="list"
-       data-dashboard--list-source-value="<%= tms_tenders_url(status: "published") %>"
+       data-dashboard--list-source-value="<%= tms_tenders_url(status: "upcoming") %>"
        data-dashboard--list-item-value="">
       <%= turbo_frame_tag(
-        "published_tenders",
-        src: tms_tenders_path(status: "published"),
+        "upcoming_tenders",
+        src: tms_tenders_path(status: "upcoming"),
+        class: "space-y-3"
+      ) do %>
+        <%= render(
+          partial: "shared/spinner",
+          locals: { text: "text-purple-50", fill: "fill-purple-600" }
+        )%>
+      <% end %>
+    </div>
+
+    <div class="basis-1/2 pr-4"
+       data-controller="dashboard--list"
+       data-dashboard--list-target="list"
+       data-dashboard--list-source-value="<%= tms_tenders_url(status: "current") %>"
+       data-dashboard--list-item-value="">
+      <%= turbo_frame_tag(
+        "current_tenders",
+        src: tms_tenders_path(status: "current"),
         class: "space-y-3"
       ) do %>
         <%= render(
