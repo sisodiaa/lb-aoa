@@ -61,8 +61,13 @@ Rails.application.routes.draw do
       resources :documents, only: :index, controller: "post_documents"
     end
 
-    resources :tenders, only: %i[index show] do
+    get "tenders", to: "tenders#tenders", as: :tenders
+    resources :tenders, only: :show, path: "/tenders/notice" do
       resources :documents, only: :index, controller: "tender_documents"
+    end
+
+    resources :tenders, only: %i[] do
+      get "upcoming", to: "tenders#index", status: "upcoming", on: :collection
     end
   end
 

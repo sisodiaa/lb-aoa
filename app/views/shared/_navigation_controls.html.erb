@@ -1,0 +1,43 @@
+<div class="inline-flex justify-center w-full pb-4">
+  <%= link_to(
+    prev_path,
+    data: { turbo_action: "advance", turbo_frame: frame },
+    class: "w-32 inline-flex items-center justify-center py-2 px-4 text-sm font-medium
+            rounded-lg border hover:bg-fuchsia-100 hover:text-fuchsia-700
+            #{
+              pagy.prev ?
+              'text-fuchsia-500 bg-white border-fuchsia-300' :
+              'text-gray-300 border-gray-300 pointer-events-none'
+            }"
+  ) do %>
+    <svg
+      class="w-4 h-4 fill-[none] stroke-current stroke-2 mr-2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <use href="/assets/feather-sprite.svg#arrow-left" />
+    </svg>
+
+    Previous
+  <% end %>
+
+  <%= link_to(
+    next_path,
+    data: { turbo_action: "advance", turbo_frame: frame },
+    class: "w-32 inline-flex items-center justify-center py-2 px-4 ml-3 text-sm font-medium
+            rounded-lg border hover:bg-fuchsia-100 hover:text-fuchsia-700
+            #{
+              pagy.next ?
+              'text-fuchsia-500 bg-white border-fuchsia-300' :
+              'text-gray-300 border-gray-300 pointer-events-none'
+            }"
+  ) do %>
+    Next
+
+    <svg
+      class="w-4 h-4 fill-[none] stroke-current stroke-2 ml-2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <use href="/assets/feather-sprite.svg#arrow-right" />
+    </svg>
+  <% end %>
+</div>

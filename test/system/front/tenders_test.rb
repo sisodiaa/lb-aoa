@@ -22,14 +22,9 @@ module Front
     end
 
     test "#index" do
-      skip
-      visit posts_url
-      assert_selector ".post-skeleton"
-      assert_selector ".post", count: 6
-
-      click_link "Next"
-      assert_selector ".post-skeleton"
-      assert_selector ".post", count: 3
+      visit upcoming_tenders_url
+      assert_selector ".skeleton"
+      assert_selector ".tender", count: 1
     end
   end
 end
