@@ -20,18 +20,38 @@
     <%= @tender.reference_token %>
   </h2>
 
-  <div class="inline-flex mb-4 xl:mb-6">
-    <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base
-                font-normal leading-none text-zinc-500">
+  <div class="inline-flex items-center justify-center text-slate-400 mb-1">
+    <svg
+      class="w-3 h-3 xl:w-4 xl:h-4 fill-[none] stroke-current stroke-2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <use href="/assets/feather-sprite.svg#calendar" />
+    </svg>
+
+    <span class="inline-block mx-2 text-xs xl:text-base">
+      <%= @tender.published_at.strftime("%d %b %Y") %>
+    </span>
+  </div>
+
+  <div class="flex items-center mb-4 xl:mb-6 text-slate-400">
+    <svg
+      class="w-3 h-3 xl:w-4 xl:h-4 fill-[none] stroke-current stroke-2 mr-2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <use href="/assets/feather-sprite.svg#clock" />
+    </svg>
+
+    <time class="block text-xs lg:text-sm xl:text-base
+                font-normal leading-none">
       <%= @tender.opens_on.strftime("%d %b %Y, %H:%M") %>
     </time>
 
-    <span class="inline-flex items-center justify-center text-slate-400 mx-1">
+    <span class="mx-1">
       &mdash;
     </span>
 
-    <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base
-                font-normal leading-none text-zinc-500">
+    <time class="block text-xs lg:text-sm xl:text-base
+                font-normal leading-none">
       <%= @tender.closes_on.strftime("%d %b %Y, %H:%M") %>
     </time>
   </div>
