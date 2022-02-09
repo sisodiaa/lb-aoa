@@ -69,7 +69,7 @@ module TMS
       return Tender.draft.order(created_at: :asc) if params[:status] == "draft"
       Tender.published.try!(params[:status].to_sym)
     rescue NoMethodError
-      Tender.all
+      Tender.all.order(created_at: :asc)
     end
 
     def set_tender
