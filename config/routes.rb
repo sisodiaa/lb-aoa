@@ -60,6 +60,10 @@ Rails.application.routes.draw do
       get "published", on: :collection
       resources :documents, only: :index, controller: "post_documents"
     end
+
+    resources :tenders, only: %i[index show] do
+      resources :documents, only: :index, controller: "tender_documents"
+    end
   end
 
   root to: "front/posts#index"
