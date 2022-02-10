@@ -6,13 +6,14 @@ module TMS
       Warden.test_mode!
       @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_tender = tenders(:cctv_cables)
+      @published_tender = tenders(:air_quality_monitors)
 
       login_as @confirmed_board_admin, scope: :admin
     end
 
     teardown do
       logout :admin
-      @confirmed_board_admin = @draft_tender = nil
+      @confirmed_board_admin = @draft_tender = @published_tender = nil
       Warden.test_reset!
     end
 
@@ -64,6 +65,13 @@ module TMS
       within("#_tenders") do
         assert_selector ".tender", count: 5
         assert_selector "p", text: "1 to 5 of 5 tenders"
+      end
+    end
+
+    test "do not show Edit button for published tenders" do
+      visit tms_tender_url(@published_tender)
+      within("#tender-buttons-section") do
+        assert_no_selector "a", text: "Edit"
       end
     end
 

@@ -5,10 +5,11 @@ module TMS
     setup do
       @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_tender = tenders(:cctv_cables)
+      @published_tender = tenders(:air_quality_monitors)
     end
 
     teardown do
-      @confirmed_board_admin = @draft_tender = nil
+      @confirmed_board_admin = @draft_tender = @published_tender = nil
     end
 
     test "#authenticate_admin!" do
@@ -34,6 +35,32 @@ module TMS
         end
 
         assert_redirected_to tms_tenders_url
+      end
+    end
+
+    # authorisation cases
+
+    test "can not edit a published tender" do
+      authenticated_admin do
+        get edit_tms_tender_url(@published_tender)
+        assert_equal "You can not perform this action on a published tender.",
+          flash[:error]
+      end
+    end
+
+    test "can not update a published tender" do
+      authenticated_admin do
+        patch tms_tender_url(@published_tender)
+        assert_equal "You can not perform this action on a published tender.",
+          flash[:error]
+      end
+    end
+
+    test "can not destroy a published tender" do
+      authenticated_admin do
+        delete tms_tender_url(@published_tender)
+        assert_equal "You can not perform this action on a published tender.",
+          flash[:error]
       end
     end
 

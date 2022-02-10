@@ -34,9 +34,13 @@ module TMS
       end
     end
 
-    def edit; end
+    def edit
+      authorize @tender, policy_class: TMS::TenderPolicy
+    end
 
     def update
+      authorize @tender, policy_class: TMS::TenderPolicy
+
       if @tender.update(tender_params)
         redirect_to tms_tender_path(@tender), notice: "Tender was successfully updated."
       else
@@ -50,6 +54,8 @@ module TMS
     end
 
     def destroy
+      authorize @tender, policy_class: TMS::TenderPolicy
+
       respond_to do |format|
         if @tender.destroy
           format.turbo_stream do
@@ -61,6 +67,10 @@ module TMS
           end
         end
       end
+    end
+
+    def pundit_user
+      current_admin
     end
 
     private

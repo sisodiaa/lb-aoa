@@ -43,12 +43,14 @@
 
   <%= turbo_frame_tag "tender-buttons-section" do %>
     <div class="inline-flex">
-      <%= link_to(
-        "Edit",
-        edit_tms_tender_path(@tender),
-        target: "_top",
-        class: "block btn btn--normal btn--secondary w-32"
-      )%>
+      <% if policy([:tms, @tender]).edit? %>
+        <%= link_to(
+          "Edit",
+          edit_tms_tender_path(@tender),
+          target: "_top",
+          class: "block btn btn--normal btn--secondary w-32"
+        )%>
+      <% end %>
 
       <%= link_to(
         "Attachments",
