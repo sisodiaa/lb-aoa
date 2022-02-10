@@ -75,6 +75,13 @@ module TMS
       end
     end
 
+    test "do not show Publish Tender button for a published tender" do
+      visit tms_tender_url(@published_tender)
+      within("#tender-buttons-section") do
+        assert_no_selector "button", text: "Publish Tender"
+      end
+    end
+
     private
 
     def new_tender_with_blank_form

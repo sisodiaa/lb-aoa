@@ -59,13 +59,15 @@
         class: "block btn btn--normal btn--secondary w-32"
       )%>
 
-      <%= button_to(
-        "Publish Tender",
-        publish_tms_tender_path(@tender),
-        method: :patch,
-        params: {tender: {publication_state: "published"}},
-        class: "mr-3 btn btn--normal btn--success"
-      )%>
+      <% if TMS::PublicationPolicy.new(current_admin, @tender).update? %>
+        <%= button_to(
+          "Publish Tender",
+          publish_tms_tender_path(@tender),
+          method: :patch,
+          params: {tender: {publication_state: "published"}},
+          class: "mr-3 btn btn--normal btn--success"
+        )%>
+      <% end %>
     </div>
   <% end %>
 </div>

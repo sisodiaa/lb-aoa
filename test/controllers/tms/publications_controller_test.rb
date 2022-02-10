@@ -5,10 +5,11 @@ module TMS
     setup do
       @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_tender = tenders(:cctv_cables)
+      @published_tender = tenders(:air_quality_monitors)
     end
 
     teardown do
-      @confirmed_board_admin = @draft_tender = nil
+      @confirmed_board_admin = @draft_tender = @published_tender = nil
     end
 
     test "#authenticate_admin!" do
@@ -33,6 +34,14 @@ module TMS
         assert_not @draft_tender.reload.draft?
         assert @draft_tender.published?
         assert_not_nil @draft_tender.published_at
+      end
+    end
+
+    test "publish action does not apply on published tender" do
+      authenticated_admin do
+        patch publish_tms_tender_path(@published_tender)
+        assert_equal "You can not perform this action on a published tender.",
+          flash[:error]
       end
     end
 

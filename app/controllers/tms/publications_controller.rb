@@ -6,6 +6,8 @@ module TMS
     def update
       @tender = Tender.find(params[:id])
 
+      authorize @tender, policy_class: TMS::PublicationPolicy
+
       @tender.publish if tender_publishable?
 
       respond_to do |format|
@@ -29,6 +31,10 @@ module TMS
           end
         end
       end
+    end
+
+    def pundit_user
+      current_admin
     end
 
     private
