@@ -21,7 +21,7 @@
 
 .trix-content {
   & h1 {
-    @apply text-4xl;
+    @apply text-3xl;
   }
 
   & ul {
@@ -33,11 +33,11 @@
   }
 }
 
+div.trix-content {
+  padding-right: 1.2em;
+}
+
 trix-editor {
   @apply bg-white border border-gray-300 text-gray-900 rounded-lg
          focus:ring-blue-500 focus:border-blue-500 min-h-[15rem];
-}
-
-trix-toolbar {
-  @apply bg-fuchsia-50;
 }
