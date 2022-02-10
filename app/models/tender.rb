@@ -17,7 +17,7 @@ class Tender < ApplicationRecord
     upcoming: 0,
     current: 1,
     under_review: 2,
-    archived: 3
+    reviewed: 3
   }
 
   validates :reference_id, presence: true, uniqueness: true

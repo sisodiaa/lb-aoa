@@ -53,5 +53,5 @@ elevator_buttons:
   published_at: <%= Time.current - 6.day %>
   opening: <%= Time.current - 4.day %>
   closing: <%= Time.current - 1.day %>
-  notice_state: archived
+  notice_state: reviewed
   publication_state: 1
