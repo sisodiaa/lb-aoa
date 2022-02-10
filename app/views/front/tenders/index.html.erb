@@ -1,5 +1,7 @@
 <%= turbo_frame_tag "tenders" do %>
   <div class="mx-auto w-10/12 sm:w-9/12 md:w-8/12 lg:w-11/12 xl:w-10/12 2xl:w-9/12">
+    <%= render partial: "dropdown" %>
+
     <%= turbo_frame_tag(
       "#{@status}_tenders",
       src: tenders_path(status: @status, page: @page),

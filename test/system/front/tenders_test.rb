@@ -21,14 +21,22 @@ module Front
       assert_selector "turbo-frame#attachments li", count: 1
     end
 
-    test "#index" do
+    test "dropdown for selecting tenders by their status types" do
       visit upcoming_tenders_url
       assert_selector ".skeleton"
       assert_selector ".tender", count: 1
+      within(".tender") do
+        assert_selector "h1", text: "supply air quality monitors"
+      end
 
-      visit current_tenders_url
+      click_button "List Tenders by Status"
+      click_link "Current"
+
       assert_selector ".skeleton"
       assert_selector ".tender", count: 1
+      within(".tender") do
+        assert_selector "h1", text: "Barb wire for fencing"
+      end
     end
   end
 end
