@@ -6,9 +6,14 @@ module TMS
       Warden.test_mode!
       @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_tender = tenders(:cctv_cables)
+      @published_tender = tenders(:air_quality_monitors)
       @document = documents(:xls)
 
       @draft_tender.documents.each do |document|
+        attach_file_to_record document.file, "square.png", "image/png"
+      end
+
+      @published_tender.documents.each do |document|
         attach_file_to_record document.file, "square.png", "image/png"
       end
 
@@ -42,6 +47,13 @@ module TMS
       delete_first_attachment
       assert_selector "li.tender-document", count: 0
       assert_text "Attachment was successfully removed"
+    end
+
+    test "Remove button and form are not shown for published tender" do
+      visit tms_tender_documents_path(@published_tender)
+
+      assert_no_selector "form"
+      assert_no_selector "a", text: "Remove"
     end
 
     private

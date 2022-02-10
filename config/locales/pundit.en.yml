@@ -16,3 +16,6 @@ en:
      destroy?: 'You can not perform this action on a published tender.'
    tms/publication_policy:
      update?: 'You can not perform this action on a published tender.'
+   tms/tender_document_policy:
+     create?: 'You can not perform this action on a published tender.'
+     destroy?: 'You can not perform this action on a published tender.'

@@ -8,6 +8,8 @@ module TMS
     end
 
     def create
+      authorize @tender, policy_class: TMS::TenderDocumentPolicy
+
       @document = @tender.documents.build(document_params)
 
       respond_to do |format|
@@ -29,6 +31,8 @@ module TMS
     end
 
     def destroy
+      authorize @tender, policy_class: TMS::TenderDocumentPolicy
+
       @document = @tender.documents.find(params[:id])
 
       respond_to do |format|
@@ -42,6 +46,10 @@ module TMS
           end
         end
       end
+    end
+
+    def pundit_user
+      current_admin
     end
 
     private

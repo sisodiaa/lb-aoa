@@ -41,25 +41,27 @@
       </div>
     <% end %>
 
-    <%= link_to(
-      tms_tender_document_path(tender, document),
-      data: {
-        turbo_method: :delete,
-        turbo_confirm: 'Are you sure?'
-      },
-      class: "inline-block ml-2"
-    ) do %>
-      <div
-        class="inline-flex items-center justify-center flex-shrink-0 h-6
-               rounded-lg bg-red-400 hover:bg-red-500 text-red-50">
-        <span class="inline-block text-xs mr-2 pl-2">Remove</span>
-        <svg
-          class="w-4 h-4 fill-[none] stroke-current stroke-2 mr-2"
-          stroke-linecap="round"
-          stroke-linejoin="round">
-          <use href="/assets/feather-sprite.svg#trash-2" />
-        </svg>
-      </div>
+    <% if TMS::TenderDocumentPolicy.new(current_admin, @tender).destroy? %>
+      <%= link_to(
+        tms_tender_document_path(tender, document),
+        data: {
+          turbo_method: :delete,
+          turbo_confirm: 'Are you sure?'
+        },
+        class: "inline-block ml-2"
+      ) do %>
+        <div
+          class="inline-flex items-center justify-center flex-shrink-0 h-6
+                 rounded-lg bg-red-400 hover:bg-red-500 text-red-50">
+          <span class="inline-block text-xs mr-2 pl-2">Remove</span>
+          <svg
+            class="w-4 h-4 fill-[none] stroke-current stroke-2 mr-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <use href="/assets/feather-sprite.svg#trash-2" />
+          </svg>
+        </div>
+      <% end %>
     <% end %>
   </li>
 <% end %>

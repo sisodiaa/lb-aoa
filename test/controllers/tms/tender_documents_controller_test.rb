@@ -5,11 +5,14 @@ module TMS
     setup do
       @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_tender = tenders(:cctv_cables)
+      @published_tender = tenders(:air_quality_monitors)
       @document = documents(:xls)
+      @published_tender_document = documents(:excel)
     end
 
     teardown do
-      @confirmed_board_admin = @draft_tender = @document = nil
+      @confirmed_board_admin = @draft_tender = @published_tender = nil
+      @document = @published_tender_document = nil
     end
 
     test "#authenticate_admin!" do
@@ -45,6 +48,24 @@ module TMS
 
         assert_redirected_to tms_tender_documents_path(@draft_tender)
         assert_equal "Attachment was successfully removed", flash[:notice]
+      end
+    end
+
+    # authorisation cases
+
+    test "#create - published tender" do
+      authenticated_admin do
+        post tms_tender_documents_path(@published_tender)
+        assert_equal "You can not perform this action on a published tender.",
+          flash[:error]
+      end
+    end
+
+    test "#destroy - published tender" do
+      authenticated_admin do
+        delete tms_tender_document_path(@published_tender, @published_tender_document)
+        assert_equal "You can not perform this action on a published tender.",
+          flash[:error]
       end
     end
 

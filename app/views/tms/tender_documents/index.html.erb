@@ -7,9 +7,11 @@
   )%>
 </h1>
 
-<div class="lg:w-1/2 p-5 border-t-4 border-dashed">
-  <%= render partial: "form", locals: { tender: @tender, document: @document } %>
-</div>
+<% if TMS::TenderDocumentPolicy.new(current_admin, @tender).create? %>
+  <div class="lg:w-1/2 p-5 border-t-4 border-dashed">
+    <%= render partial: "form", locals: { tender: @tender, document: @document } %>
+  </div>
+<% end %>
 
 <ul class="lg:w-1/2 p-5 mb-4 border-t-4 border-dashed">
   <%= turbo_frame_tag "tender-documents" do %>

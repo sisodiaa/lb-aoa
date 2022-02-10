@@ -13,7 +13,7 @@ class CMS::PostDocumentsPolicyTest < ActiveSupport::TestCase
     @confirmed_board_admin = nil
   end
 
-  def test_update
+  def test_create
     assert CMS::PostDocumentsPolicy.new(@confirmed_board_admin, @draft_post).create?
     assert_not CMS::PostDocumentsPolicy.new(@confirmed_board_admin, @published_post).create?
   end
