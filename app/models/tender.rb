@@ -6,6 +6,7 @@ class Tender < ApplicationRecord
   after_update :schedule_close_tender_job, if: :current?
 
   has_many :documents, as: :documentable, dependent: :destroy
+  has_many :bids, inverse_of: :tender, dependent: :destroy, before_add: :check_notice_state
   has_rich_text :description
 
   enum publication_state: {
@@ -87,5 +88,9 @@ class Tender < ApplicationRecord
 
   def schedule_close_tender_job
     CloseTenderJob.set(wait_until: closing).perform_later(reference_id)
+  end
+
+  def check_notice_state(bid)
+    throw(:abort) unless current?
   end
 end

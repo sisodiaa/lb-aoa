@@ -17,3 +17,7 @@ excel:
 xls:
   annotation: A template for taps
   documentable: cctv_cables (Tender)
+
+sheet:
+  annotation: Proposal Sheet
+  documentable: wirewala (Bid)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_02_122151) do
+ActiveRecord::Schema.define(version: 2022_02_11_091301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,19 @@ ActiveRecord::Schema.define(version: 2022_02_02_122151) do
     t.index ["unlock_token"], name: "index_admins_on_unlock_token", unique: true
   end
 
+  create_table "bids", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "quotation_token"
+    t.text "note"
+    t.bigint "tender_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email", "tender_id"], name: "index_bids_on_email_and_tender_id", unique: true
+    t.index ["quotation_token"], name: "index_bids_on_quotation_token", unique: true
+    t.index ["tender_id"], name: "index_bids_on_tender_id"
+  end
+
   create_table "documents", force: :cascade do |t|
     t.string "annotation"
     t.string "documentable_type", null: false
@@ -116,4 +129,5 @@ ActiveRecord::Schema.define(version: 2022_02_02_122151) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bids", "tenders"
 end

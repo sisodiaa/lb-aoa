@@ -1,0 +1,40 @@
+wirewala:
+  name: Wire Wala and Sons
+  email: wirewala@example.com
+  quotation_token:  <%= SecureRandom.hex(4) %>
+  note: We are simply the best
+  tender: barb_wire
+
+airwala:
+  name: airwala and sons
+  email: airwala@example.com
+  quotation_token:  <%= SecureRandom.hex(4) %>
+  tender: air_quality_monitors
+
+waterwala:
+  name: waterwala and sons
+  email: waterwala@example.com
+  quotation_token:  <%= SecureRandom.hex(4) %>
+  note: We are simply the best
+  tender: water_purifier
+
+paaniwala:
+  name: paaniwala and sons
+  email: paaniwala@example.com
+  quotation_token:  <%= SecureRandom.hex(4) %>
+  note: We are simply the best
+  tender: water_purifier
+
+purifierwala:
+  name: purifierwala and sons
+  email: purifierwala@example.com
+  quotation_token:  <%= SecureRandom.hex(4) %>
+  note: We are simply the best
+  tender: water_purifier
+
+no_document_wala:
+  name: no document wala and sons
+  email: no_document@example.com
+  quotation_token:  <%= SecureRandom.hex(4) %>
+  note: We are simply the best
+  tender: water_purifier

@@ -23,7 +23,7 @@ air_quality_monitors:
   published_at: <%= Time.current %>
   opening: <%= Time.current + 1.day %>
   closing: <%= Time.current + 3.day %>
-  notice_state: 0
+  notice_state: upcoming
   publication_state: 1
 
 barb_wire:
@@ -33,7 +33,7 @@ barb_wire:
   published_at: <%= Time.current - 5.day %>
   opening: <%= Time.current - 1.day %>
   closing: <%= Time.current + 2.day %>
-  notice_state: 1
+  notice_state: current
   publication_state: 1
 
 water_purifier:
@@ -43,7 +43,7 @@ water_purifier:
   published_at: <%= Time.current - 5.day %>
   opening: <%= Time.current - 3.day %>
   closing: <%= Time.current - 1.day %>
-  notice_state: 2
+  notice_state: under_review
   publication_state: 1
 
 elevator_buttons:

@@ -102,4 +102,29 @@ class TenderTest < ActiveSupport::TestCase
 
     assert_equal DateTime.current.to_i, @draft_tender.published_at.to_i
   end
+
+  test "that bids can onlly be added to current tenders" do
+    bid = Bid.create name: "name", email: "em@i.l", note: "note"
+    attach_file_to_record(
+      bid.build_document.file,
+      "sheet.xlsx",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+
+    assert_difference "Bid.count", 0 do
+      @published_tender.bids << bid
+    end
+
+    assert_difference "Bid.count" do
+      tenders(:barb_wire).bids << bid
+    end
+
+    assert_difference "Bid.count", 0 do
+      tenders(:water_purifier).bids << bid
+    end
+
+    assert_difference "Bid.count", 0 do
+      tenders(:elevator_buttons).bids << bid
+    end
+  end
 end
