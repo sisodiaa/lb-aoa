@@ -2,11 +2,12 @@ require "test_helper"
 
 class BidTest < ActiveSupport::TestCase
   setup do
+    @current_tender = tenders(:barb_wire)
     @bid = bids(:wirewala)
   end
 
   teardown do
-    @bid = nil
+    @bid = @current_tender = nil
   end
 
   test "that name is present" do
@@ -61,12 +62,36 @@ class BidTest < ActiveSupport::TestCase
     assert_not @bid.valid?, "Only excel files are allowed"
   end
 
+  test "that unique quotation token is generated for new token" do
+    new_bid = @current_tender.bids.create name: "abc", email: "em@i.l"
+    attach_file_to_record(
+      new_bid.build_document.file,
+      "sheet.xlsx",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+
+    assert_nil new_bid.quotation_token
+    new_bid.save
+    assert_not_nil new_bid.quotation_token
+  end
+
   test "that token value is unique" do
-    assert_not @bid.dup.valid?, "Quotation Token is not unique"
+    new_bid = @bid.dup
+    attach_file_to_record(
+      new_bid.build_document.file,
+      "sheet.xlsx",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+    assert_not new_bid.valid?, "Quotation Token is not unique"
   end
 
   test "that email is unique per notice" do
-    new_bid = Bid.new name: "abc", email: @bid.email, tender_id: @bid.tender_id
+    new_bid = @current_tender.bids.create name: "abc", email: @bid.email
+    attach_file_to_record(
+      new_bid.build_document.file,
+      "sheet.xlsx",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
 
     assert_not new_bid.valid?, "Email per notice needs to be unique"
   end

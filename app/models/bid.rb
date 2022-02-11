@@ -5,9 +5,14 @@ class Bid < ApplicationRecord
   has_one :document, as: :documentable, dependent: :destroy
 
   validates :name, presence: true
+  validates :quotation_token, uniqueness: true
   validates :document, presence: true
   validates_associated :document
-  validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP}
+  validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP},
+    uniqueness: {
+      scope: :tender_id,
+      message: "already used before to submit a bid for this tender."
+    }
 
   private
 
