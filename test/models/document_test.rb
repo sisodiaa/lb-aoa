@@ -3,10 +3,11 @@ require "test_helper"
 class DocumentTest < ActiveSupport::TestCase
   setup do
     @image_document = documents(:image)
+    @bid_document = documents(:sheet)
   end
 
   teardown do
-    @image_document = nil
+    @image_document = @bid_document = nil
   end
 
   test "that a document without annotation is valid" do
@@ -64,5 +65,17 @@ class DocumentTest < ActiveSupport::TestCase
     @image_document.file.stub(:content_type, "application/zip") do
       assert_not @image_document.valid?, "Attachment should be image or pdf"
     end
+  end
+
+  test "that only excel files are allowed as attachment for Bids" do
+    attach_file_to_record(
+      @bid_document.file,
+      "sheet.xlsx",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+    assert @bid_document.valid?
+
+    attach_file_to_record @bid_document.file, "square.png", "image/png"
+    assert_not @bid_document.valid?, "Only excel files are allowed"
   end
 end

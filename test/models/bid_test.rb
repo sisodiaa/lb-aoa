@@ -30,6 +30,12 @@ class BidTest < ActiveSupport::TestCase
   end
 
   test "accept valid email addresses" do
+    attach_file_to_record(
+      @bid.build_document.file,
+      "sheet.xlsx",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+
     valid_addresses = %w[user@example.com USER@foo.COM A_US-ER@foo.bar.org
       first.last@foo.jp alice+bob@baz.cn]
 
@@ -41,6 +47,18 @@ class BidTest < ActiveSupport::TestCase
 
   test "that attachment is required" do
     assert_not bids(:no_document_wala).valid?, "Attachment is missing"
+  end
+
+  test "that only excel file can be attached" do
+    attach_file_to_record(
+      @bid.build_document.file,
+      "sheet.xlsx",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+    assert @bid.valid?
+
+    attach_file_to_record @bid.build_document.file, "square.png", "image/png"
+    assert_not @bid.valid?, "Only excel files are allowed"
   end
 
   test "that token value is unique" do

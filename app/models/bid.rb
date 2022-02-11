@@ -6,6 +6,7 @@ class Bid < ApplicationRecord
 
   validates :name, presence: true
   validates :document, presence: true
+  validates_associated :document
   validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP}
 
   private
