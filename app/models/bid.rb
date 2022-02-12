@@ -3,6 +3,7 @@ class Bid < ApplicationRecord
   before_create :set_quotation_token
 
   has_one :document, as: :documentable, dependent: :destroy
+  accepts_nested_attributes_for :document
 
   validates :name, presence: true
   validates :quotation_token, uniqueness: true

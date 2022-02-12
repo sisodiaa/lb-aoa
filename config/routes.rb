@@ -72,5 +72,11 @@ Rails.application.routes.draw do
     end
   end
 
+  scope module: :tms do
+    resources :tenders, only: [], path: "/tenders/notice" do
+      resources :bids, only: %i[new create]
+    end
+  end
+
   root to: "front/posts#index"
 end

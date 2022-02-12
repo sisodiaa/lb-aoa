@@ -1,0 +1,5 @@
+<%= turbo_stream.update "tender-bid", partial: "submission", locals: {bid: @bid} %>
+
+<%= turbo_stream.update "flash-messages" do %>
+  <%= flash_messages %>
+<% end %>
