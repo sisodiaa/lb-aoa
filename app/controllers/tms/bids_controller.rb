@@ -3,11 +3,14 @@ module TMS
     before_action :set_tender
 
     def new
+      authorize @tender, policy_class: TMS::BidPolicy
       @bid = @tender.bids.new
       @bid.build_document
     end
 
     def create
+      authorize @tender, policy_class: TMS::BidPolicy
+
       @bid = @tender.bids.build(bid_params)
 
       respond_to do |format|
@@ -34,6 +37,10 @@ module TMS
       end
     end
 
+    def pundit_user
+      nil
+    end
+
     private
 
     def set_tender
@@ -41,7 +48,7 @@ module TMS
     end
 
     def bid_params
-      params.require(:bid).permit(:name, :email, :note, document_attributes: [:file])
+      params.require(:bid).permit(:name, :email, :note, document_attributes: [:file, :annotation])
     end
   end
 end

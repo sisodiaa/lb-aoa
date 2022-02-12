@@ -4,6 +4,7 @@ module TMS
   class BidsControllerTest < ActionDispatch::IntegrationTest
     setup do
       @current_tender = tenders(:barb_wire)
+      @under_review_tender = tenders(:water_purifier)
     end
 
     teardown do
@@ -35,6 +36,18 @@ module TMS
 
       assert_redirected_to tender_path(@current_tender)
       assert_equal "Bid was successfully submitted.", flash[:success]
+    end
+
+    # authorisation cases
+
+    test "can not create a new bid for under review tender" do
+      post tender_bids_path(@under_review_tender)
+      assert_equal "You cannot perform this action.", flash[:error]
+    end
+
+    test "should not get new" do
+      get new_tender_bid_path(@under_review_tender)
+      assert_equal "You cannot perform this action.", flash[:error]
     end
   end
 end

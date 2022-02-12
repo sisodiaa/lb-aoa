@@ -4,6 +4,7 @@ module TMS
   class BidsTest < ApplicationSystemTestCase
     setup do
       @current_tender = tenders(:barb_wire)
+      @reviewed_tender = tenders(:elevator_buttons)
     end
 
     teardown do
@@ -41,6 +42,11 @@ module TMS
       end
       assert_selector "[role='toast']", text: "Bid was successfully submitted."
       assert_text "Reference token for this bid is #{Bid.last.reload.quotation_token}"
+    end
+
+    test "only current tenders can have bid submission" do
+      visit tender_url(@reviewed_tender)
+      assert_no_selector "#tender-bid"
     end
   end
 end
