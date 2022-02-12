@@ -22,7 +22,22 @@ module Management
 
         within("#draft_tenders") do
           assert_selector ".tender", count: 2
-          assert_selector "p", text: "1 to 2 of 2 draft tenders"
+          assert_selector "p", text: "1 to 2 of 2 Draft tenders"
+        end
+
+        within("#upcoming_tenders") do
+          assert_selector ".tender", count: 1
+          assert_selector "p", text: "1 to 1 of 1 Upcoming tenders"
+        end
+
+        within("#current_tenders") do
+          assert_selector ".tender", count: 1
+          assert_selector "p", text: "1 to 1 of 1 Current tenders"
+        end
+
+        within("#under_review_tenders") do
+          assert_selector ".tender", count: 1
+          assert_selector "p", text: "1 to 1 of 1 Under Review tenders"
         end
       end
     end
@@ -35,14 +50,14 @@ module Management
 
         within("#draft_tenders") do
           assert_selector ".tender", count: 2
-          assert_selector "p", text: "1 to 2 of 2 draft tenders"
+          assert_selector "p", text: "1 to 2 of 2 Draft tenders"
 
           page.accept_confirm do
             click_on "Delete", match: :first
           end
 
           assert_selector ".tender", count: 1
-          assert_selector "p", text: "1 to 1 of 1 draft tenders"
+          assert_selector "p", text: "1 to 1 of 1 Draft tenders"
         end
       end
 
