@@ -69,6 +69,7 @@ Rails.application.routes.draw do
     resources :tenders, only: %i[] do
       get "upcoming", to: "tenders#index", status: "upcoming", on: :collection
       get "current", to: "tenders#index", status: "current", on: :collection
+      get "under_review", to: "tenders#index", status: "under_review", on: :collection
     end
   end
 

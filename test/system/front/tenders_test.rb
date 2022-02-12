@@ -37,6 +37,15 @@ module Front
       within(".tender") do
         assert_selector "h1", text: "Barb wire for fencing"
       end
+
+      click_button "List Tenders by Status"
+      click_link "Under Review"
+
+      assert_selector ".skeleton"
+      assert_selector ".tender", count: 1
+      within(".tender") do
+        assert_selector "h1", text: "Installation for water purifier for each tower"
+      end
     end
   end
 end
