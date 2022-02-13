@@ -43,6 +43,12 @@
            hover:from-purple-500 hover:via-purple-600 hover:to-purple-700
            focus:ring-purple-50;
   }
+
+  .btn--violet {
+    @apply from-violet-400 via-violet-500 to-violet-600
+           hover:from-violet-500 hover:via-violet-600 hover:to-violet-700
+           focus:ring-violet-50;
+  }
 }
 
 .field_with_errors > label {
