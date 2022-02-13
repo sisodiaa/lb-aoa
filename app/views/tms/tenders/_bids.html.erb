@@ -20,7 +20,7 @@
   id="bidDropdown"
   class="hidden mb-6 z-10 w-full lg:w-2/5 mx-12 text-base list-none bg-white
         rounded divide-y divide-gray-100 shadow">
-  <%= turbo_frame_tag "tender-bids", src: tender_bids_path(tender), loading: :lazy do %>
+  <%= turbo_frame_tag "tender-bids", src: tms_tender_bids_path(tender), loading: :lazy do %>
     <div class="p-2">
       <%= render(
         partial: "shared/spinner",

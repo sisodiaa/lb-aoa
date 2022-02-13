@@ -3,12 +3,79 @@ require "application_system_test_case"
 module TMS
   class BidsTest < ApplicationSystemTestCase
     setup do
-      @current_tender = tenders(:barb_wire)
+      @confirmed_board_admin = admins(:confirmed_board_admin)
       @reviewed_tender = tenders(:elevator_buttons)
+      @reviewed_bid = bids(:elevatorwala)
+
+      @under_review_tender = tenders(:water_purifier)
+      @under_review_bid = bids(:waterwala)
+
+      @current_tender = tenders(:barb_wire)
+      @current_bid = bids(:wirewala)
+
+      @upcoming_tender = tenders(:air_quality_monitors)
+      @upcoming_bid = bids(:airwala)
+
+      @bid = bids(:waterwala)
     end
 
     teardown do
-      @current_tender = nil
+      @upcoming_tender = @current_tender = @under_review_tender = @reviewed_tender = nil
+      @upcoming_bid = @current_bid = @under_review_bid = @reviewed_bid = nil
+      @confirmed_board_admin = @bid = nil
+    end
+
+    test "tms - list and show bids" do
+      attach_file_to_record(
+        @bid.document.file,
+        "sheet.xlsx",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      )
+
+      login_as @confirmed_board_admin, scope: :admin
+      visit tms_tender_url(@under_review_tender)
+
+      assert_selector "#bidDropdownButton"
+      assert_selector "#bidDropdown", visible: :hidden
+      click_button "Submitted Bids"
+      assert_selector "#bidDropdown", visible: true
+
+      assert_no_selector "#bid_#{@bid.quotation_token}"
+      within "#bidDropdown" do
+        assert_selector "li.tender-bid", count: 4
+        click_link "#{@bid.name} - #{@bid.quotation_token}"
+      end
+
+      assert_selector "#bid_#{@bid.quotation_token}"
+      logout :admin
+    end
+
+    test "tms - only reviewed and tenders show bids' list" do
+      attach_file_to_record(
+        @reviewed_bid.document.file,
+        "sheet.xlsx",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      )
+      login_as @confirmed_board_admin, scope: :admin
+      visit tender_url(@reviewed_tender)
+      assert_selector "#bidDropdownButton"
+
+      attach_file_to_record(
+        @under_review_bid.document.file,
+        "sheet.xlsx",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      )
+      visit tender_url(@under_review_tender)
+      assert_selector "#bidDropdownButton"
+
+      attach_file_to_record(
+        @current_bid.document.file,
+        "sheet.xlsx",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      )
+      visit tender_url(@current_tender)
+      assert_no_selector "#bidDropdownButton"
+      logout :admin
     end
 
     test "show validation errors and flash message if nothing is submitted" do

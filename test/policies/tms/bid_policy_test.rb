@@ -12,6 +12,29 @@ class TMS::BidPolicyTest < ActiveSupport::TestCase
     @upcoming_tender = @current_tender = @under_review_tender = @reviewed_tender = nil
   end
 
+  def test_scope
+    bids = TMS::BidPolicy::Scope.new(nil, @reviewed_tender).resolve
+    assert_includes bids, bids(:elevatorwala)
+
+    bids = TMS::BidPolicy::Scope.new(nil, @under_review_tender).resolve
+    assert_includes bids, bids(:waterwala)
+
+    assert_raises(Pundit::NotAuthorizedError) do
+      TMS::BidPolicy::Scope.new(nil, @upcoming_tender).resolve
+    end
+
+    assert_raises(Pundit::NotAuthorizedError) do
+      TMS::BidPolicy::Scope.new(nil, @current_tender).resolve
+    end
+  end
+
+  def test_show
+    assert_not TMS::BidPolicy.new(nil, @upcoming_tender).show?
+    assert_not TMS::BidPolicy.new(nil, @current_tender).show?
+    assert TMS::BidPolicy.new(nil, @under_review_tender).show?
+    assert TMS::BidPolicy.new(nil, @reviewed_tender).show?
+  end
+
   def test_new
     assert_not TMS::BidPolicy.new(nil, @upcoming_tender).new?
     assert TMS::BidPolicy.new(nil, @current_tender).new?

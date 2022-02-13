@@ -21,6 +21,7 @@ module Front
     teardown do
       @upcoming_tender = @current_tender = @under_review_tender = @reviewed_tender = nil
       @upcoming_bid = @current_bid = @under_review_bid = @reviewed_bid = nil
+      @bid = nil
     end
 
     test "list and show bids" do

@@ -1,8 +1,14 @@
 class TMS::BidPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      return scope.bids.all if scope.under_review? || scope.reviewed?
+
+      raise Pundit::NotAuthorizedError
     end
+  end
+
+  def show?
+    record.under_review? || record.reviewed?
   end
 
   def new?

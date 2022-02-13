@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   namespace :tms do
     resources :tenders do
       resources :documents, only: %i[index create destroy], controller: "tender_documents"
+      resources :bids, only: %i[index show]
     end
   end
 

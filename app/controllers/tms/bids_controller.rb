@@ -2,6 +2,16 @@ module TMS
   class BidsController < ApplicationController
     before_action :set_tender
 
+    def index
+      @bids = policy_scope(@tender, policy_scope_class: TMS::BidPolicy::Scope)
+    end
+
+    def show
+      authorize @tender, policy_class: TMS::BidPolicy
+      @bid = @tender.bids.find_by(quotation_token: params[:id])
+      @document = @bid.document
+    end
+
     def new
       authorize @tender, policy_class: TMS::BidPolicy
       @bid = @tender.bids.new

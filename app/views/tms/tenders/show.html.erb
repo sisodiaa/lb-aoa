@@ -42,13 +42,13 @@
   </div>
 
   <%= turbo_frame_tag "tender-buttons-section" do %>
-    <div class="inline-flex">
+    <div class="flex mb-6">
       <% if policy([:tms, @tender]).edit? %>
         <%= link_to(
           "Edit",
           edit_tms_tender_path(@tender),
           target: "_top",
-          class: "block btn btn--normal btn--secondary w-32"
+          class: "block btn btn--normal btn--purple w-32"
         )%>
       <% end %>
 
@@ -56,7 +56,7 @@
         "Attachments",
         tms_tender_documents_path(@tender),
         target: "_top",
-        class: "block btn btn--normal btn--secondary w-32"
+        class: "block btn btn--normal btn--purple w-32"
       )%>
 
       <% if TMS::PublicationPolicy.new(current_admin, @tender).update? %>
@@ -65,9 +65,13 @@
           publish_tms_tender_path(@tender),
           method: :patch,
           params: {tender: {publication_state: "published"}},
-          class: "mr-3 btn btn--normal btn--success"
+          class: "mr-3 btn btn--normal btn--purple"
         )%>
       <% end %>
     </div>
+  <% end %>
+
+  <% if @tender.under_review? || @tender.reviewed? %>
+    <%= render partial: "bids", locals: { tender: @tender } %>
   <% end %>
 </div>
