@@ -93,7 +93,15 @@
 
   <% if TMS::BidPolicy.new(nil, @tender).new? %>
     <%= turbo_frame_tag "tender-bid" do %>
-      <%= link_to "Submit a bid", new_tender_bid_path(@tender), class: "btn btn--normal btn--purple" %>
+      <%= link_to(
+        "Submit a bid",
+        new_tender_bid_path(@tender),
+        class: "block btn btn--normal btn--violet"
+      )%>
     <% end %>
+  <% end %>
+
+  <% if @tender.under_review? || @tender.reviewed? %>
+    <%= render partial: "bids", locals: { tender: @tender } %>
   <% end %>
 </div>

@@ -21,3 +21,11 @@ xls:
 sheet:
   annotation: Proposal Sheet
   documentable: wirewala (Bid)
+
+proposal:
+  annotation: Proposal Sheet
+  documentable: waterwala (Bid)
+
+spreadsheet:
+  annotation: Proposal Sheet
+  documentable: elevatorwala (Bid)

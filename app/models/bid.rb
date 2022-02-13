@@ -15,6 +15,10 @@ class Bid < ApplicationRecord
       message: "already used before to submit a bid for this tender."
     }
 
+  def to_param
+    quotation_token
+  end
+
   private
 
   def set_quotation_token

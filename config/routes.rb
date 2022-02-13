@@ -55,6 +55,12 @@ Rails.application.routes.draw do
 
   patch "tms/tenders/:id/publish", to: "tms/publications#update", as: "publish_tms_tender"
 
+  scope module: :tms do
+    resources :tenders, only: [], path: "/tenders/notice" do
+      resources :bids, only: %i[new create]
+    end
+  end
+
   scope module: "front" do
     resources :posts, only: %i[index show] do
       get "published", on: :collection
@@ -64,18 +70,13 @@ Rails.application.routes.draw do
     get "tenders", to: "tenders#tenders", as: :tenders
     resources :tenders, only: :show, path: "/tenders/notice" do
       resources :documents, only: :index, controller: "tender_documents"
+      resources :bids, only: %i[index show]
     end
 
     resources :tenders, only: %i[] do
       get "upcoming", to: "tenders#index", status: "upcoming", on: :collection
       get "current", to: "tenders#index", status: "current", on: :collection
       get "under_review", to: "tenders#index", status: "under_review", on: :collection
-    end
-  end
-
-  scope module: :tms do
-    resources :tenders, only: [], path: "/tenders/notice" do
-      resources :bids, only: %i[new create]
     end
   end
 
