@@ -1,7 +1,7 @@
 <%= form_with(
   model: [:cms, post],
   id: dom_id(post),
-  class: "lg:w-1/2 p-5 rounded border border-slate-200 bg-fuchsia-50"
+  class: "mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12"
 ) do |form| %>
   <% if post.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
