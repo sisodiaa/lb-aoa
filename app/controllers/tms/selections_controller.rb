@@ -6,6 +6,7 @@ module TMS
 
     def new
       authorize @tender, policy_class: TMS::SelectionPolicy
+      @selection = Selection.new
     end
 
     def create

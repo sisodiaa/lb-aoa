@@ -1,0 +1,10 @@
+<div class="mx-auto px-6 w-full sm:px-16 lg:w-2/3 xl:w-1/2">
+  <h1 class="mb-12 text-2xl lg:text-3xl xl:text-4xl font-bold text-purple-800">
+    Enter reason for selection
+  </h1>
+
+  <%= turbo_frame_tag :bid_selection do %>
+    <%= render partial: "form", locals: { tender: @tender, bid: @bid, selection: @selection } %>
+  <% end %>
+</div>
+

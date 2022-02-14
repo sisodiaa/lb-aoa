@@ -26,6 +26,10 @@ proposal:
   annotation: Proposal Sheet
   documentable: waterwala (Bid)
 
+quote:
+  annotation: Proposal Sheet
+  documentable: paaniwala (Bid)
+
 spreadsheet:
   annotation: Proposal Sheet
   documentable: elevatorwala (Bid)

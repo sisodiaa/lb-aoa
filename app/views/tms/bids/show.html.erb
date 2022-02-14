@@ -63,6 +63,16 @@
           <%= @bid.note %>
         </div>
       <% end %>
+
+      <% unless @tender.reviewed? %>
+        <%= turbo_frame_tag :bid_selection do %>
+          <%= link_to(
+            "Select Bid",
+            new_tms_tender_bid_selection_path(@tender, @bid),
+            class: "block mb-8 btn btn--normal btn--success"
+          )%>
+        <% end %>
+      <% end %>
     </div>
   <% end %>
 </div>

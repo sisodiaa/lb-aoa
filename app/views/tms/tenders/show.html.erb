@@ -41,6 +41,23 @@
     <%= @tender.description %>
   </div>
 
+  <% if @tender.reviewed? %>
+    <div class="tender-selection bg-green-50 text-green-600 text-sm rounded-lg p-4 mb-8 xl:mb-12">
+      <h2 class="mb-2">
+      Awarded to 
+      <span class="font-bold"><%= @tender.selection.bid.quotation_token %></span> 
+      by <span class="font-bold"><%= @tender.selection.bid.name %></span>
+      </h2>
+
+      <h3 class="font-bold">
+        Reason
+      </h3>
+      <p>
+        <%= @tender.selection.reason %>
+      </p>
+    </div>
+  <% end %>
+
   <%= turbo_frame_tag "tender-buttons-section" do %>
     <div class="flex mb-6">
       <% if policy([:tms, @tender]).edit? %>
