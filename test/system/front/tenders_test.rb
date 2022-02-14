@@ -46,6 +46,15 @@ module Front
       within(".tender") do
         assert_selector "h1", text: "Installation for water purifier for each tower"
       end
+
+      click_button "List Tenders by Status"
+      click_link "Reviewed"
+
+      assert_selector ".skeleton"
+      assert_selector ".tender", count: 1
+      within(".tender") do
+        assert_selector "h1", text: "Replacement of elevator buttons"
+      end
     end
   end
 end

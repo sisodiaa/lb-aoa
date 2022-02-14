@@ -67,5 +67,22 @@
         )%>
       <% end %>
     </div>
+
+    <div class="basis-1/2 pr-4"
+       data-controller="dashboard--list"
+       data-dashboard--list-target="list"
+       data-dashboard--list-source-value="<%= tms_tenders_url(status: "reviewed") %>"
+       data-dashboard--list-item-value="">
+      <%= turbo_frame_tag(
+        "reviewed_tenders",
+        src: tms_tenders_path(status: "reviewed"),
+        class: "space-y-3"
+      ) do %>
+        <%= render(
+          partial: "shared/spinner",
+          locals: { text: "text-purple-50", fill: "fill-purple-600" }
+        )%>
+      <% end %>
+    </div>
   </div>
 <% end %>

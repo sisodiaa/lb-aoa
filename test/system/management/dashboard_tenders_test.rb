@@ -39,6 +39,11 @@ module Management
           assert_selector ".tender", count: 1
           assert_selector "p", text: "1 to 1 of 1 Under Review tenders"
         end
+
+        within("#reviewed_tenders") do
+          assert_selector ".tender", count: 1
+          assert_selector "p", text: "1 to 1 of 1 Reviewed tenders"
+        end
       end
     end
 
