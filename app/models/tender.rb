@@ -7,6 +7,8 @@ class Tender < ApplicationRecord
 
   has_many :documents, as: :documentable, dependent: :destroy
   has_many :bids, inverse_of: :tender, dependent: :destroy, before_add: :check_notice_state
+  has_one :selection, dependent: :nullify
+
   has_rich_text :description
 
   enum publication_state: {

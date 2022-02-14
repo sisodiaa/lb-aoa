@@ -2,6 +2,7 @@ class Bid < ApplicationRecord
   belongs_to :tender, inverse_of: :bids
   before_create :set_quotation_token
 
+  has_one :selection, dependent: :nullify
   has_one :document, as: :documentable, dependent: :destroy
   accepts_nested_attributes_for :document
 

@@ -1,0 +1,14 @@
+paani:
+  reason: Value for money and time with good quality
+  tender: water_purifier
+  bid: paaniwala
+
+elevator:
+  reason: Value for money and time with good quality
+  tender: elevator_buttons
+  bid: elevatorwala
+
+mixed:
+  reason: Value for money and time with good quality
+  tender: elevator_buttons
+  bid: paaniwala

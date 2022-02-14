@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_11_091301) do
+ActiveRecord::Schema.define(version: 2022_02_14_073034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,16 @@ ActiveRecord::Schema.define(version: 2022_02_11_091301) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "selections", force: :cascade do |t|
+    t.text "reason"
+    t.bigint "tender_id", null: false
+    t.bigint "bid_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["bid_id"], name: "index_selections_on_bid_id"
+    t.index ["tender_id"], name: "index_selections_on_tender_id"
+  end
+
   create_table "tenders", force: :cascade do |t|
     t.string "reference_id", null: false
     t.string "reference_token", null: false
@@ -130,4 +140,6 @@ ActiveRecord::Schema.define(version: 2022_02_11_091301) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bids", "tenders"
+  add_foreign_key "selections", "bids"
+  add_foreign_key "selections", "tenders"
 end
