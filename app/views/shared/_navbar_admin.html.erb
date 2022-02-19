@@ -1,10 +1,12 @@
 <nav class="bg-gradient-to-r from-lb-500 to-lb-800 px-2 sm:px-4 py-2.5">
-  <div class="container flex flex-wrap justify-between items-center mx-auto">
+  <div
+    class="container flex flex-wrap justify-between items-center mx-auto"
+    data-controller="flowbite--collapse">
     <a href="/" class="flex">
       <%= image_tag "lb-banner.jpg", class: "w-3/4" %>
     </a>
     <button
-        data-collapse-toggle="mobile-menu"
+        data-action="click->flowbite--collapse#toggle"
         type="button"
         class="inline-flex items-center p-2 ml-3 text-sm text-lb-soft-600
                rounded-lg md:hidden hover:bg-lb-soft-100 focus:outline-none
@@ -41,7 +43,7 @@
     </button>
     <div
       class="hidden w-full md:block md:w-auto"
-      id="mobile-menu">
+      data-flowbite--collapse-target="menu">
       <ul
         class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0
                md:text-sm md:font-medium">

@@ -10,6 +10,9 @@ application.register("dashboard--component", Dashboard__ComponentController)
 import Dashboard__ListController from "./dashboard/list_controller.js"
 application.register("dashboard--list", Dashboard__ListController)
 
+import Flowbite__CollapseController from "./flowbite/collapse_controller.js"
+application.register("flowbite--collapse", Flowbite__CollapseController)
+
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
