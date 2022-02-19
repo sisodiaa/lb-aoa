@@ -84,5 +84,6 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: "front/posts#index"
+  get "/pages/*page", to: "cms/pages#show", as: "page"
+  root to: "cms/pages#show", page: "home"
 end
