@@ -13,6 +13,9 @@ application.register("dashboard--list", Dashboard__ListController)
 import Flowbite__CollapseController from "./flowbite/collapse_controller.js"
 application.register("flowbite--collapse", Flowbite__CollapseController)
 
+import Flowbite__DropdownController from "./flowbite/dropdown_controller.js"
+application.register("flowbite--dropdown", Flowbite__DropdownController)
+
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 

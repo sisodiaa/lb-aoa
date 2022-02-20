@@ -1,33 +1,39 @@
-<button
-  id="bidDropdownButton"
-  data-dropdown-toggle="bidDropdown"
-  data-controller="dropdown"
-  class="text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700
-        hover:from-violet-600 hover:via-violet-700 hover:to-violet-800
-        focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm px-4 
-        py-2.5 text-center w-full mb-6 inline-flex items-center justify-center 
-        lg:justify-start lg:max-w-max"
-  type="button">
-  Submitted Bids
-  <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" 
-    xmlns="http://www.w3.org/2000/svg">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-    </path>
-  </svg>
-</button>
-
 <div
-  id="bidDropdown"
-  class="hidden mb-6 z-10 w-full lg:w-2/5 mx-12 text-base list-none bg-white
-        rounded divide-y divide-gray-100 shadow">
-  <%= turbo_frame_tag "tender-bids", src: tender_bids_path(tender), loading: :lazy do %>
-    <div class="p-2">
-      <%= render(
-        partial: "shared/spinner",
-        locals: { text: "text-violet-50", fill: "fill-violet-600" }
-      )%>
-    </div>
-  <% end %>
+  class="max-w-fit"
+  data-controller="flowbite--dropdown"
+  data-action="click@window->flowbite--dropdown#hide"
+  data-flowbite--dropdown-target="dropdown">
+  <button
+    id="bidDropdownButton"
+    data-action="click->flowbite--dropdown#toggle"
+    class="text-white bg-gradient-to-r from-violet-500 via-violet-600 to-violet-700
+          hover:from-violet-600 hover:via-violet-700 hover:to-violet-800
+          focus:ring-4 focus:ring-violet-300 font-medium rounded-lg text-sm px-4 
+          py-2.5 text-center w-full mb-6 inline-flex items-center justify-center 
+          lg:justify-start lg:max-w-max"
+    type="button">
+    Submitted Bids
+    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" 
+      xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+      </path>
+    </svg>
+  </button>
+
+  <div
+    id="bidDropdown"
+    class="hidden mb-6 z-10 w-full lg:w-2/5 mx-12 text-base list-none bg-white
+          rounded divide-y divide-gray-100 shadow"
+    data-flowbite--dropdown-target="menu">
+    <%= turbo_frame_tag "tender-bids", src: tender_bids_path(tender), loading: :lazy do %>
+      <div class="p-2">
+        <%= render(
+          partial: "shared/spinner",
+          locals: { text: "text-violet-50", fill: "fill-violet-600" }
+        )%>
+      </div>
+    <% end %>
+  </div>
 </div>
 
 <turbo-frame id="bid"></turbo-frame>

@@ -10,7 +10,10 @@
           <%= link_to(
             "#{bid.name} - #{bid.quotation_token}",
             tms_tender_bid_path(@tender, bid),
-            data: { turbo_frame: "bid" }
+            data: {
+              turbo_frame: "bid",
+              action: "click->flowbite--dropdown#select"
+            }
           )%>
         </li>
       <% end %>
