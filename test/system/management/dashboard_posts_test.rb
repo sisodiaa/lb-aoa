@@ -22,24 +22,24 @@ module Management
 
         within("#drafts") do
           assert_selector ".draft", count: 5
-          assert_selector "p", text: "1 to 5 of 12 draft posts"
+          assert_selector "p", text: "1 to 5 of 12 Draft posts"
           click_link "Next"
 
           assert_selector ".draft", count: 5
-          assert_selector "p", text: "6 to 10 of 12 draft posts"
+          assert_selector "p", text: "6 to 10 of 12 Draft posts"
           click_link "Next"
 
           assert_selector ".draft", count: 2
-          assert_selector "p", text: "11 to 12 of 12 draft posts"
+          assert_selector "p", text: "11 to 12 of 12 Draft posts"
         end
 
-        within("#published_posts") do
-          assert_selector ".published_post", count: 5
-          assert_selector "p", text: "1 to 5 of 9 published posts"
+        within("#publisheds") do
+          assert_selector ".published", count: 5
+          assert_selector "p", text: "1 to 5 of 9 Published posts"
           click_link "Next"
 
-          assert_selector ".published_post", count: 4
-          assert_selector "p", text: "6 to 9 of 9 published posts"
+          assert_selector ".published", count: 4
+          assert_selector "p", text: "6 to 9 of 9 Published posts"
         end
       end
     end
@@ -54,12 +54,14 @@ module Management
 
         within("#drafts") do
           assert_selector ".draft", count: 5
+          assert_selector "p", text: "1 to 5 of 12 Draft posts"
 
           page.accept_confirm do
             click_on "Delete", match: :first
           end
 
-          assert_selector ".draft", count: 4
+          assert_selector ".draft", count: 5
+          assert_selector "p", text: "1 to 5 of 11 Draft posts"
         end
       end
 

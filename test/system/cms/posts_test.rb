@@ -35,7 +35,7 @@ module CMS
 
     test "destroying a Post" do
       delete_first_post
-      assert_selector "tbody tr", count: 20
+      assert_selector "[data-dashboard--list-target='item']", count: 5
       assert_selector :css, "[role='toast']", text: "Post was successfully destroyed."
     end
 
@@ -58,7 +58,7 @@ module CMS
 
     def create_new_post
       visit cms_posts_url
-      click_on "New Post"
+      click_on "Create Post"
 
       fill_in "Title", with: "Do not pluck flowers"
       content = "Be a responsible resident, and care for flowers & trees."

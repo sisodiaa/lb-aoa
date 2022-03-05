@@ -4,7 +4,13 @@ module CMS
     before_action :set_post, only: [:show, :edit, :update, :destroy]
 
     def index
-      @posts = Post.all.order("created_at ASC")
+      @status = params[:status]
+      @pagy, @posts = pagy(posts_list, items: 5)
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html
+      end
     end
 
     def show; end
@@ -63,6 +69,16 @@ module CMS
     end
 
     private
+
+    def posts_list
+      if params[:status] == "draft"
+        Post.draft.order(created_at: :asc)
+      elsif params[:status] == "published"
+        Post.published.order(created_at: :desc)
+      else
+        Post.all.order(created_at: :asc)
+      end
+    end
 
     def set_post
       @post = Post.find(params[:id])

@@ -1,0 +1,19 @@
+<div class="px-2 py-2 bg-indigo-100 rounded-lg shadow">
+  <h1 class="mb-4 text-2xl text-indigo-800 font-bold capitalize">
+    <%= status&.titleize %> posts
+  </h1>
+
+  <div class="space-y-3" id="<%= status %>s">
+    <%= render partial: "item", collection: posts, as: :post %>
+
+    <%= render(
+      partial: "navigation_controls",
+      locals: {
+        pagy: pagy,
+        prev_path: pagy.prev ? cms_posts_path(status: status, page: pagy.prev) : "#",
+        next_path: pagy.next ? cms_posts_path(status: status, page: pagy.next) : "#",
+        status: "#{status&.titleize} posts"
+      }
+    )%>
+  </div>
+</div>

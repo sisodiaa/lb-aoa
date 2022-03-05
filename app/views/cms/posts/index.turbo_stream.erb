@@ -1,0 +1,5 @@
+<%= turbo_stream.update(
+  "#{@status}_posts",
+  partial: "list",
+  locals: { status: @status, posts: @posts, pagy: @pagy }
+)%>

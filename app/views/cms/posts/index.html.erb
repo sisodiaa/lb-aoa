@@ -1,102 +1,20 @@
-<div class="mx-auto lg:w-3/4">
-  <h1 class="mb-6 text-4xl">Posts</h1>
+<div
+  class="mx-auto w-1/2"
+  data-controller="dashboard--list"
+  data-dashboard--list-target="list"
+  data-dashboard--list-source-value=""
+  data-dashboard--list-item-value="">
+  <%= link_to(
+    "Create Post",
+    new_cms_post_path,
+    class: "block btn btn--small btn--secondary w-32 mb-6"
+  )%>
 
-  <div class="flex flex-col">
-    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block py-2 min-w-full sm:px-6 lg:px-8">
-        <div class="overflow-hidden shadow-md sm:rounded-lg">
-          <table class="min-w-full">
-            <thead class="bg-gray-100 dark:bg-gray-700">
-              <tr>
-                <th
-                  scope="col"
-                  class="py-3 px-6 text-xs font-medium tracking-wider text-left
-                  text-gray-700 uppercase"
-                >
-                  Title
-                </th>
-                <th
-                  scope="col"
-                  class="py-3 px-6 text-xs font-medium tracking-wider text-left
-                         text-gray-700 uppercase"
-                >
-                  Stauts
-                </th>
-                <th
-                  scope="col"
-                  class="py-3 px-6 text-xs font-medium tracking-wider text-left
-                         text-gray-700 uppercase"
-                >
-                  Visibility
-                </th>
-                <th class="relative py-3 px-6"></th>
-                <th class="relative py-3 px-6"></th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <% @posts.each do |post| %>
-                <tr id="<%= dom_id(post) %>" class="border-b odd:bg-white even:bg-gray-50">
-                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    <%= post.title %>
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    <%= post.publication_state %>
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    <%= post.visibility_state %>
-                  </td>
-                  <td class="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                    <div class="inline-flex rounded-md shadow-sm" role="group">
-                      <%= link_to(
-                        "Show", 
-                        cms_post_path(post),
-                        class: "py-2 px-3 text-xs font-medium text-gray-900
-                                bg-white rounded-l-md border border-gray-200
-                                hover:bg-gray-100 hover:text-blue-700 focus:z-10
-                                focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-                      )%>
-                      <%= link_to(
-                        "Edit", 
-                        edit_cms_post_path(post),
-                        class: "py-2 px-3 text-xs font-medium text-gray-900
-                                bg-white border-t border-b border-gray-200
-                                hover:bg-gray-100 hover:text-blue-700 focus:z-10
-                                focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-                      )%>
-                      <%= link_to(
-                        "Delete", 
-                        cms_post_path(post),
-                        data: {
-                          turbo_method: :delete,
-                          turbo_confirm: 'Are you sure?'
-                        },
-                        class: "py-2 px-3 text-xs font-medium text-gray-900
-                                bg-white rounded-r-md border border-gray-200
-                                hover:bg-gray-100 hover:text-blue-700 focus:z-10
-                                focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-                      )%>
-                    </div>
-                  </td>
-                  <td class="py-4 px-6 text-sm text-gray-500 whitespace-nowrap">
-                    <%= link_to(
-                      "Attachments", 
-                      cms_post_documents_path(post),
-                      class: "text-white bg-indigo-800 hover:bg-indigo-900
-                              focus:ring-4 focus:ring-indigo-300 font-medium
-                              rounded-md text-xs px-3 py-2 text-center mr-2 mb-2"
-                    )%>
-                  </td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <br>
-  
-  <%= link_to "New Post", new_cms_post_path, class: "block btn btn--normal btn--primary" %>
+  <%= turbo_frame_tag(
+    "#{@status}_posts"
+  )do %>
+    <%= render partial: "list", locals: {
+      status: @status, posts: @posts, pagy: @pagy 
+    } %>
+  <% end %>
 </div>
