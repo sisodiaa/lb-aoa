@@ -1,0 +1,177 @@
+<aside class="w-64" aria-label="Sidebar">
+  <div class="overflow-y-auto h-screen bg-gray-50 py-4 px-3 rounded">
+    <ul class="space-y-2">
+      <li>
+        <%= link_to(
+          management_dashboard_path,
+          class: "flex items-center p-2 text-base font-normal text-gray-900 rounded-lg",
+          data: {
+            turbo_frame: "main",
+            turbo_action: "advance"
+          }
+        ) do %>
+          <span class="ml-3">Dashboard</span>
+        <% end %>
+      </li>
+
+      <li
+        data-controller="flowbite--collapse"
+      >
+        <button
+          type="button"
+          class="flex items-center p-2 w-full text-base font-normal text-gray-900 
+                 rounded-lg transition duration-75 group hover:bg-gray-100"
+          data-action="click->flowbite--collapse#toggle"
+        >
+          <span class="flex-1 ml-3 text-left whitespace-nowrap">Posts</span>
+          <svg
+            class="w-5 h-5 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <use href="/assets/feather-sprite.svg#chevron-down" />
+          </svg>
+        </button>
+
+        <ul
+          class="hidden py-2 space-y-2"
+          data-flowbite--collapse-target="menu"
+        >
+          <li>
+            <%= link_to(
+              cms_posts_path(status: "draft", page: 1),
+              class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                      text-gray-900 rounded-lg transition duration-75 group
+                      hover:bg-gray-100",
+              data: {
+                turbo_frame: "main",
+                turbo_action: "advance"
+              }
+            ) do %>
+              <span class="flex-1 whitespace-nowrap">Draft</span>
+            <% end %>
+          </li>
+
+          <li>
+            <%= link_to(
+              cms_posts_path(status: "published", page: 1),
+              class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                      text-gray-900 rounded-lg transition duration-75 group
+                      hover:bg-gray-100",
+              data: {
+                turbo_frame: "main",
+                turbo_action: "advance"
+              }
+            ) do %>
+              <span class="flex-1 whitespace-nowrap">Published</span>
+            <% end %>
+          </li>
+        </ul>
+      </li>
+
+      <li
+        data-controller="flowbite--collapse"
+      >
+        <button
+          type="button"
+          class="flex items-center p-2 w-full text-base font-normal text-gray-900 
+                 rounded-lg transition duration-75 group hover:bg-gray-100"
+          data-action="click->flowbite--collapse#toggle"
+        >
+          <span class="flex-1 ml-3 text-left whitespace-nowrap">Tenders</span>
+          <svg
+            class="w-5 h-5 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <use href="/assets/feather-sprite.svg#chevron-down" />
+          </svg>
+        </button>
+
+        <ul
+          class="hidden py-2 space-y-2"
+          data-flowbite--collapse-target="menu"
+        >
+          <li>
+            <%= link_to(
+              tms_tenders_path(status: "draft", page: 1),
+              class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                      text-gray-900 rounded-lg transition duration-75 group
+                      hover:bg-gray-100",
+              data: {
+                turbo_frame: "main",
+                turbo_action: "advance"
+              }
+            ) do %>
+              <span class="flex-1 whitespace-nowrap">Draft</span>
+            <% end %>
+          </li>
+
+          <li>
+            <%= link_to(
+              tms_tenders_path(status: "upcoming", page: 1),
+              class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                      text-gray-900 rounded-lg transition duration-75 group
+                      hover:bg-gray-100",
+              data: {
+                turbo_frame: "main",
+                turbo_action: "advance"
+              }
+            ) do %>
+              <span class="flex-1 whitespace-nowrap">Upcoming</span>
+            <% end %>
+          </li>
+
+          <li>
+            <%= link_to(
+              tms_tenders_path(status: "current", page: 1),
+              class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                      text-gray-900 rounded-lg transition duration-75 group
+                      hover:bg-gray-100",
+              data: {
+                turbo_frame: "main",
+                turbo_action: "advance"
+              }
+            ) do %>
+              <span class="flex-1 whitespace-nowrap">Current</span>
+            <% end %>
+          </li>
+
+          <li>
+            <%= link_to(
+              tms_tenders_path(status: "under_review", page: 1),
+              class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                      text-gray-900 rounded-lg transition duration-75 group
+                      hover:bg-gray-100",
+              data: {
+                turbo_frame: "main",
+                turbo_action: "advance"
+              }
+            ) do %>
+              <span class="flex-1 whitespace-nowrap">Under Review</span>
+            <% end %>
+          </li>
+
+          <li>
+            <%= link_to(
+              tms_tenders_path(status: "reviewed", page: 1),
+              class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                      text-gray-900 rounded-lg transition duration-75 group
+                      hover:bg-gray-100",
+              data: {
+                turbo_frame: "main",
+                turbo_action: "advance"
+              }
+            ) do %>
+              <span class="flex-1 whitespace-nowrap">Reviewed</span>
+            <% end %>
+          </li>
+        </ul>
+      </li>
+
+      <li>
+        <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg">
+          <span class="flex-1 ml-3 whitespace-nowrap">Members</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>

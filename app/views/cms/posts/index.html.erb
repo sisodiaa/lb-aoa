@@ -1,20 +1,22 @@
-<div
-  class="mx-auto w-1/2"
-  data-controller="dashboard--list"
-  data-dashboard--list-target="list"
-  data-dashboard--list-source-value=""
-  data-dashboard--list-item-value="">
-  <%= link_to(
-    "Create Post",
-    new_cms_post_path,
-    class: "block btn btn--small btn--secondary w-32 mb-6"
-  )%>
+<%= turbo_frame_tag "main" do %>
+  <div
+    class="mx-auto w-1/2"
+    data-controller="dashboard--list"
+    data-dashboard--list-target="list"
+    data-dashboard--list-source-value=""
+    data-dashboard--list-item-value="">
+    <%= link_to(
+      "Create Post",
+      new_cms_post_path,
+      class: "block btn btn--small btn--secondary w-32 mb-6"
+    )%>
 
-  <%= turbo_frame_tag(
-    "#{@status}_posts"
-  )do %>
-    <%= render partial: "list", locals: {
-      status: @status, posts: @posts, pagy: @pagy 
-    } %>
-  <% end %>
-</div>
+    <%= turbo_frame_tag(
+      "#{@status}_posts"
+    )do %>
+      <%= render partial: "list", locals: {
+        status: @status, posts: @posts, pagy: @pagy 
+      } %>
+    <% end %>
+  </div>
+<% end %>
