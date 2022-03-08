@@ -4,6 +4,9 @@ module CMS
     before_action :set_post
 
     def index
+    end
+
+    def new
       @document = @post.documents.new
     end
 
@@ -25,7 +28,7 @@ module CMS
           format.turbo_stream do
             render :new
           end
-          format.html { render :index, status: :unprocessable_entity }
+          format.html { render :new, status: :unprocessable_entity }
         end
       end
     end

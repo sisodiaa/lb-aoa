@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "post-actions" do %>
+  <div>
+    <%= render partial: "form", locals: { post: @post, document: @document } %>
+  </div>
+<% end %>

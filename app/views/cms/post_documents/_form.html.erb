@@ -48,7 +48,12 @@
     )%>
   </div>
 
-  <div>
-    <%= form.submit "Upload Document", class: "btn btn--normal btn--primary" %>
+  <div class="inline-flex">
+    <%= form.submit "Upload Document", class: "btn btn--normal btn--success" %>
+    <%= link_to(
+      "Cancel",
+      cms_post_path(post),
+      class: "btn btn--normal btn--error"
+    )%>
   </div>
 <% end %>

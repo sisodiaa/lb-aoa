@@ -35,18 +35,37 @@
     <%= @post.content %>
   </div>
 
-  <%= turbo_frame_tag "post-publication-section" do %>
-    <div class="inline-flex">
-      <% if CMS::PostPolicy.new(current_admin, @post).edit? %>
+  <div class="pt-2 pb-6">
+    <%= turbo_frame_tag(
+      :attachments,
+      src: cms_post_documents_path(@post),
+      loading: :lazy
+    ) do %>
+      <% if @post.documents.present? %>
+        <div class="flex w-full rounded-xl animate-pulse bg-indigo-50 py-3 px-2
+                     text-indigo-500 font-light text-base">
+          Loading attachments...
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= turbo_frame_tag "post-actions" do %>
+    <% if @post.draft? %>
+      <div class="inline-flex">
         <%= link_to(
           "Edit",
           edit_cms_post_path(@post),
           target: "_top",
           class: "btn btn--normal btn--secondary"
         )%>
-      <% end %>
 
-      <% if CMS::PublicationPolicy.new(current_admin, @post).update? %>
+        <%= link_to(
+          "Add attachment",
+          new_cms_post_document_path(@post),
+          class: "btn btn--normal btn--secondary"
+        )%>
+
         <%= button_to(
           "Publish Post",
           publish_cms_post_path(@post),
@@ -54,7 +73,7 @@
           params: {post: {publication_state: "published"}},
           class: "mr-3 btn btn--normal btn--success"
         )%>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
