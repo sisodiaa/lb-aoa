@@ -1,5 +1,9 @@
 <div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
-  <%= link_to :back, class: "inline-flex items-center justify-center text-slate-400 mb-6" do %>
+  <%= link_to(
+    :back,
+    class: "inline-flex items-center justify-center text-slate-400 mb-6",
+    data: { turbo_action: "advance" }
+  ) do %>
     <svg
       class="w-7 h-7 fill-[none] stroke-current stroke-2"
       stroke-linecap="round"
