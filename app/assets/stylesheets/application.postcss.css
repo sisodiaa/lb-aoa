@@ -26,6 +26,12 @@
            focus:ring-lb-50;
   }
 
+  .btn--primary-soft {
+    @apply from-lb-soft-200 via-lb-soft-400 to-lb-soft-600
+           hover:from-lb-300 hover:via-lb-500 hover:to-lb-700
+           focus:ring-lb-50;
+  }
+
   .btn--secondary {
     @apply from-indigo-400 via-indigo-500 to-indigo-600
            hover:from-indigo-500 hover:via-indigo-600 hover:to-indigo-700
@@ -36,6 +42,12 @@
     @apply from-green-400 via-green-500 to-green-600
            hover:from-green-500 hover:via-green-600 hover:to-green-700
            focus:ring-green-50;
+  }
+
+  .btn--error {
+    @apply from-red-400 via-red-500 to-red-600
+           hover:from-red-500 hover:via-red-600 hover:to-red-700
+           focus:ring-red-50;
   }
 
   .btn--purple {
