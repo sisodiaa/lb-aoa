@@ -3,7 +3,7 @@
     class="mx-auto w-1/2"
     data-controller="dashboard--list"
     data-dashboard--list-target="list"
-    data-dashboard--list-source-value=""
+    data-dashboard--list-source-value="<%= cms_posts_url(status: @status, page: @pagy.page) %>"
     data-dashboard--list-item-value="">
     <%= link_to(
       "Create Post",

@@ -9,14 +9,7 @@ export default class extends Controller {
     item: String,
   };
 
-  connect() {
-    if (!this.sourceValue) {
-      this.sourceValue = window.location.href;
-    }
-  }
-
   markItem(event) {
-    console.log("marked");
     const item = event.currentTarget.parentElement.parentElement.parentElement;
     this.itemValue = item.id;
   }
