@@ -1,0 +1,79 @@
+<div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
+  <%= link_to :back, class: "inline-flex items-center justify-center text-slate-400 mb-6" do %>
+    <svg
+      class="w-7 h-7 fill-[none] stroke-current stroke-2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <use href="/assets/feather-sprite.svg#arrow-left-circle" />
+    </svg>
+
+    <span class="inline-block ml-3 text-xl font-light">
+      Back
+    </span>
+  <% end %>
+
+  <h1 class="font-serif text-4xl mb-2 text-zinc-900"><%= post.title %></h1>
+
+  <div class="inline-flex items-center justify-center text-slate-400 mb-10">
+    <svg
+      class="w-4 h-4 fill-[none] stroke-current stroke-2"
+      stroke-linecap="round"
+      stroke-linejoin="round">
+      <use href="/assets/feather-sprite.svg#calendar" />
+    </svg>
+
+    <span class="inline-block mx-2 text-base">
+      <% if post.draft? %>
+        <%= post.updated_at.strftime("%d %B %Y") %> (last modified)
+      <% else %>
+        <%= post.published_at.strftime("%d %B %Y") %>
+      <% end %>
+    </span>
+  </div>
+
+  <div class="text-gray-800 mb-6">
+    <%= post.content %>
+  </div>
+
+  <div class="pt-2 pb-6">
+    <%= turbo_frame_tag(
+      :attachments,
+      src: cms_post_documents_path(post),
+      loading: :lazy
+    ) do %>
+      <% if post.documents.present? %>
+        <div class="flex w-full rounded-xl animate-pulse bg-indigo-50 py-3 px-2
+                     text-indigo-500 font-light text-base">
+          Loading attachments...
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= turbo_frame_tag "post-actions" do %>
+    <% if post.draft? %>
+      <div class="inline-flex">
+        <%= link_to(
+          "Edit",
+          edit_cms_post_path(post),
+          data: { turbo_frame: "main" },
+          class: "btn btn--normal btn--secondary"
+        )%>
+
+        <%= link_to(
+          "Add attachment",
+          new_cms_post_document_path(post),
+          class: "btn btn--normal btn--secondary"
+        )%>
+
+        <%= button_to(
+          "Publish Post",
+          publish_cms_post_path(post),
+          method: :patch,
+          params: {post: {publication_state: "published"}},
+          class: "mr-3 btn btn--normal btn--success"
+        )%>
+      </div>
+    <% end %>
+  <% end %>
+</div>

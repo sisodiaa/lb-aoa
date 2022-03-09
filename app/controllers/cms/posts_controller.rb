@@ -41,10 +41,18 @@ module CMS
     def update
       authorize @post, policy_class: CMS::PostPolicy
 
-      if @post.update(post_params)
-        redirect_to cms_post_path(@post), notice: "Post was successfully updated."
-      else
-        render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        if @post.update(post_params)
+          format.turbo_stream { flash.now[:success] = "Post was successfully updated." }
+
+          format.html do
+            flash[:success] = "Post was successfully updated."
+            redirect_to cms_post_path(@post)
+          end
+        else
+          format.turbo_stream { render :edit }
+          format.html { render :edit, status: :unprocessable_entity }
+        end
       end
     end
 

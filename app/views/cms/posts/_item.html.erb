@@ -10,7 +10,10 @@
       <%= link_to(
         "Show", 
         cms_post_path(post),
-        target: "_top",
+        data: {
+          turbo_frame: "main",
+          turbo_action: "advance"
+        },
         class: "py-1 px-3 text-xs font-medium text-gray-600
                 bg-white border border-gray-200
                 hover:bg-gray-100 hover:text-indigo-700 focus:z-10
@@ -18,15 +21,6 @@
                 #{post.draft? ? 'rounded-l-md' : 'rounded-md'}"
       )%>
       <% if post.draft? %>
-        <%= link_to(
-          "Edit", 
-          edit_cms_post_path(post),
-          target: "_top",
-          class: "py-1 px-3 text-xs font-medium text-gray-600
-                  bg-white border-t border-b border-gray-200
-                  hover:bg-gray-100 hover:text-indigo-700 focus:z-10
-                  focus:ring-2 focus:ring-indigo-700 focus:text-indigo-700"
-        )%>
         <%= link_to(
           "Delete", 
           cms_post_path(post),
@@ -36,7 +30,7 @@
             action: "click->dashboard--list#markItem"
           },
           class: "py-1 px-3 text-xs font-medium text-gray-600
-                  bg-white rounded-r-md border border-gray-200
+                  bg-white rounded-r-md border border-l-0 border-gray-200
                   hover:bg-gray-100 hover:text-indigo-700 focus:z-10
                   focus:ring-2 focus:ring-indigo-700 focus:text-indigo-700"
         )%>
