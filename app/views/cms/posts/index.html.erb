@@ -11,12 +11,8 @@
       class: "block btn btn--small btn--secondary w-32 mb-6"
     )%>
 
-    <%= turbo_frame_tag(
-      "#{@status}_posts"
-    )do %>
-      <%= render partial: "list", locals: {
-        status: @status, posts: @posts, pagy: @pagy 
-      } %>
-    <% end %>
+    <%= render partial: "list", locals: {
+      status: @status, posts: @posts, pagy: @pagy 
+    } %>
   </div>
 <% end %>
