@@ -26,50 +26,6 @@
           class: "mt-auto btn btn--normal btn--primary w-full py-2.5"
         )%>
       </div>
-
-      <div class="flex-auto flex flex-col flex-wrap justify-start p-8 max-w-sm min-w-max w-1/3
-                  bg-white rounded-lg border shadow-md">
-        <h5 class="text-5xl font-extrabold text-gray-500">Tenders</h5>
-
-        <ul role="list" class="my-7 space-y-5">
-          <li class="flex space-x-3">
-            <span class="text-base font-normal leading-tight text-gray-500">
-              <%= Tender.draft.count %> Drafts
-            </span>
-          </li>
-
-          <li class="flex space-x-3">
-            <span class="text-base font-normal leading-tight text-gray-500">
-              <%= Tender.published.upcoming.count %> Upcoming
-            </span>
-          </li>
-
-          <li class="flex space-x-3">
-            <span class="text-base font-normal leading-tight text-gray-500">
-              <%= Tender.published.current.count %> Current
-            </span>
-          </li>
-
-          <li class="flex space-x-3">
-            <span class="text-base font-normal leading-tight text-gray-500">
-              <%= Tender.published.under_review.count %> Under Review
-            </span>
-          </li>
-
-          <li class="flex space-x-3">
-            <span class="text-base font-normal leading-tight text-gray-500">
-              <%= Tender.published.reviewed.count %> Reviewed
-            </span>
-          </li>
-        </ul>
-
-        <%= link_to(
-          "Create New Tender",
-          new_tms_tender_path,
-          data: { turbo_action: "advance", turbo_frame: "main" },
-          class: "mt-auto btn btn--normal btn--primary w-full py-2.5"
-        )%>
-      </div>
     </div>
   </div>
 <% end %>
