@@ -46,7 +46,8 @@
 
     <%= link_to(
       "Cancel",
-      cms_post_path(post),
+      post.new_record? ? management_dashboard_path : cms_post_path(post),
+      data: { turbo_action: post.new_record? ? "advance" : "" },
       class: "btn btn--normal btn--error"
     )%>
   </div>

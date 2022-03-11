@@ -1,0 +1,6 @@
+<%= turbo_stream.update "main", @post %>
+
+<%= turbo_stream.update "flash-messages" do %>
+  <%= flash_messages %>
+<% end %>
+

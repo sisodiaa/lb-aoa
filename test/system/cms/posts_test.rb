@@ -21,14 +21,12 @@ module CMS
     end
 
     test "creating a Post" do
-      skip
       create_new_post
-      assert_text "Do not pluck flowers"
-      assert_text "Post was successfully created"
+      assert_selector "h1", text: "Do not pluck flowers"
+      assert_selector "[role='toast']", text: "Post was successfully created."
     end
 
     test "showing error when title is not present" do
-      skip
       create_new_post_without_title
       assert_selector "#error_explanation li", text: "Title can't be blank"
     end
@@ -64,8 +62,8 @@ module CMS
     private
 
     def create_new_post
-      visit cms_posts_url
-      click_on "Create Post"
+      visit management_dashboard_url
+      click_on "Create New Post"
 
       fill_in "Title", with: "Do not pluck flowers"
       content = "Be a responsible resident, and care for flowers & trees."
@@ -74,7 +72,8 @@ module CMS
     end
 
     def create_new_post_without_title
-      visit new_cms_post_url
+      visit management_dashboard_url
+      click_on "Create New Post"
       click_on "Create Post"
     end
 
