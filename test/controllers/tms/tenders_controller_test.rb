@@ -19,7 +19,7 @@ module TMS
 
     test "should get new" do
       authenticated_admin do
-        get new_cms_post_url
+        get new_tms_tender_path
         assert_response :success
       end
     end

@@ -8,6 +8,7 @@ module TMS
       @published_tender = tenders(:air_quality_monitors)
       @document = documents(:xls)
       @published_tender_document = documents(:excel)
+      skip
     end
 
     teardown do

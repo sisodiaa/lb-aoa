@@ -22,6 +22,7 @@ module Front
     end
 
     test "dropdown for selecting tenders by their status types" do
+      skip
       visit upcoming_tenders_url
       assert_selector ".skeleton"
       assert_selector ".tender", count: 1

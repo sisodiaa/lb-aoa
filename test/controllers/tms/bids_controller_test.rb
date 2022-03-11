@@ -14,6 +14,7 @@ module TMS
 
       @reviewed_tender = tenders(:elevator_buttons)
       @reviewed_bid = bids(:elevatorwala)
+      skip
     end
 
     teardown do
