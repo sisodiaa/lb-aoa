@@ -25,6 +25,7 @@ module CMS
     end
 
     test "should get new" do
+      skip
       authorised_admin do
         get new_cms_post_url
         assert_response :success

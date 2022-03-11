@@ -26,13 +26,13 @@ module CMS
     end
 
     test "index page show form and list of attached documents" do
-      visit_post_documents
+      visit_post
       assert_selector "form"
       assert_selector "li.post-document", count: 2
     end
 
     test "attach a new file" do
-      visit_post_documents
+      visit_post
       attach_document
       assert_file_is_attached_and_form_is_reset
     end
@@ -57,8 +57,9 @@ module CMS
 
     private
 
-    def visit_post_documents
-      visit cms_post_documents_path(@draft_post)
+    def visit_post
+      visit cms_post_url(@draft_post)
+      click_on "Add attachment"
     end
 
     def attach_document
@@ -78,7 +79,8 @@ module CMS
     end
 
     def create_new_post_without_attachment
-      visit cms_post_documents_path(@draft_post)
+      visit cms_post_url(@draft_post)
+      click_on "Add attachment"
       click_on "Upload Document"
     end
 

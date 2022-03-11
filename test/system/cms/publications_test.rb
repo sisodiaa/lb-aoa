@@ -6,6 +6,10 @@ module CMS
       Warden.test_mode!
       @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_post = posts(:plantation)
+
+      @draft_post.documents.each do |document|
+        attach_file_to_record document.file, "square.png", "image/png"
+      end
     end
 
     teardown do
