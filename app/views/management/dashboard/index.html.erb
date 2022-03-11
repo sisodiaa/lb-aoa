@@ -1,90 +1,75 @@
 <%= turbo_frame_tag "main" do %>
-  <h1 class="mb-28 text-3xl font-semibold text-lb-soft-400 text-center">
-    Management dashboard for Admins
-  </h1>
+  <div class="ml-16 mr-24">
+    <div class="flex flex-wrap gap-8 mb-24">
+      <div class="flex-auto flex flex-col flex-wrap justify-start p-8 max-w-sm min-w-max w-1/3
+                  bg-white rounded-lg border shadow-md">
+        <h5 class="text-5xl font-extrabold text-gray-500">Posts</h5>
 
-  <div
-    id="posts-component"
-    class="relative w-full bg-indigo-50 rounded-lg pt-4 pb-2 px-6 mb-32"
-    data-controller="dashboard--component"
-    data-dashboard--component-title-value="posts">
-    <h1 class="absolute -top-20 left-1 text-indigo-50 text-8xl font-bold
-              font-serif uppercase tracking-tighter">
-      Posts
-    </h1>
-    <div class="flex justify-between"
-         data-dashboard--component-target="header">
-      <%= link_to(
-        "Create Post",
-        new_cms_post_path,
-        class: "block btn btn--small btn--secondary w-32"
-      )%>
+        <ul role="list" class="my-7 space-y-5">
+          <li class="flex">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= @drafts_count %> Drafts
+            </span>
+          </li>
 
-      <%= link_to(
-        "Show Posts",
-        "#",
-        class: "block btn btn--small btn--secondary w-32",
-        data: {
-          action: "click->dashboard--component#toggle",
-          "dashboard--component-target": "toggleButton"
-        }
-      ) %>
+          <li class="flex">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= @published_posts_count %> Published Posts
+            </span>
+          </li>
+        </ul>
+
+        <%= link_to(
+          "Create New Post",
+          new_cms_post_path,
+          data: { turbo_action: "advance", turbo_frame: "main" },
+          class: "mt-auto btn btn--normal btn--primary w-full py-2.5"
+        )%>
+      </div>
+
+      <div class="flex-auto flex flex-col flex-wrap justify-start p-8 max-w-sm min-w-max w-1/3
+                  bg-white rounded-lg border shadow-md">
+        <h5 class="text-5xl font-extrabold text-gray-500">Tenders</h5>
+
+        <ul role="list" class="my-7 space-y-5">
+          <li class="flex space-x-3">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= Tender.draft.count %> Drafts
+            </span>
+          </li>
+
+          <li class="flex space-x-3">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= Tender.published.upcoming.count %> Upcoming
+            </span>
+          </li>
+
+          <li class="flex space-x-3">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= Tender.published.current.count %> Current
+            </span>
+          </li>
+
+          <li class="flex space-x-3">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= Tender.published.under_review.count %> Under Review
+            </span>
+          </li>
+
+          <li class="flex space-x-3">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= Tender.published.reviewed.count %> Reviewed
+            </span>
+          </li>
+        </ul>
+
+        <%= link_to(
+          "Create New Tender",
+          new_tms_tender_path,
+          data: { turbo_action: "advance", turbo_frame: "main" },
+          class: "mt-auto btn btn--normal btn--primary w-full py-2.5"
+        )%>
+      </div>
     </div>
-
-    <%= turbo_frame_tag(
-      :posts,
-      src: management_posts_path,
-      loading: :lazy,
-      class: "hidden",
-      data: { "dashboard--component-target": "lists"}
-    ) do %>
-      <%= render(
-        partial: "shared/spinner",
-        locals: { text: "text-indigo-50", fill: "fill-indigo-600" }
-      )%>
-    <% end %>
-  </div>
-
-  <div
-    id="tenders-component"
-    class="relative w-full bg-purple-50 rounded-lg pt-4 pb-2 px-6"
-    data-controller="dashboard--component"
-    data-dashboard--component-title-value="tenders">
-    <h1 class="absolute -top-20 right-1 text-purple-50 text-8xl font-bold
-              font-serif uppercase tracking-tighter">
-      Tenders
-    </h1>
-    <div class="flex justify-between"
-         data-dashboard--component-target="header">
-      <%= link_to(
-        "Create Tender Notice",
-        new_tms_tender_path,
-        target: "_top",
-        class: "block btn btn--small btn--purple w-32"
-      )%>
-
-      <%= link_to(
-        "Show Tender Notices",
-        "#",
-        class: "block btn btn--small btn--purple w-32",
-        data: {
-          action: "click->dashboard--component#toggle",
-          "dashboard--component-target": "toggleButton"
-        }
-      ) %>
-    </div>
-
-    <%= turbo_frame_tag(
-      :tenders,
-      src: management_tenders_path,
-      loading: :lazy,
-      class: "hidden",
-      data: { "dashboard--component-target": "lists"}
-    ) do %>
-      <%= render(
-        partial: "shared/spinner",
-        locals: { text: "text-indigo-50", fill: "fill-indigo-600" }
-      )%>
-    <% end %>
   </div>
 <% end %>
