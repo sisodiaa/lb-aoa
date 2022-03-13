@@ -25,7 +25,7 @@ module CMS
 
     test "should get new" do
       authenticated_admin do
-        get new_cms_category_url
+        get new_cms_category_path
         assert_response :success
       end
     end

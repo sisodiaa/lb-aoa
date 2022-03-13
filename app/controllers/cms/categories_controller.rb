@@ -1,30 +1,57 @@
 module CMS
   class CategoriesController < ApplicationController
     before_action :authenticate_admin!
-    before_action :set_category, only: [:edit, :update]
+    before_action :set_category, only: [:show, :edit, :update]
 
-    def index; end
-    def new; end
+    def index
+      @categories = Category.all.order(created_at: :asc)
+    end
+
+    def show; end
+
+    def new
+      @category = Category.new
+    end
 
     def create
       @category = Category.new(category_params)
 
-      if @category.save
-        flash[:success] = "Category was successfully created."
-        redirect_to cms_categories_path
-      else
-        render :new, status: :unprocessable_entity
+      respond_to do |format|
+        if @category.save
+          format.turbo_stream do
+            @categories = Category.all.order(created_at: :asc)
+            flash.now[:success] = "Category was successfully created."
+          end
+
+          format.html do
+            flash[:success] = "Category was successfully created."
+            redirect_to cms_categories_path
+          end
+        else
+          format.turbo_stream { render :new }
+          format.html { render :new, status: :unprocessable_entity }
+        end
       end
     end
 
     def edit; end
 
     def update
-      if @category.update(category_params)
-        flash[:success] = "Category was successfully updated."
-        redirect_to cms_categories_path
-      else
-        render :edit, status: :unprocessable_entity
+      respond_to do |format|
+        if @category.update(category_params)
+          format.turbo_stream do
+            @categories = Category.all.order(created_at: :asc)
+            flash.now[:success] = "Category was successfully updated."
+          end
+
+          format.html do
+            flash[:success] = "Category was successfully updated."
+            redirect_to cms_categories_path
+          end
+        else
+          format.turbo_stream { render :edit }
+          format.html { render :edit, status: :unprocessable_entity }
+        end
       end
     end
 

@@ -1,0 +1,46 @@
+<%= form_with(
+  model: [:cms, category],
+  id: category.new_record? ? dom_id(category) : ""
+) do |form| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
+      <h2 class="font-medium mb-2">
+        <%= pluralize(category.errors.count, "error") %> prohibited this category from being saved
+      </h2>
+
+      <ul role="list" class="list-inside list-disc">
+        <% category.errors.full_messages.each do |message| %>
+          <li class="font-light"><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+    <%= form.label(
+      :name,
+      class: "block mb-2 text-sm font-medium text-gray-900"
+    )%>
+
+    <%= form.text_field(
+      :name,
+      size: 51,
+      class: "border border-gray-300 text-gray-900 text-sm p-2.5 block w-full
+              rounded-lg focus:ring-blue-500 focus:border-blue-500"
+    )%>
+  </div>
+
+  <div class="inline-flex">
+    <%= form.submit(
+      class: "btn btn--normal btn--success"
+    )%>
+
+    <%= link_to(
+      "Cancel",
+      category.new_record? ? management_dashboard_path : cms_category_path(category),
+      data: { turbo_action: category.new_record? ? "advance" : "" },
+      class: "btn btn--normal btn--error"
+    )%>
+  </div>
+<% end %>
+

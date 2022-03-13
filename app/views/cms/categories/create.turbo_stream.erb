@@ -1,0 +1,5 @@
+<%= turbo_stream.update "main", partial: "wrapper", locals: { categories: @categories } %>
+
+<%= turbo_stream.update "flash-messages" do %>
+  <%= flash_messages %>
+<% end %>

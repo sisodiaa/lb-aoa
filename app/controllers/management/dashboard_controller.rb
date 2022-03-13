@@ -5,6 +5,7 @@ module Management
     def index
       @drafts_count = Post.draft.count
       @published_posts_count = Post.published.count
+      @categories_count = Category.count
     end
   end
 end
