@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   end
 
   namespace :cms do
+    resources :categories, except: %i[show destroy]
+
     resources :posts do
       resources :documents, only: %i[index new create destroy], controller: "post_documents"
     end
