@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_14_073034) do
+ActiveRecord::Schema.define(version: 2022_03_13_080849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,13 @@ ActiveRecord::Schema.define(version: 2022_02_14_073034) do
     t.index ["email", "tender_id"], name: "index_bids_on_email_and_tender_id", unique: true
     t.index ["quotation_token"], name: "index_bids_on_quotation_token", unique: true
     t.index ["tender_id"], name: "index_bids_on_tender_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "documents", force: :cascade do |t|

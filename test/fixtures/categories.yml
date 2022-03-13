@@ -1,0 +1,26 @@
+contracts:
+  name: contracts
+
+policy:
+  name: policy
+
+horticulture:
+  name: horticulture
+
+helpdesk:
+  name: helpdesk
+
+technical:
+  name: technical
+
+aoa_board:
+  name: a o a board
+
+house_keeping:
+  name: house keeping
+
+security:
+  name: security
+
+plumbing:
+  name: plumbing
