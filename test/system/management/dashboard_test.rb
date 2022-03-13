@@ -17,9 +17,12 @@ module Management
     test "dashboard for admin" do
       visit management_dashboard_path
 
-      assert_selector "h5", text: "Posts"
+      assert_selector "h5", text: "Post"
       assert_selector "li span", text: "#{Post.draft.count} Drafts"
-      assert_selector "li span", text: "#{Post.published.count} Published Posts"
+      assert_selector "li span", text: "#{Post.published.count} Published"
+
+      assert_selector "h5", text: "Category"
+      assert_selector "li span", text: "#{Category.count} Categories"
     end
   end
 end

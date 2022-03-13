@@ -20,9 +20,8 @@ module Management
       click_on "Sign In"
 
       assert_selector :css, "[role='toast']", text: "Signed in successfully."
-      assert_selector "h5", text: "Posts"
-      assert_selector "li span", text: "#{Post.draft.count} Drafts"
-      assert_selector "li span", text: "#{Post.published.count} Published Posts"
+      assert_selector "h5", text: "Post"
+      assert_selector "h5", text: "Category"
 
       within "nav" do
         click_link "Sign out"
