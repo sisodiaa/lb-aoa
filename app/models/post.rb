@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   include AASM
 
+  belongs_to :category, inverse_of: :posts
   has_many :documents, as: :documentable, dependent: :destroy
 
   has_rich_text :content

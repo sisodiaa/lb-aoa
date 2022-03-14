@@ -2,112 +2,133 @@ plantation:
   title: Plantation of new trees in Lotus Boulevard
   publication_state: draft
   visibility_state: members
+  category: policy
 
 lotus:
   title: Setting up a lotus pond in Lotus Boulevard
   publication_state: published
   published_at: <%= Time.current %>
   visibility_state: members
+  category: helpdesk
 
 nursery:
   title: We are setting up a nursery near kids play area
   publication_state: published
   published_at: <%= Time.current %>
   visibility_state: visitors
+  category: policy
 
 stray_dogs:
   title: Stray dog management
   publication_state: published
   published_at: <%= Time.current %>
   visibility_state: members
+  category: helpdesk
 
 essay_writing_winners:
   title: Winners for Paper Bag Making and Essay writing
   publication_state: published
   published_at: <%= Time.current %>
   visibility_state: members
+  category: horticulture
 
 rain_water_harvesting:
   title: Rain Water Harvesting
   publication_state: published
   published_at: <%= Time.current %>
   visibility_state: members
+  category: horticulture
 
 poster_making_competition:
   title: Entries to Poster Making Competition on Kargil Divas Day
   publication_state: published
   published_at: <%= Time.current %>
   visibility_state: members
+  category: house_keeping
 
 club_chiller:
   title: Club chiller is operational now
   publication_state: published
   published_at: <%= Time.current %>
   visibility_state: members
+  category: policy
 
 pending_work:
   title: Intimation made to RA for pending work for Lotus Boulevard
   publication_state: published
   published_at: <%= Time.current %>
   visibility_state: members
+  category: plumbing
 
 covid_helpline:
   title: Launching COVID helpline
   publication_state: published
   published_at: <%= Time.current %>
   visibility_state: members
+  category: house_keeping
 
 garbage_segregation:
   title: Segregations of garbage
   publication_state: draft
   visibility_state: members
+  category: horticulture
 
 pole_repair:
   title: Repairing pole lights
   publication_state: draft
   visibility_state: members
+  category: horticulture
 
 dogs_collaring:
   title: Collaring of dogs
   publication_state: draft
   visibility_state: members
+  category: policy
 
 cctv_repair:
   title: CCTV repair scheduled tomorrow
   publication_state: draft
   visibility_state: members
+  category: helpdesk
 
 ground_water:
   title: Depletion of ground water
   publication_state: draft
   visibility_state: members
+  category: aoa_board
 
 fogging:
   title: Mosquito fogging
   publication_state: draft
   visibility_state: members
+  category: contracts
 
 thermal_screening:
   title: Thermal screening of guests at society gates
   publication_state: draft
   visibility_state: members
+  category: policy
 
 mygate_notification:
   title: MyGate notification will show temperature of visitors
   publication_state: draft
   visibility_state: members
+  category: contracts
 
 parking_stickers:
   title: Issuance of new parking sticker for vehicles parked in basement
   publication_state: draft
   visibility_state: members
+  category: helpdesk
 
 club_ac:
   title: AC chiller in club is working now
   publication_state: draft
   visibility_state: members
+  category: house_keeping
 
 wash_basin:
   title: Wash basins installed for visitors
   publication_state: draft
   visibility_state: members
+  category: technical
