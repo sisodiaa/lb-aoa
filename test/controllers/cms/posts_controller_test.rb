@@ -6,10 +6,11 @@ module CMS
       @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_post = posts(:plantation)
       @published_post = posts(:lotus)
+      @category = categories(:horticulture)
     end
 
     teardown do
-      @confirmed_board_admin = @draft_post = @published_post = nil
+      @confirmed_board_admin = @draft_post = @published_post = @category = nil
     end
 
     test "#authenticate_admin!" do
@@ -37,7 +38,8 @@ module CMS
           post cms_posts_url, params: {
             post: {
               content: "<h1><em>Rich text</em> using HTML</h1>",
-              title: "New title of a new post"
+              title: "New title of a new post",
+              category_id: @category.id
             }
           }
         end

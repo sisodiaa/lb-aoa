@@ -65,6 +65,7 @@ module CMS
       visit management_dashboard_url
       click_on "Create New Post"
 
+      select "horticulture", from: "post[category_id]"
       fill_in "Title", with: "Do not pluck flowers"
       content = "Be a responsible resident, and care for flowers & trees."
       find(:xpath, "//trix-editor[@id='post__content']").set(content)

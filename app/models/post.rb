@@ -18,6 +18,7 @@ class Post < ApplicationRecord
 
   validates :title, presence: true, length: {maximum: 256}
   validates :content, presence: true
+  validates :category, presence: true
 
   aasm(
     :publication,
