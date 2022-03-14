@@ -4,12 +4,6 @@
   data-dashboard--list-target="list"
   data-dashboard--list-source-value="<%= cms_posts_url(status: status, page: pagy.page) %>"
   data-dashboard--list-item-value="">
-  <%= link_to(
-    "Create Post",
-    new_cms_post_path,
-    class: "block btn btn--small btn--secondary w-32 mb-6"
-  )%>
-
   <%= render partial: "list", locals: {
     status: status, posts: posts, pagy: pagy 
   } %>

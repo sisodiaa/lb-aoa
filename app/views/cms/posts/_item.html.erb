@@ -1,6 +1,6 @@
 <div
   id="<%= dom_id(post) %>"
-  class="p-2 bg-white rounded-lg shadow border-b border-b-indigo-100 
+  class="p-2 bg-white rounded-lg shadow border-b border-b-fuchsia-50
         <%= post.draft? ? 'draft' : 'published' %>"
   data-dashboard--list-target="item">
   <h1 class="text-lg text-gray-800"><%= post.title %></h1>
@@ -16,8 +16,8 @@
         },
         class: "py-1 px-3 text-xs font-medium text-gray-600
                 bg-white border border-gray-200
-                hover:bg-gray-100 hover:text-indigo-700 focus:z-10
-                focus:ring-2 focus:ring-indigo-700 focus:text-indigo-700
+                hover:bg-gray-100 hover:text-lb-500 focus:z-10
+                focus:ring-2 focus:ring-lb-500 focus:text-lb-500
                 #{post.draft? ? 'rounded-l-md' : 'rounded-md'}"
       )%>
       <% if post.draft? %>
@@ -31,8 +31,8 @@
           },
           class: "py-1 px-3 text-xs font-medium text-gray-600
                   bg-white rounded-r-md border border-l-0 border-gray-200
-                  hover:bg-gray-100 hover:text-indigo-700 focus:z-10
-                  focus:ring-2 focus:ring-indigo-700 focus:text-indigo-700"
+                  hover:bg-gray-100 hover:text-lb-500 focus:z-10
+                  focus:ring-2 focus:ring-lb-500 focus:text-lb-500"
         )%>
       <% end %>
     </div>
@@ -41,10 +41,10 @@
       "Attachments", 
       cms_post_documents_path(post),
       target: "_top",
-      class: "block text-white bg-indigo-500 hover:bg-indigo-600
-              focus:ring-4 focus:ring-indigo-300 font-medium
+      class: "block text-white bg-lb-400 hover:bg-lb-500
+              focus:ring-4 focus:ring-lb-300 font-medium
               rounded-md text-xs px-3 py-1 text-center border
-              border-indigo-400"
+              border-lb-400"
     )%>
   </div>
 </div>
