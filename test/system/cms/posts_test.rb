@@ -69,6 +69,7 @@ module CMS
       fill_in "Title", with: "Do not pluck flowers"
       content = "Be a responsible resident, and care for flowers & trees."
       find(:xpath, "//trix-editor[@id='post__content']").set(content)
+      fill_in "post_tags_list", with: "  Horticulture ,  Flower, do not pluck  "
       click_on "Create Post"
     end
 
