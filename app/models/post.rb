@@ -57,7 +57,7 @@ class Post < ApplicationRecord
   end
 
   def tags_list
-    tags.pluck(:name).join(",")
+    tags.pluck(:name).join(", ")
   end
 
   def tags_list=(tags_string)

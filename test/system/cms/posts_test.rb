@@ -24,6 +24,7 @@ module CMS
       create_new_post
       assert_selector "h1", text: "Do not pluck flowers"
       assert_selector "[role='toast']", text: "Post was successfully created."
+      assert_selector ".tag", count: 3
     end
 
     test "showing error when title is not present" do

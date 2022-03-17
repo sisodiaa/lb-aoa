@@ -13,7 +13,9 @@ module CMS
       end
     end
 
-    def show; end
+    def show
+      @tags = @post.tags
+    end
 
     def new
       @post = Post.new
@@ -24,7 +26,10 @@ module CMS
 
       respond_to do |format|
         if @post.save
-          format.turbo_stream { flash.now[:success] = "Post was successfully created." }
+          format.turbo_stream do
+            @tags = @post.tags
+            flash.now[:success] = "Post was successfully created."
+          end
 
           format.html do
             flash[:success] = "Post was successfully created."
@@ -46,7 +51,10 @@ module CMS
 
       respond_to do |format|
         if @post.update(post_params)
-          format.turbo_stream { flash.now[:success] = "Post was successfully updated." }
+          format.turbo_stream do
+            @tags = @post.tags
+            flash.now[:success] = "Post was successfully updated."
+          end
 
           format.html do
             flash[:success] = "Post was successfully updated."
