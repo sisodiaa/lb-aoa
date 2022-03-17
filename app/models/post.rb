@@ -3,6 +3,8 @@ class Post < ApplicationRecord
 
   belongs_to :category, inverse_of: :posts
   has_many :documents, as: :documentable, dependent: :destroy
+  has_many :taggings, dependent: :destroy
+  has_many :tags, through: :taggings
 
   has_rich_text :content
 
