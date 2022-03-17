@@ -96,7 +96,7 @@ module CMS
     end
 
     def post_params
-      params.require(:post).permit(:title, :content, :category_id)
+      params.require(:post).permit(:title, :content, :category_id, :tags_list)
     end
   end
 end

@@ -54,4 +54,17 @@ class Post < ApplicationRecord
       transitions from: :visitors, to: :members, if: :published?
     end
   end
+
+  def tags_list
+    tags.pluck(:name).join(",")
+  end
+
+  def tags_list=(tags_string)
+    self.tags = tags_string
+      .split(",")
+      .collect(&:strip)
+      .reject(&:empty?)
+      .uniq
+      .collect { |name| Tag.find_or_create_by(name: name) }
+  end
 end
