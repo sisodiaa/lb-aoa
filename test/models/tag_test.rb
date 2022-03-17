@@ -19,4 +19,9 @@ class TagTest < ActiveSupport::TestCase
 
     assert_equal "fire alarm", Tag.last.name
   end
+
+  test "that name is unique" do
+    tag = Tag.create(name: "plant")
+    assert_not tag.valid?, "Name should be unique"
+  end
 end

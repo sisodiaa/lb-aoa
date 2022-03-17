@@ -21,6 +21,7 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: {maximum: 256}
   validates :content, presence: true
   validates :category, presence: true
+  validate :number_of_tags
 
   aasm(
     :publication,
@@ -66,5 +67,9 @@ class Post < ApplicationRecord
       .reject(&:empty?)
       .uniq
       .collect { |name| Tag.find_or_create_by(name: name) }
+  end
+
+  def number_of_tags
+    errors.add(:tags, "should not be more than 5") if tags.length > 5
   end
 end

@@ -4,5 +4,5 @@ class Tag < ApplicationRecord
 
   before_save { name.downcase! }
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 end

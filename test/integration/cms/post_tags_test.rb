@@ -16,13 +16,13 @@ module CMS
       authenticated_admin do
         assert_difference "Post.count" do
           assert_difference "Tag.count", 2 do
-            assert_difference "Tagging.count", 2 do
+            assert_difference "Tagging.count", 3 do
               post cms_posts_path, params: {
                 post: {
                   category_id: @category.id,
                   title: "New title of a new post",
                   content: "<h1><em>Rich text</em> using HTML</h1>",
-                  tags_list: "new , draft post "
+                  tags_list: "plant, new , draft post "
                 }
               }
             end
