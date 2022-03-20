@@ -1,5 +1,18 @@
 <div class="post lg:basis-1/2 lg:odd:pr-4 lg:even:pl-4">
   <div class="sm:rounded-lg sm:py-4 sm:px-6 sm:shadow bg-white">
+    <div class="inline-flex items-center justify-center text-slate-400 mb-2">
+      <svg
+        class="w-3 h-3 fill-[none] stroke-current stroke-2"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+        <use href="/assets/feather-sprite.svg#folder" />
+      </svg>
+
+      <span class="inline-block mx-2 text-xs capitalize">
+        <%= post.category.name %>
+      </span>
+    </div>
+
     <h1 class="mb-1 font-serif font-medium text-xl md:text-2xl">
       <%= post.title %>
     </h1>
