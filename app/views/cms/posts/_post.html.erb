@@ -1,84 +1,71 @@
-<div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
-  <%= link_to(
-    :back,
-    class: "inline-flex items-center justify-center text-slate-400 mb-6",
-    data: { turbo_action: "advance" }
-  ) do %>
-    <svg
-      class="w-7 h-7 fill-[none] stroke-current stroke-2"
-      stroke-linecap="round"
-      stroke-linejoin="round">
-      <use href="/assets/feather-sprite.svg#arrow-left-circle" />
-    </svg>
+<div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12 -mt-2">
+  <div class="border-double border-t-4 border-b-4 border-slate-200 mb-12">
+    <h1 class="font-serif text-4xl mb-4 mt-4 text-zinc-900 text-center"><%= post.title %></h1>
 
-    <span class="inline-block ml-3 text-xl font-light">
-      Back
-    </span>
-  <% end %>
+    <div class="text-center mb-4">
+      <div class="inline-flex items-center justify-center text-slate-400">
+        <svg
+            class="w-4 h-4 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+          <use href="/assets/feather-sprite.svg#folder" />
+        </svg>
 
-  <h1 class="font-serif text-4xl mb-2 text-zinc-900"><%= post.title %></h1>
-
-  <div class="inline-flex items-center justify-center text-slate-400 mb-2">
-    <svg
-      class="w-4 h-4 fill-[none] stroke-current stroke-2"
-      stroke-linecap="round"
-      stroke-linejoin="round">
-      <use href="/assets/feather-sprite.svg#folder" />
-    </svg>
-
-    <span class="inline-block mx-2 text-base capitalize">
-      <%= @post.category.name %>
-    </span>
-  </div>
-
-  <div class="inline-flex items-center justify-center text-slate-400 mb-10">
-    <svg
-      class="w-4 h-4 fill-[none] stroke-current stroke-2"
-      stroke-linecap="round"
-      stroke-linejoin="round">
-      <use href="/assets/feather-sprite.svg#calendar" />
-    </svg>
-
-    <span class="inline-block mx-2 text-base">
-      <% if post.draft? %>
-        <%= post.updated_at.strftime("%d %B %Y") %> (last modified)
-      <% else %>
-        <%= post.published_at.strftime("%d %B %Y") %>
-      <% end %>
-    </span>
-  </div>
-
-  <% if @tags.present? %>
-    <div class="tags flex gap-x-2 mb-6">
-      <svg
-          class="self-center w-4 h-4 fill-[none] stroke-current stroke-2 text-slate-400"
-          stroke-linecap="round"
-          stroke-linejoin="round">
-        <use href="/assets/feather-sprite.svg#tag" />
-      </svg>
-
-      <% @tags.each do |tag| %>
-        <span class="tag bg-fuchsia-50 text-lb-soft-500 text-xs font-semibold
-                     px-2.5 py-0.5 rounded">
-          <%= tag.name %>
+        <span class="inline-block mx-2 text-base capitalize">
+          <%= @post.category.name %>
         </span>
-      <% end %>
-    </div>
-  <% end %>
+      </div>
 
-  <div class="text-gray-800 mb-6">
+      <div class="inline-flex items-center justify-center text-slate-400">
+        <svg
+            class="w-4 h-4 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+          <use href="/assets/feather-sprite.svg#calendar" />
+        </svg>
+
+        <span class="inline-block mx-2 text-base">
+          <% if post.draft? %>
+            <%= post.updated_at.strftime("%d %B %Y") %> (last modified)
+          <% else %>
+            <%= post.published_at.strftime("%d %B %Y") %>
+          <% end %>
+        </span>
+      </div>
+    </div>
+
+    <% if @tags.present? %>
+      <div class="tags flex gap-x-2 justify-center mb-5">
+        <svg
+            class="self-center w-4 h-4 fill-[none] stroke-current stroke-2 text-slate-400"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+          <use href="/assets/feather-sprite.svg#tag" />
+        </svg>
+
+        <% @tags.each do |tag| %>
+          <span class="tag bg-slate-50 text-slate-400 text-xs font-semibold
+                       px-2.5 py-0.5 rounded">
+            <%= tag.name %>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="text-gray-800 mb-6 pb-12 border-double border-b-4 border-slate-200">
     <%= post.content %>
   </div>
 
-  <div class="pt-2 pb-6">
+  <div class="pt-2 pb-4">
     <%= turbo_frame_tag(
       :attachments,
       src: cms_post_documents_path(post),
       loading: :lazy
     ) do %>
       <% if post.documents.present? %>
-        <div class="flex w-full rounded-xl animate-pulse bg-indigo-50 py-3 px-2
-                     text-indigo-500 font-light text-base">
+        <div class="flex w-full rounded-xl animate-pulse bg-fuchsia-50 py-3 px-2
+                     text-lb-soft-500 font-light text-base">
           Loading attachments...
         </div>
       <% end %>
@@ -87,7 +74,7 @@
 
   <%= turbo_frame_tag "post-actions" do %>
     <% if post.draft? %>
-      <div class="inline-flex">
+      <div class="inline-flex w-full pt-4 border-double border-t-4 border-slate-200">
         <%= link_to(
           "Edit",
           edit_cms_post_path(post),
