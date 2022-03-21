@@ -60,13 +60,12 @@ class Post < ApplicationRecord
     tags.pluck(:name).join(", ")
   end
 
-  def tags_list=(tags_string)
-    self.tags = tags_string
-      .split(",")
-      .collect(&:strip)
-      .reject(&:empty?)
-      .uniq
-      .collect { |name| Tag.first_or_create(name: name) }
+  def tags_list=(tag_names_string)
+    Prosopite.pause
+    self.tags = tag_names_string.split(",").map do |name|
+      Tag.where(name: name.strip).first_or_create!
+    end
+    Prosopite.resume
   end
 
   def number_of_tags
