@@ -4,7 +4,20 @@ require "rails/test_help"
 require "minitest/autorun"
 require_relative "./remove_uploaded_files"
 
+module ProsopiteTesting
+  def before_setup
+    super
+    Prosopite.scan
+  end
+
+  def after_teardown
+    Prosopite.finish
+    super
+  end
+end
+
 class ActiveSupport::TestCase
+  include ProsopiteTesting
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
 
@@ -24,4 +37,9 @@ end
 
 class ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+  include ProsopiteTesting
+end
+
+class MiniTest::Unit::TestCase
+  include ProsopiteTesting
 end
