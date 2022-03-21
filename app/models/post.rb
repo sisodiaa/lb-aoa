@@ -66,7 +66,7 @@ class Post < ApplicationRecord
       .collect(&:strip)
       .reject(&:empty?)
       .uniq
-      .collect { |name| Tag.find_or_create_by(name: name) }
+      .collect { |name| Tag.first_or_create(name: name) }
   end
 
   def number_of_tags

@@ -4,6 +4,17 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :unauthorised_request
 
+  unless Rails.env.production?
+    around_action :n_plus_one_detection
+
+    def n_plus_one_detection
+      Prosopite.scan
+      yield
+    ensure
+      Prosopite.finish
+    end
+  end
+
   private
 
   # Overwriting the sign_out redirect path method
