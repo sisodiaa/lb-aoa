@@ -27,7 +27,6 @@ module Front
       assert_selector ".post", count: 6
 
       click_link "Next"
-      assert_selector ".post-skeleton"
       assert_selector ".post", count: 3
     end
   end

@@ -7,7 +7,13 @@ module Front
     end
 
     def published
-      @pagy, @posts = pagy(Post.published.order(published_at: :desc), items: 6)
+      @pagy, @posts = pagy(
+        Post
+          .published
+          .includes(:category, :rich_text_content)
+          .order(published_at: :desc),
+        items: 6
+      )
     end
 
     def show
