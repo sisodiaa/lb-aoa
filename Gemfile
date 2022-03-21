@@ -67,6 +67,10 @@ group :development, :test do
   gem "solargraph", "~> 0.44.2", require: false
   gem "standard", "~> 1.7", require: false
   gem "rubocop-rails", "~> 2.13", ">= 2.13.2", require: false
+
+  # N+1 auto-detection for Rails with zero false positives / false negative
+  gem "prosopite", "~> 1.0", ">= 1.0.8"
+  gem "pg_query", "~> 2.1", ">= 2.1.3" # required by prosopite when using pg
 end
 
 group :development do
