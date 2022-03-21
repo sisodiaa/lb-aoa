@@ -71,7 +71,7 @@ module CMS
       authorize @post, policy_class: CMS::PostPolicy
 
       respond_to do |format|
-        if @post.destroy
+        if @post.documents.with_attached_file.destroy_all && @post.destroy
           format.turbo_stream do
             flash.now[:notice] = "Post was successfully destroyed."
           end
