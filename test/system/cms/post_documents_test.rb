@@ -8,6 +8,7 @@ module CMS
       @draft_post = posts(:plantation)
       @published_post = posts(:club_chiller)
 
+      Prosopite.pause
       @draft_post.documents.each do |document|
         attach_file_to_record document.file, "square.png", "image/png"
       end
@@ -15,6 +16,7 @@ module CMS
       @published_post.documents.each do |document|
         attach_file_to_record document.file, "square.png", "image/png"
       end
+      Prosopite.resume
 
       login_as @confirmed_board_admin, scope: :admin
     end

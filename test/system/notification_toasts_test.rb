@@ -6,9 +6,12 @@ class NotificationToastsTest < ApplicationSystemTestCase
     @confirmed_board_admin = admins(:confirmed_board_admin)
     @draft_post = posts(:plantation)
 
+    Prosopite.pause
     @draft_post.documents.each do |document|
       attach_file_to_record document.file, "square.png", "image/png"
     end
+    Prosopite.resume
+
     login_as @confirmed_board_admin, scope: :admin
     update_post
   end
