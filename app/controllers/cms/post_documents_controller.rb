@@ -4,6 +4,7 @@ module CMS
     before_action :set_post
 
     def index
+      @documents = @post.documents.with_attached_file.reject(&:new_record?)
     end
 
     def new

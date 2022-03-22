@@ -3,7 +3,7 @@
     <%= turbo_frame_tag "post-documents" do %>
       <%= render(
         partial: "post_document",
-        collection: @post.documents.reject(&:new_record?),
+        collection: @documents,
         as: :document,
         locals: {post: @post}
       )%>
