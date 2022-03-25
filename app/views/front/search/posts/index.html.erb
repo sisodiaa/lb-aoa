@@ -1,7 +1,12 @@
 <div class="mx-auto w-10/12 sm:w-9/12 md:w-8/12 lg:w-11/12 xl:w-10/12 2xl:w-9/12">
   <%= turbo_frame_tag :main do %>
     <%= link_to(
-      new_search_post_path,
+      new_search_post_path(
+        category_id: params[:category_id],
+        tags_list: params[:tags_list],
+        start_date: params[:start_date],
+        end_date: params[:end_date]
+      ),
       class: "ml-auto mb-4 flex items-center justify-end btn btn--small btn--primary mr-0",
       data: { turbo_frame: "modal" }
     ) do %>
@@ -13,18 +18,23 @@
       </svg>
 
       <span class="inline-block mx-2 text-sm capitalize">
-        Search
+        Refine Search
       </span>
     <% end %>
 
-    <%= turbo_frame_tag "posts" do %>
+    <%= turbo_frame_tag "results" do %>
         <%= turbo_frame_tag(
-          :published_posts,
-          src: published_posts_path(page: @page),
+          :search_results,
+          src: results_search_posts_path(
+            category_id: params[:category_id],
+            tags_list: params[:tags_list],
+            start_date: params[:start_date],
+            end_date: params[:end_date]
+          ),
           class: "space-y-12 sm:space-y-8 lg:space-y-0 lg:flex lg:flex-wrap lg:gap-y-10"
         ) do %>
           <% 2.times do %>
-            <%= render partial: "skeleton" %>
+            <%= render partial: "shared/skeleton" %>
           <% end %>
         <% end %>
     <% end %>

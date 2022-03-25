@@ -52,7 +52,9 @@ Rails.application.routes.draw do
     end
 
     namespace :search do
-      resources :posts, only: %i[new]
+      resources :posts, only: %i[index new] do
+        get "results", on: :collection
+      end
     end
   end
 

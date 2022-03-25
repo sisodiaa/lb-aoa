@@ -19,6 +19,10 @@ module Front
         end
       end
 
+      def results
+        @results = @post_form.search.order(published_at: :desc)
+      end
+
       def new
       end
 
