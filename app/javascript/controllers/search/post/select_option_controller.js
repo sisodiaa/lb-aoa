@@ -1,8 +1,14 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="search--post--select-option"
 export default class extends Controller {
-  static targets = ["category"]
+  static targets = ["category"];
+
+  hideModal(e) {
+    e.preventDefault();
+    this.element.parentElement.removeAttribute("src");
+    this.element.remove();
+  }
 
   categoryTargetConnected(element) {
     if (element.value !== "") {
@@ -10,7 +16,7 @@ export default class extends Controller {
       opt.value = "";
       opt.text = "All Categories";
 
-      element.add(opt, element.options[0])
+      element.add(opt, element.options[0]);
     }
   }
 }
