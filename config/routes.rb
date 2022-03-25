@@ -50,6 +50,10 @@ Rails.application.routes.draw do
       get "published", on: :collection
       resources :documents, only: :index, controller: "post_documents"
     end
+
+    namespace :search do
+      resources :posts, only: %i[new]
+    end
   end
 
   get "/pages/*page", to: "cms/pages#show", as: "page"
