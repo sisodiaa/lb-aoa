@@ -5,7 +5,10 @@ export default class extends Controller {
   static targets = ["category"];
 
   hideModal(e) {
-    e.preventDefault();
+    if (e.type === "click") {
+      e.preventDefault();
+    }
+
     this.element.parentElement.removeAttribute("src");
     this.element.remove();
   }

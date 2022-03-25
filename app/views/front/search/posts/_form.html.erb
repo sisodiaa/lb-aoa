@@ -5,7 +5,11 @@
   id: dom_id(post_form),
   method: :get,
   class: "w-full",
-  data: { turbo_action: "advance", turbo_frame: "_top" }
+  data: {
+    turbo_action: "advance",
+    turbo_frame: "main",
+    action: "turbo:submit-start->search--post--select-option#hideModal"
+  }
 ) do |form| %>
   <% if post_form.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
