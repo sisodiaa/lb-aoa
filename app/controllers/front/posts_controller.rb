@@ -1,6 +1,6 @@
 module Front
   class PostsController < ApplicationController
-    layout "front"
+    layout -> { turbo_frame_request? ? false : "front" }
 
     def index
       @page = params[:page] || 1
