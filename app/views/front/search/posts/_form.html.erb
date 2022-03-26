@@ -9,8 +9,8 @@
     turbo_action: "advance",
     turbo_frame: "main",
     search__post__select_option_target: "form",
-    action: "turbo:submit-start->search--post--select-option#deactivateForm
-             turbo:frame-load->search--post--select-option#activateForm"
+    action: "turbo:submit-start->search--post--modal#deactivateForm
+             turbo:frame-load->search--post--modal#activateForm"
   }
 ) do |form| %>
   <% if post_form.errors.any? %>
@@ -29,7 +29,10 @@
 
   <h3 class="text-center text-xl font-medium text-gray-900 mb-4">Search Posts</h3>
 
-  <div class="mb-6">
+  <div
+    class="mb-6"
+    data-controller="search--post--select-option"
+  >
     <%= form.label(
       :category_id,
       class: "block mb-2 text-sm font-medium text-gray-900"
@@ -99,7 +102,7 @@
       "Cancel",
       "#",
       class: "btn btn--normal btn--error mb-0",
-      data: { action: "click->search--post--select-option#hideModal" }
+      data: { action: "click->search--post--modal#hideModal" }
     )%>
   </div>
 <% end %>

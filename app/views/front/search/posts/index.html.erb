@@ -32,7 +32,7 @@
             end_date: params[:end_date]
           ),
           class: "space-y-12 sm:space-y-8 lg:space-y-0 lg:flex lg:flex-wrap lg:gap-y-10",
-          data: { action: "turbo:frame-load->search--post--select-option#hideModal" }
+          data: { action: "turbo:frame-load->search--post--modal#hideModal" }
         ) do %>
           <% 2.times do %>
             <%= render partial: "shared/skeleton" %>
