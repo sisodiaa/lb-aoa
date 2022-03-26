@@ -26,6 +26,18 @@ module Front
         end
       end
 
+      test "that cancel button closes the modal" do
+        visit posts_url
+        click_link "Search"
+        assert_selector "[aria-modal='true']"
+
+        within "#new_front_search_post_form" do
+          click_on "Cancel"
+        end
+
+        assert_no_selector "[aria-modal='true']"
+      end
+
       test "perform a search" do
         visit posts_url
         click_link "Search"
@@ -34,6 +46,8 @@ module Front
           select "policy", from: "category_id"
           click_on "Search"
         end
+
+        assert_no_selector "[aria-modal='true']"
 
         within "#main" do
           assert_selector "a[data-turbo-frame='modal']", text: "Refine Search"

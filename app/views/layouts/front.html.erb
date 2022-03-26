@@ -17,10 +17,12 @@
       <%= flash_messages %>
     <% end %>
 
-    <div class="relative container mx-auto pt-6">
-      <%= yield %>
-    </div>
+    <div data-controller="search--post--select-option">
+      <div class="relative container mx-auto pt-6">
+        <%= yield %>
+      </div>
 
-    <%= turbo_frame_tag "modal" %>
+      <%= turbo_frame_tag "modal" %>
+    </div>
   </body>
 </html>

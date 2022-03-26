@@ -2,15 +2,23 @@ import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="search--post--select-option"
 export default class extends Controller {
-  static targets = ["category"];
+  static targets = ["category", "modal", "form"];
 
   hideModal(e) {
     if (e.type === "click") {
       e.preventDefault();
     }
 
-    this.element.parentElement.removeAttribute("src");
-    this.element.remove();
+    this.modalTarget.parentElement.removeAttribute("src");
+    this.modalTarget.remove();
+  }
+
+  deactivateForm() {
+    this.formTarget.classList.add("opacity-50", "pointer-events-none");
+  }
+
+  activateForm() {
+    this.formTarget.classList.remove("opacity-50", "pointer-events-none");
   }
 
   categoryTargetConnected(element) {
