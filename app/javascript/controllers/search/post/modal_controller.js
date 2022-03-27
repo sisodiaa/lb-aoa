@@ -9,8 +9,10 @@ export default class extends Controller {
       e.preventDefault();
     }
 
-    this.modalTarget.parentElement.removeAttribute("src");
-    this.modalTarget.remove();
+    if (this.hasModalTarget) {
+      this.modalTarget.parentElement.removeAttribute("src");
+      this.modalTarget.remove();
+    }
   }
 
   deactivateForm() {
