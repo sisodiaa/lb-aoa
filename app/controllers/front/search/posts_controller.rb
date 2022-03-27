@@ -6,6 +6,8 @@ module Front
       before_action :set_post_form
 
       def index
+        @page = params[:page] || 1
+
         unless @post_form.valid?
           render(
             turbo_stream: turbo_stream.replace(
@@ -20,7 +22,10 @@ module Front
       end
 
       def results
-        @results = @post_form.search.order(published_at: :desc)
+        @pagy, @results = pagy(
+          @post_form.search.order(published_at: :desc),
+          items: 6
+        )
       end
 
       def new

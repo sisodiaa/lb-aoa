@@ -63,6 +63,24 @@ module Front
           assert_selector "select#category_id", text: "Policy"
         end
       end
+
+      test "pagination of results" do
+        visit posts_url
+        click_link "Search"
+
+        within "#new_front_search_post_form" do
+          click_on "Search"
+        end
+
+        within "#results" do
+          assert_selector ".post", count: 6
+          click_on "Next"
+        end
+
+        within "#results" do
+          assert_selector ".post", count: 3
+        end
+      end
     end
   end
 end

@@ -47,7 +47,7 @@ module Front
       click_link @published_post_2.published_at.strftime("%d %B %Y")
 
       within "#results" do
-        assert_selector ".post", count: 9
+        assert_selector ".post", count: 6
       end
     end
 

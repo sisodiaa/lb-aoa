@@ -1,3 +1,31 @@
 <%= turbo_frame_tag :search_results do %>
   <%= render partial: "front/posts/post", collection: @results, as: :post %>
+
+  <br class="hidden lg:block">
+  
+  <%= render(
+    partial: "shared/navigation_controls",
+    locals: {
+      frame: "search_results",
+      pagy: @pagy,
+      prev_path: @pagy.prev ?
+        results_search_posts_path(
+          page: @pagy.prev,
+          category_id: params[:category_id],
+          tags_list: params[:tags_list],
+          start_date: params[:start_date],
+          end_date: params[:end_date]
+        ) :
+        "#",
+      next_path: @pagy.next ?
+        results_search_posts_path(
+          page: @pagy.next,
+          category_id: params[:category_id],
+          tags_list: params[:tags_list],
+          start_date: params[:start_date],
+          end_date: params[:end_date]
+        ) :
+        "#"
+    }
+  )%>
 <% end %>
