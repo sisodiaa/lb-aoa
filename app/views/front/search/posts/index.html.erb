@@ -26,6 +26,7 @@
         <%= turbo_frame_tag(
           :search_results,
           src: results_search_posts_path(
+            page: @page,
             category_id: params[:category_id],
             tags_list: params[:tags_list],
             start_date: params[:start_date],

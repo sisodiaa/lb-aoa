@@ -6,10 +6,10 @@
   <%= render(
     partial: "shared/navigation_controls",
     locals: {
-      frame: "search_results",
+      frame: "results",
       pagy: @pagy,
       prev_path: @pagy.prev ?
-        results_search_posts_path(
+        search_posts_path(
           page: @pagy.prev,
           category_id: params[:category_id],
           tags_list: params[:tags_list],
@@ -18,7 +18,7 @@
         ) :
         "#",
       next_path: @pagy.next ?
-        results_search_posts_path(
+        search_posts_path(
           page: @pagy.next,
           category_id: params[:category_id],
           tags_list: params[:tags_list],
