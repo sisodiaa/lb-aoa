@@ -69,7 +69,7 @@ class Post < ApplicationRecord
   end
 
   def number_of_tags
-    errors.add(:tags, "should not be more than 5") if tags.length > 5
+    errors.add(:tags_list, "should not have more than 5 tags") if tags.length > 5
   end
 
   # Query methods

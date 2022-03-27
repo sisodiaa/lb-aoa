@@ -22,7 +22,7 @@ module Front
           click_on "Search"
 
           assert_selector "#error_explanation li", text: "Start date should be before end date"
-          assert_selector "#error_explanation li", text: "Tags should be 3 or lesser"
+          assert_selector "#error_explanation li", text: "Tags list should not have more than 3 tags"
         end
       end
 

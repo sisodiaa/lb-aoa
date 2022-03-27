@@ -34,6 +34,11 @@ module CMS
       assert_selector "#error_explanation li", text: "Title can't be blank"
     end
 
+    test "showing error when tags are more than 5" do
+      create_new_post_with_more_than_5_tags
+      assert_selector "#error_explanation li", text: "Tags list should not have more than 5 tags"
+    end
+
     test "updating a post" do
       edit_first_post
       assert_selector "[role='toast']", text: "Post was successfully updated"
@@ -79,6 +84,13 @@ module CMS
     def create_new_post_without_title
       visit management_dashboard_url
       click_on "Create New Post"
+      click_on "Create Post"
+    end
+
+    def create_new_post_with_more_than_5_tags
+      visit management_dashboard_url
+      click_on "Create New Post"
+      fill_in "post_tags_list", with: "Earth, Water, Fire, Wind, Sky, Sixth"
       click_on "Create Post"
     end
 

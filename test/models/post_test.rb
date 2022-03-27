@@ -91,6 +91,6 @@ class PostTest < ActiveSupport::TestCase
   test "that a post can not have more than 5 tags" do
     @draft_post.tags_list = "one, two, three, four, five, six"
     assert_not @draft_post.valid?, "Post can not be more than 5 tags"
-    assert_equal ["should not be more than 5"], @draft_post.errors[:tags]
+    assert_equal ["should not have more than 5 tags"], @draft_post.errors[:tags_list]
   end
 end

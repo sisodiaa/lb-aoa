@@ -20,7 +20,7 @@ module Search
       @model.tags_list = "lotus, boulevard, society, noida"
 
       assert_not @model.valid?
-      assert_equal ["should be 3 or lesser"], @model.errors[:tags]
+      assert_equal ["should not have more than 3 tags"], @model.errors[:tags_list]
     end
 
     test "that start_date should be before or on end_date" do

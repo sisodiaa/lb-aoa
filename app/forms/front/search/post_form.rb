@@ -39,7 +39,7 @@ module Front
       end
 
       def number_of_tags
-        errors.add(:tags, "should be 3 or lesser") if tags.length > 3
+        errors.add(:tags_list, "should not have more than 3 tags") if tags.length > 3
       end
 
       def start_date_after_end_date?
