@@ -1,18 +1,21 @@
-import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus";
 
 // Connects to data-controller="search--post--modal"
 export default class extends Controller {
   static targets = ["modal", "form"];
+
+  connect() {
+    document.addEventListener("turbo:before-visit", () => {
+      this.removeModal();
+    });
+  }
 
   hideModal(e) {
     if (e.type === "click") {
       e.preventDefault();
     }
 
-    if (this.hasModalTarget) {
-      this.modalTarget.parentElement.removeAttribute("src");
-      this.modalTarget.remove();
-    }
+    this.removeModal();
   }
 
   deactivateForm() {
@@ -21,5 +24,12 @@ export default class extends Controller {
 
   activateForm() {
     this.formTarget.classList.remove("opacity-50", "pointer-events-none");
+  }
+
+  removeModal() {
+    if (this.hasModalTarget) {
+      this.modalTarget.parentElement.removeAttribute("src");
+      this.modalTarget.remove();
+    }
   }
 }
