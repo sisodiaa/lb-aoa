@@ -1,15 +1,103 @@
-<div class="mx-auto pt-16 w-full lg:w-4/5">
-  <h1 class="text-center text-6xl lg:text-8xl font-extrabold text-transparent 
-             bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-lb-500">
-    Lotus Boulevard AOA
-  </h1>
+<div class="h-screen bg-right bg-cover bg-[url('/assets/bg-homepage.svg')]">
+	<!--Main-->
+	<div class="container pt-0 md:pt-8 px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+		
+		<!--Left Col-->
+    <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start
+                overflow-y-hidden text-center xl:text-left">
+      <h1 class="my-8 text-4xl md:text-6xl font-bold leading-tight mx-auto xl:mx-0
+                 text-transparent bg-clip-text bg-gradient-to-r from-indigo-700 to-lb-500">
+        Lotus Boulevard <span class="block">Apartment Owners Association</span>
+      </h1>
 
-  <div class="text-center flex gap-x-8 justify-center mt-12">
-    <%= link_to(
-      "Posts",
-      posts_path,
-      class: "text-white bg-indigo-500 hover:bg-indigo-600 focus:ring-4 focus:ring-indigo-300
-              font-medium rounded-lg text-base px-6 py-3.5 text-center"
-    )%>
-  </div>
+      <p class="leading-normal text-lg md:text-2xl mb-8 mx-auto xl:mx-0">
+        welcomes you to lbaoa.com, a platform for easy access to the information.
+        We are making management by LBAOA board transparent through regular publishing
+        updates about <strong>finances, procurements, and other activities</strong> here.
+        Stay connected to follow the latest updates.
+      </p>
+		
+      <div class="flex flex-wrap md:flex-nowrap w-full lg:w-3/5 xl:w-full
+                  lg:mx-auto xl:mx-0 justify-center md:justify-start pb-4 lg:pb-0 gap-4">
+        <a href="#" class="w-full flex items-center justify-center px-8 py-3 
+                 border border-transparent text-base font-medium rounded-md text-white
+                 bg-lb-500 hover:bg-lb-600 md:py-4 md:text-lg md:px-10">
+          About AOA
+        </a>
+        <%= link_to(
+          "Posts",
+          posts_path,
+          class: "w-full flex items-center justify-center px-8 py-3 border
+                  border-transparent text-base font-medium rounded-md text-lb-500
+                  bg-fuchsia-100 hover:bg-fuchsia-200 md:py-4 md:text-lg md:px-10"
+        )%>
+			</div>
+
+		</div>
+		
+		<!--Right Col-->
+		<div class="md:block w-full xl:w-3/5 py-6 overflow-y-hidden">
+			<img class="w-5/6 mx-auto xl:mr-0" src="assets/web_design.svg">
+		</div>
+    
+    <!--Footer-->
+    <footer class="mt-auto w-full pb-4 pt-4 xl:pt-32 px-0">
+      <div class="md:flex md:justify-between">
+        <div class="grid grid-cols-2 gap-8 sm:gap-16 sm:grid-cols-2">
+          <div>
+            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Resources</h2>
+            <ul class="text-gray-600">
+              <li class="mb-4">
+                <a href="#" class="hover:underline">Lotus Boulevard</a>
+              </li>
+
+              <li class="mb-4">
+                <a href="#" class="hover:underline">Lotus Boulevard AOA</a>
+              </li>
+
+              <li class="mb-4">
+                <a href="#" class="hover:underline">AOA Board</a>
+              </li>
+
+              <li>
+                <a href="#" class="hover:underline">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Legal</h2>
+            <ul class="text-gray-600">
+              <li class="mb-4">
+                Version 1.0.0<sup>beta</sup>
+              </li>
+
+              <li class="mb-4">
+                <a href="#" class="hover:underline">Disclaimer</a>
+              </li>
+
+              <li>
+                <a href="#" class="hover:underline">Source Code</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
+
+      <div class="sm:flex sm:items-center sm:justify-between">
+        <div class="text-sm text-gray-500">© 2022 <a href="#" class="hover:underline">Lotus Boulevard AOA</a>. All Rights Reserved.
+        </div>
+        <div class="mt-4 space-x-6 sm:mt-0 text-sm text-gray-500">
+          Designed and developed by 
+          <%= mail_to(
+            "dev.abhishek.sisodia@gmail.com",
+            "Abhishek Sisodia",
+            class: "hover:text-gray-900 underline"
+          ) %>
+        </div>
+      </div>
+    </footer>
+	</div>
 </div>
