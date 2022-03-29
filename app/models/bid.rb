@@ -16,9 +16,11 @@ class Bid < ApplicationRecord
       message: "already used before to submit a bid for this tender."
     }
 
+  # :nocov:
   def to_param
     quotation_token
   end
+  # :nocov:
 
   private
 
