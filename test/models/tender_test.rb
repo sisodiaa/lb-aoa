@@ -127,4 +127,8 @@ class TenderTest < ActiveSupport::TestCase
       tenders(:elevator_buttons).bids << bid
     end
   end
+
+  test "to_param" do
+    assert_equal "#{@draft_tender.id}-SEP_21-tech-79", @draft_tender.to_param
+  end
 end
