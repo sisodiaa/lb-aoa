@@ -27,17 +27,8 @@ class ApplicationController < ActionController::Base
   def unauthorised_request(exception)
     policy_name = exception.policy.class.to_s.underscore
 
-    respond_to do |format|
-      format.turbo_stream do
-        flash.now[:error] = t "#{policy_name}.#{exception.query}",
-          scope: "pundit", default: :default
-      end
-
-      format.html do
-        flash[:error] = t "#{policy_name}.#{exception.query}",
-          scope: "pundit", default: :default
-      end
-    end
+    flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit",
+      default: :default
 
     redirect_to(request.referer || root_path)
   end
