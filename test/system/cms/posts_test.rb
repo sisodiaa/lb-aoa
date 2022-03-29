@@ -61,7 +61,9 @@ module CMS
     end
 
     test "do not show Edit and Publish Post button for published posts" do
-      visit cms_post_url(posts(:lotus))
+      visit cms_posts_url(status: "published")
+      click_on "Show", match: :first
+
       assert_no_selector "#post-actions"
       assert_no_selector "a", text: "Edit"
       assert_no_selector "button", text: "Publish Post"

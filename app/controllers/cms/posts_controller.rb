@@ -93,7 +93,7 @@ module CMS
       if params[:status] == "draft"
         Post.draft.order(created_at: :asc)
       elsif params[:status] == "published"
-        Post.published.order(created_at: :desc)
+        Post.published.order(published_at: :desc)
       else
         Post.all.order(created_at: :asc)
       end

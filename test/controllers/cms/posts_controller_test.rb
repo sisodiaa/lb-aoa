@@ -74,6 +74,18 @@ module CMS
       end
     end
 
+    test "updating post with invalid arguments returns unprocessable_entity" do
+      authorised_admin do
+        patch cms_post_url(@draft_post), params: {
+          post: {
+            title: ""
+          }
+        }
+
+        assert_response :unprocessable_entity
+      end
+    end
+
     test "should destroy post" do
       authorised_admin do
         assert_difference("Post.count", -1) do
