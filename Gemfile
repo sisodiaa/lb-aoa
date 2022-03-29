@@ -92,4 +92,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  # Code coverage
+  gem "simplecov", "~> 0.21.2", require: false
 end
