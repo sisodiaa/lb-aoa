@@ -82,6 +82,9 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  # Static analysis security vulnerability scanner
+  gem "brakeman", "~> 5.2", ">= 5.2.1"
 end
 
 group :test do
