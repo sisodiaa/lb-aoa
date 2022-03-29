@@ -2,7 +2,7 @@ class Selection < ApplicationRecord
   belongs_to :tender
   belongs_to :bid
 
-  after_create :change_notice_state
+  after_create :change_tender_state
 
   validates :reason, presence: true
   validate :tender_includes_bid
@@ -15,7 +15,7 @@ class Selection < ApplicationRecord
     end
   end
 
-  def change_notice_state
+  def change_tender_state
     tender.reviewed!
   end
 end
