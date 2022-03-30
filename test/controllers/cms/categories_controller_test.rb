@@ -44,6 +44,18 @@ module CMS
       end
     end
 
+    test "return unprocessable_entity if post can not be created" do
+      authenticated_admin do
+        post cms_categories_path, params: {
+          category: {
+            name: ""
+          }
+        }
+
+        assert_response :unprocessable_entity
+      end
+    end
+
     test "should get edit" do
       authenticated_admin do
         get edit_cms_category_path(@category)
@@ -64,6 +76,18 @@ module CMS
 
       assert_equal "new name", @category.reload.name
       assert_redirected_to cms_categories_path
+    end
+
+    test "return unprocessable_entity if post can not be updated" do
+      authenticated_admin do
+        patch cms_category_path(@category), params: {
+          category: {
+            name: ""
+          }
+        }
+
+        assert_response :unprocessable_entity
+      end
     end
 
     private
