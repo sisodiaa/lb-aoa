@@ -1,24 +1,19 @@
-# README
+# LB AOA Management Application  
+Web application to manage LBAOA board operation and to connect with members of the association.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Features
+- Content Management System to publish financial, operational, and other updates
+- Tender Management System to manage procurements (To be released soon)
 
-Things you may want to cover:
+# Technologies
+ - [Ruby 3.1](https://www.ruby-lang.org/en/)
+ - [Ruby on Rails 7.0](https://rubyonrails.org/)
+ - [Tailwind CSS 3.0](https://tailwindcss.com/)
+ - [Turbo 7.1](https://turbo.hotwired.dev/)
+ - [Stimlus 3.0](https://stimulus.hotwired.dev/)
 
-* Ruby version
+# Copyright and License
+Source code of this application is licensed under the MIT license.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Contributors
+- [Abhishek Sisodia](dev.abhishek.sisodia@gmail.com)
