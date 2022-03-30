@@ -20,9 +20,6 @@ module CMS
             flash[:success] = "Post was successfully published."
             redirect_to cms_post_path(@post)
           end
-        else
-          flash.now[:error] = "Post was not published."
-          render "cms/posts#show", status: :unprocessable_entity
         end
       end
     end
