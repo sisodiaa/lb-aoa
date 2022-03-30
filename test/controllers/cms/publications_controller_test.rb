@@ -20,7 +20,7 @@ module CMS
     test "publish a post" do
       sign_in @confirmed_board_admin, scope: :admin
 
-      authorised_admin do
+      authenticated_admin do
         assert @draft_post.draft?
         assert_not @draft_post.published?
         assert_nil @draft_post.published_at
@@ -38,7 +38,7 @@ module CMS
     end
 
     test "publish action does not apply on published post" do
-      authorised_admin do
+      authenticated_admin do
         patch publish_cms_post_path(@published_post)
         assert_equal "You can not perform this action on a published post.",
           flash[:error]
@@ -47,7 +47,7 @@ module CMS
 
     private
 
-    def authorised_admin
+    def authenticated_admin
       sign_in @confirmed_board_admin, scope: :admin
       yield if block_given?
       sign_out :admin

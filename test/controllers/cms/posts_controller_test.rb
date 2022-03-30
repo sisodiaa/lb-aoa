@@ -19,21 +19,21 @@ module CMS
     end
 
     test "should get index" do
-      authorised_admin do
+      authenticated_admin do
         get cms_posts_url
         assert_response :success
       end
     end
 
     test "should get new" do
-      authorised_admin do
+      authenticated_admin do
         get new_cms_post_url
         assert_response :success
       end
     end
 
     test "should create post" do
-      authorised_admin do
+      authenticated_admin do
         assert_difference("Post.count") do
           post cms_posts_url, params: {
             post: {
@@ -49,21 +49,21 @@ module CMS
     end
 
     test "should show post" do
-      authorised_admin do
+      authenticated_admin do
         get cms_post_url(@draft_post)
         assert_response :success
       end
     end
 
     test "should get edit" do
-      authorised_admin do
+      authenticated_admin do
         get edit_cms_post_url(@draft_post)
         assert_response :success
       end
     end
 
     test "should update post" do
-      authorised_admin do
+      authenticated_admin do
         patch cms_post_url(@draft_post), params: {
           post: {
             title: "Updating the title of the post"
@@ -75,7 +75,7 @@ module CMS
     end
 
     test "updating post with invalid arguments returns unprocessable_entity" do
-      authorised_admin do
+      authenticated_admin do
         patch cms_post_url(@draft_post), params: {
           post: {
             title: ""
@@ -87,7 +87,7 @@ module CMS
     end
 
     test "should destroy post" do
-      authorised_admin do
+      authenticated_admin do
         assert_difference("Post.count", -1) do
           delete cms_post_url(@draft_post)
         end
@@ -99,7 +99,7 @@ module CMS
     # authorisation cases
 
     test "can not edit a publishded post" do
-      authorised_admin do
+      authenticated_admin do
         get edit_cms_post_url(@published_post)
         assert_equal "You can not perform this action on a published post.",
           flash[:error]
@@ -107,7 +107,7 @@ module CMS
     end
 
     test "can not update a publishded post" do
-      authorised_admin do
+      authenticated_admin do
         patch cms_post_url(@published_post)
         assert_equal "You can not perform this action on a published post.",
           flash[:error]
@@ -115,7 +115,7 @@ module CMS
     end
 
     test "can not destroy a publishded post" do
-      authorised_admin do
+      authenticated_admin do
         delete cms_post_url(@published_post)
         assert_equal "You can not perform this action on a published post.",
           flash[:error]
@@ -124,7 +124,7 @@ module CMS
 
     private
 
-    def authorised_admin
+    def authenticated_admin
       sign_in @confirmed_board_admin, scope: :admin
       yield if block_given?
       sign_out :admin

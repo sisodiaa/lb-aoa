@@ -20,7 +20,7 @@ module CMS
     end
 
     test "#create" do
-      authorised_admin do
+      authenticated_admin do
         assert_difference("Document.count") do
           post cms_post_documents_path(@draft_post), params: {
             document: {
@@ -37,7 +37,7 @@ module CMS
     end
 
     test "#destroy" do
-      authorised_admin do
+      authenticated_admin do
         assert_difference("Document.count", -1) do
           delete cms_post_document_path(@draft_post, @document)
         end
@@ -50,7 +50,7 @@ module CMS
     # authorisation cases
 
     test "#create - published post" do
-      authorised_admin do
+      authenticated_admin do
         post cms_post_documents_path(@published_post)
         assert_equal "You can not perform this action on a published post.",
           flash[:error]
@@ -58,7 +58,7 @@ module CMS
     end
 
     test "#destroy - published post" do
-      authorised_admin do
+      authenticated_admin do
         delete cms_post_document_path(@published_post, @published_post_document)
         assert_equal "You can not perform this action on a published post.",
           flash[:error]
@@ -67,7 +67,7 @@ module CMS
 
     private
 
-    def authorised_admin
+    def authenticated_admin
       sign_in @confirmed_board_admin, scope: :admin
       yield if block_given?
       sign_out :admin
