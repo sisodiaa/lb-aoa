@@ -41,3 +41,5 @@ test/fixtures/files/flower-hq.jpg
 report.html
 .simplecov
 /coverage/*
+
+/config/credentials/staging.key
