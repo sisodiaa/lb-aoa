@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :unauthorised_request
 
-  unless Rails.env.production?
+  if Rails.env.development? || Rails.env.test?
     around_action :n_plus_one_detection
 
     def n_plus_one_detection
