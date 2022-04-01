@@ -61,11 +61,11 @@ class Post < ApplicationRecord
   end
 
   def tags_list=(tag_names_string)
-    Prosopite.pause
+    Prosopite.pause if development_or_test_environment?
     self.tags = tag_names_string.split(",").map do |name|
       Tag.where(name: name.strip).first_or_create!
     end
-    Prosopite.resume
+    Prosopite.resume if development_or_test_environment?
   end
 
   def number_of_tags
@@ -85,5 +85,11 @@ class Post < ApplicationRecord
 
   def self.with_tags(tags)
     where(tags: {name: tags})
+  end
+
+  private
+
+  def development_or_test_environment?
+    Rails.env.development? || Rails.env.test?
   end
 end
