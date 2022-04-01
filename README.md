@@ -16,4 +16,4 @@ Web application to manage LBAOA board operation and to connect with members of t
 Source code of this application is licensed under the MIT license.
 
 # Contributors
-- [Abhishek Sisodia](dev.abhishek.sisodia@gmail.com)
+- [Abhishek Sisodia](mailto:dev.abhishek.sisodia@gmail.com)
