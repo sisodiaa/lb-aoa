@@ -81,7 +81,7 @@ module FlashMessagesHelper
   end
 
   def toast_icon(type)
-    tag.use href: "/assets/feather-sprite.svg##{toast_icon_symbol(type)}"
+    svg_icon("feather-sprite.svg", toast_icon_symbol(type))
   end
 
   def toast_icon_symbol(type)
@@ -104,6 +104,6 @@ module FlashMessagesHelper
   end
 
   def close_symbol
-    tag.use href: "/assets/feather-sprite.svg#x"
+    svg_icon("feather-sprite.svg", "x")
   end
 end
