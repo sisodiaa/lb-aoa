@@ -63,6 +63,9 @@ gem "pagy", "~> 5.9", ">= 5.9.3"
 # For mailers and background jobs
 gem "sidekiq", "~> 6.4", ">= 6.4.1"
 
+# Manage S3 bucket to store documents
+gem "aws-sdk-s3", "~> 1.113"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
