@@ -10,7 +10,7 @@
             class="w-4 h-4 fill-[none] stroke-current stroke-2"
             stroke-linecap="round"
             stroke-linejoin="round">
-          <use href="/assets/feather-sprite.svg#folder" />
+          <%= svg_icon("feather-sprite.svg", "folder") %>
         </svg>
 
         <span class="inline-block mx-2 text-base capitalize">
@@ -23,7 +23,7 @@
             class="w-4 h-4 fill-[none] stroke-current stroke-2"
             stroke-linecap="round"
             stroke-linejoin="round">
-          <use href="/assets/feather-sprite.svg#calendar" />
+          <%= svg_icon("feather-sprite.svg", "calendar") %>
         </svg>
 
         <span class="inline-block mx-2 text-base">
@@ -42,7 +42,7 @@
             class="self-center w-4 h-4 fill-[none] stroke-current stroke-2 text-slate-400"
             stroke-linecap="round"
             stroke-linejoin="round">
-          <use href="/assets/feather-sprite.svg#tag" />
+          <%= svg_icon("feather-sprite.svg", "tag") %>
         </svg>
 
         <% @tags.each do |tag| %>
