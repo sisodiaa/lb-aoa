@@ -6,6 +6,7 @@
   - mailers
   - active_storage_analysis
   - active_storage_purge
+  - lb_aoa_staging_default
 
 production:
   :concurrency: 25
