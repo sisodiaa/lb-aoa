@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  if Rails.env.production? || Rails.env.staging?
+    require "sidekiq/web"
+    authenticate :admin do
+      mount Sidekiq::Web => "/sidekiq"
+    end
+  end
+
   devise_for :admins, skip: %i[registrations], controllers: {
     sessions: "accounts/admins/sessions",
     passwords: "accounts/admins/passwords",
