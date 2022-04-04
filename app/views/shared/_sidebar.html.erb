@@ -10,6 +10,12 @@
             turbo_action: "advance"
           }
         ) do %>
+          <svg
+            class="w-5 h-5 fill-[none] stroke-current stroke-2 text-gray-500"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "grid") %>
+          </svg>
           <span class="ml-3">Dashboard</span>
         <% end %>
       </li>
@@ -23,6 +29,12 @@
                  rounded-lg transition duration-75 group hover:bg-gray-100"
           data-action="click->flowbite--collapse#toggle"
         >
+          <svg
+            class="w-5 h-5 fill-[none] stroke-current stroke-2 text-gray-500"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "file-text") %>
+          </svg>
           <span class="flex-1 ml-3 text-left whitespace-nowrap">Posts</span>
           <svg
             class="w-5 h-5 fill-[none] stroke-current stroke-2"
@@ -78,14 +90,14 @@
             turbo_action: "advance"
           }
         ) do %>
+          <svg
+            class="w-5 h-5 fill-[none] stroke-current stroke-2 text-gray-500"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "folder") %>
+          </svg>
           <span class="flex-1 ml-3 whitespace-nowrap">Categories</span>
         <% end %>
-      </li>
-
-      <li>
-        <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg">
-          <span class="flex-1 ml-3 whitespace-nowrap">Members</span>
-        </a>
       </li>
     </ul>
   </div>
