@@ -33,15 +33,11 @@ module CMS
       assert_selector "li.post-document", count: 2
     end
 
-    test "attach a new file" do
-      visit_post
-      attach_document
-      assert_file_is_attached_and_form_is_reset
-    end
-
-    test "show error if form is submitted without any attachment" do
+    test "remove validation error upon successful attachment" do
       create_new_post_without_attachment
       assert_selector "#error_explanation li", text: "File is not choosed"
+      attach_document
+      assert_file_is_attached_and_form_is_reset
     end
 
     test "remove an attachment" do

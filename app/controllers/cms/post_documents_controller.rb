@@ -19,6 +19,7 @@ module CMS
       respond_to do |format|
         if @document.save
           format.turbo_stream do
+            @new_document = @post.documents.new
             flash.now[:notice] = "File was successfully attached"
           end
           format.html do

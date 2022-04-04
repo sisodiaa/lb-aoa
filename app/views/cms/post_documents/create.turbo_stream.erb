@@ -4,6 +4,12 @@
   locals: { document: @document, post: @post }
 )%>
 
+<%= turbo_stream.replace(
+  "post_document",
+  partial: "form",
+  locals: { post: @post, document: @new_document }
+)%>
+
 <%= turbo_stream.update "flash-messages" do %>
   <%= flash_messages %>
 <% end %>
