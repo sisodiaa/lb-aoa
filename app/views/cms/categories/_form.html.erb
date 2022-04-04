@@ -16,10 +16,16 @@
     </div>
   <% end %>
 
+  <div class="bg-green-50 text-green-500 text-sm rounded-lg p-6 mb-6">
+    <ul role="list" class="list-inside list-disc space-y-0.5">
+      <li>Name of the category should not be longer than 50 letters</li>
+    </ul>
+  </div>
+
   <div class="mb-6">
     <%= form.label(
       :name,
-      class: "block mb-2 text-sm font-medium text-gray-900"
+      class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
     )%>
 
     <%= form.text_field(
