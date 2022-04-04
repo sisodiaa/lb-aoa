@@ -1,5 +1,10 @@
 <%= turbo_frame_tag :search_results do %>
-  <%= render partial: "front/posts/post", collection: @results, as: :post %>
+  <div class="grid gap-10 lg:grid-cols-2 2xl:grid-cols-3">
+    <%=
+      render(partial: "front/posts/post", collection: @results, as: :post) ||
+      "There are no results for this query"
+    %>
+  </div>
 
   <br class="hidden lg:block">
   

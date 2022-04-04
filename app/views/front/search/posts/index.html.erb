@@ -32,12 +32,13 @@
             start_date: params[:start_date],
             end_date: params[:end_date]
           ),
-          class: "space-y-12 sm:space-y-8 lg:space-y-0 lg:flex lg:flex-wrap lg:gap-y-10",
           data: { action: "turbo:frame-load->search--post--modal#hideModal" }
         ) do %>
-          <% 2.times do %>
-            <%= render partial: "shared/skeleton" %>
-          <% end %>
+          <div class="grid gap-10 lg:grid-cols-2 2xl:grid-cols-3">
+            <% 3.times do %>
+              <%= render partial: "shared/skeleton" %>
+            <% end %>
+          </div>
         <% end %>
     <% end %>
   <% end %>
