@@ -17,10 +17,21 @@
     </div>
   <% end %>
 
+  <div class="bg-green-50 text-green-500 text-sm rounded-lg p-6 mb-6">
+    <ul role="list" class="list-inside list-disc space-y-0.5">
+      <li>
+        <%= link_to "Create a new category", new_cms_category_path, class: "underline hover:text-green-600" %> 
+        if it is not listed
+      </li>
+      <li>Title of the post should not be longer than 256 letters</li>
+      <li>Tags should not be more than 5 and separate the tags with a <q>,</q></li>
+    </ul>
+  </div>
+    
   <div class="mb-6">
     <%= form.label(
       :category_id,
-      class: "block mb-2 text-sm font-medium text-gray-900"
+      class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
     )%>
 
     <%= form.collection_select(
@@ -36,7 +47,7 @@
   <div class="mb-6">
     <%= form.label(
       :title,
-      class: "block mb-2 text-sm font-medium text-gray-900"
+      class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
     )%>
 
     <%= form.text_field(
@@ -49,7 +60,7 @@
   <div class="mb-6">
     <%= form.label(
       :content,
-      class: "block mb-2 text-sm font-medium text-gray-900"
+      class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
     )%>
 
   <%= form.rich_text_area(
