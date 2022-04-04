@@ -1,154 +1,158 @@
-<div class="p-4 mx-auto max-w-md bg-white rounded-lg border border-gray-200
-            shadow-md sm:p-6 lg:p-8">
-  <%= form_for(
-    resource,
-    as: resource_name,
-    url: registration_path(resource_name),
-    html: {method: :put}
-  ) do |f| %>
-    <div class="space-y-6">
-      <%= render "accounts/admins/shared/error_messages", resource: resource %>
+<%= turbo_frame_tag :main do %>
+  <div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
+    <div class="bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8">
+      <%= form_for(
+        resource,
+        as: resource_name,
+        url: registration_path(resource_name),
+        data: {turbo: false},
+        html: {method: :put}
+      ) do |f| %>
+        <div class="space-y-6">
+          <%= render "accounts/admins/shared/error_messages", resource: resource %>
 
-      <ul role="list" class="list-inside list-none bg-green-50 text-green-600 text-sm rounded-lg p-6 mb-6">
-        <li class="font-light">Password should be at least 8 characters long</li>
-      </ul>
+          <ul role="list" class="list-inside list-none bg-green-50 text-green-600 text-sm rounded-lg p-6 mb-6">
+            <li class="font-light">Password should be at least 8 characters long</li>
+          </ul>
 
-      <h3 class="pt-0 text-xl font-medium text-gray-900">
-        Update <%= resource_name.to_s.humanize %> password
-      </h3>
+          <h3 class="pt-0 text-xl font-medium text-gray-900">
+            Update <%= resource_name.to_s.humanize %> password
+          </h3>
 
-      <div class="field">
-        <p class="block mb-2 text-sm font-medium text-gray-900">Admin</p>
+          <div class="field">
+            <p class="block mb-2 text-sm font-medium text-gray-900">Admin</p>
 
-        <div class="relative mt-1">
-          <div class="flex absolute inset-y-0 left-0 items-center pl-3
-                      pointer-events-none text-gray-400">
-            <svg
-              class="w-5 h-5 fill-[none] stroke-current stroke-2"
-              stroke-linecap="round"
-              stroke-linejoin="round">
-              <%= svg_icon("feather-sprite.svg", "user") %>
-            </svg>
+            <div class="relative mt-1">
+              <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                          pointer-events-none text-gray-400">
+                <svg
+                  class="w-5 h-5 fill-[none] stroke-current stroke-2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <%= svg_icon("feather-sprite.svg", "user") %>
+                </svg>
+              </div>
+
+              <p class="bg-stone-200 border border-gray-300 text-gray-900 text-sm
+                        rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                        w-full pl-10 p-2.5 cursor-not-allowed">
+                <%= resource.full_name %>
+              </p>
+            </div>
           </div>
 
-          <p class="bg-stone-200 border border-gray-300 text-gray-900 text-sm
-                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
-                    w-full pl-10 p-2.5 cursor-not-allowed">
-            <%= resource.full_name %>
-          </p>
-        </div>
-      </div>
+          <div class="field">
+            <%= f.label :email, class: "block mb-2 text-sm font-medium text-gray-900" %>
 
-      <div class="field">
-        <%= f.label :email, class: "block mb-2 text-sm font-medium text-gray-900" %>
+            <div class="relative mt-1">
+              <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                          pointer-events-none text-gray-400">
+                <svg
+                  class="w-5 h-5 fill-[none] stroke-current stroke-2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <%= svg_icon("feather-sprite.svg", "mail") %>
+                </svg>
+              </div>
 
-        <div class="relative mt-1">
-          <div class="flex absolute inset-y-0 left-0 items-center pl-3
-                      pointer-events-none text-gray-400">
-            <svg
-              class="w-5 h-5 fill-[none] stroke-current stroke-2"
-              stroke-linecap="round"
-              stroke-linejoin="round">
-              <%= svg_icon("feather-sprite.svg", "mail") %>
-            </svg>
+              <%= f.email_field(
+                :email,
+                disabled: true,
+                class: "bg-stone-200 border border-gray-300 text-gray-900 text-sm
+                        rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                        w-full pl-10 p-2.5 cursor-not-allowed"
+              )%>
+            </div>
           </div>
 
-          <%= f.email_field(
-            :email,
-            disabled: true,
-            class: "bg-stone-200 border border-gray-300 text-gray-900 text-sm
-                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
-                    w-full pl-10 p-2.5 cursor-not-allowed"
-          )%>
-        </div>
-      </div>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
 
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
+          <div class="field">
+            <%= f.label :password, "New Password", class: "block mb-2 text-sm font-medium text-gray-900" %>
 
-      <div class="field">
-        <%= f.label :password, "New Password", class: "block mb-2 text-sm font-medium text-gray-900" %>
+            <div class="relative mt-1">
+              <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                          pointer-events-none text-gray-400">
+                <svg
+                  class="w-5 h-5 fill-[none] stroke-current stroke-2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <%= svg_icon("feather-sprite.svg", "key") %>
+                </svg>
+              </div>
 
-        <div class="relative mt-1">
-          <div class="flex absolute inset-y-0 left-0 items-center pl-3
-                      pointer-events-none text-gray-400">
-            <svg
-              class="w-5 h-5 fill-[none] stroke-current stroke-2"
-              stroke-linecap="round"
-              stroke-linejoin="round">
-              <%= svg_icon("feather-sprite.svg", "key") %>
-            </svg>
+              <%= f.password_field(
+                :password,
+                autocomplete: "new-password",
+                class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                        rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                        w-full pl-10 p-2.5"
+              )%>
+            </div>
           </div>
 
-          <%= f.password_field(
-            :password,
-            autocomplete: "new-password",
-            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
-                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
-                    w-full pl-10 p-2.5"
-          )%>
-        </div>
-      </div>
+          <div class="field">
+            <%= f.label :password_confirmation, class: "block mb-2 text-sm font-medium text-gray-900" %>
 
-      <div class="field">
-        <%= f.label :password_confirmation, class: "block mb-2 text-sm font-medium text-gray-900" %>
+            <div class="relative mt-1">
+              <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                          pointer-events-none text-gray-400">
+                <svg
+                  class="w-5 h-5 fill-[none] stroke-current stroke-2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <%= svg_icon("feather-sprite.svg", "key") %>
+                </svg>
+              </div>
 
-        <div class="relative mt-1">
-          <div class="flex absolute inset-y-0 left-0 items-center pl-3
-                      pointer-events-none text-gray-400">
-            <svg
-              class="w-5 h-5 fill-[none] stroke-current stroke-2"
-              stroke-linecap="round"
-              stroke-linejoin="round">
-              <%= svg_icon("feather-sprite.svg", "key") %>
-            </svg>
+              <%= f.password_field(
+                :password_confirmation,
+                autocomplete: "new-password",
+                class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                        rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                        w-full pl-10 p-2.5"
+              )%>
+            </div>
           </div>
 
-          <%= f.password_field(
-            :password_confirmation,
-            autocomplete: "new-password",
-            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
-                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
-                    w-full pl-10 p-2.5"
-          )%>
-        </div>
-      </div>
+          <div class="field">
+            <%= f.label :current_password, class: "block mb-2 text-sm font-medium text-gray-900" %>
 
-      <div class="field">
-        <%= f.label :current_password, class: "block mb-2 text-sm font-medium text-gray-900" %>
+            <div class="relative mt-1">
+              <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                          pointer-events-none text-gray-400">
+                <svg
+                  class="w-5 h-5 fill-[none] stroke-current stroke-2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <%= svg_icon("feather-sprite.svg", "key") %>
+                </svg>
+              </div>
 
-        <div class="relative mt-1">
-          <div class="flex absolute inset-y-0 left-0 items-center pl-3
-                      pointer-events-none text-gray-400">
-            <svg
-              class="w-5 h-5 fill-[none] stroke-current stroke-2"
-              stroke-linecap="round"
-              stroke-linejoin="round">
-              <%= svg_icon("feather-sprite.svg", "key") %>
-            </svg>
+              <%= f.password_field(
+                :current_password,
+                autocomplete: "current-password",
+                class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                        rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                        w-full pl-10 p-2.5"
+              )%>
+            </div>
           </div>
 
-          <%= f.password_field(
-            :current_password,
-            autocomplete: "current-password",
-            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
-                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
-                    w-full pl-10 p-2.5"
-          )%>
+          <%= f.button class: "btn btn--normal btn--secondary w-full" do %>
+            <span class="inline-block mr-1">Update</span>
+
+            <svg
+              class="inline-block w-4 h-4 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "edit-3") %>
+            </svg>
+          <% end %>
         </div>
-      </div>
-
-      <%= f.button class: "btn btn--normal btn--secondary w-full" do %>
-        <span class="inline-block mr-1">Update</span>
-
-        <svg
-          class="inline-block w-4 h-4 fill-[none] stroke-current stroke-2"
-          stroke-linecap="round"
-          stroke-linejoin="round">
-          <%= svg_icon("feather-sprite.svg", "edit-3") %>
-        </svg>
       <% end %>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>

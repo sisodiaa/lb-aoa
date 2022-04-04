@@ -29,5 +29,25 @@ module Management
 
       assert_selector :css, "[role='toast']", text: "Signed out successfully."
     end
+
+    test "changing password" do
+      login_as @confirmed_board_admin, scope: :admin
+
+      visit edit_admin_registration_path
+
+      within("form.edit_admin") do
+        click_on "Update"
+        assert_selector "#error_explanation li", text: "Current password can't be blank"
+
+        fill_in "admin_password", with: "dassworp"
+        fill_in "admin_password_confirmation", with: "dassworp"
+        fill_in "admin_current_password", with: "password"
+        click_on "Update"
+      end
+
+      assert_selector "[role='toast']", text: "Your account has been updated successfully."
+
+      logout :admin
+    end
   end
 end
