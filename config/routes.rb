@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
   namespace :cms do
     resources :categories, except: :destroy
+    resources :tags, only: :index
 
     resources :posts do
       resources :documents, only: %i[index new create destroy], controller: "post_documents"

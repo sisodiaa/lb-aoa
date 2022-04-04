@@ -99,6 +99,26 @@
           <span class="flex-1 ml-3 whitespace-nowrap">Categories</span>
         <% end %>
       </li>
+
+      <li>
+        <%= link_to(
+          cms_tags_path,
+          class: "flex items-center p-2 text-base font-normal text-gray-900
+                  rounded-lg hover:bg-gray-100",
+          data: {
+            turbo_frame: "main",
+            turbo_action: "advance"
+          }
+        ) do %>
+          <svg
+            class="w-5 h-5 fill-[none] stroke-current stroke-2 text-gray-500"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "tag") %>
+          </svg>
+          <span class="flex-1 ml-3 whitespace-nowrap">Tags</span>
+        <% end %>
+      </li>
     </ul>
   </div>
 </aside>
