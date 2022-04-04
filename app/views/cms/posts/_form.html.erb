@@ -52,7 +52,14 @@
       class: "block mb-2 text-sm font-medium text-gray-900"
     )%>
 
-    <%= form.rich_text_area :content, id: "post__content" %>
+  <%= form.rich_text_area(
+    :content,
+    id: "post__content",
+    data: {
+      controller: "cms-editor",
+      action: "trix-file-accept->cms-editor#disableAccept"
+    }
+  )%>
   </div>
 
   <div class="mb-6">

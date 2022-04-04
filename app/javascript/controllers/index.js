@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import CmsEditorController from "./cms_editor_controller.js"
+application.register("cms-editor", CmsEditorController)
+
 import Dashboard__ComponentController from "./dashboard/component_controller.js"
 application.register("dashboard--component", Dashboard__ComponentController)
 
