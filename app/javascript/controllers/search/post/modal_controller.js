@@ -26,7 +26,15 @@ export default class extends Controller {
     this.formTarget.classList.remove("opacity-50", "pointer-events-none");
   }
 
-  removeModal() {
+  removeModal(e) {
+    if (
+      e &&
+      (this.formTarget.contains(e.target) ||
+        this.formTarget.parentElement.contains(e.target))
+    ) {
+      return;
+    }
+
     if (this.hasModalTarget) {
       this.modalTarget.parentElement.removeAttribute("src");
       this.modalTarget.remove();
