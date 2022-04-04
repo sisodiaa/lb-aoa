@@ -5,6 +5,7 @@
     <a href="/" class="flex">
       <%= image_tag "lb-banner.jpg", class: "w-3/4" %>
     </a>
+
     <button
         data-action="click->flowbite--collapse#toggle"
         type="button"
@@ -41,6 +42,7 @@
         </path>
       </svg>
     </button>
+
     <div
       class="hidden w-full md:block md:w-auto"
       data-flowbite--collapse-target="menu">
@@ -48,36 +50,33 @@
         class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0
                md:text-sm md:font-medium">
         <% if admin_signed_in? %>
-          <li>
+          <li class="text-gray-300 hover:text-white">
             <%= link_to(
               "Dashboard",
               management_dashboard_path,
               data: { turbo_action: "advance", turbo_frame: "main" },
-              class: "block py-2 pr-4 pl-3 text-gray-300 border-b border-gray-100
-                      hover:bg-lb-soft-300 hover:rounded md:hover:bg-transparent
-                      md:border-0 md:hover:text-gray-50 md:p-0"
+              class: "block py-2 pr-4 pl-3 border-b border-gray-100 md:border-0 md:p-0
+                      hover:bg-lb-soft-300 hover:rounded md:hover:bg-transparent"
             )%>
           </li>
 
-          <li>
+          <li class="text-gray-300 hover:text-white">
             <%= link_to(
               "Account",
               edit_admin_registration_path,
               data: { turbo_action: "advance", turbo_frame: "main" },
-              class: "block py-2 pr-4 pl-3 text-gray-300 border-b border-gray-100
-                      hover:bg-lb-soft-300 hover:rounded md:hover:bg-transparent
-                      md:border-0 md:hover:text-gray-50 md:p-0"
+              class: "block py-2 pr-4 pl-3 border-b border-gray-100 md:border-0 md:p-0
+                      hover:bg-lb-soft-300 hover:rounded md:hover:bg-transparent"
             )%>
           </li>
 
-          <li>
+          <li class="text-gray-300 hover:text-white">
             <%= link_to(
               "Sign out",
               destroy_admin_session_path,
               data: {turbo_method: :delete},
-              class: "block py-2 pr-4 pl-3 text-gray-300 hover:bg-lb-soft-300
-                      hover:rounded md:hover:bg-transparent md:border-0
-                      md:hover:text-gray-50 md:p-0"
+              class: "block py-2 pr-4 pl-3 md:border-0 md:p-0 hover:bg-lb-soft-300
+                      hover:rounded md:hover:bg-transparent"
             )%>
           </li>
         <% end %>
