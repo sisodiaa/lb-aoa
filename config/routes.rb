@@ -53,10 +53,40 @@ Rails.application.routes.draw do
 
   patch "cms/posts/:id/publish", to: "cms/publications#update", as: "publish_cms_post"
 
+  namespace :tms do
+    resources :tenders do
+      resources :documents, only: %i[index create destroy], controller: "tender_documents"
+      resources :bids, only: %i[index show] do
+        resource :selection, only: %i[new create]
+      end
+    end
+  end
+
+  patch "tms/tenders/:id/publish", to: "tms/publications#update", as: "publish_tms_tender"
+
+  scope module: :tms do
+    resources :tenders, only: [], path: "/tenders/notice" do
+      resources :bids, only: %i[new create]
+    end
+  end
+
   scope module: "front" do
     resources :posts, only: %i[index show] do
       get "published", on: :collection
       resources :documents, only: :index, controller: "post_documents"
+    end
+
+    get "tenders", to: "tenders#tenders", as: :tenders
+    resources :tenders, only: :show, path: "/tenders/notice" do
+      resources :documents, only: :index, controller: "tender_documents"
+      resources :bids, only: %i[index show]
+    end
+
+    resources :tenders, only: %i[] do
+      get "upcoming", to: "tenders#index", status: "upcoming", on: :collection
+      get "current", to: "tenders#index", status: "current", on: :collection
+      get "under_review", to: "tenders#index", status: "under_review", on: :collection
+      get "reviewed", to: "tenders#index", status: "reviewed", on: :collection
     end
 
     namespace :search do
