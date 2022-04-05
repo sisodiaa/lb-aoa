@@ -1,5 +1,5 @@
 <%= turbo_frame_tag :published_posts do %>
-  <div class="grid gap-10 lg:grid-cols-2 2xl:grid-cols-3">
+  <div class="grid gap-10 md:grid-cols-2 xl:grid-cols-3 mb-4">
     <%= render(partial: "post", collection: @posts) || "There are no posts yet" %>
   </div>
 
