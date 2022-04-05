@@ -1,6 +1,7 @@
 <%= form_with(
   model: [:cms, post],
   id: dom_id(post),
+  data: post.new_record? ? { turbo: false } : {},
   class: "mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12"
 ) do |form| %>
   <% if post.errors.any? %>
