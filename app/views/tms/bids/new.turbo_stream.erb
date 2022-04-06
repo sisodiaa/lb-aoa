@@ -1,0 +1,5 @@
+<%= turbo_stream.replace dom_id(@bid), partial: "form", locals: {tender: @tender, bid: @bid} %>
+
+<%= turbo_stream.update "flash-messages" do %>
+  <%= flash_messages %>
+<% end %>

@@ -1,0 +1,88 @@
+<%= form_with(
+  model: [tender, bid],
+  id: dom_id(bid),
+  class: "w-full"
+) do |form| %>
+  <% if bid.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
+      <h2 class="font-medium mb-2">
+        <%= pluralize(bid.errors.count, "error") %> prohibited this bid from being submitted
+      </h2>
+
+      <ul role="list" class="list-inside list-disc">
+        <% bid.errors.full_messages.each do |message| %>
+          <li class="font-light"><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+    <%= form.label(
+      :name,
+      "Name of the Bidder (Organisation name or Individual name)",
+      class: "block mb-2 text-sm font-medium text-gray-900"
+    )%>
+
+    <%= form.text_field(
+      :name,
+      class: "border border-gray-300 text-gray-900 text-sm p-2.5 block w-full
+              rounded-lg focus:ring-blue-500 focus:border-blue-500"
+    )%>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label(
+      :email,
+      "Email of the Bidder (Organisation's email or Individual's email)",
+      class: "block mb-2 text-sm font-medium text-gray-900"
+    )%>
+
+    <%= form.email_field(
+      :email,
+      class: "border border-gray-300 text-gray-900 text-sm p-2.5 block w-full
+              rounded-lg focus:ring-blue-500 focus:border-blue-500"
+    )%>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label(
+      :note,
+      "Additional note by the bidder (Optional)",
+      class: "block mb-2 text-sm font-medium text-gray-900"
+    )%>
+
+    <%= form.text_area(
+      :note,
+      rows: 3,
+      class: "border border-gray-300 text-gray-900 text-sm p-2.5 block w-full
+              rounded-lg focus:ring-blue-500 focus:border-blue-500"
+    )%>
+  </div>
+
+  <%= form.fields_for :document do |document_form| %>
+    <div class="mb-6">
+      <%= document_form.label(
+        :file,
+        "Attach Proposal Document",
+        class: "block mb-2 text-sm font-medium text-gray-900"
+      )%>
+
+      <%= document_form.file_field(
+        :file,
+        class: "block w-full text-sm text-gray-900 bg-gray-50 rounded-lg
+                border border-gray-300 cursor-pointer focus:outline-none
+                focus:border-transparent"
+      )%>
+    </div>
+
+    <%= document_form.hidden_field :annotation %>
+  <% end %>
+
+  <div class="mb-6">
+    <%= form.submit(
+      "Submit Bid",
+      class: "btn btn--normal btn--violet"
+    )%>
+  </div>
+<% end %>
