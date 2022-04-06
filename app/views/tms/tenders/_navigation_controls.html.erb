@@ -2,8 +2,8 @@
   <%= link_to(
     prev_path,
     class: "w-32 inline-flex items-center justify-center py-1 px-4 text-xs
-            font-medium rounded-lg border text-purple-500 bg-transparent
-            border-purple-300 hover:bg-purple-500 hover:text-purple-100
+            font-medium rounded-lg border text-lb-500 bg-transparent
+            border-lb-300 hover:bg-lb-500 hover:text-white
             #{ pagy.prev ? '' : 'pointer-events-none' }",
     data: { turbo_action: "advance" }
   ) do %>
@@ -11,21 +11,21 @@
       class="w-4 h-4 fill-[none] stroke-current stroke-2 mr-2"
       stroke-linecap="round"
       stroke-linejoin="round">
-      <use href="/assets/feather-sprite.svg#arrow-left" />
+      <%= svg_icon("feather-sprite.svg", "arrow-left") %>
     </svg>
 
     Previous
   <% end %>
 
-  <p class="py-1 text-xs font-medium text-purple-500">
+  <p class="py-1 text-xs font-medium text-lb-500">
     <%= pagy.from %> to <%= pagy.to %> of <%= pagy.count %> <%= status %>
   </p>
 
   <%= link_to(
     next_path,
     class: "w-32 inline-flex items-center justify-center py-1 px-4 text-xs
-            font-medium rounded-lg border text-purple-500 bg-transparent
-            border-purple-300 hover:bg-purple-500 hover:text-purple-100
+            font-medium rounded-lg border text-lb-500 bg-transparent
+            border-lb-300 hover:bg-lb-500 hover:text-white
             #{ pagy.next ? '' : 'pointer-events-none' }",
     data: { turbo_action: "advance" }
   ) do %>
@@ -35,7 +35,7 @@
       class="w-4 h-4 fill-[none] stroke-current stroke-2 ml-2"
       stroke-linecap="round"
       stroke-linejoin="round">
-      <use href="/assets/feather-sprite.svg#arrow-right" />
+      <%= svg_icon("feather-sprite.svg", "arrow-right") %>
     </svg>
   <% end %>
 </div>

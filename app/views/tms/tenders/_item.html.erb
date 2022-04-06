@@ -1,6 +1,6 @@
 <div
     id="<%= dom_id(tender) %>"
-    class="tender p-2 bg-white rounded-lg shadow border-b border-b-purple-100"
+    class="tender p-2 bg-white rounded-lg shadow border-b border-b-fuchsia-50"
     data-dashboard--list-target="item">
   <h1 class="text-lg text-gray-800"><%= tender.title %></h1>
 
@@ -9,23 +9,17 @@
       <%= link_to(
         "Show", 
         tms_tender_path(tender),
-        target: "_top",
+        data: {
+          turbo_frame: "main",
+          turbo_action: "advance"
+        },
         class: "py-1 px-3 text-xs font-medium text-gray-600
                 bg-white border border-gray-200
-                hover:bg-gray-100 hover:text-purple-700 focus:z-10
-                focus:ring-2 focus:ring-purple-700 focus:text-purple-700
+                hover:bg-gray-100 hover:text-lb-500 focus:z-10
+                focus:ring-2 focus:ring-lb-500 focus:text-lb-500
                 #{tender.draft? ? 'rounded-l-md' : 'rounded-md'}"
       )%>
       <% if tender.draft? %>
-        <%= link_to(
-          "Edit", 
-          edit_tms_tender_path(tender),
-          target: "_top",
-          class: "py-1 px-3 text-xs font-medium text-gray-600
-                  bg-white border-t border-b border-gray-200
-                  hover:bg-gray-100 hover:text-purple-700 focus:z-10
-                  focus:ring-2 focus:ring-purple-700 focus:text-purple-700"
-        )%>
         <%= link_to(
           "Delete", 
           tms_tender_path(tender),
@@ -35,9 +29,9 @@
             action: "click->dashboard--list#markItem"
           },
           class: "py-1 px-3 text-xs font-medium text-gray-600
-                  bg-white rounded-r-md border border-gray-200
-                  hover:bg-gray-100 hover:text-purple-700 focus:z-10
-                  focus:ring-2 focus:ring-purple-700 focus:text-purple-700"
+                  bg-white rounded-r-md border border-l-0 border-gray-200
+                  hover:bg-gray-100 hover:text-lb-500 focus:z-10
+                  focus:ring-2 focus:ring-lb-500 focus:text-lb-500"
         )%>
       <% end %>
     </div>
@@ -46,10 +40,10 @@
       "Attachments", 
       tms_tender_documents_path(tender),
       target: "_top",
-      class: "block text-white bg-purple-500 hover:bg-purple-600
-              focus:ring-4 focus:ring-purple-300 font-medium
+      class: "block text-white bg-lb-400 hover:bg-lb-500
+              focus:ring-4 focus:ring-lb-300 font-medium
               rounded-md text-xs px-3 py-1 text-center border
-              border-purple-400"
+              border-lb-400"
     )%>
   </div>
 </div>

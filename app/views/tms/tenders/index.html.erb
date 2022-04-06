@@ -5,11 +5,6 @@
     data-dashboard--list-target="list"
     data-dashboard--list-source-value=""
     data-dashboard--list-item-value="">
-    <%= link_to(
-      "Create Tender Notice",
-      new_tms_tender_path,
-      class: "block btn btn--small btn--purple w-32 mb-6"
-    )%>
     <%= turbo_frame_tag(
       "#{@status}_tenders"
     )do %>
