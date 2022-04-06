@@ -1,0 +1,5 @@
+<%= turbo_stream.replace(
+  dom_id(@document, :tender),
+  partial: "form",
+  locals: { tender: @tender, document: @document }
+)%>

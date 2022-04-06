@@ -1,0 +1,67 @@
+<%= turbo_frame_tag dom_id(document, :tender) do %>
+  <li class="tender-document w-full mb-2 py-3 px-4 text-sm font-medium
+             text-indigo-500 bg-indigo-50 rounded-xl flex">
+    <p class="leading-relaxed">
+      <%= document.file.filename.to_s %>
+    </p>
+
+    <%= link_to(
+      url_for(document.file),
+      target: "_blank",
+      rel: "noopener noreferrer",
+      class: "inline-block ml-auto"
+    ) do %>
+      <div
+        class="inline-flex items-center justify-center flex-shrink-0 h-6
+               rounded-lg bg-indigo-400 hover:bg-indigo-500 text-indigo-50">
+        <span class="inline-block text-xs mr-2 pl-2">Open</span>
+        <svg
+          class="w-4 h-4 fill-[none] stroke-current stroke-2 mr-2"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <use href="/assets/feather-sprite.svg#external-link" />
+        </svg>
+      </div>
+    <% end %>
+
+    <%= link_to(
+      rails_blob_path(document.file, disposition: 'attachment'),
+      class: "inline-block ml-2"
+    ) do %>
+      <div
+        class="inline-flex items-center justify-center flex-shrink-0 h-6
+               rounded-lg bg-indigo-400 hover:bg-indigo-500 text-indigo-50">
+        <span class="inline-block text-xs mr-2 pl-2">Download</span>
+        <svg
+          class="w-4 h-4 fill-[none] stroke-current stroke-2 mr-2"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <use href="/assets/feather-sprite.svg#download" />
+        </svg>
+      </div>
+    <% end %>
+
+    <% if TMS::TenderDocumentPolicy.new(current_admin, @tender).destroy? %>
+      <%= link_to(
+        tms_tender_document_path(tender, document),
+        data: {
+          turbo_method: :delete,
+          turbo_confirm: 'Are you sure?'
+        },
+        class: "inline-block ml-2"
+      ) do %>
+        <div
+          class="inline-flex items-center justify-center flex-shrink-0 h-6
+                 rounded-lg bg-red-400 hover:bg-red-500 text-red-50">
+          <span class="inline-block text-xs mr-2 pl-2">Remove</span>
+          <svg
+            class="w-4 h-4 fill-[none] stroke-current stroke-2 mr-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <use href="/assets/feather-sprite.svg#trash-2" />
+          </svg>
+        </div>
+      <% end %>
+    <% end %>
+  </li>
+<% end %>

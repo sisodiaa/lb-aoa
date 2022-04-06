@@ -1,0 +1,9 @@
+<%= turbo_stream.append(
+  "tender-documents",
+  partial: "tender_document",
+  locals: { document: @document, tender: @tender }
+)%>
+
+<%= turbo_stream.update "flash-messages" do %>
+  <%= flash_messages %>
+<% end %>
