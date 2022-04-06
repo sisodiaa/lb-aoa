@@ -1,6 +1,6 @@
 <%= turbo_frame_tag "main" do %>
   <div class="ml-16 mr-24">
-    <div class="flex flex-wrap gap-8 mb-24">
+    <div class="flex flex-wrap gap-8 mb-8">
       <div class="card flex-auto flex flex-col flex-wrap justify-start p-8
                   max-w-sm min-w-max w-1/3 bg-white rounded-lg border shadow-md">
         <h5 class="text-5xl font-extrabold text-gray-500">Post</h5>
@@ -8,7 +8,7 @@
         <ul role="list" class="my-7 space-y-5">
           <li class="flex">
             <span class="text-base font-normal leading-tight text-gray-500">
-              <%= @drafts_count %> Drafts
+              <%= @draft_posts_count %> Drafts
             </span>
           </li>
 
@@ -42,6 +42,54 @@
         <%= link_to(
           "Create New Category",
           new_cms_category_path,
+          data: { turbo_action: "advance", turbo_frame: "main" },
+          class: "mt-auto btn btn--normal btn--primary w-full py-2.5"
+        )%>
+      </div>
+    </div>
+  </div>
+
+  <div class="ml-16 mr-24">
+    <div class="flex flex-wrap gap-8 mb-24">
+      <div class="card flex-auto flex flex-col flex-wrap justify-start p-8
+                  max-w-sm min-w-max w-1/3 bg-white rounded-lg border shadow-md">
+        <h5 class="text-5xl font-extrabold text-gray-500">Tender</h5>
+
+        <ul role="list" class="my-7 space-y-5">
+          <li class="flex">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= @draft_tenders_count %> Drafts
+            </span>
+          </li>
+
+          <li class="flex">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= @upcoming_tenders_count %> Upcoming
+            </span>
+          </li>
+
+          <li class="flex">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= @current_tenders_count %> Current
+            </span>
+          </li>
+
+          <li class="flex">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= @under_review_tenders_count %> Under Review
+            </span>
+          </li>
+
+          <li class="flex">
+            <span class="text-base font-normal leading-tight text-gray-500">
+              <%= @reviewed_tenders_count %> Reviewed
+            </span>
+          </li>
+        </ul>
+
+        <%= link_to(
+          "Create New Tender",
+          new_tms_tender_path,
           data: { turbo_action: "advance", turbo_frame: "main" },
           class: "mt-auto btn btn--normal btn--primary w-full py-2.5"
         )%>
