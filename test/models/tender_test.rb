@@ -30,9 +30,19 @@ class TenderTest < ActiveSupport::TestCase
     assert_not new_tender.valid?, "Reference Token needs to be unique"
   end
 
+  test "that reference_token is not longer than 256 characters" do
+    @draft_tender.reference_token = "a" * 257
+    assert_not @draft_tender.valid?, "Reference Token is longer than 256 words"
+  end
+
   test "that title is present" do
     @draft_tender.title = ""
     assert_not @draft_tender.valid?, "Title is required"
+  end
+
+  test "that title is not longer than 256 words" do
+    @draft_tender.title = "a" * 257
+    assert_not @draft_tender.valid?, "Title is longer than 256 words"
   end
 
   test "that description is present" do

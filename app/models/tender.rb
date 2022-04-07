@@ -24,8 +24,8 @@ class Tender < ApplicationRecord
   }
 
   validates :reference_id, presence: true, uniqueness: true
-  validates :reference_token, presence: true, uniqueness: true
-  validates :title, presence: true
+  validates :reference_token, presence: true, uniqueness: true, length: {maximum: 256}
+  validates :title, presence: true, length: {maximum: 256}
   validates :description, presence: true
   validates :opens_on, presence: true
   validates :closes_on, presence: true
