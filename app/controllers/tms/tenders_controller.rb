@@ -22,13 +22,16 @@ module TMS
     def create
       @tender = Tender.new(tender_params)
 
-      if @tender.save
-        redirect_to tms_tender_path(@tender), notice: "Tender was successfully created."
-      else
-        respond_to do |format|
-          format.turbo_stream do
-            render :new
+      respond_to do |format|
+        if @tender.save
+          format.turbo_stream { flash.now[:success] = "Tender was successfully created." }
+
+          format.html do
+            flash[:success] = "Tender was successfully created."
+            redirect_to tms_tender_path(@tender)
           end
+        else
+          format.turbo_stream { render :new }
           format.html { render :new, status: :unprocessable_entity }
         end
       end
@@ -41,13 +44,16 @@ module TMS
     def update
       authorize @tender, policy_class: TMS::TenderPolicy
 
-      if @tender.update(tender_params)
-        redirect_to tms_tender_path(@tender), notice: "Tender was successfully updated."
-      else
-        respond_to do |format|
-          format.turbo_stream do
-            render :edit
+      respond_to do |format|
+        if @tender.update(tender_params)
+          format.turbo_stream { flash.now[:success] = "Tender was successfully updated." }
+
+          format.html do
+            flash[:success] = "Tender was successfully updated."
+            redirect_to tms_tender_path(@tender)
           end
+        else
+          format.turbo_stream { render :edit }
           format.html { render :edit, status: :unprocessable_entity }
         end
       end

@@ -70,14 +70,14 @@ module TMS
 
     test "do not show Edit button for published tenders" do
       visit tms_tender_url(@published_tender)
-      within("#tender-buttons-section") do
+      within("#tender-actions") do
         assert_no_selector "a", text: "Edit"
       end
     end
 
     test "do not show Publish Tender button for a published tender" do
       visit tms_tender_url(@published_tender)
-      within("#tender-buttons-section") do
+      within("#tender-actions") do
         assert_no_selector "button", text: "Publish Tender"
       end
     end
@@ -90,7 +90,9 @@ module TMS
     end
 
     def create_new_tender
-      visit new_tms_tender_url
+      visit management_dashboard_url
+      click_on "Create New Tender"
+
       fill_in "tender_reference_token", with: "lb/2022/jan-15/clamp"
       fill_in "Title", with: "Clamps for Vechicles"
       description = "We need clamps for our society"
@@ -102,7 +104,8 @@ module TMS
     end
 
     def edit_tender
-      visit edit_tms_tender_url(@draft_tender)
+      visit tms_tender_url(@draft_tender)
+      click_on "Edit"
 
       fill_in "tender_title", with: "Edited title for system test"
       click_on "Update Tender"

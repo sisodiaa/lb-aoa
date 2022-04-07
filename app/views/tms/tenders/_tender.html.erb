@@ -1,0 +1,111 @@
+<div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
+  <div class="border-double border-t-4 border-b-4 border-slate-200 mb-12 pt-6">
+    <h2 class="font-mono text-xs lg:text-sm mb-1 xl:mb-2 text-zinc-500 text-center">
+      <%= tender.reference_token %>
+    </h2>
+
+    <h1 class="font-serif text-4xl mb-4 text-zinc-900 text-center">
+      <%= tender.title %>
+    </h1>
+
+    <table class="w-1/2 text-sm text-gray-500 mb-4 mx-auto text-center">
+      <thead class="text-xs text-gray-700 uppercase">
+        <tr>
+          <th scope="col" class="px-1 py-1">
+            Opens On
+          </th>
+
+          <th scope="col" class="px-1 py-1">
+            Closes On
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white">
+          <td class="px-1 py-1">
+            <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base
+                         font-normal leading-none text-zinc-500">
+              <%= tender.opens_on.strftime("%d %b %Y, %H:%M") %>
+            </time>
+          </td>
+          <td class="px-1 py-1">
+            <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base
+                         font-normal leading-none text-zinc-500">
+              <%= tender.closes_on.strftime("%d %b %Y, %H:%M") %>
+            </time>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="flex mb-6 justify-center">
+      <span class="bg-fuchsia-50 text-lb-500 text-xs font-semibold mr-2
+                   px-2.5 py-0.5 rounded capitalize">
+        <%= tender.publication_state %>
+      </span>
+      <span class="bg-fuchsia-50 text-lb-500 text-xs font-semibold mr-2
+                   px-2.5 py-0.5 rounded capitalize">
+        <%= tender.notice_state.titleize %>
+      </span>
+    </div>
+  </div>
+
+  <div class="mb-8">
+    <h1 class="text-lb-500 font-semibold mb-1">
+      Description
+    </h1>
+      
+    <div class="text-gray-800">
+      <%= tender.description %>
+    </div>
+  </div>
+
+  <% if tender.reviewed? %>
+    <div class="tender-selection bg-green-50 text-green-600 text-sm rounded-lg p-4 mb-8 xl:mb-12">
+      <h2 class="mb-2">
+      Awarded to 
+      <span class="font-bold"><%= tender.selection.bid.quotation_token %></span> 
+      by <span class="font-bold"><%= tender.selection.bid.name %></span>
+      </h2>
+
+      <h3 class="font-bold">
+        Reason
+      </h3>
+      <p>
+        <%= tender.selection.reason %>
+      </p>
+    </div>
+  <% end %>
+
+  <%= turbo_frame_tag "tender-actions" do %>
+    <div class="flex mb-6">
+      <% if policy([:tms, tender]).edit? %>
+        <%= link_to(
+          "Edit",
+          edit_tms_tender_path(tender),
+          data: { turbo_frame: "main" },
+          class: "block btn btn--normal btn--secondary w-32"
+        )%>
+      <% end %>
+      <%= link_to(
+        "Attachments",
+        tms_tender_documents_path(tender),
+        class: "block btn btn--normal btn--secondary w-32"
+      )%>
+      <% if TMS::PublicationPolicy.new(current_admin, tender).update? %>
+        <%= button_to(
+          "Publish Tender",
+          publish_tms_tender_path(tender),
+          method: :patch,
+          params: {tender: {publication_state: "published"}},
+          class: "mr-3 btn btn--normal btn--success"
+        )%>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if tender.under_review? || tender.reviewed? %>
+    <%= render partial: "bids", locals: { tender: tender } %>
+  <% end %>
+</div>
+

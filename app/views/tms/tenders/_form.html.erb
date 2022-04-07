@@ -1,6 +1,7 @@
 <%= form_with(
   model: [:tms, tender],
   id: dom_id(tender),
+  data: tender.new_record? ? { turbo: false } : {},
   class: "mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12"
 ) do |form| %>
   <% if tender.errors.any? %>
@@ -17,10 +18,17 @@
     </div>
   <% end %>
 
+  <div class="bg-green-50 text-green-500 text-sm rounded-lg p-6 mb-6">
+    <ul role="list" class="list-inside list-disc space-y-0.5">
+      <li>Reference Token of the tender should not have more than 256 characters</li>
+      <li>Title of the tender should not have more than 256 characters</li>
+    </ul>
+  </div>
+
   <div class="mb-6">
     <%= form.label(
       :reference_token,
-      class: "block mb-2 text-sm font-medium text-gray-900"
+      class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
     )%>
 
     <%= form.text_field(
@@ -33,7 +41,7 @@
   <div class="mb-6">
     <%= form.label(
       :title,
-      class: "block mb-2 text-sm font-medium text-gray-900"
+      class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
     )%>
 
     <%= form.text_field(
@@ -46,7 +54,7 @@
   <div class="mb-6">
     <%= form.label(
       :description,
-      class: "block mb-2 text-sm font-medium text-gray-900"
+      class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
     )%>
 
     <%= form.rich_text_area :description, id: "tender__description" %>
@@ -56,7 +64,7 @@
     <div class="basis-1/2">
       <%= form.label(
         :opens_on,
-        class: "block mb-2 text-sm font-medium text-gray-900"
+        class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
       )%>
 
     <%= form.datetime_field(
@@ -69,7 +77,7 @@
     <div class="basis-1/2">
       <%= form.label(
         :closes_on,
-        class: "block mb-2 text-sm font-medium text-gray-900"
+        class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
       )%>
 
     <%= form.datetime_field(
@@ -80,9 +88,16 @@
     </div>
   </div>
 
-  <div class="mb-6">
+  <div class="mb-6 inline-flex">
     <%= form.submit(
-      class: "btn btn--normal btn--primary"
+      class: "btn btn--normal btn--success"
+    )%>
+
+    <%= link_to(
+      "Cancel",
+      tender.new_record? ? management_dashboard_path : tms_tender_path(tender),
+      data: { turbo_action: tender.new_record? ? "advance" : "" },
+      class: "btn btn--normal btn--error"
     )%>
   </div>
 <% end %>
