@@ -4,6 +4,10 @@ module TMS
     before_action :set_tender
 
     def index
+      @documents = @tender.documents.with_attached_file.reject(&:new_record?)
+    end
+
+    def new
       @document = @tender.documents.new
     end
 
@@ -15,8 +19,10 @@ module TMS
       respond_to do |format|
         if @document.save
           format.turbo_stream do
+            @new_document = @tender.documents.new
             flash.now[:notice] = "File was successfully attached"
           end
+
           format.html do
             flash[:notice] = "File was successfully attached"
             redirect_to tms_tender_documents_path(@tender)
@@ -25,6 +31,7 @@ module TMS
           format.turbo_stream do
             render :new
           end
+
           format.html { render :index, status: :unprocessable_entity }
         end
       end
@@ -40,6 +47,7 @@ module TMS
           format.turbo_stream do
             flash.now[:notice] = "Attachment was successfully removed"
           end
+
           format.html do
             flash[:notice] = "Attachment was successfully removed"
             redirect_to tms_tender_documents_path(@tender), status: :see_other

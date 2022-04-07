@@ -60,8 +60,21 @@
     </div>
   </div>
 
+  <div class="pt-2 pb-2">
+    <%= turbo_frame_tag(
+      :attachments,
+      src: tms_tender_documents_path(tender),
+      loading: :lazy
+    ) do %>
+      <div class="flex w-full rounded-xl animate-pulse bg-fuchsia-50 py-3 px-2
+                   text-lb-soft-500 font-light text-base">
+        Loading attachments...
+      </div>
+    <% end %>
+  </div>
+
   <% if tender.reviewed? %>
-    <div class="tender-selection bg-green-50 text-green-600 text-sm rounded-lg p-4 mb-8 xl:mb-12">
+    <div class="tender-selection bg-green-50 text-green-600 text-sm rounded-lg p-4 mb-4">
       <h2 class="mb-2">
       Awarded to 
       <span class="font-bold"><%= tender.selection.bid.quotation_token %></span> 
@@ -87,11 +100,15 @@
           class: "block btn btn--normal btn--secondary w-32"
         )%>
       <% end %>
-      <%= link_to(
-        "Attachments",
-        tms_tender_documents_path(tender),
-        class: "block btn btn--normal btn--secondary w-32"
-      )%>
+
+      <% if TMS::TenderDocumentPolicy.new(current_admin, tender).create? %>
+        <%= link_to(
+          "Add attachment",
+          new_tms_tender_document_path(tender),
+          class: "block btn btn--normal btn--secondary w-32"
+        )%>
+      <% end %>
+
       <% if TMS::PublicationPolicy.new(current_admin, tender).update? %>
         <%= button_to(
           "Publish Tender",

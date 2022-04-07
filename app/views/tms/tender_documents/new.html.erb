@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "tender-actions" do %>
+  <div>
+    <%= render partial: "form", locals: { tender: @tender, document: @document } %>
+  </div>
+<% end %>

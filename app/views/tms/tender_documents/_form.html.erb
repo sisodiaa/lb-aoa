@@ -3,7 +3,8 @@
   id: dom_id(document, :tender),
   data: {
     controller: "reset-form",
-    action: "turbo:submit-end->reset-form#reset"
+    action: "turbo:submit-start->reset-form#deactivateForm
+             turbo:submit-end->reset-form#activateForm"
   }
 ) do |form| %>
   <% if document.errors.any? %>
@@ -48,7 +49,12 @@
     )%>
   </div>
 
-  <div>
-    <%= form.submit "Upload Document", class: "btn btn--normal btn--primary" %>
+  <div class="inline-flex">
+    <%= form.submit "Upload Document", class: "btn btn--normal btn--success" %>
+    <%= link_to(
+      "Cancel",
+      tms_tender_path(tender),
+      class: "btn btn--normal btn--error"
+    )%>
   </div>
 <% end %>

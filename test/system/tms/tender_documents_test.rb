@@ -27,20 +27,17 @@ module TMS
     end
 
     test "index page show form and list of attached documents" do
-      visit_tender_documents
+      visit_tender
       assert_selector "form"
       assert_selector "li.tender-document", count: 1
     end
 
-    test "attach a new file" do
-      visit_tender_documents
-      attach_document
-      assert_file_is_attached_and_form_is_reset
-    end
-
-    test "show error if form is submitted without any attachment" do
+    test "remove validation error upon successful attachment" do
       create_new_tender_without_attachment
       assert_selector "#error_explanation li", text: "File is not choosed"
+      attach_document
+      assert_file_is_attached_and_form_is_reset
+      assert_no_selector "#error_explanation li"
     end
 
     test "remove an attachment" do
@@ -50,16 +47,15 @@ module TMS
     end
 
     test "Remove button and form are not shown for published tender" do
-      visit tms_tender_documents_path(@published_tender)
-
-      assert_no_selector "form"
+      visit tms_tender_path(@published_tender)
       assert_no_selector "a", text: "Remove"
     end
 
     private
 
-    def visit_tender_documents
-      visit tms_tender_documents_path(@draft_tender)
+    def visit_tender
+      visit tms_tender_path(@draft_tender)
+      click_on "Add attachment"
     end
 
     def attach_document
@@ -74,17 +70,17 @@ module TMS
       assert_selector "li.tender-document", count: 2
       assert_selector "li.tender-document:last-child", text: "vim-cheatsheet.pdf"
       assert_text "File was successfully attached"
-      # assert_selector "#document_annotation", text: ""
-      # assert_equal "", find("#document_file").value
+      assert_selector "#document_annotation", text: ""
+      assert_equal "", find("#document_file").value
     end
 
     def create_new_tender_without_attachment
-      visit tms_tender_documents_path(@draft_tender)
+      visit_tender
       click_on "Upload Document"
     end
 
     def delete_first_attachment
-      visit tms_tender_documents_path(@draft_tender)
+      visit tms_tender_path(@draft_tender)
 
       page.accept_confirm do
         click_on "Remove", match: :first

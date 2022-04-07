@@ -1,25 +1,12 @@
-<h1 class="mb-4">
-  Documents attached to
-  <%= link_to(
-    @tender.title,
-    [:tms, @tender],
-    class: "font-bold text-indigo-700 underline underline-offset-2"
-  )%>
-</h1>
-
-<% if TMS::TenderDocumentPolicy.new(current_admin, @tender).create? %>
-  <div class="lg:w-1/2 p-5 border-t-4 border-dashed">
-    <%= render partial: "form", locals: { tender: @tender, document: @document } %>
-  </div>
+<%= turbo_frame_tag :attachments do %>
+  <ul class="mb-4">
+    <%= turbo_frame_tag "tender-documents" do %>
+      <%= render(
+        partial: "tender_document",
+        collection: @documents,
+        as: :document,
+        locals: {tender: @tender}
+      )%>
+    <% end %>
+  </ul>
 <% end %>
-
-<ul class="lg:w-1/2 p-5 mb-4 border-t-4 border-dashed">
-  <%= turbo_frame_tag "tender-documents" do %>
-    <%= render(
-      partial: "tender_document",
-      collection: @tender.documents.reject(&:new_record?),
-      as: :document,
-      locals: {tender: @tender}
-    )%>
-  <% end %>
-</ul>

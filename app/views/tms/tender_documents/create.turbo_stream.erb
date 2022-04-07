@@ -4,6 +4,12 @@
   locals: { document: @document, tender: @tender }
 )%>
 
+<%= turbo_stream.replace(
+  "tender_document",
+  partial: "form",
+  locals: { tender: @tender, document: @new_document }
+)%>
+
 <%= turbo_stream.update "flash-messages" do %>
   <%= flash_messages %>
 <% end %>
