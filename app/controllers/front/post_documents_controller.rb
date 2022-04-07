@@ -1,6 +1,6 @@
 module Front
   class PostDocumentsController < ApplicationController
-    layout "front"
+    layout -> { turbo_frame_request? ? false : "front" }
 
     def index
       @post = Post.find(params[:post_id])

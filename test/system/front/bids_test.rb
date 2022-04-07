@@ -47,7 +47,7 @@ module Front
       assert_selector "#bid_#{@bid.quotation_token}"
     end
 
-    test "only reviewed and tenders show bids' list" do
+    test "only reviewed and under review tenders show bids' list" do
       attach_file_to_record(
         @reviewed_bid.document.file,
         "sheet.xlsx",

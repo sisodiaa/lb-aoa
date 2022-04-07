@@ -21,7 +21,7 @@
     <%= form.label(
       :name,
       "Name of the Bidder (Organisation name or Individual name)",
-      class: "block mb-2 text-sm font-medium text-gray-900"
+      class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
     )%>
 
     <%= form.text_field(
@@ -35,7 +35,7 @@
     <%= form.label(
       :email,
       "Email of the Bidder (Organisation's email or Individual's email)",
-      class: "block mb-2 text-sm font-medium text-gray-900"
+      class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
     )%>
 
     <%= form.email_field(
@@ -65,7 +65,7 @@
       <%= document_form.label(
         :file,
         "Attach Proposal Document",
-        class: "block mb-2 text-sm font-medium text-gray-900"
+        class: "block mb-2 text-sm font-medium text-gray-900 after:text-red-500 after:content-['*']"
       )%>
 
       <%= document_form.file_field(
@@ -79,10 +79,12 @@
     <%= document_form.hidden_field :annotation %>
   <% end %>
 
-  <div class="mb-6">
-    <%= form.submit(
-      "Submit Bid",
-      class: "btn btn--normal btn--violet"
+  <div class="inline-flex">
+    <%= form.submit "Submit Bid", class: "btn btn--normal btn--success" %>
+    <%= link_to(
+      "Cancel",
+      tender_path(tender),
+      class: "btn btn--normal btn--error"
     )%>
   </div>
 <% end %>

@@ -50,7 +50,7 @@ module TMS
       logout :admin
     end
 
-    test "tms - only reviewed and tenders show bids' list" do
+    test "tms - only reviewed and under review tenders show bids' list" do
       attach_file_to_record(
         @reviewed_bid.document.file,
         "sheet.xlsx",

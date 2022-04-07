@@ -1,6 +1,6 @@
 module Front
   class TenderDocumentsController < ApplicationController
-    layout "front"
+    layout -> { turbo_frame_request? ? false : "front" }
 
     def index
       @tender = Tender.find(params[:tender_id])

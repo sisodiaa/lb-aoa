@@ -74,6 +74,16 @@
       <% end %>
     </div>
 
+    <% if TMS::BidPolicy.new(nil, @tender).new? %>
+      <%= turbo_frame_tag "tender-bid" do %>
+        <%= link_to(
+          "Submit a bid",
+          new_tender_bid_path(@tender),
+          class: "block btn btn--normal btn--success"
+        )%>
+      <% end %>
+    <% end %>
+
     <% if @tender.reviewed? %>
       <div class="tender-selection bg-green-50 text-green-600 text-sm rounded-lg p-4 mb-8 xl:mb-12">
         <h2 class="mb-2">
@@ -89,16 +99,6 @@
           <%= @tender.selection.reason %>
         </p>
       </div>
-    <% end %>
-
-    <% if TMS::BidPolicy.new(nil, @tender).new? %>
-      <%= turbo_frame_tag "tender-bid" do %>
-        <%= link_to(
-          "Submit a bid",
-          new_tender_bid_path(@tender),
-          class: "block btn btn--normal btn--success"
-        )%>
-      <% end %>
     <% end %>
 
     <% if @tender.under_review? || @tender.reviewed? %>

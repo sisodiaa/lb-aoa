@@ -1,6 +1,6 @@
 module Front
   class BidsController < ApplicationController
-    layout "front"
+    layout -> { turbo_frame_request? ? false : "front" }
 
     before_action :set_tender
 
