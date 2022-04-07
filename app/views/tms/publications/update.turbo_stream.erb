@@ -1,6 +1,6 @@
 <% if @tender.published? %>
   <%= turbo_stream.replace(
-    "tender-buttons-section",
+    "tender-actions",
     partial: "published_tender",
     locals: { tender: @tender }
   )%>

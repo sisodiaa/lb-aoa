@@ -6,6 +6,10 @@ module TMS
       Warden.test_mode!
       @confirmed_board_admin = admins(:confirmed_board_admin)
       @draft_tender = tenders(:cctv_cables)
+
+      @draft_tender.documents.each do |document|
+        attach_file_to_record document.file, "square.png", "image/png"
+      end
     end
 
     teardown do
@@ -18,6 +22,7 @@ module TMS
         visit tms_tender_url(@draft_tender)
         click_button "Publish Tender"
         assert_selector "[role='toast']", text: "Tender was successfully published."
+        assert_text "Tender successfully published for viewing here."
       end
     end
 
@@ -28,7 +33,7 @@ module TMS
       authenticated_admin do
         visit tms_tender_url(@draft_tender)
         click_button "Publish Tender"
-        assert_selector :css, "[role='toast']", text: "Tender was not published."
+        assert_selector "[role='toast']", text: "Tender was not published."
       end
     end
 
@@ -39,7 +44,7 @@ module TMS
       authenticated_admin do
         visit tms_tender_url(@draft_tender)
         click_button "Publish Tender"
-        assert_selector :css, "[role='toast']", text: "Tender was not published."
+        assert_selector "[role='toast']", text: "Tender was not published."
       end
     end
 
@@ -51,7 +56,7 @@ module TMS
       authenticated_admin do
         visit tms_tender_url(@draft_tender)
         click_button "Publish Tender"
-        assert_selector :css, "[role='toast']", text: "Tender was not published."
+        assert_selector "[role='toast']", text: "Tender was not published."
       end
     end
 
