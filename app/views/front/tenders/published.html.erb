@@ -1,5 +1,7 @@
 <%= turbo_frame_tag "#{@status}_tenders" do %>
-  <%= render partial: "tender", collection: @tenders %>
+  <div class="grid gap-10 md:grid-cols-2 xl:grid-cols-3 mb-4">
+    <%= render partial: "tender", collection: @tenders %>
+  </div>
 
   <br class="hidden lg:block">
   

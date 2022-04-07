@@ -76,8 +76,9 @@ Rails.application.routes.draw do
       resources :documents, only: :index, controller: "post_documents"
     end
 
-    get "tenders", to: "tenders#tenders", as: :tenders
+    get "tenders", to: "tenders#index", as: :tenders
     resources :tenders, only: :show, path: "/tenders/notice" do
+      get "published", on: :collection
       resources :documents, only: :index, controller: "tender_documents"
       resources :bids, only: %i[index show]
     end

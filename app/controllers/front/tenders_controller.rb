@@ -7,9 +7,9 @@ module Front
       @status = params[:status] || "upcoming"
     end
 
-    def tenders
-      @status = params[:status]
+    def published
       @pagy, @tenders = pagy(published_tenders.order(published_at: :desc), items: 6)
+      @status = status.to_s
     end
 
     def show
@@ -19,9 +19,11 @@ module Front
     private
 
     def published_tenders
-      Tender.published.try!(params[:status].to_sym)
-    rescue NoMethodError
-      Tender.none
+      Tender.published.try!(status)
+    end
+
+    def status
+      (params[:status] || "upcoming").to_sym
     end
   end
 end

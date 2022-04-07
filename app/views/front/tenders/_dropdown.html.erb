@@ -6,9 +6,9 @@
   <button
     id="tenderDropdownButton"
     data-action="click->flowbite--dropdown#toggle"
-    class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700
-          hover:from-purple-600 hover:via-purple-700 hover:to-purple-800
-          focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 
+    class="text-white bg-gradient-to-r from-lb-300 via-lb-400 to-lb-500
+          hover:from-lb-400 hover:via-lb-500 hover:to-lb-600
+          focus:ring-4 focus:ring-lb-200 font-medium rounded-lg text-sm px-4 
           py-2.5 text-center w-full mb-4 inline-flex items-center justify-center 
           lg:justify-start lg:max-w-max"
     type="button">
@@ -27,38 +27,74 @@
     <ul class="py-1" aria-labelledby="tenderDropdownButton">
       <li>
         <%= link_to(
-          "Upcoming",
           upcoming_tenders_path,
           data: { turbo_action: "advance", turbo_frame: "tenders" },
-          class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-        )%>
+          class: "flex justify-between py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+        ) do %>
+          Upcoming
+          <% if status == "upcoming" %>
+            <svg
+                class="w-5 h-5 fill-[none] stroke-current stroke-2 mx-2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "check") %>
+            </svg>
+          <% end %>
+        <% end %>
       </li>
 
       <li>
         <%= link_to(
-          "Current",
           current_tenders_path,
           data: { turbo_action: "advance", turbo_frame: "tenders" },
-          class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-        )%>
+          class: "flex justify-between py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+        ) do %>
+          Current
+          <% if status == "current" %>
+            <svg
+                class="w-5 h-5 fill-[none] stroke-current stroke-2 mx-2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "check") %>
+            </svg>
+          <% end %>
+        <% end %>
       </li>
 
       <li>
         <%= link_to(
-          "Under Review",
           under_review_tenders_path,
           data: { turbo_action: "advance", turbo_frame: "tenders" },
-          class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-        )%>
+          class: "flex justify-between py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+        ) do %>
+          Under Review
+          <% if status == "under_review" %>
+            <svg
+                class="w-5 h-5 fill-[none] stroke-current stroke-2 mx-2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "check") %>
+            </svg>
+          <% end %>
+        <% end %>
       </li>
 
       <li>
         <%= link_to(
-          "Reviewed",
           reviewed_tenders_path,
           data: { turbo_action: "advance", turbo_frame: "tenders" },
-          class: "block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
-        )%>
+          class: "flex justify-between py-2 px-4 text-sm text-gray-700 hover:bg-gray-100"
+        ) do %>
+          Reviewed
+          <% if status == "reviewed" %>
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2 mx-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "check") %>
+            </svg>
+          <% end %>
+        <% end %>
       </li>
     </ul>
   </div>
