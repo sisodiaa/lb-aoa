@@ -1,80 +1,81 @@
-<div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
-  <div class="border-double border-t-4 border-b-4 border-slate-200 mb-12 pt-6">
-    <h1 class="font-serif text-4xl mb-4 text-zinc-900 text-center">
-      <%= @post.title %>
-    </h1>
+<%= turbo_frame_tag "main" do %>
+  <div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
+    <div class="border-double border-t-4 border-b-4 border-slate-200 mb-12 pt-6">
+      <h1 class="font-serif text-4xl mb-4 text-zinc-900 text-center">
+        <%= @post.title %>
+      </h1>
 
-    <div class="text-center mb-4">
-      <div class="inline-flex items-center justify-center text-slate-400">
-        <svg
-          class="w-4 h-4 fill-[none] stroke-current stroke-2"
-          stroke-linecap="round"
-          stroke-linejoin="round">
-          <%= svg_icon("feather-sprite.svg", "folder") %>
-        </svg>
-
-        <%= link_to(
-          @post.category.name,
-          search_posts_path(category_id: @post.category.id),
-          class: "inline-block mx-2 text-base capitalize hover:text-lb-soft-400"
-        )%>
-      </div>
-
-      <div class="inline-flex items-center justify-center text-slate-400">
-        <svg
-          class="w-4 h-4 fill-[none] stroke-current stroke-2"
-          stroke-linecap="round"
-          stroke-linejoin="round">
-          <%= svg_icon("feather-sprite.svg", "calendar") %>
-        </svg>
-
-        <%= link_to(
-          @post.published_at.strftime("%d %B %Y"),
-          search_posts_path(
-            start_date: @post.published_at.to_date,
-            end_date: @post.published_at.to_date
-          ),
-          class: "inline-block mx-2 text-base capitalize hover:text-lb-soft-400"
-        )%>
-      </div>
-    </div>
-
-    <% if @tags.present? %>
-      <div class="tags flex flex-wrap gap-2 justify-center mb-5">
-        <svg
-            class="self-center w-4 h-4 fill-[none] stroke-current stroke-2 text-slate-400"
+      <div class="text-center mb-4">
+        <div class="inline-flex items-center justify-center text-slate-400">
+          <svg
+            class="w-4 h-4 fill-[none] stroke-current stroke-2"
             stroke-linecap="round"
             stroke-linejoin="round">
-          <%= svg_icon("feather-sprite.svg", "tag") %>
-        </svg>
+            <%= svg_icon("feather-sprite.svg", "folder") %>
+          </svg>
 
-        <% @tags.each do |tag| %>
           <%= link_to(
-            tag.name,
-            search_posts_path(tags_list: tag.name),
-            class: "tag bg-slate-50 text-slate-400 hover:bg-fuchsia-50 hover:text-lb-soft-400
-                    text-xs font-semibold px-2.5 py-0.5 rounded"
+            @post.category.name,
+            search_posts_path(category_id: @post.category.id),
+            class: "inline-block mx-2 text-base capitalize hover:text-lb-soft-400"
           )%>
-        <% end %>
+        </div>
+
+        <div class="inline-flex items-center justify-center text-slate-400">
+          <svg
+            class="w-4 h-4 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "calendar") %>
+          </svg>
+
+          <%= link_to(
+            @post.published_at.strftime("%d %B %Y"),
+            search_posts_path(
+              start_date: @post.published_at.to_date,
+              end_date: @post.published_at.to_date
+            ),
+            class: "inline-block mx-2 text-base capitalize hover:text-lb-soft-400"
+          )%>
+        </div>
       </div>
-    <% end %>
-  </div>
 
-  <div class="text-gray-800 mb-6">
-    <%= @post.content %>
-  </div>
+      <% if @tags.present? %>
+        <div class="tags flex flex-wrap gap-2 justify-center mb-5">
+          <svg
+              class="self-center w-4 h-4 fill-[none] stroke-current stroke-2 text-slate-400"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "tag") %>
+          </svg>
 
-  <div class="pt-2 pb-2">
-    <%= turbo_frame_tag(
-      :attachments,
-      src: post_documents_path(@post),
-      loading: :lazy
-    ) do %>
-      <div class="flex w-full rounded-xl animate-pulse bg-fuchsia-50 py-3 px-2
-                  text-lb-soft-500 font-light text-base">
-        Loading attachments...
-      </div>
-    <% end %>
-  </div>
-</div>
+          <% @tags.each do |tag| %>
+            <%= link_to(
+              tag.name,
+              search_posts_path(tags_list: tag.name),
+              class: "tag bg-slate-50 text-slate-400 hover:bg-fuchsia-50 hover:text-lb-soft-400
+                      text-xs font-semibold px-2.5 py-0.5 rounded"
+            )%>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 
+    <div class="text-gray-800 mb-6">
+      <%= @post.content %>
+    </div>
+
+    <div class="pt-2 pb-2">
+      <%= turbo_frame_tag(
+        :attachments,
+        src: post_documents_path(@post),
+        loading: :lazy
+      ) do %>
+        <div class="flex w-full rounded-xl animate-pulse bg-fuchsia-50 py-3 px-2
+                    text-lb-soft-500 font-light text-base">
+          Loading attachments...
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
