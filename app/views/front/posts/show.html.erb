@@ -65,17 +65,19 @@
       <%= @post.content %>
     </div>
 
-    <div class="pt-2 pb-2">
-      <%= turbo_frame_tag(
-        :attachments,
-        src: post_documents_path(@post),
-        loading: :lazy
-      ) do %>
-        <div class="flex w-full rounded-xl animate-pulse bg-fuchsia-50 py-3 px-2
-                    text-lb-soft-500 font-light text-base">
-          Loading attachments...
-        </div>
-      <% end %>
-    </div>
+    <% if @post.documents.presence %>
+      <div class="pt-2 pb-2">
+        <%= turbo_frame_tag(
+          :attachments,
+          src: post_documents_path(@post),
+          loading: :lazy
+        ) do %>
+          <div class="flex w-full rounded-xl animate-pulse bg-fuchsia-50 py-3 px-2
+                      text-lb-soft-500 font-light text-base">
+            Loading attachments...
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 <% end %>
