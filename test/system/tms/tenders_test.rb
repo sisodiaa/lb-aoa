@@ -8,6 +8,14 @@ module TMS
       @draft_tender = tenders(:cctv_cables)
       @published_tender = tenders(:air_quality_monitors)
 
+      @draft_tender.documents.each do |document|
+        attach_file_to_record document.file, "square.png", "image/png"
+      end
+
+      @published_tender.documents.each do |document|
+        attach_file_to_record document.file, "square.png", "image/png"
+      end
+
       login_as @confirmed_board_admin, scope: :admin
     end
 
