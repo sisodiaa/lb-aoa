@@ -37,7 +37,7 @@
     <%= link_to(
       post_path(post),
       class: "inline-flex items-center justify-center text-lb-100",
-      data: { turbo_frame: "main", turbo_action: "advance" }
+      data: { turbo_frame: frame, turbo_action: "advance" }
     ) do %>
       <span class="inline-block mr-1 text-xs lg:text-sm">
         Read more
