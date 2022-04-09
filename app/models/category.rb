@@ -5,5 +5,5 @@ class Category < ApplicationRecord
 
   validates :name, presence: true, length: {maximum: 50}
 
-  scope :having_posts, -> { where.associated(:posts).distinct }
+  scope :having_posts, -> { includes(:posts).where(posts: {publication_state: :published}) }
 end
