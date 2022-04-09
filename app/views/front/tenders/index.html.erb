@@ -1,18 +1,20 @@
-<%= turbo_frame_tag :main do %>
-  <div class="mx-auto w-10/12 sm:w-9/12 md:w-11/12 xl:w-10/12 2xl:w-9/12">
-    <%= turbo_frame_tag "tenders" do %>
-      <%= render partial: "dropdown", locals: { status: @status } %>
+<%= turbo_frame_tag :container do %>
+  <%= turbo_frame_tag :main do %>
+    <div class="mx-auto w-10/12 sm:w-9/12 md:w-11/12 xl:w-10/12 2xl:w-9/12">
+      <%= turbo_frame_tag "tenders" do %>
+        <%= render partial: "dropdown", locals: { status: @status } %>
 
-      <%= turbo_frame_tag(
-        "#{@status}_tenders",
-        src: published_tenders_path(status: @status, page: @page)
-      ) do %>
-          <div class="grid gap-10 lg:grid-cols-2 2xl:grid-cols-3">
-            <% 3.times do %>
-              <%= render partial: "shared/skeleton" %>
-            <% end %>
-          </div>
+        <%= turbo_frame_tag(
+          "#{@status}_tenders",
+          src: published_tenders_path(status: @status, page: @page)
+        ) do %>
+            <div class="grid gap-10 lg:grid-cols-2 2xl:grid-cols-3">
+              <% 3.times do %>
+                <%= render partial: "shared/skeleton" %>
+              <% end %>
+            </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 <% end %>
