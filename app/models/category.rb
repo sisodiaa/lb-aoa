@@ -4,4 +4,6 @@ class Category < ApplicationRecord
   before_save { name.downcase! }
 
   validates :name, presence: true, length: {maximum: 50}
+
+  scope :having_posts, -> { where.associated(:posts).distinct }
 end
