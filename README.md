@@ -3,7 +3,7 @@ Web application to manage LBAOA board operation and to connect with members of t
 
 # Features
 - Content Management System to publish financial, operational, and other updates
-- Tender Management System to manage procurements (To be released soon)
+- Tender Management System to manage procurements
 
 # Technologies
  - [Ruby 3.1](https://www.ruby-lang.org/en/)
