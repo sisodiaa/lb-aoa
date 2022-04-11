@@ -1,0 +1,60 @@
+<main class="container mx-auto mb-6 pt-4 px-12 lg:px-36 xl:px-60 2xl:px-80">
+  <h1 class="mb-8 lg:mb-12 text-center text-2xl lg:text-3xl font-bold font-serif text-gray-800">
+    Lotus Boulvard Apartment Owners Association 
+    <span class="block text-sm text-gray-400 font-sans">Reg No – GBN/00063/20192020</span>
+  </h1>
+
+  <div class="mx-auto flex flex-col items-start sm:flex-row sm:gap-20 md:gap-28">
+    <div class="sm:basis-1/2 sm:flex sm:flex-col sm:gap-y-8 sm:items-end">
+      <section class="mb-8 sm:mb-0 inline-flex items-start justify-center leading-relaxed text-lg lg:text-xl
+                      sm:basis-1/2">
+        <svg
+          class="w-6 h-6 fill-[none] stroke-current stroke-2 text-gray-400 mt-1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <%= svg_icon("feather-sprite.svg", "map-pin") %>
+        </svg>
+
+        <p class="inline-block mx-2 text-gray-700">
+          Plot No. GH-03,<br>
+          Sector-100,<br>
+          Noida,<br>
+          Gautambudh Nagar,<br>
+          Uttar Pradesh<br>
+          201301
+        </p>
+      </section>
+    </div>
+
+    <div class="sm:basis-1/2 sm:flex sm:flex-col sm:gap-y-8 sm:items-start">
+      <section class="mb-8 sm:mb-0 inline-flex items-start justify-center leading-relaxed text-lg lg:text-xl">
+        <svg
+          class="w-6 h-6 fill-[none] stroke-current stroke-2 text-gray-400 mt-1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <%= svg_icon("feather-sprite.svg", "phone") %>
+        </svg>
+
+        <span class="inline-block mx-2 text-gray-700">
+          0120-7132166<br>
+          0120-4961321
+        </span>
+      </section>
+
+      <br class="sm:hidden">
+
+      <section class="inline-flex items-center justify-center leading-relaxed text-lg lg:text-xl">
+        <svg
+          class="w-6 h-6 fill-[none] stroke-current stroke-2 text-gray-400"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <%= svg_icon("feather-sprite.svg", "mail") %>
+        </svg>
+
+        <span class="inline-block mx-2 text-gray-700">
+          <%= mail_to "board@lbaoa.com" %> 
+        </span>
+      </section>
+    </div>
+  </div>
+</main>
