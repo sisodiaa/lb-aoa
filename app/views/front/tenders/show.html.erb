@@ -1,108 +1,110 @@
 <%= turbo_frame_tag "main" do %>
-  <div class="mx-auto mb-8 px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
-    <div class="border-double border-t-4 border-b-4 border-slate-200 mb-12 pt-6">
-      <h2 class="font-mono text-xs lg:text-sm mb-1 xl:mb-2 text-zinc-500 text-center">
-        <%= @tender.reference_token %>
-      </h2>
-
-      <h1 class="font-serif text-4xl mb-4 text-zinc-900 text-center">
-        <%= @tender.title %>
-      </h1>
-
-      <table class="w-1/2 text-sm text-gray-500 mb-4 mx-auto text-center">
-        <thead class="text-xs text-gray-700 uppercase">
-          <tr>
-            <th scope="col" class="px-1 py-1">
-              Opens On
-            </th>
-
-            <th scope="col" class="px-1 py-1">
-              Closes On
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="bg-white">
-            <td class="px-1 py-1">
-              <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base
-                           font-normal leading-none text-zinc-500">
-                <%= @tender.opens_on.strftime("%d %b %Y, %H:%M") %>
-              </time>
-            </td>
-            <td class="px-1 py-1">
-              <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base
-                           font-normal leading-none text-zinc-500">
-                <%= @tender.closes_on.strftime("%d %b %Y, %H:%M") %>
-              </time>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="flex mb-6 justify-center">
-        <span class="bg-fuchsia-50 text-lb-500 text-xs font-semibold mr-2
-                     px-2.5 py-0.5 rounded capitalize">
-          <%= @tender.publication_state %>
-        </span>
-        <span class="bg-fuchsia-50 text-lb-500 text-xs font-semibold mr-2
-                     px-2.5 py-0.5 rounded capitalize">
-          <%= @tender.notice_state.titleize %>
-        </span>
-      </div>
-    </div>
-
-    <div class="mb-8">
-      <h1 class="text-lb-500 font-semibold mb-1">
-        Description
-      </h1>
-      
-      <div class="text-gray-800">
-        <%= @tender.description %>
-      </div>
-    </div>
-
-    <div class="py-2 mb-8">
-      <%= turbo_frame_tag(
-        :attachments,
-        src: tender_documents_path(@tender),
-        loading: :lazy
-      ) do %>
-        <div class="flex w-full rounded-xl animate-pulse bg-fuchsia-50 py-3 px-2
-                     text-lb-soft-500 font-light text-base">
-          Loading attachments...
-        </div>
-      <% end %>
-    </div>
-
-    <% if TMS::BidPolicy.new(nil, @tender).new? %>
-      <%= turbo_frame_tag "tender-bid" do %>
-        <%= link_to(
-          "Submit a bid",
-          new_tender_bid_path(@tender),
-          class: "block btn btn--normal btn--success"
-        )%>
-      <% end %>
-    <% end %>
-
-    <% if @tender.reviewed? %>
-      <div class="tender-selection bg-green-50 text-green-600 text-sm rounded-lg p-4 mb-8 xl:mb-12">
-        <h2 class="mb-2">
-        Awarded to 
-        <span class="font-bold"><%= @tender.selection.bid.quotation_token %></span> 
-        by <span class="font-bold"><%= @tender.selection.bid.name %></span>
+  <div class="mx-auto mb-8 px-6 w-full sm:px-32 lg:w-3/4 xl:w-7/12">
+    <div class="-mx-[22px]">
+      <div class="border-double border-t-4 border-b-4 border-slate-200 mb-12 pt-6">
+        <h2 class="font-mono text-xs lg:text-sm mb-1 xl:mb-2 text-zinc-500 text-center">
+          <%= @tender.reference_token %>
         </h2>
 
-        <h3 class="font-bold">
-          Reason
-        </h3>
-        <p>
-          <%= @tender.selection.reason %>
-        </p>
-      </div>
-    <% end %>
+        <h1 class="font-serif text-4xl mb-4 text-zinc-900 text-center">
+          <%= @tender.title %>
+        </h1>
 
-    <% if @tender.under_review? || @tender.reviewed? %>
-      <%= render partial: "bids", locals: { tender: @tender } %>
-    <% end %>
+        <table class="w-1/2 text-sm text-gray-500 mb-4 mx-auto text-center">
+          <thead class="text-xs text-gray-700 uppercase">
+            <tr>
+              <th scope="col" class="px-1 py-1">
+                Opens On
+              </th>
+
+              <th scope="col" class="px-1 py-1">
+                Closes On
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-white">
+              <td class="px-1 py-1">
+                <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base
+                             font-normal leading-none text-zinc-500">
+                  <%= @tender.opens_on.strftime("%d %b %Y, %H:%M") %>
+                </time>
+              </td>
+              <td class="px-1 py-1">
+                <time class="block pt-0.5 lg:pt-0 text-xs lg:text-sm xl:text-base
+                             font-normal leading-none text-zinc-500">
+                  <%= @tender.closes_on.strftime("%d %b %Y, %H:%M") %>
+                </time>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="flex mb-6 justify-center">
+          <span class="bg-fuchsia-50 text-lb-500 text-xs font-semibold mr-2
+                       px-2.5 py-0.5 rounded capitalize">
+            <%= @tender.publication_state %>
+          </span>
+          <span class="bg-fuchsia-50 text-lb-500 text-xs font-semibold mr-2
+                       px-2.5 py-0.5 rounded capitalize">
+            <%= @tender.notice_state.titleize %>
+          </span>
+        </div>
+      </div>
+
+      <div class="mb-8">
+        <h1 class="text-lb-500 font-semibold mb-1">
+          Description
+        </h1>
+        
+        <div class="text-gray-800">
+          <%= @tender.description %>
+        </div>
+      </div>
+
+      <div class="py-2 mb-8">
+        <%= turbo_frame_tag(
+          :attachments,
+          src: tender_documents_path(@tender),
+          loading: :lazy
+        ) do %>
+          <div class="flex w-full rounded-xl animate-pulse bg-fuchsia-50 py-3 px-2
+                       text-lb-soft-500 font-light text-base">
+            Loading attachments...
+          </div>
+        <% end %>
+      </div>
+
+      <% if TMS::BidPolicy.new(nil, @tender).new? %>
+        <%= turbo_frame_tag "tender-bid" do %>
+          <%= link_to(
+            "Submit a bid",
+            new_tender_bid_path(@tender),
+            class: "block btn btn--normal btn--success"
+          )%>
+        <% end %>
+      <% end %>
+
+      <% if @tender.reviewed? %>
+        <div class="tender-selection bg-green-50 text-green-600 text-sm rounded-lg p-4 mb-8 xl:mb-12">
+          <h2 class="mb-2">
+          Awarded to 
+          <span class="font-bold"><%= @tender.selection.bid.quotation_token %></span> 
+          by <span class="font-bold"><%= @tender.selection.bid.name %></span>
+          </h2>
+
+          <h3 class="font-bold">
+            Reason
+          </h3>
+          <p>
+            <%= @tender.selection.reason %>
+          </p>
+        </div>
+      <% end %>
+
+      <% if @tender.under_review? || @tender.reviewed? %>
+        <%= render partial: "bids", locals: { tender: @tender } %>
+      <% end %>
+    </div>
   </div>
 <% end %>
