@@ -11,6 +11,8 @@
   </head>
 
   <body>
+    <%= render "shared/navbar_front" if @show_navbar %>
+
     <div class="relative">
       <%= yield %>
     </div>
