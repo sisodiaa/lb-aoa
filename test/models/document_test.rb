@@ -67,11 +67,18 @@ class DocumentTest < ActiveSupport::TestCase
     end
   end
 
-  test "that only excel files are allowed as attachment for Bids" do
+  test "that only excel or pdf files are allowed as attachment for Bids" do
     attach_file_to_record(
       @bid_document.file,
       "sheet.xlsx",
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
+    assert @bid_document.valid?
+
+    attach_file_to_record(
+      @bid_document.file,
+      "vim-cheatsheet.pdf",
+      "application/pdf"
     )
     assert @bid_document.valid?
 

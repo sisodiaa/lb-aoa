@@ -38,7 +38,7 @@ class Document < ApplicationRecord
       "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     ]
 
-    file_types = file_types.drop(3) if documentable.is_a? Bid
+    file_types = file_types.drop(2) if documentable.is_a? Bid
 
     file_types
   end

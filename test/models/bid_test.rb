@@ -58,6 +58,13 @@ class BidTest < ActiveSupport::TestCase
     )
     assert @bid.valid?
 
+    attach_file_to_record(
+      @bid.build_document.file,
+      "vim-cheatsheet.pdf",
+      "application/pdf"
+    )
+    assert @bid.valid?
+
     attach_file_to_record @bid.build_document.file, "square.png", "image/png"
     assert_not @bid.valid?, "Only excel files are allowed"
   end
