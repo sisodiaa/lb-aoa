@@ -3,14 +3,14 @@
     <div id="bid_<%= @bid.quotation_token %>">
       <div class="md:flex w-full">
         <div class="md:basis-1/2 text-gray-800 mb-8">
-          <h1 class="text-violet-500 font-semibold mb-1">
+          <h1 class="text-pink-500 font-semibold mb-1">
             Quotation Token
           </h1>
           <%= @bid.quotation_token %>
         </div>
 
         <div class="md:basis-1/2">
-          <h1 class="text-violet-500 font-semibold mb-1">
+          <h1 class="text-pink-500 font-semibold mb-1">
             Submitted Proposal
           </h1>
           <%= link_to(
@@ -18,14 +18,14 @@
             class: "block ml-auto mb-8"
           ) do %>
           <div
-              class="flex items-center justify-between h-6 text-gray-800 hover:text-violet-500">
+              class="flex items-center justify-between h-6 text-gray-800 hover:text-pink-500">
             <span class="inline-block">
               <%= @document.file.filename.to_s %>
             </span>
 
             <div
                 class="inline-flex items-center justify-center h-6
-                       rounded-lg bg-violet-400 hover:bg-violet-500 text-violet-50">
+                       rounded-lg bg-pink-400 hover:bg-pink-500 text-pink-50">
               <span class="hidden sm:inline-block pl-2 text-xs">Download</span>
               <svg
                   class="w-4 h-4 fill-[none] stroke-current stroke-2 mx-2"
@@ -41,14 +41,14 @@
 
       <div class="md:flex w-full">
         <div class="md:basis-1/2 text-gray-800 mb-8">
-          <h1 class="text-violet-500 font-semibold mb-1">
+          <h1 class="text-pink-500 font-semibold mb-1">
             Vendor Name
           </h1>
           <%= @bid.name %>
         </div>
 
         <div class="md:basis-1/2 text-gray-800 mb-8">
-          <h1 class="text-violet-500 font-semibold mb-1">
+          <h1 class="text-pink-500 font-semibold mb-1">
             Vendor Email
           </h1>
           <%= @bid.email %>
@@ -57,7 +57,7 @@
 
       <% if @bid.note.present? %>
         <div class="text-gray-800 mb-8">
-          <h1 class="text-violet-500 font-semibold mb-1">
+          <h1 class="text-pink-500 font-semibold mb-1">
             Additional Note
           </h1>
           <%= @bid.note %>
