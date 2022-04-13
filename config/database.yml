@@ -81,9 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: lb_aoa_production
-  username: lb_aoa
-  password: <%= ENV["LB_AOA_DATABASE_PASSWORD"] %>
 
 staging:
   <<: *default
