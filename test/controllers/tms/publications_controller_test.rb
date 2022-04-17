@@ -37,6 +37,38 @@ module TMS
       end
     end
 
+    test "publicatoin fails if closing date is before opening date" do
+      @draft_tender.opening = @draft_tender.closing + 3.days
+      @draft_tender.save
+
+      authenticated_admin do
+        patch publish_tms_tender_path(@draft_tender), params: {
+          tender: {
+            publication_state: "published"
+          }
+        }
+      end
+
+      assert_equal "Tender was not published.", flash[:error]
+      assert_response :unprocessable_entity
+    end
+
+    test "rescue from InvalidTransition expception" do
+      @draft_tender.opening = DateTime.current - 3.days
+      @draft_tender.save
+
+      authenticated_admin do
+        patch publish_tms_tender_path(@draft_tender), params: {
+          tender: {
+            publication_state: "published"
+          }
+        }
+      end
+
+      assert_equal "Tender was not published.", flash[:error]
+      assert_response :unprocessable_entity
+    end
+
     test "publish action does not apply on published tender" do
       authenticated_admin do
         patch publish_tms_tender_path(@published_tender)

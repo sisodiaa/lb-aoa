@@ -27,7 +27,7 @@ module TMS
 
           format.html do
             flash[:error] = "Tender was not published."
-            render "tms/tender#show", status: :unprocessable_entity
+            render "tms/tenders/show", status: :unprocessable_entity
           end
         end
       end
@@ -53,7 +53,7 @@ module TMS
 
         format.html do
           flash[:error] = "Tender was not published."
-          render "tms/tender#show", status: :unprocessable_entity
+          render "tms/tenders/show", status: :unprocessable_entity
         end
       end
     end
