@@ -24,21 +24,11 @@ module CMS
     def create
       @post = Post.new(post_params)
 
-      respond_to do |format|
-        if @post.save
-          format.turbo_stream do
-            @tags = @post.tags
-            flash.now[:success] = "Post was successfully created."
-          end
-
-          format.html do
-            flash[:success] = "Post was successfully created."
-            redirect_to cms_post_path(@post)
-          end
-        else
-          format.turbo_stream { render :new }
-          format.html { render :new, status: :unprocessable_entity }
-        end
+      if @post.save
+        flash[:success] = "Post was successfully created."
+        redirect_to cms_post_path(@post)
+      else
+        render :new, status: :unprocessable_entity
       end
     end
 
