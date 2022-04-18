@@ -86,6 +86,22 @@ module TMS
       assert_equal "Bid was successfully submitted.", flash[:success]
     end
 
+    test "show error message if bid can not be created" do
+      assert_difference "Bid.count", 0 do
+        assert_difference "Document.count", 0 do
+          post tender_bids_path(@current_tender), params: {
+            bid: {
+              name: "",
+              email: ""
+            }
+          }
+        end
+      end
+
+      assert_equal "Bid was not created. Try again!", flash[:error]
+      assert_response :unprocessable_entity
+    end
+
     # authentication cases
 
     test "can not create a new bid for under review tender" do

@@ -28,6 +28,30 @@ module TMS
       assert_equal "/tms/tenders/#{@draft_tender.id}-SEP_21-tech-79", tms_tender_path(@draft_tender)
     end
 
+    test "update a tender" do
+      authenticated_admin do
+        patch tms_tender_url(@draft_tender), params: {
+          tender: {
+            title: "new title"
+          }
+        }
+
+        assert_equal "Tender was successfully updated.", flash[:success]
+      end
+    end
+
+    test "return unprocessable_entity if update was not successful" do
+      authenticated_admin do
+        patch tms_tender_url(@draft_tender), params: {
+          tender: {
+            title: ""
+          }
+        }
+
+        assert_response :unprocessable_entity
+      end
+    end
+
     test "should destroy tender" do
       authenticated_admin do
         assert_difference("Tender.count", -1) do
