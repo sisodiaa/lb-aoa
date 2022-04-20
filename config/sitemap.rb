@@ -26,8 +26,8 @@ SitemapGenerator::Sitemap.create do
   #   end
   add "/posts"
   add "/tenders"
-  add "/aoa-board"
-  add "/contact-us"
-  add "/disclaimer"
-  add "/terms-and-condition"
+  add "/pages/aoa-board"
+  add "/pages/contact-us"
+  add "/pages/disclaimer"
+  add "/pages/terms-and-condition"
 end
