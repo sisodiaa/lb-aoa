@@ -66,9 +66,6 @@ gem "sidekiq", "~> 6.4", ">= 6.4.1"
 # Manage S3 bucket to store documents
 gem "aws-sdk-s3", "~> 1.113"
 
-# Drop-in plug-in for ActionMailer to send emails via Postmark
-gem "postmark-rails", "~> 0.22.0"
-
 # Sitemap generator
 gem "sitemap_generator", "~> 6.2", ">= 6.2.1"
 
