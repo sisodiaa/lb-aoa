@@ -1,20 +1,19 @@
 <div class="homepage h-screen bg-right bg-cover">
-	<!--Main-->
-	<div class="container pt-0 md:pt-8 px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+  <div class="container pt-0 md:pt-8 px-6 xl:px-12 2xl:px-24 mx-auto flex flex-wrap 
+              flex-col md:flex-row items-center">
 		
-		<!--Left Col-->
     <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start
                 overflow-y-hidden text-center xl:text-left">
-      <h1 class="my-8 text-4xl md:text-6xl font-bold leading-tight mx-auto xl:mx-0
-                 text-transparent bg-clip-text bg-gradient-to-r from-indigo-700 to-lb-500">
-        Lotus Boulevard <span class="block">Apartment Owners Association</span>
+      <h1 class="mt-4 mb-6 md:mb-16 text-7xl md:text-9xl font-bold leading-tight 
+                  mx-auto xl:mx-0 tracking-wide text-transparent bg-clip-text 
+                  bg-gradient-to-r from-indigo-700 via-lb-500 to-lb-500 font-serif">
+        LB <span class="inline xl:block">AOA</span>
       </h1>
 
-      <p class="leading-normal text-lg md:text-2xl mb-8 mx-auto xl:mx-0">
-        welcomes you to lbaoa.com, a platform for easy access to the information.
-        We are making management by LBAOA board transparent through regular publishing
-        updates about <strong>finances, procurements, and other activities</strong> here.
-        Stay connected to follow the latest updates.
+      <p class="leading-normal text-lg md:text-2xl mb-8 md:mb-20 mx-auto xl:mx-0">
+        Welcome to online community platform for Lotus Boulevard's Apartment Owners 
+        Association. It connects you with the managing board of LB AOA and brings information 
+        on <strong>finances, procurements, and other activities</strong> to your finger tips.
       </p>
 		
       <div class="flex flex-wrap md:flex-nowrap w-full lg:w-3/5 xl:w-full
@@ -38,43 +37,18 @@
 
 		</div>
 		
-		<!--Right Col-->
-		<div class="md:block w-full xl:w-3/5 py-6 overflow-y-hidden">
+    <div class="w-full py-6 overflow-y-hidden md:block md:bg-homepage
+                md:bg-no-repeat md:bg-120% md:bg-100%-75%
+                xl:w-3/5 xl:bg-150% xl:bg-110%-5%">
       <%= image_tag "web_design.svg", class: "w-5/6 mx-auto xl:mr-0" %>
 		</div>
     
-    <!--Footer-->
     <footer class="mt-auto w-full pb-4 pt-4 xl:pt-32 px-0">
       <div class="md:flex md:justify-between">
         <div class="grid grid-cols-2 gap-8 sm:gap-16 sm:grid-cols-2">
           <div>
-            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Resources</h2>
-            <ul class="text-gray-600">
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Lotus Boulevard</a>
-              </li>
-
-              <li class="mb-4">
-                <a href="#" class="hover:underline">Lotus Boulevard AOA</a>
-              </li>
-
-              <li class="mb-4">
-                <%= link_to "AOA Board", page_path(page: "aoa-board"), class: "hover:underline" %>
-              </li>
-
-              <li>
-                <%= link_to "Contact Us", page_path(page: "contact-us"), class: "hover:underline" %>
-              </li>
-            </ul>
-          </div>
-
-          <div>
             <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Legal</h2>
             <ul class="text-gray-600">
-              <li class="mb-4">
-                Version 0.2<sup>beta</sup>
-              </li>
-
               <li class="mb-4">
                 <%= link_to "Terms and Conditions", page_path(page: "terms-and-conditions"), class: "hover:underline" %>
               </li>
@@ -94,20 +68,33 @@
               </li>
             </ul>
           </div>
+
+          <div>
+            <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase">Resources</h2>
+            <ul class="text-gray-600">
+              <li class="mb-4">
+                <%= link_to "AOA Board", page_path(page: "aoa-board"), class: "hover:underline" %>
+              </li>
+
+              <li>
+                <%= link_to "Contact Us", page_path(page: "contact-us"), class: "hover:underline" %>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8" />
 
-      <div class="sm:flex sm:items-center sm:justify-between">
+      <div class="sm:flex sm:items-start sm:justify-between sm:gap-x-4">
         <div class="text-sm text-gray-500">© 2022 <a href="#" class="hover:underline">Lotus Boulevard AOA</a>. All Rights Reserved.
         </div>
-        <div class="mt-4 space-x-6 sm:mt-0 text-sm text-gray-500">
-          Designed and developed by 
+        <div class="mt-4 space-x-6 sm:mt-0 text-sm text-gray-500 sm:text-right">
+          Version 0.2<sup>beta</sup> designed and developed by 
           <%= mail_to(
             "dev.abhishek.sisodia@gmail.com",
             "Abhishek Sisodia",
-            class: "hover:text-gray-900 underline"
+            class: "hover:text-gray-900 underline sm:block"
           ) %>
         </div>
       </div>

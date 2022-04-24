@@ -66,7 +66,3 @@
 .field_with_errors > label {
   @apply text-red-500;
 }
-
-.homepage {
-  background-image: image-url("bg-homepage.svg");
-}

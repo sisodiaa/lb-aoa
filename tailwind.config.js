@@ -5,7 +5,18 @@ module.exports = {
     "./app/javascript/**/*.js"
   ],
   theme: {
+    backgroundSize: {
+      "120%": "120%",
+      "150%": "150%",
+    },
+    backgroundPosition: {
+      "100%-75%": "100% 75%",
+      "110%-5%": "110% 5%",
+    },
     extend: {
+      backgroundImage: {
+        "homepage": "url('bg-homepage.svg')",
+      },
       colors: {
         lb: {
           50:  "#d092c6",
