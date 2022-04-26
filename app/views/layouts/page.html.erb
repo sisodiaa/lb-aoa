@@ -7,10 +7,11 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag GoogleAnalytics::JS_URL, async: true, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
+  <body data-tracking-id="<%= GoogleAnalytics::TRACKING_ID %>">
     <%= render "shared/navbar_front" if @show_navbar %>
 
     <div class="relative">
