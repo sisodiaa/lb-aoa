@@ -18,7 +18,7 @@ class Document < ApplicationRecord
   end
 
   def content_size_allowed?
-    file.byte_size <= 5.megabytes
+    file.byte_size <= 20.megabytes
   end
 
   def type_of_attachment

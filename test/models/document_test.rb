@@ -34,11 +34,11 @@ class DocumentTest < ActiveSupport::TestCase
     assert @image_document.valid?
   end
 
-  test "that attachment should not be more than 5 MB in size" do
+  test "that attachment should not be more than 20 MB in size" do
     attach_file_to_record @image_document.file, "square.png", "image/png"
     # stub the file size to 21 MB
     @image_document.file.stub(:byte_size, 21.megabytes) do
-      assert_not @image_document.valid?, "Attachment size is bigger than 5 MB"
+      assert_not @image_document.valid?, "Attachment size is bigger than 20 MB"
     end
   end
 
