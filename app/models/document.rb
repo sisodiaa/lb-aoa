@@ -14,7 +14,7 @@ class Document < ApplicationRecord
   end
 
   def size_of_attachment
-    errors.add(:file, "is bigger than 5 MB") unless content_size_allowed?
+    errors.add(:file, "is bigger than 20 MB") unless content_size_allowed?
   end
 
   def content_size_allowed?
