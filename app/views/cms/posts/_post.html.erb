@@ -1,10 +1,14 @@
 <div class="mx-auto px-6 w-full sm:px-16 lg:w-3/4 xl:w-7/12">
-  <div class="mb-12 pt-6 bg-gray-50 rounded-lg">
+  <div class="mb-12 p-6 bg-gray-50 rounded-lg">
     <h1 class="font-serif text-4xl mb-4 text-gray-800 text-center">
       <%= post.title %>
     </h1>
 
-    <div class="text-center mb-4">
+    <% if @tags.present? %>
+      <div class="text-center mb-4">
+    <% else %>
+      <div class="text-center">
+    <% end %>
       <div class="inline-flex items-center justify-center text-slate-400">
         <svg
             class="w-4 h-4 fill-[none] stroke-current stroke-2"
