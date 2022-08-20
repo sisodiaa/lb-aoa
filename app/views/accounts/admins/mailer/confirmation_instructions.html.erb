@@ -4,7 +4,4 @@
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
 
-<div>
-  This is a system generated email. Please do not reply back to this address.
-  You can send your reply to LBAOA board at <%= mail_to "board@lbaoa.com" %>.
-</div>
+<%= render partial: "accounts/admins/mailer/notice" %>
