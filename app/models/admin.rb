@@ -23,4 +23,8 @@ class Admin < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def devise_mailer
+    AdminMailer
+  end
 end
