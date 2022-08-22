@@ -13,6 +13,14 @@ Rails.application.routes.draw do
     unlocks: "accounts/admins/unlocks"
   }
 
+  devise_for :owners, controllers: {
+    registrations: "accounts/owners/registrations",
+    sessions: "accounts/owners/sessions",
+    passwords: "accounts/owners/passwords",
+    confirmations: "accounts/owners/confirmations",
+    unlocks: "accounts/owners/unlocks"
+  }
+
   scope module: "accounts" do
     devise_scope :admin do
       get "/admins/edit",
@@ -26,6 +34,7 @@ Rails.application.routes.draw do
 
       scope "/management" do
         unauthenticated do
+          # Navigate to this root after logging out from admin's dashboard
           root to: "admins/sessions#new", as: :management_root
         end
       end
@@ -35,6 +44,12 @@ Rails.application.routes.draw do
   devise_scope :admin do
     authenticated :admin do
       root to: "management/dashboard#index", as: :admin_root
+    end
+  end
+
+  devise_scope :owner do
+    authenticated :owner do
+      root to: "posts#index", as: :owner_root
     end
   end
 
@@ -98,5 +113,6 @@ Rails.application.routes.draw do
   end
 
   get "/pages/*page", to: "cms/pages#show", as: "page"
+  # An owner after logging out is redirected to this root
   root to: "cms/pages#show", page: "home"
 end
