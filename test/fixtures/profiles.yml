@@ -1,0 +1,20 @@
+confirmed_unlinked_owner:
+  first_name: First
+  last_name: Owner
+  middle_name: Dummy
+  phone_number: +91-9898989898
+  owner: confirmed_linked_owner
+
+confirmed_linked_owner:
+  first_name: Second
+  last_name: Owner
+  middle_name: Dummy
+  phone_number: +91-9797979797
+  owner: confirmed_linked_owner
+
+archived_owner:
+  first_name: Third
+  last_name: Owner
+  middle_name: Dummy
+  phone_number: +91-9696969696
+  owner: archived_owner

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_21_145817) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_22_071252) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -148,6 +148,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_145817) do
     t.index ["category_id"], name: "index_posts_on_category_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "middle_name"
+    t.string "phone_number"
+    t.bigint "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_profiles_on_owner_id"
+  end
+
   create_table "selections", force: :cascade do |t|
     t.text "reason"
     t.bigint "tender_id", null: false
@@ -191,6 +202,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_21_145817) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bids", "tenders"
   add_foreign_key "posts", "categories"
+  add_foreign_key "profiles", "owners"
   add_foreign_key "selections", "bids"
   add_foreign_key "selections", "tenders"
   add_foreign_key "taggings", "posts"

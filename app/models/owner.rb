@@ -1,4 +1,6 @@
 class Owner < ApplicationRecord
+  has_one :profile, dependent: :destroy, inverse_of: :owner
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :trackable, :confirmable,
