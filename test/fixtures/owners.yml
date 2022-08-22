@@ -1,0 +1,17 @@
+confirmed_unlinked_owner:
+  email: owner_one@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(Owner, 'password') %>
+  confirmed_at: <%= Time.zone.now %>
+  account_status: unlinked
+
+confirmed_linked_owner:
+  email: owner_two@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(Owner, 'password') %>
+  confirmed_at: <%= Time.zone.now %>
+  account_status: linked
+
+archived_owner:
+  email: owner_three@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(Admin, 'password') %>
+  confirmed_at: <%= Time.zone.now %>
+  account_status: archived
