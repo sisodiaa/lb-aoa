@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Accounts::Owners::SessionsController < Devise::SessionsController
+  layout "front"
+
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
