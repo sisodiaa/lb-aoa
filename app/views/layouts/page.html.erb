@@ -14,6 +14,10 @@
   <body data-tracking-id="<%= GoogleAnalytics::TRACKING_ID %>">
     <%= render "shared/navbar_front" if @show_navbar %>
 
+    <%= turbo_frame_tag "flash-messages" do %>
+      <%= flash_messages %>
+    <% end %>
+
     <div class="relative">
       <%= yield %>
     </div>
