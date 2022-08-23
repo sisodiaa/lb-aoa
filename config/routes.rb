@@ -6,23 +6,21 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :admins, skip: %i[registrations], controllers: {
-    sessions: "accounts/admins/sessions",
-    passwords: "accounts/admins/passwords",
-    confirmations: "accounts/admins/confirmations",
-    unlocks: "accounts/admins/unlocks"
-  }
-
-  devise_for :owners, controllers: {
-    registrations: "accounts/owners/registrations",
-    sessions: "accounts/owners/sessions",
-    passwords: "accounts/owners/passwords",
-    confirmations: "accounts/owners/confirmations",
-    unlocks: "accounts/owners/unlocks"
-  }
+  devise_scope :admin do
+    authenticated :admin do
+      root to: "management/dashboard#index", as: :admin_root
+    end
+  end
 
   scope module: "accounts" do
     devise_scope :admin do
+      scope "/management" do
+        unauthenticated do
+          # Navigate to this root after logging out from admin's dashboard
+          root to: "admins/sessions#new", as: :management_root
+        end
+      end
+
       get "/admins/edit",
         to: "admins/registrations#edit",
         as: "edit_admin_registration"
@@ -31,31 +29,33 @@ Rails.application.routes.draw do
         to: "admins/registrations#update",
         as: "admin_registration",
         via: %i[put patch]
-
-      scope "/management" do
-        unauthenticated do
-          # Navigate to this root after logging out from admin's dashboard
-          root to: "admins/sessions#new", as: :management_root
-        end
-      end
     end
   end
 
-  devise_scope :admin do
-    authenticated :admin do
-      root to: "management/dashboard#index", as: :admin_root
-    end
-  end
-
-  devise_scope :owner do
-    authenticated :owner do
-      root to: "posts#index", as: :owner_root
-    end
-  end
+  devise_for :admins, skip: %i[registrations], controllers: {
+    sessions: "accounts/admins/sessions",
+    passwords: "accounts/admins/passwords",
+    confirmations: "accounts/admins/confirmations",
+    unlocks: "accounts/admins/unlocks"
+  }
 
   namespace :management do
     get "dashboard", to: "dashboard#index", as: "dashboard"
   end
+
+  devise_scope :owner do
+    authenticated :owner do
+      root to: "front/posts#index", as: :owner_root
+    end
+  end
+
+  devise_for :owners, controllers: {
+    registrations: "accounts/owners/registrations",
+    sessions: "accounts/owners/sessions",
+    passwords: "accounts/owners/passwords",
+    confirmations: "accounts/owners/confirmations",
+    unlocks: "accounts/owners/unlocks"
+  }
 
   namespace :cms do
     resources :categories, except: :destroy
