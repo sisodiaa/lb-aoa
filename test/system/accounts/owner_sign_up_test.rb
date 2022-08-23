@@ -16,6 +16,14 @@ module Accounts
           "#error_explanation li",
           text: "Password can't be blank"
         )
+        assert_selector(
+          "#error_explanation li",
+          text: "Profile first name can't be blank"
+        )
+        assert_selector(
+          "#error_explanation li",
+          text: "Profile last name can't be blank"
+        )
       end
     end
 
@@ -24,6 +32,8 @@ module Accounts
 
       within("form#new_owner") do
         fill_in "owner_email", with: "new_owner@example.com"
+        fill_in "owner_profile_attributes_first_name", with: "New"
+        fill_in "owner_profile_attributes_last_name", with: "Owner"
         fill_in "owner_password", with: "password"
         fill_in "owner_password_confirmation", with: "password"
         click_on "Sign Up"
