@@ -10,6 +10,22 @@ module Accounts
       @confirmed_linked_owner = nil
     end
 
+    test "new owner account can not be created without profile information" do
+      assert_difference("Owner.count", 0) do
+        assert_difference("Profile.count", 0) do
+          assert_emails 0 do
+            post owner_registration_path, params: {
+              owner: {
+                email: "new_owner@example.com",
+                password: "password",
+                password_confirmation: "password"
+              }
+            }
+          end
+        end
+      end
+    end
+
     test "create a new owner account" do
       assert_difference("Owner.count") do
         assert_difference("Profile.count") do

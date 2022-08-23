@@ -1,6 +1,7 @@
 class Owner < ApplicationRecord
   has_one :profile, dependent: :destroy, inverse_of: :owner
   accepts_nested_attributes_for :profile
+  validates :profile, presence: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
