@@ -1,29 +1,107 @@
-<h2>Sign up</h2>
+<div class="p-4 mx-auto max-w-md bg-white rounded-lg border border-gray-200
+            shadow-md sm:p-6 lg:p-8">
+  <%= form_for(
+    resource,
+    as: resource_name,
+    url: registration_path(resource_name)
+  ) do |f| %>
+    <div class="space-y-6">
+      <%= render "accounts/owners/shared/error_messages", resource: resource %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "accounts/owners/shared/error_messages", resource: resource %>
+      <h3 class="pt-0 text-xl font-medium text-gray-900">
+        Sign up for LB AOA
+      </h3>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+      <div class="field">
+        <%= f.label :email, class: "block mb-2 text-sm font-medium text-gray-900" %>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-gray-400">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "mail") %>
+            </svg>
+          </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+          <%= f.email_field(
+            :email,
+            autofocus: true,
+            autocomplete: "email",
+            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                    w-full pl-10 p-2.5"
+          )%>
+        </div>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+      <div class="field">
+        <div class="block mb-2 text-sm font-medium text-gray-900">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+            (<%= @minimum_password_length %> characters minimum)
+          <% end %>
+        </div>
 
-<%= render "accounts/owners/shared/links" %>
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-gray-400">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "key") %>
+            </svg>
+          </div>
+
+          <%= f.password_field(
+            :password,
+            autocomplete: "current-password",
+            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                    w-full pl-10 p-2.5"
+          )%>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation, class: "block mb-2 text-sm font-medium text-gray-900" %>
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-gray-400">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "key") %>
+            </svg>
+          </div>
+
+          <%= f.password_field(
+            :password_confirmation,
+            autocomplete: "new-password",
+            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                    w-full pl-10 p-2.5"
+          )%>
+        </div>
+      </div>
+
+      <%= f.button class: "btn btn--normal btn--secondary w-full" do %>
+          <span class="inline-block mr-1">Sign Up</span>
+          <svg
+            class="inline-block w-5 h-5 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "user") %>
+          </svg>
+      <% end %>
+
+      <div class="text-sm text-indigo-500">
+        <%= render "accounts/owners/shared/links" %>
+      </div>
+    </div>
+  <% end %>
+</div>
