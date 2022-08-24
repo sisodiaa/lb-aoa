@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Accounts::Owners::UnlocksController < Devise::UnlocksController
+  layout "front"
+
   # GET /resource/unlock/new
   # def new
   #   super
