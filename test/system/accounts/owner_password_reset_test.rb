@@ -93,7 +93,6 @@ module Accounts
 
     def reset_password_token
       devise_token_generator(Owner, :reset_password_token) do |raw, hashed|
-        @confirmed_linked_owner = owners(:confirmed_linked_owner)
         @confirmed_linked_owner.reset_password_token = hashed
         @confirmed_linked_owner.reset_password_sent_at = Time.now.utc
         @confirmed_linked_owner.save
