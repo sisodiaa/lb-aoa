@@ -71,5 +71,37 @@ module Accounts
         }
       end
     end
+
+    test "resend email with confirmation instructions if owner has an account" do
+      assert_emails 1 do
+        post owner_confirmation_path, params: {
+          owner: {
+            email: "owner_four@example.com"
+          }
+        }
+      end
+
+      assert_redirected_to new_owner_session_path
+    end
+
+    test "do not resend email with confirmation instructions if owner is already confirmed" do
+      assert_emails 0 do
+        post owner_confirmation_path, params: {
+          owner: {
+            email: "owner_two@example.com"
+          }
+        }
+      end
+    end
+
+    test "do not resend email with confirmation instructions if owner id is bogus" do
+      assert_emails 0 do
+        post owner_confirmation_path, params: {
+          owner: {
+            email: "bogus_owner@example.com"
+          }
+        }
+      end
+    end
   end
 end
