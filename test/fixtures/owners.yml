@@ -15,3 +15,8 @@ archived_owner:
   encrypted_password: <%= Devise::Encryptor.digest(Admin, 'password') %>
   confirmed_at: <%= Time.zone.now %>
   account_status: archived
+
+unconfirmed_owner:
+  email: owner_four@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(Owner, 'password') %>
+  account_status: unlinked

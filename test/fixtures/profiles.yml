@@ -18,3 +18,10 @@ archived_owner:
   middle_name: Dummy
   phone_number: +91-9696969696
   owner: archived_owner
+
+unconfirmed_owner:
+  first_name: Fourth
+  last_name: Owner
+  middle_name: Dummy
+  phone_number: +91-9595959595
+  owner: unconfirmed_owner
