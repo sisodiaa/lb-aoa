@@ -6,6 +6,6 @@ class Profile < ApplicationRecord
   validates :phone_number, phone: {allow_blank: true}
 
   def full_name
-    "#{first_name} #{middle_name} #{last_name}".titleize
+    [first_name, middle_name, last_name].select(&:present?).join(" ").titleize
   end
 end
