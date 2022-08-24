@@ -1,7 +1,7 @@
 require "test_helper"
 
 module Accounts
-  class OwnerAuthenticationFlowTest < ActionDispatch::IntegrationTest
+  class OwnerManagementFlowTest < ActionDispatch::IntegrationTest
     setup do
       @confirmed_linked_owner = profiles(:confirmed_linked_owner)
     end
