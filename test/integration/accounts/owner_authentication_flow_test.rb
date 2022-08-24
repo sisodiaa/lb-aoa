@@ -51,5 +51,25 @@ module Accounts
         flash[:notice]
       )
     end
+
+    test "send email to reset password when email is in the records" do
+      assert_emails 1 do
+        post owner_password_path, params: {
+          owner: {
+            email: "owner_two@example.com"
+          }
+        }
+      end
+    end
+
+    test "do not send email to reset password when email is not in the records" do
+      assert_emails 0 do
+        post owner_password_path, params: {
+          owner: {
+            email: "bogus_owner@example.com"
+          }
+        }
+      end
+    end
   end
 end
