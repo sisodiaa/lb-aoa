@@ -13,4 +13,8 @@ class Owner < ApplicationRecord
     linked: 1,
     archived: 2
   }
+
+  def devise_mailer
+    OwnerMailer
+  end
 end
