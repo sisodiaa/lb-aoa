@@ -3,7 +3,7 @@ confirmed_unlinked_owner:
   last_name: Owner
   middle_name: Dummy
   phone_number: +91-9898989898
-  owner: confirmed_linked_owner
+  owner: confirmed_unlinked_owner
 
 confirmed_linked_owner:
   first_name: Second
