@@ -45,7 +45,7 @@ Rails.application.routes.draw do
 
   devise_scope :owner do
     authenticated :owner do
-      root to: "accounts/owners/profiles#show", as: :owner_root
+      root to: "accounts/owners/dashboards#show", as: :owner_root
     end
   end
 
@@ -59,7 +59,8 @@ Rails.application.routes.draw do
 
   scope module: "accounts" do
     namespace :owners do
-      resource :profile, except: [:new, :create, :destroy]
+      resource :profile, only: [:edit, :update]
+      resource :dashboard, only: :show
     end
   end
 

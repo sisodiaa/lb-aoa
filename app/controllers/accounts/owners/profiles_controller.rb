@@ -5,14 +5,12 @@ module Accounts
       before_action :authenticate_owner!
       before_action :set_profile
 
-      def show; end
-
       def edit; end
 
       def update
         if @profile.update(profile_params)
           flash[:success] = "Your profile was successfully updated."
-          redirect_to owners_profile_path
+          redirect_to owners_dashboard_path
         else
           render :edit, status: :unprocessable_entity
         end

@@ -2,7 +2,7 @@ require "test_helper"
 
 module Accounts
   module Owners
-    class ProfilesControllerTest < ActionDispatch::IntegrationTest
+    class DashboardsControllerTest < ActionDispatch::IntegrationTest
       setup do
         @confirmed_linked_owner = owners(:confirmed_linked_owner)
       end
@@ -12,13 +12,13 @@ module Accounts
       end
 
       test "#authenticate_owner!" do
-        get owners_profile_path
+        get owners_dashboard_path
         assert_redirected_to new_owner_session_path
       end
 
       test "show profile to authenticated owner" do
         authenticated_owner do
-          get owners_profile_path
+          get owners_dashboard_path
           assert_response :success
         end
       end
