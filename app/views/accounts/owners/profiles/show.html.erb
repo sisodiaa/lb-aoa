@@ -1,0 +1,22 @@
+<div class="px-48">
+  <p class="text-3xl font-extralight text-slate-800">
+  Welcome <span class="font-normal"><%= @profile.full_name %></span>
+  </p>
+
+  <h3 class="mt-12 text-lg font-light">
+    Account Information
+  </h3>
+  <p>
+   <%= current_owner.email %> 
+  </p>
+
+  <h3 class="mt-12 text-lg font-light">
+    Profile Information
+  </h3>
+  <ul>
+    <li><%= @profile.first_name %></li>
+    <li><%= @profile.middle_name %></li>
+    <li><%= @profile.last_name %></li>
+    <li><%= @profile.phone_number %></li>
+  </ul>
+</div>

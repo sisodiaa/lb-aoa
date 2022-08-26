@@ -45,7 +45,7 @@ Rails.application.routes.draw do
 
   devise_scope :owner do
     authenticated :owner do
-      root to: "front/posts#index", as: :owner_root
+      root to: "accounts/owners/profiles#show", as: :owner_root
     end
   end
 
@@ -56,6 +56,12 @@ Rails.application.routes.draw do
     confirmations: "accounts/owners/confirmations",
     unlocks: "accounts/owners/unlocks"
   }
+
+  scope module: "accounts" do
+    namespace :owners do
+      resource :profile, except: [:new, :create, :destroy]
+    end
+  end
 
   namespace :cms do
     resources :categories, except: :destroy
