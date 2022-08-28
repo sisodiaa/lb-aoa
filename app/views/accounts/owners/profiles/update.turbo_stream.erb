@@ -1,0 +1,15 @@
+<%= turbo_stream.update(
+  "dashboard-greeting",
+  partial: "accounts/owners/dashboards/greet",
+  locals: {full_name: @profile.full_name}
+) %>
+
+<%= turbo_stream.update(
+  "dashboard-content",
+  partial: "accounts/owners/dashboards/profile",
+  locals: {profile: @profile}
+) %>
+
+<%= turbo_stream.update "flash-messages" do %>
+  <%= flash_messages %>
+<% end %>

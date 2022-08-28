@@ -12,7 +12,10 @@ module Accounts
       def update
         if @profile.update(profile_params)
           flash[:success] = "Your profile was successfully updated."
-          redirect_to owners_dashboard_path
+          respond_to do |format|
+            format.turbo_stream
+            format.html { redirect_to owners_dashboard_path }
+          end
         else
           render :edit, status: :unprocessable_entity
         end

@@ -43,5 +43,65 @@ module Accounts
         assert_selector :xpath, "//table/tbody/tr[5]/th/a", text: "Edit Profile"
       end
     end
+
+    test "that errors will be displayed on profile edit form when accessed through dashboard" do
+      access_profile_edit_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "form#edit_profile"
+
+        within "form#edit_profile" do
+          fill_in "profile_last_name", with: ""
+          click_on "Update Profile"
+        end
+
+        assert_selector "#error_explanation li", text: "Last name can't be blank"
+      end
+    end
+
+    test "that profile can be updated by profile edit form when accessed through dashboard" do
+      access_profile_edit_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "form#edit_profile"
+
+        within "form#edit_profile" do
+          fill_in "profile_last_name", with: "User"
+          click_on "Update Profile"
+        end
+
+        within "#dashboard-profile" do
+          assert_selector :xpath, "//table/tbody/tr[3]/td", text: "User"
+        end
+      end
+
+      assert_selector "[role='toast']", text: "Your profile was successfully updated."
+    end
+
+    test "that cancel button for profile edit form is rendered only on dashboard" do
+      visit edit_owners_profile_url
+
+      assert_no_selector "a", text: "Cancel"
+
+      access_profile_edit_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "a", text: "Cancel"
+      end
+    end
+
+    private
+
+    def access_profile_edit_form_on_dashboard
+      visit owners_dashboard_url
+
+      within "#dashboard-tabs" do
+        click_on "Profile"
+      end
+
+      within "#dashboard-profile" do
+        click_on "Edit Profile"
+      end
+    end
   end
 end
