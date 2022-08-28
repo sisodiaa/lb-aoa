@@ -40,6 +40,7 @@ module Accounts
         assert_selector :xpath, "//table/tbody/tr[2]/td", text: "Dummy"
         assert_selector :xpath, "//table/tbody/tr[3]/td", text: "Owner"
         assert_selector :xpath, "//table/tbody/tr[4]/td", text: "+91-9797979797"
+        assert_selector :xpath, "//table/tbody/tr[5]/th/a", text: "Edit Profile"
       end
     end
   end

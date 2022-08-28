@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "dashboard-content" do %>
+  <div class="p-4">
+    <%= render "form", profile: @profile %>
+    <%= link_to(
+      "Cancel",
+      profile_owners_dashboard_path,
+      class: "block mt-2 w-full btn btn--normal btn--error"
+    )%>
+  </div>
+<% end %>

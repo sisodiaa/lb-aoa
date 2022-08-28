@@ -1,0 +1,112 @@
+<%= form_with model: [:owners, profile], id: "edit_profile" do |form| %>
+  <div class="space-y-6">
+    <% if profile.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
+        <h2 class="font-medium mb-2">
+          <%= pluralize(profile.errors.count, "error") %> prohibited this profile from being updated
+        </h2>
+
+        <ul role="list" class="list-inside list-disc">
+          <% profile.errors.full_messages.each do |message| %>
+            <li class="font-light"><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :first_name, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+      <div class="relative mt-1">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                    pointer-events-none text-gray-400">
+          <svg
+            class="w-5 h-5 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "type") %>
+          </svg>
+        </div>
+
+        <%= form.text_field(
+          :first_name,
+          class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                  rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                  w-full pl-10 p-2.5"
+        )%>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :middle_name, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+      <div class="relative mt-1">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                    pointer-events-none text-gray-400">
+          <svg
+            class="w-5 h-5 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "type") %>
+          </svg>
+        </div>
+
+        <%= form.text_field(
+          :middle_name,
+          class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                  rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                  w-full pl-10 p-2.5"
+        )%>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :last_name, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+      <div class="relative mt-1">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                    pointer-events-none text-gray-400">
+          <svg
+            class="w-5 h-5 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "type") %>
+          </svg>
+        </div>
+
+        <%= form.text_field(
+          :last_name,
+          class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                  rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                  w-full pl-10 p-2.5"
+        )%>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :phone_number, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+      <div class="relative mt-1">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                    pointer-events-none text-gray-400">
+          <svg
+            class="w-5 h-5 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "phone") %>
+          </svg>
+        </div>
+
+        <%= form.phone_field(
+          :phone_number,
+          class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                  rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                  w-full pl-10 p-2.5"
+        )%>
+      </div>
+    </div>
+
+    <%= form.submit class: "btn btn--normal btn--primary w-full" %>
+  </div>
+<% end %>
+

@@ -1,7 +1,9 @@
 module Accounts
   module Owners
     class ProfilesController < ApplicationController
-      layout "front"
+      layout -> { turbo_frame_request? ? false : "front" }
+
+      before_action :turbo_frame_request_variant
       before_action :authenticate_owner!
       before_action :set_profile
 
@@ -17,6 +19,9 @@ module Accounts
       end
 
       private
+      def turbo_frame_request_variant
+        request.variant = :turbo_frame if turbo_frame_request?
+      end
 
       def set_profile
         @profile = current_owner.profile
