@@ -22,6 +22,9 @@ application.register("flowbite--dropdown", Flowbite__DropdownController)
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
+import Owners__Dashboards__TabController from "./owners/dashboards/tab_controller.js"
+application.register("owners--dashboards--tab", Owners__Dashboards__TabController)
+
 import ResetFormController from "./reset_form_controller.js"
 application.register("reset-form", ResetFormController)
 

@@ -1,0 +1,41 @@
+<div id="dashboard-profile" class="overflow-x-auto relative">
+  <table class="w-full break-all">
+    <tbody>
+      <tr class="border-b">
+        <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+          First Name
+        </th>
+        <td class="py-4 px-6 font-medium text-gray-900">
+          <%= profile.first_name %>
+        </td>
+      </tr>
+
+      <tr class="border-b">
+        <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+          Middle Name
+        </th>
+        <td class="py-4 px-6 font-medium text-gray-900">
+          <%= profile.middle_name || "NA" %>
+        </td>
+      </tr>
+
+      <tr class="border-b">
+        <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+          Last Name
+        </th>
+        <td class="py-4 px-6 font-medium text-gray-900">
+          <%= profile.last_name %>
+        </td>
+      </tr>
+
+      <tr>
+        <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+          Phone Number
+        </th>
+        <td class="py-4 px-6 font-medium text-gray-900">
+          <%= profile.phone_number || "NA" %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

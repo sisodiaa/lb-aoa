@@ -60,7 +60,12 @@ Rails.application.routes.draw do
   scope module: "accounts" do
     namespace :owners do
       resource :profile, only: [:edit, :update]
-      resource :dashboard, only: :show
+      resource :dashboard, only: :show do
+        member do
+          get "account"
+          get "profile"
+        end
+      end
     end
   end
 

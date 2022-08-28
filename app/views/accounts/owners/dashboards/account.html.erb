@@ -1,0 +1,13 @@
+<div class="mx-auto max-w-sm sm:max-w-none p-4 sm:px-24 md:px-28 lg:px-48">
+  <h3 class="mb-4 text-xl font-medium text-gray-900">
+    Account details
+  </h3>
+
+  <div
+    class="w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 text-sm text-left text-gray-500
+      border border-fuchsia-100 rounded-lg">
+    <%= turbo_frame_tag "dashboard-content" do %>
+      <%= render "account" %>
+    <% end %>
+  </div>
+</div>

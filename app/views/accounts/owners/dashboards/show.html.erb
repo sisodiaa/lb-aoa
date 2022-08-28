@@ -1,22 +1,45 @@
-<div class="px-48">
-  <p class="text-3xl font-extralight text-slate-800">
-  Welcome <span class="font-normal"><%= @profile.full_name %></span>
+<div class="mx-auto max-w-sm sm:max-w-none p-4 sm:px-24 md:px-28 lg:px-48">
+  <p class="text-2xl sm:text-3xl font-extralight text-slate-800">
+    <%= turbo_frame_tag "dashboard-greeting" do %>
+      <%= render "greet", full_name: @profile.full_name %>
+    <% end %>
   </p>
 
-  <h3 class="mt-12 text-lg font-light">
-    Account Information
-  </h3>
-  <p>
-   <%= current_owner.email %> 
-  </p>
+  <ul
+    id="dashboard-tabs"
+    class="pl-2 mt-8 flex flex-wrap text-sm font-medium text-center text-gray-500"
+    data-controller="owners--dashboards--tab"
+    data-owners--dashboards--tab-index-value="0"
+  >
+    <li class="mr-2" data-owners--dashboards--tab-target="item">
+      <%= link_to(
+        "Account",
+        account_owners_dashboard_path,
+        class: "inline-block p-4 rounded-t-lg",
+        data: {
+          action: "owners--dashboards--tab#select",
+          owners__dashboards__tab_id_param: "0",
+          turbo_frame: "dashboard-content"
+        }
+      )%>
+    </li>
 
-  <h3 class="mt-12 text-lg font-light">
-    Profile Information
-  </h3>
-  <ul>
-    <li><%= @profile.first_name %></li>
-    <li><%= @profile.middle_name %></li>
-    <li><%= @profile.last_name %></li>
-    <li><%= @profile.phone_number %></li>
+    <li data-owners--dashboards--tab-target="item">
+      <%= link_to(
+        "Profile",
+        profile_owners_dashboard_path,
+        class: "inline-block p-4 rounded-t-lg",
+        data: {
+          action: "owners--dashboards--tab#select",
+          owners__dashboards__tab_id_param: "1",
+          turbo_frame: "dashboard-content"
+        }
+      )%>
+    </li>
   </ul>
+
+  <div class="w-full md:w-4/5 xl:w-3/5 2xl:w-1/2 text-sm text-left text-gray-500
+    border border-fuchsia-100 rounded-lg">
+    <%= turbo_frame_tag "dashboard-content", src: account_owners_dashboard_path %>
+  </div>
 </div>

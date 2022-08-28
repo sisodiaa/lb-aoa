@@ -1,11 +1,14 @@
 module Accounts
   module Owners
     class DashboardsController < ApplicationController
-      layout "front"
+      layout -> { turbo_frame_request? ? false : "front" }
+
       before_action :authenticate_owner!
       before_action :set_profile
 
       def show; end
+      def account; end
+      def profile; end
 
       private
 
