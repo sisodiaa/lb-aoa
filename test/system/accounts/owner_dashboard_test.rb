@@ -91,6 +91,53 @@ module Accounts
       end
     end
 
+    test "that errors will be displayed on account edit form when accessed through dashboard" do
+      access_account_edit_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "form#edit_owner"
+
+        within "form#edit_owner" do
+          click_on "Update"
+        end
+
+        assert_selector "#error_explanation li", text: "Current password can't be blank"
+      end
+    end
+
+    test "that password can be updated by account edit form when accessed through dashboard" do
+      access_account_edit_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "form#edit_owner"
+
+        within "form#edit_owner" do
+          fill_in "owner_password", with: "dassworp"
+          fill_in "owner_password_confirmation", with: "dassworp"
+          fill_in "owner_current_password", with: "password"
+          click_on "Update"
+        end
+
+        within "#dashboard-account" do
+          assert_selector :xpath, "//table/tbody/tr/td", text: "owner_two@example.com"
+        end
+      end
+
+      assert_selector "[role='toast']", text: "Your account has been updated successfully."
+    end
+
+    test "that cancel button for account edit form is rendered only on dashboard" do
+      visit edit_owner_registration_url
+
+      assert_no_selector "a", text: "Cancel"
+
+      access_account_edit_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "a", text: "Cancel"
+      end
+    end
+
     private
 
     def access_profile_edit_form_on_dashboard
@@ -102,6 +149,18 @@ module Accounts
 
       within "#dashboard-profile" do
         click_on "Edit Profile"
+      end
+    end
+
+    def access_account_edit_form_on_dashboard
+      visit owners_dashboard_url
+
+      within "#dashboard-tabs" do
+        click_on "Account"
+      end
+
+      within "#dashboard-account" do
+        click_on "Edit Account"
       end
     end
   end
