@@ -76,6 +76,7 @@ module Accounts
         end
       end
 
+      assert_text "Welcome Second Dummy User"
       assert_selector "[role='toast']", text: "Your profile was successfully updated."
     end
 
