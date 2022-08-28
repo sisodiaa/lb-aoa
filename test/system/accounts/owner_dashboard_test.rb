@@ -26,6 +26,7 @@ module Accounts
 
       within "#dashboard-account" do
         assert_selector :xpath, "//table/tbody/tr/td", text: "owner_two@example.com"
+        assert_selector :xpath, "//table/tbody/tr[2]/th/a", text: "Edit Account"
       end
 
       within "#dashboard-tabs" do

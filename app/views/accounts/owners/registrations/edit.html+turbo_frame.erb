@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "dashboard-content" do %>
+  <div class="p-4">
+    <%= render partial: "form_edit", locals: { resource: resource, resource_name: resource_name } %>
+
+    <%= link_to(
+      "Cancel",
+      account_owners_dashboard_path,
+      class: "block mt-2 w-full btn btn--normal btn--error"
+    )%>
+  </div>
+<% end %>

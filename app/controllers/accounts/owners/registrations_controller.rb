@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class Accounts::Owners::RegistrationsController < Devise::RegistrationsController
-  layout "front"
+  layout -> { turbo_frame_request? ? false : "front" }
+
+  before_action :turbo_frame_request_variant
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -62,4 +64,9 @@ class Accounts::Owners::RegistrationsController < Devise::RegistrationsControlle
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+  def turbo_frame_request_variant
+    request.variant = :turbo_frame if turbo_frame_request?
+  end
 end
