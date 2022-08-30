@@ -43,19 +43,23 @@ Rails.application.routes.draw do
     get "dashboard", to: "dashboard#index", as: "dashboard"
   end
 
-  devise_scope :owner do
-    authenticated :owner do
-      root to: "accounts/owners/dashboards#show", as: :owner_root
-    end
-  end
-
-  devise_for :owners, controllers: {
-    registrations: "accounts/owners/registrations",
+  devise_for :owners, skip: :registrations, controllers: {
     sessions: "accounts/owners/sessions",
     passwords: "accounts/owners/passwords",
     confirmations: "accounts/owners/confirmations",
     unlocks: "accounts/owners/unlocks"
   }
+
+  devise_scope :owner do
+    resource :registration, only: [:new, :create, :edit, :update],
+      path: "owners", path_names: {new: "sign_up"},
+      controller: "accounts/owners/registrations",
+      as: :owner_registration
+
+    authenticated :owner do
+      root to: "accounts/owners/dashboards#show", as: :owner_root
+    end
+  end
 
   scope module: "accounts" do
     namespace :owners do
