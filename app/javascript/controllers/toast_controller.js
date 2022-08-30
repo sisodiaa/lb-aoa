@@ -4,8 +4,11 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["notification"];
   static values = { timeout: Number };
+  static classes = [ "topPosition" ]
 
-  connect() {
+  notificationTargetConnected() {
+    this.notificationTarget.classList.add(this.topPositionClass);
+
     setTimeout(() => {
       this.close();
     }, this.timeoutValue);

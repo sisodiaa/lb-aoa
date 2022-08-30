@@ -19,13 +19,11 @@ module FlashMessagesHelper
   def toast(type, message)
     tag.div(
       class: "flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow "\
-             "absolute top-20 right-4 transition-opacity z-20 "\
-             "#{Rails.env.test? ? 'duration-300' : 'duration-1000'}",
+             "absolute right-4 transition-opacity z-20 "\
+             "#{Rails.env.test? ? "duration-300" : "duration-1000"}",
       role: "toast",
       data: {
-        controller: "toast",
-        toast_target: "notification",
-        toast_timeout_value: Rails.env.test? ? 0 : 5000
+        toast_target: "notification"
       }
     ) do
       concat(toast_icon_wrapper(type))

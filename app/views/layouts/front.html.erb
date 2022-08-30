@@ -14,7 +14,14 @@
   <body data-tracking-id="<%= GoogleAnalytics::TRACKING_ID %>">
     <%= render "shared/navbar_front" %>
 
-    <%= turbo_frame_tag "flash-messages" do %>
+    <%= turbo_frame_tag(
+      "flash-messages",
+      data: {
+        controller: "toast",
+        toast_top_position_class: "top-20",
+        toast_timeout_value: Rails.env.test? ? 0 : 5000
+      }
+    ) do %>
       <%= flash_messages %>
     <% end %>
 
