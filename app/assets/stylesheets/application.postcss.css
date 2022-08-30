@@ -28,7 +28,7 @@
 
   .btn--primary-soft {
     @apply from-lb-soft-200 via-lb-soft-400 to-lb-soft-600
-           hover:from-lb-300 hover:via-lb-500 hover:to-lb-700
+           hover:from-lb-soft-300 hover:via-lb-soft-500 hover:to-lb-soft-700
            focus:ring-lb-50;
   }
 
