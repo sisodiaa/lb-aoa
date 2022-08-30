@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class Accounts::Owners::SessionsController < Devise::SessionsController
-  layout "front"
+  layout -> { turbo_frame_request? ? false : "front" }
+
+  before_action :turbo_frame_request_variant
 
   # before_action :configure_sign_in_params, only: [:create]
 
@@ -26,4 +28,9 @@ class Accounts::Owners::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  private
+  def turbo_frame_request_variant
+    request.variant = :turbo_frame if turbo_frame_request?
+  end
 end

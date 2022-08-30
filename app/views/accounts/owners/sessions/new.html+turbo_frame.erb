@@ -1,0 +1,95 @@
+<%= turbo_frame_tag "owner-login" do %>
+  <%= form_for(
+    resource,
+    as: resource_name,
+    url: session_path(resource_name),
+    data: { turbo_frame: "_top" }
+  ) do |f| %>
+    <div class="space-y-6">
+      <div class="field">
+        <%= f.label :email, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-lb-soft-200">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "mail") %>
+            </svg>
+          </div>
+
+          <%= f.email_field(
+            :email,
+            autofocus: true,
+            autocomplete: "email",
+            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-lb-soft-500 focus:border-lb-soft-500 block
+                    w-full pl-10 p-2.5"
+          )%>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :password, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-lb-soft-200">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "key") %>
+            </svg>
+          </div>
+
+          <%= f.password_field(
+            :password,
+            autocomplete: "current-password",
+            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-lb-soft-500 focus:border-lb-soft-500 block
+                    w-full pl-10 p-2.5"
+          )%>
+        </div>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="flex items-start">
+          <div class="field flex items-center h-5">
+            <%= f.check_box(
+              :remember_me,
+              class: "w-4 h-4 bg-gray-50 rounded border border-gray-300
+                      focus:ring-3 focus:ring-lb-soft-300"
+            )%>
+          </div>
+          <div class="field ml-3 text-sm">
+            <%= f.label :remember_me, class: "font-medium text-gray-900" %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= f.button class: "btn btn--normal btn--primary-soft w-full" do %>
+          <span class="inline-block mr-1">Sign In</span>
+          <svg
+            class="inline-block w-5 h-5 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "log-in") %>
+          </svg>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="flex items-baseline mt-6">
+    <p class="font-light text-sm mr-2">Don't have an account?</p>
+
+    <%= link_to(
+      "Sign Up",
+      new_owner_registration_path,
+      class: "block btn btn--small btn--secondary",
+      data: { turbo_frame: "_top" }
+    )%>
+  </div>
+<% end %>

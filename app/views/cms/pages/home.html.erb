@@ -1,6 +1,6 @@
 <div class="homepage h-screen bg-right bg-cover">
   <div class="container pt-0 md:pt-8 px-6 xl:px-12 2xl:px-24 mx-auto flex flex-wrap 
-              flex-col md:flex-row items-center">
+              flex-col md:flex-row items-start gap-x-2">
 		
     <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start
                 overflow-y-hidden text-center xl:text-left">
@@ -37,13 +37,13 @@
 
 		</div>
 		
-    <div class="w-full py-6 overflow-y-hidden md:block md:bg-homepage
-                md:bg-no-repeat md:bg-120% md:bg-100%-75%
-                xl:w-3/5 xl:bg-150% xl:bg-110%-5%">
-      <%= image_tag "web_design.svg", class: "w-5/6 mx-auto xl:mr-0" %>
-		</div>
+    <div class="w-full xl:h-[38rem] md:mx-auto md:my-8 xl:mb-0 xl:mt-4 md:w-2/3 lg:w-1/2 xl:w-7/12 xl:bg-homepage xl:bg-no-repeat xl:bg-150% xl:bg-110%-5%">
+      <div class="xl:mx-auto xl:w-2/3 2xl:w-7/12 md:border md:rounded-lg py-6 md:px-6 xl:backdrop-blur-md md:shadow">
+        <%= turbo_frame_tag "owner-login", src: new_owner_session_path %>
+      </div>
+    </div>
     
-    <footer class="mt-auto w-full pb-4 pt-4 xl:pt-32 px-0">
+    <footer class="mt-auto w-full pb-4 pt-4 xl:pt-20 px-0">
       <div class="md:flex md:justify-between">
         <div class="grid grid-cols-2 gap-8 sm:gap-16 sm:grid-cols-2">
           <div>
