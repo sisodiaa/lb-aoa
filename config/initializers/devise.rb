@@ -9,6 +9,14 @@ class TurboFailureApp < Devise::FailureApp
     end
   end
 
+  def redirect_url
+    if request_format == :turbo_stream && warden_options[:scope] == :owner
+      return root_path
+    end
+    super
+  end
+
+
   def skip_format?
     %w(html turbo_stream */*).include? request_format.to_s
   end
