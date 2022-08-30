@@ -13,6 +13,7 @@ module Accounts
 
       click_on "Sign In"
       assert_selector "[role='toast']", text: "You need to sign in or sign up before continuing."
+      assert_equal root_path, current_path
     end
 
     test "that toast shows the error message if email and/or password combination is not correct" do
@@ -25,6 +26,7 @@ module Accounts
       end
 
       assert_selector "[role='toast']", text: "Invalid Email or password"
+      assert_equal root_path, current_path
     end
 
     test "that owner can log in via homepage" do

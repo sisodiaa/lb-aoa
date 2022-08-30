@@ -10,10 +10,11 @@ class TurboFailureApp < Devise::FailureApp
   end
 
   def redirect_url
-    if request_format == :turbo_stream && warden_options[:scope] == :owner
-      return root_path
+    if request_format == :turbo_stream && warden_options[:scope] == :owner && URI(request.referer).path == "/"
+      root_path
+    else
+      super
     end
-    super
   end
 
 

@@ -12,6 +12,7 @@ module Accounts
       end
 
       assert_selector "[role='toast']", text: "Signed in successfully."
+      assert_equal owner_root_path, current_path
     end
 
     test "failed signing in" do
@@ -24,6 +25,7 @@ module Accounts
       end
 
       assert_selector "[role='toast']", text: "Invalid Email or password"
+      assert_equal new_owner_session_path, current_path
     end
   end
 end
