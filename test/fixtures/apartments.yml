@@ -1,0 +1,11 @@
+apartment_one:
+  tower_number: 25
+  flat_number: 1102
+
+apartment_two:
+  tower_number: 9
+  flat_number: 2105
+
+apartment_three:
+  tower_number: 12A
+  flat_number: 2102
