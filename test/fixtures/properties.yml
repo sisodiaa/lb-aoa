@@ -1,0 +1,13 @@
+registered_property:
+  purchased_on: <%= Time.current - 3.years %>
+  registered: true
+  primary_owner: true
+  apartment: apartment_one
+  owner: confirmed_linked_owner
+
+unregistered_property:
+  purchased_on: <%= Time.current - 1.year %>
+  registered: false
+  primary_owner: true
+  apartment: apartment_two
+  owner: confirmed_linked_owner

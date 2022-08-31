@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_31_052640) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_31_100340) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -166,6 +166,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_052640) do
     t.index ["owner_id"], name: "index_profiles_on_owner_id"
   end
 
+  create_table "properties", force: :cascade do |t|
+    t.date "purchased_on"
+    t.boolean "registered"
+    t.boolean "primary_owner"
+    t.bigint "apartment_id", null: false
+    t.bigint "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["apartment_id"], name: "index_properties_on_apartment_id"
+    t.index ["owner_id"], name: "index_properties_on_owner_id"
+  end
+
   create_table "selections", force: :cascade do |t|
     t.text "reason"
     t.bigint "tender_id", null: false
@@ -210,6 +222,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_052640) do
   add_foreign_key "bids", "tenders"
   add_foreign_key "posts", "categories"
   add_foreign_key "profiles", "owners"
+  add_foreign_key "properties", "apartments"
+  add_foreign_key "properties", "owners"
   add_foreign_key "selections", "bids"
   add_foreign_key "selections", "tenders"
   add_foreign_key "taggings", "posts"
