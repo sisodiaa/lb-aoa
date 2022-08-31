@@ -24,7 +24,7 @@
       )%>
     </li>
 
-    <li data-owners--dashboards--tab-target="item">
+    <li clss="mr-2" data-owners--dashboards--tab-target="item">
       <%= link_to(
         "Profile",
         profile_owners_dashboard_path,
@@ -32,6 +32,19 @@
         data: {
           action: "owners--dashboards--tab#select",
           owners__dashboards__tab_id_param: "1",
+          turbo_frame: "dashboard-content"
+        }
+      )%>
+    </li>
+
+    <li data-owners--dashboards--tab-target="item">
+      <%= link_to(
+        "Properties",
+        properties_owners_dashboard_path,
+        class: "inline-block p-4 rounded-t-lg",
+        data: {
+          action: "owners--dashboards--tab#select",
+          owners__dashboards__tab_id_param: "2",
           turbo_frame: "dashboard-content"
         }
       )%>

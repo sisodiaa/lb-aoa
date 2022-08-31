@@ -14,7 +14,7 @@ module Accounts
       Warden.test_reset!
     end
 
-    test "that account and profile information is displayed through tabbed interface" do
+    test "that account, profile, and properties information is displayed through tabbed interface" do
       visit owners_dashboard_url
 
       within "#dashboard-tabs" do
@@ -23,6 +23,7 @@ module Accounts
 
       assert_selector "#dashboard-account"
       assert_no_selector "#dashboard-profile"
+      assert_no_selector "#dashboard-properties"
 
       within "#dashboard-account" do
         assert_selector :xpath, "//table/tbody/tr/td", text: "owner_two@example.com"
@@ -35,6 +36,7 @@ module Accounts
 
       assert_no_selector "#dashboard-account"
       assert_selector "#dashboard-profile"
+      assert_no_selector "#dashboard-properties"
 
       within "#dashboard-profile" do
         assert_selector :xpath, "//table/tbody/tr[1]/td", text: "Second"
@@ -43,6 +45,14 @@ module Accounts
         assert_selector :xpath, "//table/tbody/tr[4]/td", text: "+91-9797979797"
         assert_selector :xpath, "//table/tbody/tr[5]/th/a", text: "Edit Profile"
       end
+
+      within "#dashboard-tabs" do
+        click_on "Properties"
+      end
+
+      assert_no_selector "#dashboard-account"
+      assert_no_selector "#dashboard-profile"
+      assert_selector "#dashboard-properties"
     end
 
     test "that errors will be displayed on profile edit form when accessed through dashboard" do

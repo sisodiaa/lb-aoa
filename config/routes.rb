@@ -68,6 +68,7 @@ Rails.application.routes.draw do
         member do
           get "account"
           get "profile"
+          get "properties"
         end
       end
     end

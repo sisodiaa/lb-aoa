@@ -10,6 +10,13 @@ module Accounts
       def account; end
       def profile; end
 
+      def properties
+        @properties = current_owner
+          .properties
+          .includes(:apartment)
+          .order("purchased_on ASC")
+      end
+
       private
 
       def set_profile
