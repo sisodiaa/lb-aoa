@@ -35,13 +35,17 @@ module TMS
       assert_response :success
     end
 
-    test "tms - show bids' details for under review and reviewed tenders only" do
+    test "tms - do not show bids' details for upcoming tenders" do
       get tms_tender_bid_path(@upcoming_tender, @upcoming_bid)
       assert_equal "You cannot perform this action.", flash[:error]
+    end
 
+    test "tms - do not show bids' details for current tenders" do
       get tms_tender_bid_path(@current_tender, @current_bid)
       assert_equal "You cannot perform this action.", flash[:error]
+    end
 
+    test "tms - show bids' details for under review tenders" do
       attach_file_to_record(
         @under_review_bid.document.file,
         "sheet.xlsx",
@@ -49,7 +53,9 @@ module TMS
       )
       get tms_tender_bid_path(@under_review_tender, @under_review_bid)
       assert_response :success
+    end
 
+    test "tms - show bids' details for reviewed tenders" do
       attach_file_to_record(
         @reviewed_bid.document.file,
         "sheet.xlsx",
