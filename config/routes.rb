@@ -6,21 +6,8 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_scope :admin do
-    authenticated :admin do
-      root to: "management/dashboard#index", as: :admin_root
-    end
-  end
-
   scope module: "accounts" do
     devise_scope :admin do
-      scope "/management" do
-        unauthenticated do
-          # Navigate to this root after logging out from admin's dashboard
-          root to: "admins/sessions#new", as: :management_root
-        end
-      end
-
       get "/admins/edit",
         to: "admins/registrations#edit",
         as: "edit_admin_registration"
@@ -29,7 +16,18 @@ Rails.application.routes.draw do
         to: "admins/registrations#update",
         as: "admin_registration",
         via: %i[put patch]
+
+      scope "/management" do
+        unauthenticated do
+          # Navigate to this root after logging out from admin's dashboard
+          root to: "admins/sessions#new", as: :management_root
+        end
+      end
     end
+  end
+
+  namespace :management do
+    get "dashboard", to: "dashboard#index", as: "dashboard"
   end
 
   devise_for :admins, skip: %i[registrations], controllers: {
@@ -39,8 +37,10 @@ Rails.application.routes.draw do
     unlocks: "accounts/admins/unlocks"
   }
 
-  namespace :management do
-    get "dashboard", to: "dashboard#index", as: "dashboard"
+  devise_scope :admin do
+    authenticated :admin do
+      root to: "management/dashboard#index", as: :admin_root
+    end
   end
 
   devise_for :owners, skip: :registrations, controllers: {
