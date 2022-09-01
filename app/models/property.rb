@@ -1,6 +1,4 @@
 class Property < ApplicationRecord
-  include ApartmentOwnerLinker
-
   belongs_to :apartment, inverse_of: :properties
   belongs_to :owner, inverse_of: :properties
 
