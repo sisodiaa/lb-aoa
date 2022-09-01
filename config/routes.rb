@@ -71,6 +71,7 @@ Rails.application.routes.draw do
           get "properties"
         end
       end
+      resources :properties, except: :destroy
     end
   end
 
