@@ -25,6 +25,8 @@ module Accounts
             }
           end
         end
+
+        assert_not_nil Property.last.property_token
       end
     end
 

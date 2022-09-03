@@ -5,12 +5,14 @@ class Property < ApplicationRecord
   before_validation :create_association_with_apartment, on: :create
   after_validation :remove_apartment_absence_message, if: Proc.new { errors.include?(:apartment) }
   after_validation :destroy_apartment_association, on: :create, if: Proc.new { errors.any? }
+  before_create :set_property_token
 
   attribute :tower_number, :string
   attribute :flat_number, :string
 
   validates :tower_number, presence: true
   validates :flat_number, presence: true
+  validates :property_token, uniqueness: true
   validates :purchased_on, presence: true
   validate :purchased_on_date_cannot_be_in_the_future
   validates :registered, inclusion: {
@@ -21,6 +23,10 @@ class Property < ApplicationRecord
     in: [true, false],
     message: "value should be either Yes or No"
   }
+
+  def to_param
+    property_token
+  end
 
   private
 
@@ -39,5 +45,12 @@ class Property < ApplicationRecord
 
   def destroy_apartment_association
     apartment&.destroy
+  end
+
+  def set_property_token
+    self.property_token = loop do
+      property_token = SecureRandom.hex(4)
+      break property_token unless Property.where(property_token: property_token).exists?
+    end
   end
 end

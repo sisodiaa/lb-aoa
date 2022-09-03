@@ -3,6 +3,8 @@ require "test_helper"
 class PropertyTest < ActiveSupport::TestCase
   setup do
     @registered_property = properties(:registered_property)
+    @registered_property.tower_number = @registered_property.apartment.tower_number
+    @registered_property.flat_number = @registered_property.apartment.flat_number
   end
 
   teardown do
@@ -27,5 +29,10 @@ class PropertyTest < ActiveSupport::TestCase
   test "that ownership status is either true or false" do
     @registered_property.primary_owner = nil
     assert_not @registered_property.valid?, "Ownership status is neither true nor false"
+  end
+
+  test "that unique property token is generated for new property record" do
+    new_property = @registered_property.dup
+    assert_not new_property.valid?, "Property Token is not unique"
   end
 end
