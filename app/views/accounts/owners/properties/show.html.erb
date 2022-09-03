@@ -1,0 +1,62 @@
+<%= turbo_frame_tag "dashboard-content" do %>
+  <div id="dashboard-property" class="overflow-x-auto relative">
+    <table class="w-full break-all">
+      <tbody>
+        <tr class="border-b">
+          <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+            Tower Number
+          </th>
+          <td class="py-4 px-6 font-medium text-gray-900">
+            <%= @property.apartment.tower_number %>
+          </td>
+        </tr>
+
+        <tr class="border-b">
+          <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+            Flat Number
+          </th>
+          <td class="py-4 px-6 font-medium text-gray-900">
+            <%= @property.apartment.flat_number %>
+          </td>
+        </tr>
+
+        <tr class="border-b">
+          <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+            Date of Purchase
+          </th>
+          <td class="py-4 px-6 font-medium text-gray-900">
+            <%= @property.purchased_on.strftime("%d %B %Y") %>
+          </td>
+        </tr>
+
+        <tr class="border-b">
+          <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+            Property registered
+          </th>
+          <td class="py-4 px-6 font-medium text-gray-900">
+            <%= @property.registered ? "Yes" : "No" %>
+          </td>
+        </tr>
+
+        <tr class="border-b">
+          <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+            Primary Owner
+          </th>
+          <td class="py-4 px-6 font-medium text-gray-900">
+            <%= @property.primary_owner ? "Yes" : "No" %>
+          </td>
+        </tr>
+
+        <tr>
+          <th scope="row" class="py-4 px-6" colspan="2">
+            <%= link_to(
+              raw("&larr; Go Back"),
+              properties_owners_dashboard_path,
+              class: "btn btn--small btn--primary w-full"
+            )%>
+          </th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>

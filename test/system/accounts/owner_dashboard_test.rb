@@ -243,6 +243,35 @@ module Accounts
       end
     end
 
+    test "show property detials on dashboard" do
+      property = @confirmed_linked_owner.properties.order("purchased_on ASC").first
+
+      visit owners_dashboard_url
+
+      within "#dashboard-tabs" do
+        click_on "Properties"
+      end
+
+      within "#dashboard-properties" do
+        within :xpath, "//table/tbody/tr[1]" do
+          click_on "Details"
+        end
+      end
+
+      within "#dashboard-property" do
+        assert_selector :xpath, "//table/tbody/tr[1]/td", text: property.apartment.tower_number
+        assert_selector :xpath, "//table/tbody/tr[2]/td", text: property.apartment.flat_number
+        assert_selector :xpath, "//table/tbody/tr[3]/td", text: property.purchased_on.strftime("%d %B %Y")
+        assert_selector :xpath, "//table/tbody/tr[4]/td", text: property.registered ? "Yes" : "No"
+        assert_selector :xpath, "//table/tbody/tr[5]/td", text: property.primary_owner ? "Yes" : "No"
+        assert_selector :xpath, "//table/tbody/tr[6]/th/a", text: "Go Back"
+
+        click_on "Go Back"
+      end
+
+      assert_selector "#dashboard-properties"
+    end
+
     private
 
     def access_profile_edit_form_on_dashboard
