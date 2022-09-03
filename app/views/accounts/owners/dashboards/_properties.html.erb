@@ -19,6 +19,16 @@
     </thead>
     <tbody>
       <%= render properties %>
+
+      <tr>
+        <th scope="row" class="py-3 px-1 sm:px-4 lg:px-6" colspan="3">
+          <%= link_to(
+            "Add Property",
+            new_owners_property_path,
+            class: "btn btn--small btn--primary w-full"
+          )%>
+        </th>
+      </tr>
     </tbody>
   </table>
 </div>

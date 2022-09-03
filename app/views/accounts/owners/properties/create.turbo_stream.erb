@@ -1,0 +1,9 @@
+<%= turbo_stream.update(
+  "dashboard-content",
+  partial: "accounts/owners/dashboards/properties",
+  locals: {properties: @properties}
+) %>
+
+<%= turbo_stream.update "flash-messages" do %>
+  <%= flash_messages %>
+<% end %>

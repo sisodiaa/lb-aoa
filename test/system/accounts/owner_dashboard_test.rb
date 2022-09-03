@@ -149,6 +149,100 @@ module Accounts
       end
     end
 
+    test "linking an owner account with an apartment through a property record" do
+      access_property_creation_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "form#new_property"
+
+        within "form#new_property" do
+          select "17", from: "property_tower_number"
+          fill_in "property_flat_number", with: "2301"
+          fill_in "property_purchased_on", with: Time.zone.today - 6.years
+          choose "property_registered_true"
+          choose "property_primary_owner_true"
+          click_on "Create Property"
+        end
+
+        within "#dashboard-properties" do
+          assert_selector :xpath, "//table/tbody/tr/td", text: "17"
+          assert_selector :xpath, "//table/tbody/tr/td[2]", text: "2301"
+          assert_selector :xpath, "//table/tbody/tr/td[3]", text: "Approved"
+        end
+      end
+
+      assert_selector "[role='toast']", text: "Your Property record was successfully saved."
+    end
+
+    test "show errors if apartment info is filled but property info is not filled" do
+      access_property_creation_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "form#new_property"
+
+        within "form#new_property" do
+          select "17", from: "property_tower_number"
+          fill_in "property_flat_number", with: "2301"
+          click_on "Create Property"
+
+          assert_selector "#error_explanation li", text: "Purchased on can't be blank"
+          assert_selector "#error_explanation li", text: "Registered status should be either Yes or No"
+          assert_selector "#error_explanation li", text: "Primary owner value should be either Yes or No"
+        end
+      end
+    end
+
+    test "show errors if apartment info is not filled but property info is filled" do
+      access_property_creation_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "form#new_property"
+
+        within "form#new_property" do
+          fill_in "property_purchased_on", with: Time.zone.today - 6.years
+          choose "property_registered_true"
+          choose "property_primary_owner_true"
+          click_on "Create Property"
+
+          assert_selector "#error_explanation li", text: "Tower number can't be blank"
+          assert_selector "#error_explanation li", text: "Flat number can't be blank"
+        end
+      end
+    end
+
+    test "show errors if purchased on date is set in future" do
+      access_property_creation_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "form#new_property"
+
+        within "form#new_property" do
+          select "17", from: "property_tower_number"
+          fill_in "property_flat_number", with: "2301"
+          fill_in "property_purchased_on", with: Time.zone.today + 6.months
+          choose "property_registered_true"
+          choose "property_primary_owner_true"
+          click_on "Create Property"
+
+          assert_selector "#error_explanation li", text: "Purchased on date is invalid as it is set in future"
+        end
+      end
+    end
+
+    test "that cancel button is shoen for property creation form on dashboard" do
+      access_property_creation_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "form#new_property"
+        assert_selector "a", text: "Cancel"
+
+        click_on "Cancel"
+
+        assert_selector "div#dashboard-properties"
+        assert_no_selector "a", text: "Cancel"
+      end
+    end
+
     private
 
     def access_profile_edit_form_on_dashboard
@@ -172,6 +266,18 @@ module Accounts
 
       within "#dashboard-account" do
         click_on "Edit Account"
+      end
+    end
+
+    def access_property_creation_form_on_dashboard
+      visit owners_dashboard_url
+
+      within "#dashboard-tabs" do
+        click_on "Properties"
+      end
+
+      within "#dashboard-properties" do
+        click_on "Add Property"
       end
     end
   end
