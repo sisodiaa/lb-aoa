@@ -186,8 +186,8 @@ module Accounts
           click_on "Create Property"
 
           assert_selector "#error_explanation li", text: "Purchased on can't be blank"
-          assert_selector "#error_explanation li", text: "Registered status should be either Yes or No"
-          assert_selector "#error_explanation li", text: "Primary owner value should be either Yes or No"
+          assert_selector "#error_explanation li", text: "Registration status should be either \"Yes\" or \"No\""
+          assert_selector "#error_explanation li", text: "Primary ownership status should be either \"Yes\" or \"No\""
         end
       end
     end
