@@ -4,7 +4,175 @@
 
 <%= turbo_frame_tag "dashboard-content" do %>
   <div class="p-4">
-    <%= render "form", property: @property %>
+    <%= form_with(
+      scope: :property,
+      model: @property,
+      url: owners_properties_path,
+      id: "new_property"
+    ) do |form| %>
+      <div class="space-y-6">
+        <% if @property.errors.any? %>
+          <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
+            <h2 class="font-medium mb-2">
+              <%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved
+            </h2>
+
+            <ul role="list" class="list-inside list-disc">
+              <% @property.errors.full_messages.each do |message| %>
+                <li class="font-light"><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="flex gap-x-8">
+          <div class="field basis-1/2">
+            <%= form.label :tower_number, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+            <div class="relative mt-1">
+              <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                pointer-events-none text-gray-400">
+                <svg
+                  class="w-5 h-5 fill-[none] stroke-current stroke-2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <%= svg_icon("feather-sprite.svg", "home") %>
+                </svg>
+              </div>
+
+              <%= form.select(
+                :tower_number,
+                %w[1 2 3 4 5 6 7 8 9 10 12 12A 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29],
+                { prompt: "Select Tower" },
+                class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                w-full pl-10 p-2.5"
+              )%>
+            </div>
+          </div>
+
+          <div class="field basis-1/2">
+            <%= form.label :flat_number, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+            <div class="relative mt-1">
+              <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                pointer-events-none text-gray-400">
+                <svg
+                  class="w-5 h-5 fill-[none] stroke-current stroke-2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <%= svg_icon("feather-sprite.svg", "home") %>
+                </svg>
+              </div>
+
+              <%= form.text_field(
+                :flat_number,
+                class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                w-full pl-10 p-2.5"
+              )%>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= form.label :purchased_on, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+          <div class="relative mt-1">
+            <div class="flex absolute inset-y-0 left-0 items-center pl-3
+              pointer-events-none text-gray-400">
+              <svg
+                class="w-5 h-5 fill-[none] stroke-current stroke-2"
+                stroke-linecap="round"
+                stroke-linejoin="round">
+                <%= svg_icon("feather-sprite.svg", "calendar") %>
+              </svg>
+            </div>
+
+            <%= form.date_field(
+              :purchased_on,
+              class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+              rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+              w-full pl-10 p-2.5"
+            )%>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= form.label(
+            :registered,
+            "Is this property registered?",
+            class: "block mb-2 text-sm font-medium text-gray-900"
+          )%>
+
+          <div class="mt-1">
+            <div class="flex items-center mb-2">
+              <%= form.radio_button(
+                :registered,
+                true,
+                class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+              )%>
+              <%= form.label(
+                :registered_true,
+                "Yes",
+                class: "ml-2 text-sm font-medium text-gray-900"
+              )%>
+            </div>
+
+            <div class="flex items-center">
+              <%= form.radio_button(
+                :registered,
+                false,
+                class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+              )%>
+              <%= form.label(
+                :registered_false,
+                "No",
+                class: "ml-2 text-sm font-medium text-gray-900"
+              )%>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <%= form.label(
+            :primary_owner,
+            "Are you the primary owner?",
+            class: "block mb-2 text-sm font-medium text-gray-900"
+          )%>
+
+          <div class="mt-1">
+            <div class="flex items-center mb-2">
+              <%= form.radio_button(
+                :primary_owner,
+                true,
+                class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+              )%>
+              <%= form.label(
+                :primary_owner_true,
+                "Yes",
+                class: "ml-2 text-sm font-medium text-gray-900"
+              )%>
+            </div>
+
+            <div class="flex items-center">
+              <%= form.radio_button(
+                :primary_owner,
+                false,
+                class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
+              )%>
+              <%= form.label(
+                :primary_owner_false,
+                "No",
+                class: "ml-2 text-sm font-medium text-gray-900"
+              )%>
+            </div>
+          </div>
+        </div>
+
+        <%= form.submit class: "btn btn--normal btn--primary w-full" %>
+      </div>
+    <% end %>
 
     <%= link_to(
       "Cancel",

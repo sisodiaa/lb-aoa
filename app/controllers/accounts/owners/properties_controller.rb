@@ -13,11 +13,13 @@ module Accounts
       def show; end
 
       def new
-        @property = current_owner.properties.new
+        @property = Accounts::Owners::PropertyForm.new
       end
 
       def create
-        @property = current_owner.properties.new(property_params)
+        @property = Accounts::Owners::PropertyForm.new(
+          property_params.merge!(owner_id: current_owner.id)
+        )
 
         if @property.save
           flash[:success] = "Your Property record was successfully saved."
