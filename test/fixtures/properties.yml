@@ -13,3 +13,11 @@ unregistered_property:
   primary_owner: true
   apartment: apartment_two
   owner: confirmed_linked_owner
+
+unregistered_property_co_owner:
+  property_token:  <%= SecureRandom.hex(4) %>
+  purchased_on: <%= Time.current - 1.year %>
+  registered: false
+  primary_owner: false
+  apartment: apartment_two
+  owner: confirmed_linked_co_owner

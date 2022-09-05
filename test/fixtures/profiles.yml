@@ -25,3 +25,10 @@ unconfirmed_owner:
   middle_name: Dummy
   phone_number: +91-9595959595
   owner: unconfirmed_owner
+
+confirmed_linked_co_owner:
+  first_name: Fifth
+  last_name: Owner
+  middle_name: Dummy
+  phone_number: +91-9494949494
+  owner: confirmed_linked_co_owner

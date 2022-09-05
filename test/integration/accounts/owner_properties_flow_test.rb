@@ -4,10 +4,11 @@ module Accounts
   class OwnerPropertiesFlowTest < ActionDispatch::IntegrationTest
     setup do
       @confirmed_linked_owner = owners(:confirmed_linked_owner)
+      @registered_property = properties(:registered_property)
     end
 
     teardown do
-      @confirmed_linked_owner = nil
+      @confirmed_linked_owner = @registered_property = nil
     end
 
     test "that linking a property also creates a new apartment" do
@@ -60,6 +61,53 @@ module Accounts
             }
           end
         end
+      end
+    end
+
+    test "updating a property record" do
+      authenticated_owner do
+        put owners_property_path(@registered_property), params: {
+          property: {
+            purchased_on: @registered_property.purchased_on - 6.weeks
+          }
+        }
+
+        assert_equal Time.zone.today - 3.years - 6.weeks, @registered_property.reload.purchased_on
+      end
+    end
+
+    test "that replacing apartment would delete previously linked apartment" do
+      authenticated_owner do
+        apartment_id = apartments(:apartment_one).id
+        assert_equal apartment_id, @registered_property.apartment.id
+
+        put owners_property_path(@registered_property), params: {
+          property: {
+            tower_number: "7",
+            flat_number: "1402"
+          }
+        }
+
+        assert_not_equal apartment_id, @registered_property.reload.apartment.id
+        assert_nil Apartment.find_by(id: apartment_id)
+      end
+    end
+
+    test "updating apartment does not delete previously linked apartment if it has another linked property" do
+      authenticated_owner do
+        apartment_id = apartments(:apartment_two).id
+        unregistered_property = properties(:unregistered_property)
+        assert_equal apartment_id, unregistered_property.apartment.id
+
+        put owners_property_path(unregistered_property), params: {
+          property: {
+            tower_number: "7",
+            flat_number: "1402"
+          }
+        }
+
+        assert_not_equal apartment_id, unregistered_property.reload.apartment.id
+        assert_not_nil Apartment.find_by(id: apartment_id)
       end
     end
 

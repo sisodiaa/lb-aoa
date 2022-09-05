@@ -10,6 +10,14 @@ class Property < ApplicationRecord
     property_token
   end
 
+  def tower_number
+    apartment&.tower_number
+  end
+
+  def flat_number
+    apartment&.flat_number
+  end
+
   private
 
   def set_property_token

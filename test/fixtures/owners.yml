@@ -20,3 +20,9 @@ unconfirmed_owner:
   email: owner_four@example.com
   encrypted_password: <%= Devise::Encryptor.digest(Owner, 'password') %>
   account_status: unlinked
+
+confirmed_linked_co_owner:
+  email: co_owner_two@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(Owner, 'password') %>
+  confirmed_at: <%= Time.zone.now %>
+  account_status: linked

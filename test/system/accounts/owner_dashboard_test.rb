@@ -272,6 +272,45 @@ module Accounts
       assert_selector "#dashboard-properties"
     end
 
+    test "update property record" do
+      access_property_record_edit_form_on_dashboard
+      property = @confirmed_linked_owner.properties.order("purchased_on ASC").first
+
+      within "form#property_#{property.id}" do
+        fill_in "property_purchased_on", with: property.purchased_on - 6.weeks
+        click_on "Update Property"
+      end
+
+      assert_selector "[role='toast']", text: "Your Property record was successfully updated."
+
+      within "#dashboard-properties" do
+        within :xpath, "//table/tbody/tr[1]" do
+          click_on "Details"
+        end
+      end
+
+      within "#dashboard-property" do
+        assert_selector(
+          :xpath,
+          "//table/tbody/tr[3]/td",
+          text: (Time.zone.today - 3.years - 6.weeks).strftime("%d %B %Y")
+        )
+      end
+    end
+
+    test "show error if a field is kept blank in property record edit form" do
+      access_property_record_edit_form_on_dashboard
+      property = @confirmed_linked_owner.properties.order("purchased_on ASC").first
+
+      within "form#property_#{property.id}" do
+        fill_in "property_flat_number", with: ""
+        click_on "Update Property"
+
+        assert_selector "#error_explanation li", text: "Flat number can't be blank"
+        assert_selector ".field_with_errors label[for='property_flat_number']"
+      end
+    end
+
     private
 
     def access_profile_edit_form_on_dashboard
@@ -307,6 +346,20 @@ module Accounts
 
       within "#dashboard-properties" do
         click_on "Add Property"
+      end
+    end
+
+    def access_property_record_edit_form_on_dashboard
+      visit owners_dashboard_url
+
+      within "#dashboard-tabs" do
+        click_on "Properties"
+      end
+
+      within "#dashboard-properties" do
+        within :xpath, "//table/tbody/tr[1]" do
+          click_on "Edit"
+        end
       end
     end
   end

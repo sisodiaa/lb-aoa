@@ -3,15 +3,16 @@ module Accounts
     class PropertyForm
       include ActiveModel::API
 
-      attr_accessor :owner_id, :tower_number, :flat_number, :purchased_on, :registration, :primary_ownership
+      attr_accessor :owner_id, :property_token, :tower_number, :flat_number, :purchased_on, :registration, :primary_ownership
 
       def initialize(attributes = {})
         @owner_id = attributes.fetch(:owner_id, "")
+        @property_token = attributes.fetch(:property_token, "")
         @tower_number = attributes.fetch(:tower_number, "")
         @flat_number = attributes.fetch(:flat_number, "")
         @purchased_on = attributes.fetch(:purchased_on, "").to_date
-        @registration = ActiveModel::Type::Boolean.new.cast(attributes.fetch(:registered, ""))
-        @primary_ownership = ActiveModel::Type::Boolean.new.cast(attributes.fetch(:primary_owner, ""))
+        @registration = ActiveModel::Type::Boolean.new.cast(attributes.fetch(:registration, ""))
+        @primary_ownership = ActiveModel::Type::Boolean.new.cast(attributes.fetch(:primary_ownership, ""))
       end
 
       def save
@@ -32,9 +33,43 @@ module Accounts
         end
       end
 
+      def update
+        if valid?(:update)
+          property = Property.find_by(property_token: property_token)
+
+          ActiveRecord::Base.transaction do
+            apartment = if property.tower_number != tower_number || property.flat_number != flat_number
+              Apartment
+                .where(tower_number: tower_number, flat_number: flat_number)
+                .first_or_create
+            else
+              property.apartment
+            end
+
+            old_apartment = property.apartment
+
+            property.update(
+              apartment_id: apartment.id,
+              purchased_on: purchased_on,
+              registered: registration,
+              primary_owner: primary_ownership
+            )
+
+            if apartment != old_apartment && old_apartment.properties.count.zero?
+              old_apartment.destroy
+            end
+          end
+
+          true
+        else
+          false
+        end
+      end
+
       # Validations
 
       validates :owner_id, presence: true
+      validates :property_token, presence: true, on: :update
       validates :tower_number, presence: true
       validates :flat_number, presence: true
       validates :purchased_on, presence: true
