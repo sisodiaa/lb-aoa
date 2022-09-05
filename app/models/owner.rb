@@ -1,7 +1,7 @@
 class Owner < ApplicationRecord
   has_one :profile, dependent: :destroy, inverse_of: :owner
 
-  has_many :properties, dependent: :destroy
+  has_many :properties
   has_many :apartments, through: :properties
 
   accepts_nested_attributes_for :profile

@@ -1,5 +1,5 @@
 class Apartment < ApplicationRecord
-  has_many :properties, dependent: :destroy
+  has_many :properties
   has_many :owners, through: :properties
 
   validates :tower_number, presence: true, inclusion: {
