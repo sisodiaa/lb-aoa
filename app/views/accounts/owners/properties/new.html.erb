@@ -6,19 +6,19 @@
   <div class="p-4">
     <%= form_with(
       scope: :property,
-      model: @property,
+      model: @property_form,
       url: owners_properties_path,
       id: "new_property"
     ) do |form| %>
       <div class="space-y-6">
-        <% if @property.errors.any? %>
+        <% if @property_form.errors.any? %>
           <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
             <h2 class="font-medium mb-2">
-              <%= pluralize(@property.errors.count, "error") %> prohibited this property from being saved
+              <%= pluralize(@property_form.errors.count, "error") %> prohibited this property from being saved
             </h2>
 
             <ul role="list" class="list-inside list-disc">
-              <% @property.errors.full_messages.each do |message| %>
+              <% @property_form.errors.full_messages.each do |message| %>
                 <li class="font-light"><%= message %></li>
               <% end %>
             </ul>
@@ -100,7 +100,7 @@
 
         <div class="field">
           <%= form.label(
-            :registered,
+            :registration,
             "Is this property registered?",
             class: "block mb-2 text-sm font-medium text-gray-900"
           )%>
@@ -108,12 +108,12 @@
           <div class="mt-1">
             <div class="flex items-center mb-2">
               <%= form.radio_button(
-                :registered,
+                :registration,
                 true,
                 class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
               )%>
               <%= form.label(
-                :registered_true,
+                :registration_true,
                 "Yes",
                 class: "ml-2 text-sm font-medium text-gray-900"
               )%>
@@ -121,12 +121,12 @@
 
             <div class="flex items-center">
               <%= form.radio_button(
-                :registered,
+                :registration,
                 false,
                 class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
               )%>
               <%= form.label(
-                :registered_false,
+                :registration_false,
                 "No",
                 class: "ml-2 text-sm font-medium text-gray-900"
               )%>
@@ -136,7 +136,7 @@
 
         <div class="field">
           <%= form.label(
-            :primary_owner,
+            :primary_ownership,
             "Are you the primary owner?",
             class: "block mb-2 text-sm font-medium text-gray-900"
           )%>
@@ -144,12 +144,12 @@
           <div class="mt-1">
             <div class="flex items-center mb-2">
               <%= form.radio_button(
-                :primary_owner,
+                :primary_ownership,
                 true,
                 class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
               )%>
               <%= form.label(
-                :primary_owner_true,
+                :primary_ownership_true,
                 "Yes",
                 class: "ml-2 text-sm font-medium text-gray-900"
               )%>
@@ -157,12 +157,12 @@
 
             <div class="flex items-center">
               <%= form.radio_button(
-                :primary_owner,
+                :primary_ownership,
                 false,
                 class: "w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500"
               )%>
               <%= form.label(
-                :primary_owner_false,
+                :primary_ownership_false,
                 "No",
                 class: "ml-2 text-sm font-medium text-gray-900"
               )%>
@@ -170,7 +170,7 @@
           </div>
         </div>
 
-        <%= form.submit class: "btn btn--normal btn--primary w-full" %>
+        <%= form.submit "Create Property Record", class: "btn btn--normal btn--primary w-full" %>
       </div>
     <% end %>
 

@@ -16,7 +16,7 @@ module Accounts
       end
 
       def save
-        if valid?
+        if valid?(:create)
           ActiveRecord::Base.transaction do
             apartment = Apartment
               .where(tower_number: tower_number, flat_number: flat_number)
@@ -68,7 +68,7 @@ module Accounts
 
       # Validations
 
-      validates :owner_id, presence: true
+      validates :owner_id, presence: true, on: :create
       validates :property_token, presence: true, on: :update
       validates :tower_number, presence: true
       validates :flat_number, presence: true

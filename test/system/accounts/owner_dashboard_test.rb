@@ -159,9 +159,9 @@ module Accounts
           select "17", from: "property_tower_number"
           fill_in "property_flat_number", with: "2301"
           fill_in "property_purchased_on", with: Time.zone.today - 6.years
-          choose "property_registered_true"
-          choose "property_primary_owner_true"
-          click_on "Create Property"
+          choose "property_registration_true"
+          choose "property_primary_ownership_true"
+          click_on "Create Property Record"
         end
 
         within "#dashboard-properties" do
@@ -200,9 +200,9 @@ module Accounts
 
         within "form#new_property" do
           fill_in "property_purchased_on", with: Time.zone.today - 6.years
-          choose "property_registered_true"
-          choose "property_primary_owner_true"
-          click_on "Create Property"
+          choose "property_registration_true"
+          choose "property_primary_ownership_true"
+          click_on "Create Property Record"
 
           assert_selector "#error_explanation li", text: "Tower number can't be blank"
           assert_selector "#error_explanation li", text: "Flat number can't be blank"
@@ -220,9 +220,9 @@ module Accounts
           select "17", from: "property_tower_number"
           fill_in "property_flat_number", with: "2301"
           fill_in "property_purchased_on", with: Time.zone.today + 6.months
-          choose "property_registered_true"
-          choose "property_primary_owner_true"
-          click_on "Create Property"
+          choose "property_registration_true"
+          choose "property_primary_ownership_true"
+          click_on "Create Property Record"
 
           assert_selector "#error_explanation li", text: "Purchased on date is invalid as it is set in future"
         end

@@ -23,8 +23,8 @@ module Accounts
               tower_number: "17",
               flat_number: "2301",
               purchased_on: Time.current - 6.years,
-              registered: true,
-              primary_owner: true
+              registration: true,
+              primary_ownership: true
             }
           }
 
