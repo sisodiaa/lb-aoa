@@ -32,6 +32,18 @@ module Accounts
         end
       end
 
+      test "that only owner can access his or her  property record" do
+        different_owner = owners(:confirmed_linked_co_owner)
+        owners_property = properties(:registered_property)
+        sign_in different_owner, scope: :owner
+
+        get owners_property_path(owners_property)
+
+        assert_redirected_to root_path
+
+        sign_out :owner
+      end
+
       private
 
       def authenticated_owner

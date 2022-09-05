@@ -74,6 +74,7 @@ module Accounts
 
       def set_property
         @property = current_owner.properties.find_by(property_token: params[:property_token])
+        redirect_to root_path if @property.nil?
       end
 
       def property_params
