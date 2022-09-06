@@ -10,6 +10,18 @@
         </td>
       </tr>
 
+      <tr class="border-b">
+        <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+          Account Status
+        </th>
+        <td class="py-4 px-6 font-medium text-gray-900">
+          <span class="capitalize"><%= current_owner.account_status %></span>
+          <% if current_owner.linked? %>
+            with <%= current_owner.properties.count %> property records
+          <% end %>
+        </td>
+      </tr>
+
       <tr>
         <th scope="row" class="py-4 px-6" colspan="2">
           <%= link_to(
