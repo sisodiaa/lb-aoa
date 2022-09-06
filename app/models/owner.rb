@@ -1,4 +1,6 @@
 class Owner < ApplicationRecord
+  include AASM
+
   has_one :profile, dependent: :destroy, inverse_of: :owner
 
   has_many :properties
@@ -17,6 +19,16 @@ class Owner < ApplicationRecord
     linked: 1,
     archived: 2
   }
+
+  aasm column: :account_status, enum: true, no_direct_assignment: true do
+    state :unlinked, initial: true
+    state :linked
+    state :archived
+
+    event :link do
+      transitions from: :unlinked, to: :linked
+    end
+  end
 
   def devise_mailer
     OwnerMailer
