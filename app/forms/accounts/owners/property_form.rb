@@ -29,7 +29,13 @@ module Accounts
               registered: registration,
               primary_owner: primary_ownership
             )
+
+            owner = Owner.find(owner_id)
+            owner.link! if owner.unlinked?
           end
+          true
+        else
+          false
         end
       end
 

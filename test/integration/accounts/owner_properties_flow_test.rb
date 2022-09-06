@@ -11,6 +11,27 @@ module Accounts
       @confirmed_linked_owner = @registered_property = nil
     end
 
+    test "that linking a property changes account status" do
+      unlinked_owner = owners(:confirmed_unlinked_owner)
+      sign_in unlinked_owner, scope: :owner
+
+      assert unlinked_owner.unlinked?
+
+      post owners_properties_path, params: {
+        property: {
+          tower_number: "17",
+          flat_number: "2301",
+          purchased_on: Time.current - 6.years,
+          registration: true,
+          primary_ownership: true
+        }
+      }
+
+      assert unlinked_owner.reload.linked?
+
+      sign_out :owner
+    end
+
     test "that linking a property also creates a new apartment" do
       authenticated_owner do
         assert_difference "Apartment.count" do
