@@ -9,3 +9,11 @@ apartment_two:
 apartment_three:
   tower_number: 12A
   flat_number: 2102
+
+apartment_four:
+  tower_number: 8
+  flat_number: 304
+
+apartment_five:
+  tower_number: 15
+  flat_number: 403

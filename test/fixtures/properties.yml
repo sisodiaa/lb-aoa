@@ -21,3 +21,19 @@ unregistered_property_co_owner:
   primary_owner: false
   apartment: apartment_two
   owner: confirmed_linked_co_owner
+
+invalid_property:
+  property_token:  <%= SecureRandom.hex(4) %>
+  purchased_on: <%= Time.current - 3.years %>
+  registered: true
+  primary_owner: true
+  apartment: apartment_four
+  owner: confirmed_linked_owner
+
+archived_property:
+  property_token:  <%= SecureRandom.hex(4) %>
+  purchased_on: <%= Time.current - 3.years %>
+  registered: true
+  primary_owner: true
+  apartment: apartment_five
+  owner: archived_owner

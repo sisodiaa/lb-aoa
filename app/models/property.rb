@@ -1,6 +1,7 @@
 class Property < ApplicationRecord
   belongs_to :apartment, inverse_of: :properties
   belongs_to :owner, inverse_of: :properties
+  has_one :membership, dependent: :destroy
 
   before_create :set_property_token
 

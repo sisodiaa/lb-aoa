@@ -1,0 +1,16 @@
+under_review_membership:
+  membership_state: under_review
+  property: unregistered_property
+
+approved_membership:
+  membership_state: approved
+  property: registered_property
+
+rejected_membership:
+  membership_state: rejected
+  remark: "details are invalid"
+  property: invalid_property
+
+archived_membership:
+  membership_state: archived
+  property: archived_property
