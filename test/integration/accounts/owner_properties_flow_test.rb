@@ -85,6 +85,24 @@ module Accounts
       end
     end
 
+    test "that linking a property creates memberhip record" do
+      authenticated_owner do
+        assert_difference "Membership.count" do
+          post owners_properties_path, params: {
+            property: {
+              tower_number: "17",
+              flat_number: "2301",
+              purchased_on: Time.current - 6.years,
+              registration: true,
+              primary_ownership: true
+            }
+          }
+        end
+
+        assert Membership.last.under_review?
+      end
+    end
+
     test "updating a property record" do
       authenticated_owner do
         put owners_property_path(@registered_property), params: {

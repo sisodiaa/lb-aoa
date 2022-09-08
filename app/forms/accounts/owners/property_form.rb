@@ -22,7 +22,7 @@ module Accounts
               .where(tower_number: tower_number, flat_number: flat_number)
               .first_or_create
 
-            Property.create(
+            property = Property.create(
               owner_id: owner_id,
               apartment_id: apartment.id,
               purchased_on: purchased_on,
@@ -32,6 +32,8 @@ module Accounts
 
             owner = Owner.find(owner_id)
             owner.link! if owner.unlinked?
+
+            property.create_membership!
           end
           true
         else
