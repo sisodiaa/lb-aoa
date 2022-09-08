@@ -6,7 +6,7 @@
     <%= property.apartment.flat_number.rjust(2, "0") %>
   </td>
   <td class="py-3 px-1 sm:px-4 lg:px-6 text-gray-900">
-    Approved
+    <%= property.membership.membership_state.humanize %>
   </td>
   <td class="py-3 px-1 sm:px-4 lg:px-6 text-gray-900">
     <%= link_to "Details", [:owners, property], class: "btn btn--small btn--primary-soft" %>

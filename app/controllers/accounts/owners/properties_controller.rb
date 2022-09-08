@@ -68,7 +68,7 @@ module Accounts
       def set_properties
         @properties = current_owner
           .properties
-          .includes(:apartment)
+          .includes(:apartment, :membership)
           .order("purchased_on ASC")
       end
 
