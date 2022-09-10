@@ -2,6 +2,10 @@ under_review_membership:
   membership_state: under_review
   property: unregistered_property
 
+under_review_membership_co_owner:
+  membership_state: under_review
+  property: unregistered_property_co_owner
+
 approved_membership:
   membership_state: approved
   property: registered_property
