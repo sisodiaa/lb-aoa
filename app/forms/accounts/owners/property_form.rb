@@ -66,6 +66,8 @@ module Accounts
             if apartment != old_apartment && old_apartment.properties.count.zero?
               old_apartment.destroy
             end
+
+            property.membership.scrutinize!
           end
 
           true

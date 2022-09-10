@@ -115,6 +115,20 @@ module Accounts
       end
     end
 
+    test "updating a property record would change associated memberhip state to under review" do
+      authenticated_owner do
+        assert @registered_property.membership.approved?
+
+        put owners_property_path(@registered_property), params: {
+          property: {
+            purchased_on: @registered_property.purchased_on - 6.weeks
+          }
+        }
+
+        assert @registered_property.reload.membership.under_review?
+      end
+    end
+
     test "that replacing apartment would delete previously linked apartment" do
       authenticated_owner do
         apartment_id = apartments(:apartment_one).id
