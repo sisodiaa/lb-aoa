@@ -58,11 +58,11 @@ class MembershipTest < ActiveSupport::TestCase
     assert @rejected_membership.under_review?
   end
 
-  test "that `archiving` event changes the membership state from approved to archived" do
+  test "that `archive` event changes the membership state from approved to archived" do
     assert @approved_membership.approved?
     assert_not @approved_membership.archived?
 
-    @approved_membership.archiving
+    @approved_membership.archive
 
     assert_not @approved_membership.approved?
     assert @approved_membership.archived?

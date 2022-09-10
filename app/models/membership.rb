@@ -29,7 +29,7 @@ class Membership < ApplicationRecord
       transitions from: :rejected, to: :under_review
     end
 
-    event :archiving do
+    event :archive do
       transitions from: :approved, to: :archived
     end
   end
