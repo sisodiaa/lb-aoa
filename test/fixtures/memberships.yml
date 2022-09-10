@@ -18,3 +18,11 @@ rejected_membership:
 archived_membership:
   membership_state: archived
   property: archived_property
+
+membership_six:
+  membership_state: approved
+  property: property_six
+
+membership_seven:
+  membership_state: approved
+  property: property_seven

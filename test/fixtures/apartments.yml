@@ -17,3 +17,7 @@ apartment_four:
 apartment_five:
   tower_number: 15
   flat_number: 403
+
+apartment_six:
+  tower_number: 22
+  flat_number: 404

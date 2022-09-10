@@ -134,12 +134,14 @@ module Accounts
         apartment_id = apartments(:apartment_one).id
         assert_equal apartment_id, @registered_property.apartment.id
 
-        put owners_property_path(@registered_property), params: {
-          property: {
-            tower_number: "7",
-            flat_number: "1402"
+        assert_difference "Apartment.count", 0 do
+          put owners_property_path(@registered_property), params: {
+            property: {
+              tower_number: "7",
+              flat_number: "1402"
+            }
           }
-        }
+        end
 
         assert_not_equal apartment_id, @registered_property.reload.apartment.id
         assert_nil Apartment.find_by(id: apartment_id)
@@ -147,21 +149,25 @@ module Accounts
     end
 
     test "updating apartment does not delete previously linked apartment if it has another linked property" do
-      authenticated_owner do
-        apartment_id = apartments(:apartment_two).id
-        unregistered_property = properties(:unregistered_property)
-        assert_equal apartment_id, unregistered_property.apartment.id
+      sign_in owners(:owner_six), scope: :owner
 
-        put owners_property_path(unregistered_property), params: {
+      apartment_id = apartments(:apartment_six).id
+      property = properties(:property_six)
+      assert_equal apartment_id, property.apartment.id
+
+      assert_difference "Apartment.count", 1 do
+        put owners_property_path(property), params: {
           property: {
             tower_number: "7",
             flat_number: "1402"
           }
         }
-
-        assert_not_equal apartment_id, unregistered_property.reload.apartment.id
-        assert_not_nil Apartment.find_by(id: apartment_id)
       end
+
+      assert_not_equal apartment_id, property.reload.apartment.id
+      assert_not_nil Apartment.find_by(id: apartment_id)
+
+      sign_out :owner
     end
 
     private

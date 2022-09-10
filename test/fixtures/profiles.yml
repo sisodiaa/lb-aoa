@@ -32,3 +32,17 @@ confirmed_linked_co_owner:
   middle_name: Dummy
   phone_number: +91-9494949494
   owner: confirmed_linked_co_owner
+
+owner_six:
+  first_name: Sixth
+  last_name: Owner
+  middle_name: Dummy
+  phone_number: +91-9393939393
+  owner: owner_six
+
+owner_seven:
+  first_name: Seventh
+  last_name: Owner
+  middle_name: Dummy
+  phone_number: +91-9292929292
+  owner: owner_seven

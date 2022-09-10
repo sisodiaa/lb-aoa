@@ -118,7 +118,7 @@ module Management
 
       within "#main" do
         within "#approved_memberships" do
-          assert_selector ".membership", count: 1
+          assert_selector ".membership", count: 3
 
           click_on "View Details and Manage", match: :first
         end
@@ -131,7 +131,7 @@ module Management
         end
 
         within "#approved_memberships" do
-          assert_selector ".membership", count: 0
+          assert_selector ".membership", count: 2
         end
       end
 
