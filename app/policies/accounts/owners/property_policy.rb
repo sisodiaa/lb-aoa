@@ -1,13 +1,9 @@
 class Accounts::Owners::PropertyPolicy < ApplicationPolicy
-  def show?
-    record.owner == user
-  end
-
   def edit?
-    record.owner == user
+    record.membership.approved? || record.membership.rejected?
   end
 
   def update?
-    record.owner == user
+    record.membership.approved? || record.membership.rejected?
   end
 end

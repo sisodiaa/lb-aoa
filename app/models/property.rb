@@ -19,6 +19,10 @@ class Property < ApplicationRecord
     apartment&.flat_number
   end
 
+  def policy_class
+    Accounts::Owners::PropertyPolicy
+  end
+
   private
 
   def set_property_token
