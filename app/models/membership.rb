@@ -10,6 +10,11 @@ class Membership < ApplicationRecord
     archived: 3
   }
 
+  validates :remark,
+    presence: true,
+    on: :membership_transition,
+    if: -> { rejected? }
+
   aasm column: :membership_state, enum: true, no_direct_assignment: true do
     state :under_review, initial: true
     state :approved

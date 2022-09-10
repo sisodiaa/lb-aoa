@@ -12,6 +12,11 @@ class MembershipTest < ActiveSupport::TestCase
     @under_review_membership = @approved_membership = @rejected_membership = @archived_membership = nil
   end
 
+  test "that remkark is necessary when rejecting" do
+    @rejected_membership.remark = ""
+    assert_not @rejected_membership.valid?(:membership_transition), "Remark is not present"
+  end
+
   test "that manual assignment of membership state will raise error" do
     assert_raises AASM::NoDirectAssignmentError do
       @under_review_membership.membership_state = :banned
