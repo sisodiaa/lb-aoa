@@ -26,10 +26,6 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :management do
-    get "dashboard", to: "dashboard#index", as: "dashboard"
-  end
-
   devise_for :admins, skip: %i[registrations], controllers: {
     sessions: "accounts/admins/sessions",
     passwords: "accounts/admins/passwords",
@@ -73,6 +69,11 @@ Rails.application.routes.draw do
       end
       resources :properties, except: :destroy, param: :property_token
     end
+  end
+
+  namespace :management do
+    get "dashboard", to: "dashboard#index", as: "dashboard"
+    resources :memberships, only: [:index, :edit, :update]
   end
 
   namespace :cms do

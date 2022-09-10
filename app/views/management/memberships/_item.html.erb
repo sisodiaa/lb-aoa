@@ -1,0 +1,26 @@
+<div
+  id="<%= dom_id(membership) %>"
+  class="membership p-2 bg-white rounded-lg shadow border-b border-b-fuchsia-50"
+  data-dashboard--list-target="item">
+  <h3 class="text-sm text-gray-400">Name</h3>
+  <h1 class="text-base text-gray-800"><%= membership.property.owner.profile.full_name %></h1>
+  
+  <h3 class="mt-2 text-sm text-gray-400">Tower / Flat</h3>
+  <div class="flex justify-between items-center">
+    <p class="text-sm text-gray-800">
+    <%= membership.property.apartment.tower_number.rjust(2, "0") %> /
+    <%= membership.property.apartment.flat_number.rjust(2, "0") %> 
+    </p>
+    <%= link_to(
+      "View Details and Manage", 
+      edit_management_membership_path(membership),
+        data: {
+          turbo_frame: "membership-details"
+        },
+      class: "py-1 px-3 text-xs font-medium text-gray-600
+      bg-white rounded-md border border-gray-200
+      hover:bg-gray-100 hover:text-lb-500 focus:z-10
+      focus:ring-2 focus:ring-lb-500 focus:text-lb-500"
+    )%>
+  </div>
+</div>

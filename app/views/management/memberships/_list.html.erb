@@ -1,0 +1,19 @@
+<div class="px-2 py-2 bg-fuchsia-50 rounded-lg shadow">
+  <h1 class="mb-4 text-2xl text-lb-500 font-bold capitalize">
+    <%= status&.humanize %> memberships
+  </h1>
+
+  <div class="space-y-3">
+    <%= render partial: "item", collection: memberships, as: :membership %>
+
+    <%= render(
+      partial: "navigation_controls",
+      locals: {
+        pagy: pagy,
+        prev_path: pagy.prev ? management_memberships_path(status: status, page: pagy.prev) : "#",
+        next_path: pagy.next ? management_memberships_path(status: status, page: pagy.next) : "#",
+        status: "#{status&.humanize} memberships"
+      }
+    )%>
+  </div>
+</div>

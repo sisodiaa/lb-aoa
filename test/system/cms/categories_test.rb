@@ -25,7 +25,7 @@ module CMS
     test "cancel category creation flow" do
       visit_category_form
       click_on "Cancel"
-      assert_selector ".card", count: 3
+      assert_selector ".card", count: 4
     end
 
     test "updating a Category" do
