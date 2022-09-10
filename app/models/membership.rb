@@ -33,4 +33,10 @@ class Membership < ApplicationRecord
       transitions from: :approved, to: :archived
     end
   end
+
+  def actions
+    return ["approve", "reject"] if under_review?
+    return ["archive"] if approved?
+    []
+  end
 end
