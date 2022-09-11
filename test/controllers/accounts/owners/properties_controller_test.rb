@@ -5,10 +5,11 @@ module Accounts
     class PropertiesControllerTest < ActionDispatch::IntegrationTest
       setup do
         @confirmed_linked_owner = owners(:confirmed_linked_owner)
+        @under_review_property = properties(:unregistered_property)
       end
 
       teardown do
-        @confirmed_linked_owner = nil
+        @confirmed_linked_owner = @under_review_property = nil
       end
 
       test "#authenticate_owner!" do
@@ -42,6 +43,20 @@ module Accounts
         assert_redirected_to root_path
 
         sign_out :owner
+      end
+
+      test "that under review membership can not be edited" do
+        authenticated_owner do
+          get edit_owners_property_path(@under_review_property)
+          assert_redirected_to root_path
+        end
+      end
+
+      test "that under review membership can not be updated" do
+        authenticated_owner do
+          put owners_property_path(@under_review_property)
+          assert_redirected_to root_path
+        end
       end
 
       private

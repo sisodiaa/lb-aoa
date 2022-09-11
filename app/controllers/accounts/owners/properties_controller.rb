@@ -33,6 +33,8 @@ module Accounts
       end
 
       def edit
+        authorize @property
+
         @property_form = Accounts::Owners::PropertyForm.new(
           tower_number: @property.apartment.tower_number,
           flat_number: @property.apartment.flat_number,
@@ -43,6 +45,8 @@ module Accounts
       end
 
       def update
+        authorize @property
+
         @property_form = Accounts::Owners::PropertyForm.new(
           property_token: @property.property_token,
           tower_number: property_params[:tower_number] || @property.apartment.tower_number,
@@ -61,6 +65,10 @@ module Accounts
         else
           render :edit, status: :unprocessable_entity
         end
+      end
+
+      def pundit_user
+        current_owner
       end
 
       private
