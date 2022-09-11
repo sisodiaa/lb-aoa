@@ -17,7 +17,8 @@
         <td class="py-4 px-6 font-medium text-gray-900">
           <span class="capitalize"><%= current_owner.account_status %></span>
           <% if current_owner.linked? %>
-            with <%= current_owner.properties.count %> property records
+            with <%= current_owner.properties.count %> property
+            <%= "record".pluralize(current_owner.properties.count) %>
           <% end %>
         </td>
       </tr>
