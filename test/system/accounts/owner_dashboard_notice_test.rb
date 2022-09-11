@@ -21,5 +21,17 @@ module Accounts
 
       logout :owner
     end
+
+    test "show notice if profile is not complete" do
+      owner_with_incomplete_profile = owners(:owner_seven)
+      login_as owner_with_incomplete_profile, scope: :owner
+
+      visit owners_dashboard_url
+
+      assert_no_selector "#account-linking-notice"
+      assert_selector "#profile-notice"
+
+      logout :owner
+    end
   end
 end
