@@ -43,6 +43,5 @@ owner_six:
 owner_seven:
   first_name: Seventh
   last_name: Owner
-  middle_name: Dummy
   phone_number: +91-9292929292
   owner: owner_seven

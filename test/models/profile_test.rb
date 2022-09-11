@@ -41,4 +41,9 @@ class ProfileTest < ActiveSupport::TestCase
       assert @confirmed_linked_owner.valid?, "#{valid_phone_number.inspect} is valid"
     end
   end
+
+  test "#complete?" do
+    assert @confirmed_linked_owner.complete?
+    assert_not profiles(:owner_seven).complete?
+  end
 end
