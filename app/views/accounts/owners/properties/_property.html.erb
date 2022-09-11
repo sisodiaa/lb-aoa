@@ -1,4 +1,4 @@
-<tr class="border-b text-center">
+<tr id="<%= dom_id(property) %>" class="border-b text-center">
   <td class="py-3 px-1 sm:px-4 lg:px-6 text-gray-900">
     <%= property.apartment.tower_number.rjust(2, "0") %>
   </td>
@@ -12,6 +12,8 @@
     <%= link_to "Details", [:owners, property], class: "btn btn--small btn--primary-soft" %>
   </td>
   <td class="py-3 px-1 sm:px-4 lg:px-6 text-gray-900">
-    <%= link_to "Edit", edit_owners_property_path(property), class: "btn btn--small btn--secondary" %>
+    <% if policy(property).edit? %>
+      <%= link_to "Edit", edit_owners_property_path(property), class: "btn btn--small btn--secondary" %>
+    <% end %>
   </td>
 </tr>

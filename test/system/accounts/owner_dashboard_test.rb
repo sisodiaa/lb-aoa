@@ -312,6 +312,20 @@ module Accounts
       end
     end
 
+    test "that `edit` button is not shown for under review properties" do
+      property = @confirmed_linked_owner.properties.order("purchased_on ASC").last
+
+      visit owners_dashboard_url
+
+      within "#dashboard-tabs" do
+        click_on "Properties"
+      end
+
+      within "tr##{dom_id(property)}" do
+        assert_no_selector "a.btn", text: "Edit"
+      end
+    end
+
     private
 
     def access_profile_edit_form_on_dashboard
