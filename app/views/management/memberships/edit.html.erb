@@ -22,6 +22,30 @@
       <ul class="mb-4 flex gap-x-12 items-center">
         <li>
           <h3 class="text-sm text-gray-400">
+            Email Address
+          </h3>
+          <p class="text-base text-gray-800">
+            <%= @membership.property.owner.email %>
+          </p>
+        </li>
+
+        <li>
+          <h3 class="text-sm text-gray-400">
+            Phone Nunber
+          </h3>
+          <p class="text-base text-gray-800">
+            <% if @membership.property.owner.profile.phone_number.blank? %>
+              &nbsp;
+            <% else %>
+              <%= @membership.property.owner.profile.phone_number %>
+            <% end %>
+          </p>
+        </li>
+      </ul>
+
+      <ul class="mb-4 flex gap-x-12 items-center">
+        <li>
+          <h3 class="text-sm text-gray-400">
             First Name
           </h3>
           <p class="text-base text-gray-800">
