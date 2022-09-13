@@ -19,7 +19,7 @@ module Management
         @model.email = ""
 
         assert_not @model.valid?
-        assert_equal ["can't be blank"], @model.errors[:email]
+        assert_equal ["can not be blank"], @model.errors[:email]
       end
     end
   end
