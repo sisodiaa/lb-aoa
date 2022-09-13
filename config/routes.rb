@@ -74,6 +74,8 @@ Rails.application.routes.draw do
   namespace :management do
     get "dashboard", to: "dashboard#index", as: "dashboard"
     resources :memberships, only: [:index, :edit, :update]
+
+    get "search/owners", to: "search/owners#index", as: :search_owners
   end
 
   namespace :cms do

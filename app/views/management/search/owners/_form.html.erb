@@ -1,0 +1,54 @@
+<%= form_with(
+  model: owners_form,
+  scope: "",
+  url: management_search_owners_path,
+  id: "search_owners_form",
+  method: :get,
+  class: "w-3/5",
+  data: { turbo_action: "advance" }
+) do |form| %>
+  <% if owners_form.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
+      <h2 class="font-medium mb-2">
+        <%= pluralize(owners_form.errors.count, "error") %> prohibited this search from being performed
+      </h2>
+
+      <ul role="list" class="list-inside list-disc">
+        <% owners_form.errors.full_messages.each do |message| %>
+          <li class="font-light"><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h3 class="text-xl font-medium text-gray-900 mb-4">
+    Search for Owner by email address
+  </h3>
+
+  <div class="field mb-4">
+    <%= form.label :email, class: "block mb-2 text-sm font-medium text-gray-900" %>
+
+    <div class="relative mt-1">
+      <div class="flex absolute inset-y-0 left-0 items-center pl-3
+        pointer-events-none text-gray-400">
+        <svg
+          class="w-5 h-5 fill-[none] stroke-current stroke-2"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <%= svg_icon("feather-sprite.svg", "mail") %>
+        </svg>
+      </div>
+
+      <%= form.email_field(
+        :email,
+        class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+        rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+        w-full pl-10 p-2.5"
+      )%>
+    </div>
+  </div>
+
+  <div class="action">
+    <%= form.submit "Search", class: "btn btn--normal btn--primary" %>
+  </div>
+<% end %>
