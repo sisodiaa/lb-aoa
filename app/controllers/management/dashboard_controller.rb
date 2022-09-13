@@ -17,6 +17,9 @@ module Management
       @approved_memberships_count = Membership.approved.count
       @rejected_memberships_count = Membership.rejected.count
       @archived_memberships_count = Membership.archived.count
+
+      @linked_owners_count = Owner.linked.count
+      @unlinked_owners_count = Owner.unlinked.count
     end
   end
 end
