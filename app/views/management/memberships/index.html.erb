@@ -150,7 +150,7 @@
     <%= turbo_frame_tag(
       "#{@status}_memberships"
     )do %>
-      <%= render partial: "list", locals: {
+      <%= render partial: "management/memberships/list", locals: {
         status: @status, memberships: @memberships, pagy: @pagy 
       } %>
     <% end %>

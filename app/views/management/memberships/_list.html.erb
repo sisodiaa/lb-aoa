@@ -4,10 +4,10 @@
   </h1>
 
   <div class="space-y-3">
-    <%= render partial: "item", collection: memberships, as: :membership %>
+    <%= render partial: "management/memberships/item", collection: memberships, as: :membership %>
 
     <%= render(
-      partial: "navigation_controls",
+      partial: "management/memberships/navigation_controls",
       locals: {
         pagy: pagy,
         prev_path: pagy.prev ? management_memberships_path(status: status, page: pagy.prev) : "#",

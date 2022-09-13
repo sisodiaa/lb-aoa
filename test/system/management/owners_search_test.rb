@@ -48,7 +48,22 @@ module Management
       end
     end
 
-    test "show results" do
+    test "do not show memberships link button if owner account is unlinked" do
+      owner = owners(:confirmed_unlinked_owner)
+
+      visit management_search_owners_url
+
+      within "form#search_owners_form" do
+        fill_in "email", with: owner.email
+        click_on "Search"
+      end
+
+      within "#owners ##{dom_id(owner)}" do
+        assert_no_selector "a", text: "View linked memberships"
+      end
+    end
+
+    test "show results and navigate to linked memberships" do
       owner = owners(:confirmed_linked_owner)
 
       visit management_search_owners_url
@@ -58,7 +73,12 @@ module Management
         click_on "Search"
       end
 
-      assert_selector "#owners ##{dom_id(owner)}"
+      within "#owners ##{dom_id(owner)}" do
+        click_on "View linked memberships"
+      end
+
+      assert_selector "#membership-details"
+      assert_selector "#_memberships"
     end
   end
 end

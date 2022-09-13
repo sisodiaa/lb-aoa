@@ -76,6 +76,7 @@ Rails.application.routes.draw do
     resources :memberships, only: [:index, :edit, :update]
 
     get "search/owners", to: "search/owners#index", as: :search_owners
+    get "owners/:owner_id/memberships", to: "owners/memberships#index", as: :owners_memberships
   end
 
   namespace :cms do

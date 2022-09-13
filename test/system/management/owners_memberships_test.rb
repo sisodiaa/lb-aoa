@@ -171,5 +171,28 @@ module Management
         end
       end
     end
+
+    test "appoving a membership selected from owner's membership list" do
+      owner = owners(:confirmed_linked_owner)
+
+      visit management_owners_memberships_url(owner)
+
+      within "#_memberships" do
+        assert_selector ".membership", count: 3
+
+        click_on "View Details and Manage", match: :first
+      end
+
+      within "#membership-details form" do
+        select "Approve", from: "membership_transition"
+        click_on "Update Membership"
+      end
+
+      within "#_memberships" do
+        assert_selector ".membership", count: 3
+      end
+
+      assert_selector "[role='toast']", text: "Membership state was successfully updated."
+    end
   end
 end

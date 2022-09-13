@@ -9,5 +9,16 @@
     <p class="text-sm text-gray-800 capitalize">
       <%= owner.account_status %>
     </p>
+    <% unless owner.unlinked? %>
+      <%= link_to(
+        "View linked memberships", 
+        management_owners_memberships_path(owner),
+        data: { turbo_action: "advance" },
+        class: "py-1 px-3 text-xs font-medium text-gray-600
+        bg-white rounded-md border border-gray-200
+        hover:bg-gray-100 hover:text-lb-500 focus:z-10
+        focus:ring-2 focus:ring-lb-500 focus:text-lb-500"
+      )%>
+    <% end %>
   </div>
 </div>
