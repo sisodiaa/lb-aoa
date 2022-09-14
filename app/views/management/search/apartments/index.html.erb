@@ -4,7 +4,10 @@
 
     <% if @apartments_form.tower_number.present? && @apartments_form.flat_number.present? %>
       <div id="apartments" class="mt-8">
-        <%= render(@apartments) || "No record found for Flat #{@apartments_form.flat_number} of Tower #{@apartments_form.tower_number}" %>
+        <%= render(@apartments) || (
+          "No record found for Flat #{@apartments_form.flat_number} of
+           Tower #{@apartments_form.tower_number}"
+        )%>
       </div>
     <% end %>
   </div>
