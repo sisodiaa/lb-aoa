@@ -47,6 +47,17 @@
           </td>
         </tr>
 
+        <% if @property.membership.rejected? %>
+          <tr class="border-b">
+            <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+              Reason for rejection
+            </th>
+            <td class="py-4 px-6 font-medium text-gray-900">
+              <%= @property.membership.remark %>
+            </td>
+          </tr>
+        <% end %>
+
         <tr>
           <th scope="row" class="py-4 px-6" colspan="2">
             <%= link_to(

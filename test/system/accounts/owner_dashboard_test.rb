@@ -244,7 +244,7 @@ module Accounts
       end
     end
 
-    test "show property detials on dashboard" do
+    test "show property details on dashboard" do
       property = @confirmed_linked_owner.properties.order("purchased_on ASC").first
 
       visit owners_dashboard_url
@@ -271,6 +271,25 @@ module Accounts
       end
 
       assert_selector "#dashboard-properties"
+    end
+
+    test "show reason for rejection in property details section" do
+      visit owners_dashboard_url
+
+      within "#dashboard-tabs" do
+        click_on "Properties"
+      end
+
+      within "#dashboard-properties" do
+        within :xpath, "//table/tbody/tr[2]" do
+          click_on "Details"
+        end
+      end
+
+      within "#dashboard-property" do
+        assert_selector :xpath, "//table/tbody/tr[6]/td", text: "details are invalid"
+        assert_selector :xpath, "//table/tbody/tr[7]/th/a", text: "Go Back"
+      end
     end
 
     test "update property record" do
