@@ -77,6 +77,8 @@ Rails.application.routes.draw do
 
     get "search/owners", to: "search/owners#index", as: :search_owners
     get "owners/:owner_id/memberships", to: "owners/memberships#index", as: :owners_memberships
+
+    get "search/apartments", to: "search/apartments#index", as: :search_apartments
   end
 
   namespace :cms do
