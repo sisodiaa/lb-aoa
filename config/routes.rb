@@ -79,6 +79,7 @@ Rails.application.routes.draw do
     get "owners/:owner_id/memberships", to: "owners/memberships#index", as: :owners_memberships
 
     get "search/apartments", to: "search/apartments#index", as: :search_apartments
+    get "apartments/:apartment_id/memberships", to: "apartments/memberships#index", as: :apartments_memberships
   end
 
   namespace :cms do

@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 module Management
-  class OwnersSearchTest < ApplicationSystemTestCase
+  class ApartmentsSearchTest < ApplicationSystemTestCase
     setup do
       Warden.test_mode!
       @confirmed_board_admin = admins(:confirmed_board_admin)
@@ -14,7 +14,7 @@ module Management
       Warden.test_reset!
     end
 
-    test "that only search form is displayed on inital request with any search params" do
+    test "that only search form is displayed on inital request without any search params" do
       visit management_search_apartments_url
 
       within "form#search_apartments_form" do
@@ -60,20 +60,24 @@ module Management
       end
     end
 
-    test "show results" do
-      apartment = apartments(:apartment_six)
+    test "show results and navigate to linked memberships" do
+      apartment = apartments(:apartment_two)
 
       visit management_search_apartments_url
 
       within "form#search_apartments_form" do
-        fill_in "tower_number", with: "22"
-        fill_in "flat_number", with: "404"
+        fill_in "tower_number", with: "9"
+        fill_in "flat_number", with: "2105"
         click_on "Search"
       end
 
       within "#apartments ##{dom_id(apartment)}" do
         assert_selector "p", text: "2 record(s) linked"
+        click_on "View linked memberships"
       end
+
+      assert_selector "#membership-details"
+      assert_selector "#_memberships"
     end
   end
 end
