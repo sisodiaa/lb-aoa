@@ -20,6 +20,8 @@ module Management
 
       @linked_owners_count = Owner.linked.count
       @unlinked_owners_count = Owner.unlinked.count
+
+      @apartments_count = Apartment.count
     end
   end
 end
