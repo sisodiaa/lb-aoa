@@ -13,7 +13,11 @@
       </h3>
 
       <div class="field">
-        <%= f.label :email, class: "block mb-2 text-sm font-medium text-gray-900" %>
+        <%= f.label(
+          :email,
+          "Owner's e-mail address",
+          class: "block mb-2 text-sm font-medium text-gray-900"
+        )%>
 
         <div class="relative mt-1">
           <div class="flex absolute inset-y-0 left-0 items-center pl-3
@@ -35,11 +39,17 @@
                     w-full pl-10 p-2.5"
           )%>
         </div>
+        <p class="mt-2 text-xs text-gray-500">Enter the email used in your property documents</p>
       </div>
 
       <%= f.fields_for :profile do |profile_form| %>
         <div class="field">
-          <%= profile_form.label :first_name, class: "block mb-2 text-sm font-medium text-gray-900" %>
+          <%= profile_form.label(
+            :first_name,
+            "Owner's First Name",
+            class: "block mb-2 text-sm font-medium text-gray-900"
+          )%>
+
 
           <div class="relative mt-1">
             <div class="flex absolute inset-y-0 left-0 items-center pl-3
@@ -62,7 +72,11 @@
         </div>
 
         <div class="field">
-          <%= profile_form.label :last_name, class: "block mb-2 text-sm font-medium text-gray-900" %>
+          <%= profile_form.label(
+            :last_name,
+            "Owner's Last Name",
+            class: "block mb-2 text-sm font-medium text-gray-900"
+          )%>
 
           <div class="relative mt-1">
             <div class="flex absolute inset-y-0 left-0 items-center pl-3
@@ -88,9 +102,6 @@
       <div class="field">
         <div class="block mb-2 text-sm font-medium text-gray-900">
           <%= f.label :password %>
-          <% if @minimum_password_length %>
-            (<%= @minimum_password_length %> characters minimum)
-          <% end %>
         </div>
 
         <div class="relative mt-1">
@@ -112,6 +123,11 @@
                     w-full pl-10 p-2.5"
           )%>
         </div>
+        <% if @minimum_password_length %>
+          <p class="mt-2 text-xs text-gray-500">
+            <%= @minimum_password_length %> characters minimum
+          </p>
+        <% end %>
       </div>
 
       <div class="field">
