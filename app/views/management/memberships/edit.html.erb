@@ -142,7 +142,7 @@
             <%= form.label :transition, "Transition to", class: "capitalize text-sm text-gray-400" %>
             <%= form.select(
               :transition,
-              @membership.actions.map { |w| [w.humanize, w] },
+              transition_actions(@status).map { |w| [w.humanize, w] },
               {},
               class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-1/4 px-2 py-0.5"
             )%>
