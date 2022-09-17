@@ -72,10 +72,4 @@ class MembershipTest < ActiveSupport::TestCase
     assert_not @approved_membership.approved?
     assert @approved_membership.archived?
   end
-
-  test "#actions" do
-    assert_includes @under_review_membership.actions, "approve", "Approve action is missing"
-    assert_includes @under_review_membership.actions, "reject", "Reject action is missing"
-    assert_includes @approved_membership.actions, "archive", "Archive action is missing"
-  end
 end
