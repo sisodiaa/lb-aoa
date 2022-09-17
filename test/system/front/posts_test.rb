@@ -24,7 +24,6 @@ module Front
 
     test "#index" do
       visit posts_url
-      assert_selector ".post-skeleton"
       assert_selector ".post", count: 6
 
       click_link "Next"
