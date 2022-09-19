@@ -52,7 +52,8 @@ module Accounts
 
       assert_selector(
         "[role='toast']",
-        text: "Your email address has been successfully confirmed."
+        text: "Your email address has been successfully confirmed. " \
+        "Please sign in and link your property with your account."
       )
     end
 

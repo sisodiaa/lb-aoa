@@ -6,4 +6,8 @@
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
 
+<p>
+  After confirming your account's email, please sign in to LBAOA web app and link your property with your account.
+</p>
+
 <%= render partial: "accounts/owners/mailer/footer" %>
