@@ -11,8 +11,10 @@ module FlashMessagesHelper
       data: {toast_target: "notificationsContainer"}
     ) do
       flash.each do |type, message|
-        concat(toast(type, message))
-        flash.discard(type)
+        if ["notice", "success", "error", "alert"].include?(type)
+          concat(toast(type, message))
+          flash.discard(type)
+        end
       end
     end
   end
