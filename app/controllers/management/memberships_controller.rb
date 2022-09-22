@@ -35,7 +35,9 @@ module Management
         .includes(property: [:apartment, {owner: [:profile]}])
         .try!(@status.to_sym)
     rescue NoMethodError
-      Membership.all.order(created_at: :asc)
+      Membership
+        .includes(property: [:apartment, {owner: [:profile]}])
+        .order(created_at: :asc)
     end
 
     def set_membership
