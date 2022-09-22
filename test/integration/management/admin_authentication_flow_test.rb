@@ -10,6 +10,18 @@ module Management
       @confirmed_board_admin = nil
     end
 
+    test "that email is dispatched when admin account is created through console" do
+      assert_emails 1 do
+        Admin.create!(
+          email: "new_admin@example.com",
+          first_name: "New",
+          last_name: "Admin",
+          password: "password",
+          password_confirmation: "password"
+        )
+      end
+    end
+
     test "that admin can not change its email" do
       sign_in @confirmed_board_admin, scope: :admin
 
