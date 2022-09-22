@@ -7,7 +7,8 @@ module FlashMessagesHelper
 
   def toast_wrapper
     tag.div(
-      class: "flex flex-col"
+      class: "absolute flex flex-col gap-y-2 right-4 z-20",
+      data: {toast_target: "notificationsContainer"}
     ) do
       flash.each do |type, message|
         concat(toast(type, message))
@@ -19,7 +20,7 @@ module FlashMessagesHelper
   def toast(type, message)
     tag.div(
       class: "flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow "\
-             "absolute right-4 transition-opacity z-20 "\
+             "transition-opacity "\
              "#{Rails.env.test? ? "duration-300" : "duration-1000"}",
       role: "toast",
       data: {
@@ -51,7 +52,7 @@ module FlashMessagesHelper
              "rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100"\
              "inline-flex h-8 w-8",
       type: "button",
-      data: {action: "click->toast#close"},
+      data: {action: "click->toast#discard"},
       aria: {label: "Close"}
     ) do
       concat(tag.span("Close", class: "sr-only"))
