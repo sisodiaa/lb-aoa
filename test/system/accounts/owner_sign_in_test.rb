@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 module Accounts
   class OwnerSignInTest < ApplicationSystemTestCase
-    test "signing in" do
+    test "signing in and signing out" do
       visit new_owner_session_url
 
       within("form#new_owner") do
@@ -13,6 +13,13 @@ module Accounts
 
       assert_selector "[role='toast']", text: "Signed in successfully."
       assert_equal owner_root_path, current_path
+
+      within "nav" do
+        click_on "Sign out"
+      end
+
+      assert_selector "[role='toast']", text: "Signed out successfully."
+      assert_equal root_path, current_path
     end
 
     test "failed signing in" do
