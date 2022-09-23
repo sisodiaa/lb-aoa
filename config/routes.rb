@@ -92,6 +92,7 @@ Rails.application.routes.draw do
   end
 
   patch "cms/posts/:id/publish", to: "cms/publications#update", as: "publish_cms_post"
+  patch "cms/posts/:id/classify", to: "cms/classifications#update", as: "classify_cms_post"
 
   namespace :tms do
     resources :tenders do
