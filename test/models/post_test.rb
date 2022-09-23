@@ -41,40 +41,40 @@ class PostTest < ActiveSupport::TestCase
     end
   end
 
-  test "that broadcast event changes the visibility of a published post" do
+  test "that `declassify` event changes the visibility of a published post" do
     assert @published_post.members?
     assert_not @published_post.visitors?
 
-    @published_post.broadcast
+    @published_post.declassify
 
     assert_not @published_post.members?
     assert @published_post.visitors?
   end
 
-  test "that narrowcast event changes the visibility of a public post" do
+  test "that `classify` event changes the visibility of a public post" do
     assert @public_post.visitors?
     assert_not @public_post.members?
 
-    @public_post.narrowcast
+    @public_post.classify
 
     assert_not @public_post.visitors?
     assert @public_post.members?
   end
 
-  test "that broadcast event on a draft post raises InvalidTransition error" do
-    assert_raise(AASM::InvalidTransition) { @draft_post.broadcast }
+  test "that `declassify` event on a draft post raises InvalidTransition error" do
+    assert_raise(AASM::InvalidTransition) { @draft_post.declassify }
   end
 
-  test "that broadcast event raises error when post is visible to visitors" do
-    assert_raise(AASM::InvalidTransition) { @public_post.broadcast }
+  test "that `declassify` event raises error when post is visible to visitors" do
+    assert_raise(AASM::InvalidTransition) { @public_post.declassify }
   end
 
-  test "that narrowcast event on a draft post raises InvalidTransition error" do
-    assert_raise(AASM::InvalidTransition) { @draft_post.narrowcast }
+  test "that `classify` event on a draft post raises InvalidTransition error" do
+    assert_raise(AASM::InvalidTransition) { @draft_post.classify }
   end
 
-  test "that narrowcast event raises error when post is visible to members" do
-    assert_raise(AASM::InvalidTransition) { @published_post.narrowcast }
+  test "that `classify` event raises error when post is visible to members" do
+    assert_raise(AASM::InvalidTransition) { @published_post.classify }
   end
 
   test "that manual assignment of visibility_state will raise error" do
@@ -92,5 +92,20 @@ class PostTest < ActiveSupport::TestCase
     @draft_post.tags_list = "one, two, three, four, five, six"
     assert_not @draft_post.valid?, "Post can not be more than 5 tags"
     assert_equal ["should not have more than 5 tags"], @draft_post.errors[:tags_list]
+  end
+
+  test "#toggle_visibility" do
+    assert @public_post.visitors?
+    assert_not @public_post.members?
+
+    @public_post.toggle_visibility
+
+    assert_not @public_post.visitors?
+    assert @public_post.members?
+
+    @public_post.toggle_visibility
+
+    assert @public_post.visitors?
+    assert_not @public_post.members?
   end
 end

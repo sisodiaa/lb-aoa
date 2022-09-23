@@ -14,8 +14,8 @@ class Post < ApplicationRecord
   }
 
   enum visibility_state: {
-    visitors: 0,
-    members: 1
+    members: 0,
+    visitors: 1,
   }
 
   validates :title, presence: true, length: {maximum: 256}
@@ -46,14 +46,19 @@ class Post < ApplicationRecord
     state :members, initial: true
     state :visitors
 
-    # Casting can only be performed on a published post
-    event :broadcast do
-      transitions from: :members, to: :visitors, if: :published?
-    end
-
-    event :narrowcast do
+    # Classification can only be performed on a published post
+    event :classify do
       transitions from: :visitors, to: :members, if: :published?
     end
+
+    event :declassify do
+      transitions from: :members, to: :visitors, if: :published?
+    end
+  end
+
+  def toggle_visibility
+    return classify if visitors?
+    declassify
   end
 
   def tags_list

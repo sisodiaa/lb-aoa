@@ -118,7 +118,7 @@ mygate_notification:
 parking_stickers:
   title: Issuance of new parking sticker for vehicles parked in basement
   publication_state: draft
-  visibility_state: members
+  visibility_state: visitors
   category: helpdesk
 
 club_ac:
@@ -130,5 +130,5 @@ club_ac:
 wash_basin:
   title: Wash basins installed for visitors
   publication_state: draft
-  visibility_state: members
+  visibility_state: visitors
   category: technical
