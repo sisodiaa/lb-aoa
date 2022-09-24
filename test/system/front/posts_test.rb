@@ -17,6 +17,7 @@ module Front
     test "#show post cotent and attachments" do
       visit post_url(@published_post_1)
 
+      assert_selector ".visibility-status"
       assert_selector "h1", text: @published_post_1.title
       assert_selector ".trix-content"
       assert_selector "turbo-frame#attachments li", count: 1
@@ -25,9 +26,11 @@ module Front
     test "#index" do
       visit posts_url
       assert_selector ".post", count: 6
+      assert_selector ".visibility-status", count: 5
 
       click_link "Next"
       assert_selector ".post", count: 3
+      assert_selector ".visibility-status", count: 3
     end
 
     test "clicking category lists all published posts belonging to the category" do
@@ -43,6 +46,7 @@ module Front
     test "clicking date lists all posts published on that date" do
       visit post_url(@published_post_2)
 
+      assert_no_selector ".visibility-status"
       click_link @published_post_2.published_at.strftime("%d %B %Y")
 
       within "#results" do

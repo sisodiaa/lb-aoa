@@ -36,5 +36,14 @@
         )%>
       <% end %>
     </div>
+
+    <% if post.published? %>
+      <div class="visibility-status inline-flex items-center justify-center px-2 rounded-lg
+                  text-white <%= post.members? ? 'bg-blue-600' : 'bg-green-500' %>">
+        <span class="text-xs capitalize">
+          <%= post.visibility_state %>
+        </span>
+      </div>
+    <% end %>
   </div>
 </div>

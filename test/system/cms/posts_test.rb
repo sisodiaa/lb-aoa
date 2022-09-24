@@ -69,6 +69,18 @@ module CMS
       assert_no_selector "button", text: "Publish Post"
     end
 
+    test "do not show visibility status for drafts" do
+      visit cms_posts_url(status: "draft", page: 1)
+      assert_no_selector ".visibility-status"
+    end
+
+    test "show visibility status for published posts" do
+      visit cms_posts_url(status: "published", page: 1)
+      assert_selector ".visibility-status", count: 5
+      assert_selector ".visibility-status span", count: 4, text: "Members"
+      assert_selector ".visibility-status span", count: 1, text: "Visitors"
+    end
+
     private
 
     def create_new_post
