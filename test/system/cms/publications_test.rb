@@ -26,6 +26,7 @@ module CMS
 
       click_button "Publish Post"
 
+      assert_selector "#post-toggler"
       assert_selector :css, "[role='toast']", text: "Post was successfully published."
 
       logout :admin

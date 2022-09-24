@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import Cms__VisibilityToggleController from "./cms/visibility_toggle_controller.js"
+application.register("cms--visibility-toggle", Cms__VisibilityToggleController)
+
 import CmsEditorController from "./cms_editor_controller.js"
 application.register("cms-editor", CmsEditorController)
 

@@ -59,6 +59,12 @@
     <% end %>
   </div>
 
+  <%= turbo_frame_tag "post-toggler" do %>
+    <% if post.published? %>
+      <%= render partial: "post_toggler", locals: { post: post } %>
+    <% end %>
+  <% end %>
+
   <div class="text-gray-800 mb-6">
     <%= post.content %>
   </div>

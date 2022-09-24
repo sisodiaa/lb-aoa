@@ -10,6 +10,7 @@ module CMS
         respond_to do |format|
           format.turbo_stream do
             flash.now[:success] = "Visibility state was successfully modified."
+            render "cms/posts/classifications"
           end
 
           format.html do

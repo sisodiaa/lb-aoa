@@ -1,0 +1,45 @@
+<div class="field mb-6 p-4 border border-teal-100 rounded-lg bg-teal-50">
+  <h3 class="block mb-2 text-base font-medium text-gray-900">
+    Visible to
+  </h3>
+
+  <%= form_with(
+    model: post,
+    url: classify_cms_post_path(post),
+    method: :patch,
+    class: "inline-flex gap-x-4 items-center",
+    id: dom_id(post, :visibility),
+    data: {
+      controller: "cms--visibility-toggle",
+      cms__visibility_toggle_target: "form"
+    }
+  ) do |form| %>
+    <span class="text-sm font-medium text-gray-700">Members Only</span>
+
+    <%= form.label(
+      :visibility_state,
+      "",
+      class: "inline-flex relative items-center cursor-pointer"
+    ) do %>
+    <%= form.check_box(
+      :visibility_state,
+      {
+        class: "sr-only peer",
+        checked: post.visitors?,
+        data: { action: "cms--visibility-toggle#submit" }
+      },
+      "members", "visitors"
+    ) %>
+
+      <div class="w-14 h-7 bg-blue-600 peer-focus:outline-none peer-focus:ring-4
+                  peer-focus:ring-teal-300 rounded-full peer
+                  peer-checked:after:translate-x-full peer-checked:after:border-white
+                  after:content-[''] after:absolute after:top-0.5 after:left-[4px]
+                  after:bg-white after:border-green-500 after:border after:rounded-full
+                  after:h-6 after:w-6 after:transition-all peer-checked:bg-green-500">
+      </div>
+    <% end %>
+
+    <span class="text-sm font-medium text-gray-700">All Visitors</span>
+  <% end %>
+</div>
