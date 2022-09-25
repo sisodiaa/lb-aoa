@@ -28,12 +28,14 @@
                 <%= svg_icon("feather-sprite.svg", "folder") %>
               </svg>
 
-              <%= link_to(
-                @post.category.name,
-                search_posts_path(category_id: @post.category.id),
-                data: { turbo_frame: "container", turbo_action: "advance" },
-                class: "inline-block mx-2 text-sm capitalize"
-              )%>
+              <span class="inline-block mx-2 text-sm capitalize">
+                <%= link_to_if(
+                  policy(Front::Search::PostForm.new).new?,
+                  @post.category.name,
+                  search_posts_path(category_id: @post.category.id),
+                  data: { turbo_frame: "container", turbo_action: "advance" }
+                )%>
+              </span>
             </div>
 
             <div class="inline-flex items-center justify-center p-1 text-blue-600
@@ -45,15 +47,17 @@
                 <%= svg_icon("feather-sprite.svg", "calendar") %>
               </svg>
 
-              <%= link_to(
-                @post.published_at.strftime("%d %B %Y"),
-                search_posts_path(
-                  start_date: @post.published_at.to_date,
-                  end_date: @post.published_at.to_date
-                ),
-                data: { turbo_frame: "container", turbo_action: "advance" },
-                class: "inline-block mx-2 text-sm capitalize"
-              )%>
+              <span class="inline-block mx-2 text-sm capitalize">
+                <%= link_to_if(
+                  policy(Front::Search::PostForm.new).new?,
+                  @post.published_at.strftime("%d %B %Y"),
+                  search_posts_path(
+                    start_date: @post.published_at.to_date,
+                    end_date: @post.published_at.to_date
+                  ),
+                  data: { turbo_frame: "container", turbo_action: "advance" }
+                )%>
+              </span>
             </div>
           </div>
 
@@ -67,13 +71,15 @@
               </svg>
 
               <% @tags.each do |tag| %>
-                <%= link_to(
-                  tag.name,
-                  search_posts_path(tags_list: tag.name),
-                  data: { turbo_frame: "container", turbo_action: "advance" },
-                  class: "tag hover:bg-blue-500 hover:text-white
-                          text-xs font-semibold px-2.5 py-0.5 rounded"
-                )%>
+                <span class="tag text-xs font-semibold px-2.5 py-0.5 rounded
+                             hover:bg-blue-500 hover:text-white">
+                  <%= link_to_if(
+                    policy(Front::Search::PostForm.new).new?,
+                    tag.name,
+                    search_posts_path(tags_list: tag.name),
+                    data: { turbo_frame: "container", turbo_action: "advance" }
+                  )%>
+                </span>
               <% end %>
             </div>
           <% end %>
