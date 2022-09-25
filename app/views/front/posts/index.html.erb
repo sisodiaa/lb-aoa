@@ -1,21 +1,23 @@
 <%= turbo_frame_tag "container" do %>
   <%= turbo_frame_tag :main do %>
     <div class="mx-auto w-10/12 sm:w-9/12 md:w-11/12 xl:w-10/12 2xl:w-9/12">
-      <%= link_to(
-        new_search_post_path,
-        class: "ml-auto mb-4 flex items-center justify-end btn btn--small btn--primary mr-0",
-        data: { turbo_frame: "modal" }
-      ) do %>
-        <svg
-          class="w-4 h-4 fill-[none] stroke-current stroke-2"
-          stroke-linecap="round"
-          stroke-linejoin="round">
-          <%= svg_icon("feather-sprite.svg", "search") %>
-        </svg>
+      <% if policy(Front::Search::PostForm.new).new? %>
+        <%= link_to(
+          new_search_post_path,
+          class: "ml-auto mb-4 flex items-center justify-end btn btn--small btn--primary mr-0",
+          data: { turbo_frame: "modal" }
+        ) do %>
+          <svg
+            class="w-4 h-4 fill-[none] stroke-current stroke-2"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            <%= svg_icon("feather-sprite.svg", "search") %>
+          </svg>
 
-        <span class="inline-block mx-2 text-sm capitalize">
-          Search
-        </span>
+          <span class="inline-block mx-2 text-sm capitalize">
+            Search
+          </span>
+        <% end %>
       <% end %>
 
       <%= turbo_frame_tag "posts" do %>
