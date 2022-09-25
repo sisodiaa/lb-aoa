@@ -29,4 +29,12 @@ class OwnerTest < ActiveSupport::TestCase
   test "that `link` event raises error when account is already linked" do
     assert_raise(AASM::InvalidTransition) { @confirmed_linked_owner.link }
   end
+
+  test "#has_approved_membership?" do
+    owner_with_approved_membership = @confirmed_linked_owner
+    owner_with_under_review_membership = owners(:confirmed_linked_co_owner)
+
+    assert owner_with_approved_membership.has_approved_membership?
+    assert_not owner_with_under_review_membership.has_approved_membership?
+  end
 end

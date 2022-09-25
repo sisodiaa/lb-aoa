@@ -33,4 +33,11 @@ class Owner < ApplicationRecord
   def devise_mailer
     OwnerMailer
   end
+
+  def has_approved_membership?
+    properties
+      .joins(:membership)
+      .where(membership: {membership_state: :approved})
+      .present?
+  end
 end
