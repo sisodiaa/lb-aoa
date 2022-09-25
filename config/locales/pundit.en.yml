@@ -19,3 +19,5 @@ en:
    tms/tender_document_policy:
      create?: 'You can not perform this action on a published tender.'
      destroy?: 'You can not perform this action on a published tender.'
+   front/post_policy:
+     show?: "You can not access this post unless you have an Approved membership."

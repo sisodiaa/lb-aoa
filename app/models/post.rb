@@ -77,6 +77,11 @@ class Post < ApplicationRecord
     errors.add(:tags_list, "should not have more than 5 tags") if tags.length > 5
   end
 
+  # Scopes
+  scope :for_approved_members, -> { includes(:category, :rich_text_content).published }
+  scope :for_visitors, -> { for_approved_members.visitors }
+  scope :ordered_by_published_date, -> { order(published_at: :desc) }
+
   # Query methods
 
   def self.published_between(start_date, end_date)
