@@ -21,3 +21,7 @@ en:
      destroy?: 'You can not perform this action on a published tender.'
    front/post_policy:
      show?: "You can not access this post unless you have an Approved membership."
+   front/search_policy:
+     index?: "You can not search unless you have an Approved membership."
+     results?: "You can not search unless you have an Approved membership."
+     new?: "You can not search unless you have an Approved membership."

@@ -45,6 +45,10 @@ module Front
       def start_date_after_end_date?
         start_date && end_date && (start_date > end_date)
       end
+
+      def policy_class
+        Front::SearchPolicy
+      end
     end
   end
 end

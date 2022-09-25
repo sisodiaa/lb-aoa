@@ -4,6 +4,7 @@ module Front
       layout -> { turbo_frame_request? ? false : "front" }
 
       before_action :set_post_form
+      before_action :authorize_post_form
 
       def index
         @page = params[:page] || 1
@@ -35,6 +36,14 @@ module Front
 
       def set_post_form
         @post_form = Front::Search::PostForm.new(params)
+      end
+
+      def authorize_post_form
+        authorize @post_form
+      end
+
+      def current_user
+        current_owner
       end
     end
   end
