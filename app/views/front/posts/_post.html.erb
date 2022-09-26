@@ -47,7 +47,7 @@
 
     <%= link_to(
       post_path(post),
-      class: "inline-flex items-center justify-center text-lb-100",
+      class: "inline-flex items-center justify-center text-lb-100 rounded-lg group",
       data: { turbo_frame: frame, turbo_action: "advance" }
     ) do %>
       <span class="inline-block mr-1 text-xs lg:text-sm">
@@ -55,10 +55,17 @@
       </span>
 
       <svg
-        class="w-3 h-3 fill-[none] stroke-current stroke-2"
+        class="w-3 h-3 fill-[none] stroke-current stroke-2 group-hover:hidden"
         stroke-linecap="round"
         stroke-linejoin="round">
-        <%= svg_icon("feather-sprite.svg", "chevrons-right") %>
+        <%= svg_icon("feather-sprite.svg", "chevron-right") %>
+      </svg>
+
+      <svg
+        class="w-3 h-3 fill-[none] stroke-current stroke-2 hidden group-hover:inline"
+        stroke-linecap="round"
+        stroke-linejoin="round">
+        <%= svg_icon("feather-sprite.svg", "arrow-right") %>
       </svg>
     <% end %>
   </div>

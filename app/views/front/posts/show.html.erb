@@ -20,7 +20,8 @@
 
           <div class="text-center <%= @tags.present? ? 'mb-4' : '' %>">
             <div class="inline-flex items-center justify-center p-1 text-blue-600
-                        hover:rounded-lg hover:text-white hover:bg-blue-600">
+                        transition-colors duration-300 ease-in-out
+                        rounded-lg hover:text-white hover:bg-blue-600">
               <svg
                 class="w-4 h-4 fill-[none] stroke-current stroke-2"
                 stroke-linecap="round"
@@ -39,7 +40,8 @@
             </div>
 
             <div class="inline-flex items-center justify-center p-1 text-blue-600
-                        hover:rounded-lg hover:text-white hover:bg-blue-600">
+                        transition-colors duration-300 ease-in-out
+                        rounded-lg hover:text-white hover:bg-blue-600">
               <svg
                 class="w-4 h-4 fill-[none] stroke-current stroke-2"
                 stroke-linecap="round"
@@ -72,6 +74,7 @@
 
               <% @tags.each do |tag| %>
                 <span class="tag text-xs font-semibold px-2.5 py-0.5 rounded
+                             transition-colors duration-300
                              hover:bg-blue-500 hover:text-white">
                   <%= link_to_if(
                     policy(Front::Search::PostForm.new).new?,
