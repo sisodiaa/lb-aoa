@@ -22,64 +22,58 @@
     </ul>
 
     <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200">
-      <li
-        data-controller="flowbite--collapse"
-      >
-        <button
-          type="button"
-          class="flex items-center p-2 w-full text-base font-normal text-gray-900 
-                 rounded-lg transition duration-75 group hover:bg-gray-100"
-          data-action="click->flowbite--collapse#toggle"
-        >
-          <svg
-            class="w-5 h-5 fill-[none] stroke-current stroke-2 text-gray-500"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <%= svg_icon("feather-sprite.svg", "file-text") %>
-          </svg>
-          <span class="flex-1 ml-3 text-left whitespace-nowrap">Posts</span>
-          <svg
-            class="w-5 h-5 fill-[none] stroke-current stroke-2"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <%= svg_icon("feather-sprite.svg", "chevron-down") %>
-          </svg>
-        </button>
+      <li>
+        <details id="posts-details" class="group cursor-pointer">
+          <summary class="list-none flex items-center p-2 w-full text-base font-normal
+                          text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2 text-gray-500"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "file-text") %>
+            </svg>
+            <span class="flex-1 ml-3 text-left whitespace-nowrap">Posts</span>
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2
+                     transition-transform duration-75 group-open:rotate-180"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "chevron-down") %>
+            </svg>
+          </summary>
 
-        <ul
-          class="hidden py-2 space-y-2"
-          data-flowbite--collapse-target="menu"
-        >
-          <li>
-            <%= link_to(
-              cms_posts_path(status: "draft", page: 1),
-              class: "flex items-center p-2 pl-11 w-full text-base font-normal
-                      text-gray-900 rounded-lg transition duration-75 group
-                      hover:bg-gray-100",
-              data: {
-                turbo_frame: "main",
-                turbo_action: "advance"
-              }
-            ) do %>
-              <span class="flex-1 whitespace-nowrap">Draft</span>
-            <% end %>
-          </li>
+          <ul class="py-2 space-y-2">
+            <li>
+              <%= link_to(
+                cms_posts_path(status: "draft", page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Draft</span>
+              <% end %>
+            </li>
 
-          <li>
-            <%= link_to(
-              cms_posts_path(status: "published", page: 1),
-              class: "flex items-center p-2 pl-11 w-full text-base font-normal
-                      text-gray-900 rounded-lg transition duration-75 group
-                      hover:bg-gray-100",
-              data: {
-                turbo_frame: "main",
-                turbo_action: "advance"
-              }
-            ) do %>
-              <span class="flex-1 whitespace-nowrap">Published</span>
-            <% end %>
-          </li>
-        </ul>
+            <li>
+              <%= link_to(
+                cms_posts_path(status: "published", page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Published</span>
+              <% end %>
+            </li>
+          </ul>
+        </details>
       </li>
 
       <li>
@@ -124,201 +118,189 @@
     </ul>
 
     <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200">
-      <li
-        data-controller="flowbite--collapse"
-      >
-        <button
-          type="button"
-          class="flex items-center p-2 w-full text-base font-normal text-gray-900 
-                 rounded-lg transition duration-75 group hover:bg-gray-100"
-          data-action="click->flowbite--collapse#toggle"
-        >
-          <svg
-            class="w-5 h-5 fill-[none] stroke-current stroke-2 text-gray-500"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <%= svg_icon("feather-sprite.svg", "shopping-bag") %>
-          </svg>
-          <span class="flex-1 ml-3 text-left whitespace-nowrap">Tenders</span>
-          <svg
-            class="w-5 h-5 fill-[none] stroke-current stroke-2"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <%= svg_icon("feather-sprite.svg", "chevron-down") %>
-          </svg>
-        </button>
+      <li>
+        <details id="tenders-details" class="group cursor-pointer">
+          <summary class="list-none flex items-center p-2 w-full text-base font-normal
+                          text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2 text-gray-500"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "shopping-bag") %>
+            </svg>
+            <span class="flex-1 ml-3 text-left whitespace-nowrap">Tenders</span>
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2
+                     transition-transform duration-75 group-open:rotate-180"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "chevron-down") %>
+            </svg>
+          </summary>
 
-        <ul
-          class="hidden py-2 space-y-2"
-          data-flowbite--collapse-target="menu"
-        >
-          <li>
-            <%= link_to(
-              tms_tenders_path(status: "draft", page: 1),
-              class: "flex items-center p-2 pl-11 w-full text-base font-normal
-                      text-gray-900 rounded-lg transition duration-75 group
-                      hover:bg-gray-100",
-              data: {
-                turbo_frame: "main",
-                turbo_action: "advance"
-              }
-            ) do %>
-              <span class="flex-1 whitespace-nowrap">Draft</span>
-            <% end %>
-          </li>
+        <ul class="py-2 space-y-2">
+            <li>
+              <%= link_to(
+                tms_tenders_path(status: "draft", page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Draft</span>
+              <% end %>
+            </li>
 
-          <li>
-            <%= link_to(
-              tms_tenders_path(status: "upcoming", page: 1),
-              class: "flex items-center p-2 pl-11 w-full text-base font-normal
-                      text-gray-900 rounded-lg transition duration-75 group
-                      hover:bg-gray-100",
-              data: {
-                turbo_frame: "main",
-                turbo_action: "advance"
-              }
-            ) do %>
-              <span class="flex-1 whitespace-nowrap">Upcoming</span>
-            <% end %>
-          </li>
+            <li>
+              <%= link_to(
+                tms_tenders_path(status: "upcoming", page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Upcoming</span>
+              <% end %>
+            </li>
 
-          <li>
-            <%= link_to(
-              tms_tenders_path(status: "current", page: 1),
-              class: "flex items-center p-2 pl-11 w-full text-base font-normal
-                      text-gray-900 rounded-lg transition duration-75 group
-                      hover:bg-gray-100",
-              data: {
-                turbo_frame: "main",
-                turbo_action: "advance"
-              }
-            ) do %>
-              <span class="flex-1 whitespace-nowrap">Current</span>
-            <% end %>
-          </li>
+            <li>
+              <%= link_to(
+                tms_tenders_path(status: "current", page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Current</span>
+              <% end %>
+            </li>
 
-          <li>
-            <%= link_to(
-              tms_tenders_path(status: "under_review", page: 1),
-              class: "flex items-center p-2 pl-11 w-full text-base font-normal
-                      text-gray-900 rounded-lg transition duration-75 group
-                      hover:bg-gray-100",
-              data: {
-                turbo_frame: "main",
-                turbo_action: "advance"
-              }
-            ) do %>
-              <span class="flex-1 whitespace-nowrap">Under Review</span>
-            <% end %>
-          </li>
+            <li>
+              <%= link_to(
+                tms_tenders_path(status: "under_review", page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Under Review</span>
+              <% end %>
+            </li>
 
-          <li>
-            <%= link_to(
-              tms_tenders_path(status: "reviewed", page: 1),
-              class: "flex items-center p-2 pl-11 w-full text-base font-normal
-                      text-gray-900 rounded-lg transition duration-75 group
-                      hover:bg-gray-100",
-              data: {
-                turbo_frame: "main",
-                turbo_action: "advance"
-              }
-            ) do %>
-              <span class="flex-1 whitespace-nowrap">Reviewed</span>
-            <% end %>
-          </li>
-        </ul>
+            <li>
+              <%= link_to(
+                tms_tenders_path(status: "reviewed", page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Reviewed</span>
+              <% end %>
+            </li>
+          </ul>
+        </details>
       </li>
     </ul>
 
     <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200">
-      <li
-        data-controller="flowbite--collapse"
-      >
-        <button
-          type="button"
-          class="flex items-center p-2 w-full text-base font-normal text-gray-900 
-                 rounded-lg transition duration-75 group hover:bg-gray-100"
-          data-action="click->flowbite--collapse#toggle"
-        >
-          <svg
-            class="w-5 h-5 fill-[none] stroke-current stroke-2 text-gray-500"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <%= svg_icon("feather-sprite.svg", "users") %>
-          </svg>
-          <span class="flex-1 ml-3 text-left whitespace-nowrap">Memberships</span>
-          <svg
-            class="w-5 h-5 fill-[none] stroke-current stroke-2"
-            stroke-linecap="round"
-            stroke-linejoin="round">
-            <%= svg_icon("feather-sprite.svg", "chevron-down") %>
-          </svg>
-        </button>
+      <li>
+        <details id="memberships-details" class="group cursor-pointer">
+          <summary class="list-none flex items-center p-2 w-full text-base font-normal
+                          text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2 text-gray-500"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "users") %>
+            </svg>
+            <span class="flex-1 ml-3 text-left whitespace-nowrap">Memberships</span>
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2
+                     transition-transform duration-75 group-open:rotate-180"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "chevron-down") %>
+            </svg>
+          </summary>
 
-        <ul
-          class="hidden py-2 space-y-2"
-          data-flowbite--collapse-target="menu"
-        >
-          <li>
-            <%= link_to(
-              management_memberships_path(status: "under_review", page: 1),
-              class: "flex items-center p-2 pl-11 w-full text-base font-normal
-                      text-gray-900 rounded-lg transition duration-75 group
-                      hover:bg-gray-100",
-              data: {
-                turbo_frame: "main",
-                turbo_action: "advance"
-              }
-            ) do %>
-              <span class="flex-1 whitespace-nowrap">Under review</span>
-            <% end %>
-          </li>
+          <ul class="py-2 space-y-2">
+            <li>
+              <%= link_to(
+                management_memberships_path(status: "under_review", page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Under review</span>
+              <% end %>
+            </li>
 
-          <li>
-            <%= link_to(
-              management_memberships_path(status: "approved", page: 1),
-              class: "flex items-center p-2 pl-11 w-full text-base font-normal
-                      text-gray-900 rounded-lg transition duration-75 group
-                      hover:bg-gray-100",
-              data: {
-                turbo_frame: "main",
-                turbo_action: "advance"
-              }
-            ) do %>
-              <span class="flex-1 whitespace-nowrap">Approved</span>
-            <% end %>
-          </li>
+            <li>
+              <%= link_to(
+                management_memberships_path(status: "approved", page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Approved</span>
+              <% end %>
+            </li>
 
-          <li>
-            <%= link_to(
-              management_memberships_path(status: "rejected", page: 1),
-              class: "flex items-center p-2 pl-11 w-full text-base font-normal
-                      text-gray-900 rounded-lg transition duration-75 group
-                      hover:bg-gray-100",
-              data: {
-                turbo_frame: "main",
-                turbo_action: "advance"
-              }
-            ) do %>
-              <span class="flex-1 whitespace-nowrap">Rejected</span>
-            <% end %>
-          </li>
+            <li>
+              <%= link_to(
+                management_memberships_path(status: "rejected", page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Rejected</span>
+              <% end %>
+            </li>
 
-          <li>
-            <%= link_to(
-              management_memberships_path(status: "archived", page: 1),
-              class: "flex items-center p-2 pl-11 w-full text-base font-normal
-                      text-gray-900 rounded-lg transition duration-75 group
-                      hover:bg-gray-100",
-              data: {
-                turbo_frame: "main",
-                turbo_action: "advance"
-              }
-            ) do %>
-              <span class="flex-1 whitespace-nowrap">Archived</span>
-            <% end %>
-          </li>
-        </ul>
+            <li>
+              <%= link_to(
+                management_memberships_path(status: "archived", page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Archived</span>
+              <% end %>
+            </li>
+          </ul>
+        </details>
       </li>
     </ul>
   </div>

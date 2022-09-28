@@ -20,7 +20,7 @@ module Management
       within "aside" do
         assert_selector "li", text: "Under review", visible: false
 
-        click_on "Memberships"
+        find("#memberships-details").click
 
         assert_selector "li", text: "Under review", visible: true
       end
