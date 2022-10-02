@@ -25,9 +25,6 @@ application.register("flowbite--dropdown", Flowbite__DropdownController)
 import Form__SubmissionController from "./form/submission_controller"
 application.register("form--submission", Form__SubmissionController)
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
-
 import Owners__Dashboards__TabController from "./owners/dashboards/tab_controller"
 application.register("owners--dashboards--tab", Owners__Dashboards__TabController)
 
