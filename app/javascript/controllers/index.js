@@ -4,11 +4,11 @@
 
 import { application } from "./application"
 
+import Cms__EditorController from "./cms/editor_controller.js"
+application.register("cms--editor", Cms__EditorController)
+
 import Cms__VisibilityToggleController from "./cms/visibility_toggle_controller.js"
 application.register("cms--visibility-toggle", Cms__VisibilityToggleController)
-
-import CmsEditorController from "./cms_editor_controller.js"
-application.register("cms-editor", CmsEditorController)
 
 import Dashboard__ComponentController from "./dashboard/component_controller.js"
 application.register("dashboard--component", Dashboard__ComponentController)

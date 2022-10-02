@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-// Connects to data-controller="cms-editor"
+// Connects to data-controller="cms--editor"
 export default class extends Controller {
   connect() {
     delete this.element.dataset.directUploadUrl;
