@@ -25,14 +25,14 @@ application.register("flowbite--collapse", Flowbite__CollapseController)
 import Flowbite__DropdownController from "./flowbite/dropdown_controller.js"
 application.register("flowbite--dropdown", Flowbite__DropdownController)
 
+import Form__SubmissionController from "./form/submission_controller.js"
+application.register("form--submission", Form__SubmissionController)
+
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 
 import Owners__Dashboards__TabController from "./owners/dashboards/tab_controller.js"
 application.register("owners--dashboards--tab", Owners__Dashboards__TabController)
-
-import ResetFormController from "./reset_form_controller.js"
-application.register("reset-form", ResetFormController)
 
 import Search__Post__ModalController from "./search/post/modal_controller.js"
 application.register("search--post--modal", Search__Post__ModalController)

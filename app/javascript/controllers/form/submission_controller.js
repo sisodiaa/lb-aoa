@@ -1,12 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="reset-form"
+// Connects to data-controller="form--submission"
 export default class extends Controller {
-  deactivateForm() {
+  deactivate() {
     this.element.classList.add("opacity-50", "pointer-events-none");
   }
 
-  activateForm() {
+  activate() {
     this.element.classList.remove("opacity-50", "pointer-events-none");
   }
 }

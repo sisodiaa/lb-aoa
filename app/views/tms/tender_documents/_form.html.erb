@@ -2,9 +2,9 @@
   model: [:tms, tender, document],
   id: dom_id(document, :tender),
   data: {
-    controller: "reset-form",
-    action: "turbo:submit-start->reset-form#deactivateForm
-             turbo:submit-end->reset-form#activateForm"
+    controller: "form--submission",
+    action: "turbo:submit-start->form--submission#deactivate
+             turbo:submit-end->form--submission#activate"
   }
 ) do |form| %>
   <% if document.errors.any? %>
