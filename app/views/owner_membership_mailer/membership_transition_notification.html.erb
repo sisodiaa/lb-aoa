@@ -1,0 +1,27 @@
+<main>
+  <h3>
+    Hello <%= @profile.full_name %>
+  </h3>
+
+  <p>
+    Your membership request for Flat <%= @apartment.flat_number %> in Tower <%= @apartment.tower_number %> has been <strong><%= @membership.membership_state %></strong>.
+  </p>
+
+  <% if @membership.rejected? %>
+  <p>
+    Remark by the Admin for rejecting your request is:
+  </p>
+
+  <p style="padding: 8px; background-color: #f5f5f5; width: fit-content; border-radius: 4px;">
+    <%= @membership.remark %>
+  </p>
+
+  <p>
+    You are advised to resubmit this request after filling in correct information.
+  </p><br>
+  <% end %>
+  <p>
+  Regards,<br>
+  LB AOA Web Admin
+  </p>
+</main>
