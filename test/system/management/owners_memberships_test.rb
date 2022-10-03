@@ -53,6 +53,8 @@ module Management
           within "form" do
             select "Approve", from: "membership_transition"
             click_on "Update Membership"
+
+            assert_no_selector "#membership_remark"
           end
         end
 
@@ -76,9 +78,12 @@ module Management
 
         within "#membership-details" do
           within "form" do
+            assert_selector "#membership-details-fields"
             select "Reject", from: "membership_transition"
             fill_in "membership_remark", with: "Purchase date is not verifiable"
             click_on "Update Membership"
+
+            assert_no_selector "#membership-details-fields"
           end
         end
 
