@@ -19,6 +19,11 @@ module Management
         @pagy, @memberships = pagy(memberships_list, items: 10)
         flash[:success] = "Membership state was successfully updated."
 
+        OwnerMembershipMailer
+          .with(membership: @membership)
+          .membership_transition_notification
+          .deliver_later
+
         respond_to do |format|
           format.turbo_stream
           format.html { redirect_to management_memberships_path }
