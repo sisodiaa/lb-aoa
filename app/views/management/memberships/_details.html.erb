@@ -1,5 +1,12 @@
 <div class="mb-8 px-4 py-4 rounded-lg shadow">
-  <%= form_with model: [:management, membership], id: dom_id(membership) do |form| %>
+  <%= form_with(
+    model: [:management, membership],
+    id: dom_id(membership),
+    data: {
+      controller: "form--submission",
+      action: "turbo:submit-start->form--submission#deactivate"
+    }
+  ) do |form| %>
     <% if membership.errors.any? %>
       <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
         <h2 class="font-medium mb-2">
