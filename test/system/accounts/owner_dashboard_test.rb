@@ -304,6 +304,8 @@ module Accounts
       assert_selector "[role='toast']", text: "Your Property record was successfully updated."
 
       within "#dashboard-properties" do
+        assert_selector :xpath, "//table/tbody/tr[1]/td[3]", text: "Under review"
+        assert_no_selector :xpath, "//table/tbody/tr[1]/td[5]/a", text: "Edit"
         within :xpath, "//table/tbody/tr[1]" do
           click_on "Details"
         end
