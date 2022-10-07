@@ -1,0 +1,12 @@
+<div 
+  id="<%= @id %>"
+  class="<%= @classes %>"
+  role="alert"
+  data-controller="element-removal"
+  data-element-removal-target="element"
+  data-action="transitionend->element-removal#remove"
+>
+  <%= header %>
+  <%= body %>
+  <%= footer %>
+</div>
