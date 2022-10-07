@@ -8,7 +8,9 @@ export default class extends Controller {
     this.elementTarget.classList.add("opacity-0");
   }
 
-  remove() {
-    this.elementTarget.remove();
+  remove(event) {
+    if (event.propertyName === "opacity") {
+      this.elementTarget.remove();
+    }
   }
 }

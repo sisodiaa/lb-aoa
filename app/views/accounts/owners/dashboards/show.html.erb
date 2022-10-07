@@ -43,14 +43,7 @@
     <% info_component.with_footer do %>
       <%= render(Notice::FooterComponent.new) do |component| %>
         <% component.with_dismissal_button do %>
-          <%= render(Notice::Footer::DismissalButtonComponent.new(
-            spacing: "px-3 py-1.5",
-            typography: "font-medium text-xs",
-            color: "text-blue-900 border-blue-900 hover:bg-blue-900 " \
-                   "hover:text-white focus:outline-none focus:ring-blue-200"
-          )) do %>
-            Dismiss
-          <% end %>
+          <%= render(Notice::Footer::DismissalButtonComponent.new.with_content("Dismiss")) %>
         <% end %>
       <% end %>
     <% end %>
@@ -95,14 +88,7 @@
     <% info_component.with_footer do %>
       <%= render(Notice::FooterComponent.new) do |component| %>
         <% component.with_dismissal_button do %>
-          <%= render(Notice::Footer::DismissalButtonComponent.new(
-            spacing: "px-3 py-1.5",
-            typography: "font-medium text-xs",
-            color: "text-blue-900 border-blue-900 hover:bg-blue-900 " \
-                   "hover:text-white focus:outline-none focus:ring-blue-200"
-          )) do %>
-            Dismiss
-          <% end %>
+          <%= render(Notice::Footer::DismissalButtonComponent.new.with_content("Dismiss")) %>
         <% end %>
       <% end %>
     <% end %>

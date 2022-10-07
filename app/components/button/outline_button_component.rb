@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 class Button::OutlineButtonComponent < ViewComponent::Base
-  def initialize(spacing: "", color: "", typography: "")
+  def initialize(spacing: "", color: "", typography: "", transition: "")
     @spacing = spacing
     @color = color
     @typography = typography
+    @transition = transition
   end
 
   def before_render
-    @classes = [base_classes, @spacing, @color, @typography].reject(&:empty?).join(" ")
+    @classes = [base_classes, @spacing, @color, @typography, @transition].reject(&:empty?).join(" ")
   end
 
   private
