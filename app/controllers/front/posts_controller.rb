@@ -7,6 +7,8 @@ module Front
     end
 
     def published
+      # You don’t need to explicitly pass the page number to the pagy method,
+      # because it is pulled in by the pagy_get_vars
       @pagy, @posts = pagy(
         policy_scope(Post, policy_scope_class: Front::PostPolicy::Scope),
         items: 6
