@@ -36,7 +36,8 @@
 
   <%= link_to(
     rails_blob_path(document.file, disposition: 'attachment'),
-    class: "inline-block #{document.file.representable? ? 'ml-2' : ' ml-auto'}"
+    class: "inline-block #{document.file.representable? ? 'ml-2' : ' ml-auto'}",
+    data: { turbo_frame: '_top' }
   ) do %>
     <div
       class="inline-flex items-center justify-center h-6
