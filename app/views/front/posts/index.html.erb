@@ -20,6 +20,8 @@
     <% end %>
 
     <%= turbo_frame_tag "posts" do %>
+      <% turbo_exempts_page_from_cache %>
+
         <%= turbo_frame_tag(
           :published_posts,
           src: published_posts_path(page: @page)
