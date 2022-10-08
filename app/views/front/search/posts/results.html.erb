@@ -4,8 +4,7 @@
       render(
         partial: "front/posts/post",
         collection: @results,
-        as: :post,
-        locals: { frame: "container" }
+        as: :post
       ) ||
       "There are no results for this query"
     %>
