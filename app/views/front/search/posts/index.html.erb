@@ -25,7 +25,7 @@
     <% end %>
 
     <%= turbo_frame_tag "results" do %>
-      <% turbo_exempts_page_from_cache %>
+      <% turbo_exempts_page_from_preview %>
 
         <%= turbo_frame_tag(
           :search_results,

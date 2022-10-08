@@ -20,7 +20,7 @@
     <% end %>
 
     <%= turbo_frame_tag "posts" do %>
-      <% turbo_exempts_page_from_cache %>
+      <% turbo_exempts_page_from_preview %>
 
         <%= turbo_frame_tag(
           :published_posts,
