@@ -8,8 +8,9 @@
   data: {
     turbo_frame: "_top",
     search__post__modal_target: "form",
-    action: "turbo:submit-start->search--post--modal#deactivateForm
-             turbo:frame-load->search--post--modal#activateForm"
+    controller: "form--submission",
+    action: "turbo:submit-start->form--submission#deactivate
+             turbo:submit-end->form--submission#activate"
   }
 ) do |form| %>
   <% if post_form.errors.any? %>

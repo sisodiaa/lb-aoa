@@ -18,14 +18,6 @@ export default class extends Controller {
     this.removeModal();
   }
 
-  deactivateForm() {
-    this.formTarget.classList.add("opacity-50", "pointer-events-none");
-  }
-
-  activateForm() {
-    this.formTarget.classList.remove("opacity-50", "pointer-events-none");
-  }
-
   removeModal(e) {
     if (
       e &&
