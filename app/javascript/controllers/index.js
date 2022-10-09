@@ -25,11 +25,11 @@ application.register("flowbite--dropdown", Flowbite__DropdownController)
 import Form__SubmissionController from "./form/submission_controller"
 application.register("form--submission", Form__SubmissionController)
 
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
 import Owners__Dashboards__TabController from "./owners/dashboards/tab_controller"
 application.register("owners--dashboards--tab", Owners__Dashboards__TabController)
-
-import Search__Post__ModalController from "./search/post/modal_controller"
-application.register("search--post--modal", Search__Post__ModalController)
 
 import ToastController from "./toast_controller"
 application.register("toast", ToastController)
