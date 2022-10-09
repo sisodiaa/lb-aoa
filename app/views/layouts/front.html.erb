@@ -27,11 +27,11 @@
       <%= flash_messages %>
     <% end %>
 
-    <div data-controller="search--post--modal">
-      <div class="relative container mx-auto pt-6">
-        <%= yield %>
-      </div>
+    <div class="relative container mx-auto pt-6">
+      <%= yield %>
+    </div>
 
+    <div data-controller="modal">
       <%= turbo_frame_tag "modal" %>
     </div>
   </body>
