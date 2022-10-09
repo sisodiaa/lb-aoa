@@ -31,8 +31,5 @@ application.register("owners--dashboards--tab", Owners__Dashboards__TabControlle
 import Search__Post__ModalController from "./search/post/modal_controller"
 application.register("search--post--modal", Search__Post__ModalController)
 
-import Search__Post__SelectOptionController from "./search/post/select_option_controller"
-application.register("search--post--select-option", Search__Post__SelectOptionController)
-
 import ToastController from "./toast_controller"
 application.register("toast", ToastController)

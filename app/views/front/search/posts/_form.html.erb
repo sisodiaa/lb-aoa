@@ -31,10 +31,7 @@
 
   <h3 class="text-center text-xl font-medium text-gray-900 mb-4">Search Posts</h3>
 
-  <div
-    class="mb-6"
-    data-controller="search--post--select-option"
-  >
+  <div class="mb-6">
     <%= form.label(
       :category_id,
       class: "block mb-2 text-sm font-medium text-gray-900"
@@ -46,8 +43,7 @@
           {prompt: "All Categories"},
           class: "capitalize border border-gray-300 text-gray-900 text-sm
                   rounded-lg focus:ring-blue-500 focus:border-blue-500 block
-                  w-full p-2.5",
-          data: { search__post__select_option_target: "category" }
+                  w-full p-2.5"
     )%>
   </div>
 
