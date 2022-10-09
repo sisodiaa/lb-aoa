@@ -5,7 +5,6 @@
     role="dialog"
     aria-modal="true"
     data-search--post--modal-target="modal"
-    data-action="click@window->search--post--modal#removeModal"
   >
     <div
       class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20
@@ -17,6 +16,9 @@
       >
       </div>
 
+      <%# a weird little trick to make sure that the modal is centered %>
+      <%# if it's shorter than the viewport, %>
+      <%# but if it's taller then the modal backdrop area becomes scrollable %>
       <span
         class="hidden sm:inline-block sm:align-middle sm:h-screen"
         aria-hidden="true"

@@ -10,7 +10,9 @@
     search__post__modal_target: "form",
     controller: "form--submission",
     action: "turbo:submit-start->form--submission#deactivate
-             turbo:submit-end->form--submission#activate"
+             turbo:submit-end->form--submission#activate
+             turbo:submit-end->search--post--modal#removeModal",
+    search__post__modal_dismiss_param: "false"
   }
 ) do |form| %>
   <% if post_form.errors.any? %>
@@ -102,7 +104,10 @@
       "Cancel",
       "#",
       class: "btn btn--normal btn--error mb-0",
-      data: { action: "click->search--post--modal#hideModal" }
+      data: {
+        action: "click->search--post--modal#removeModal:prevent",
+        search__post__modal_dismiss_param: "true"
+      }
     )%>
   </div>
 <% end %>

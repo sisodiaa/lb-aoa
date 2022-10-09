@@ -35,8 +35,7 @@
             tags_list: params[:tags_list],
             start_date: params[:start_date],
             end_date: params[:end_date]
-          ),
-          data: { action: "turbo:frame-load->search--post--modal#hideModal" }
+          )
         ) do %>
           <div class="grid gap-10 lg:grid-cols-2 2xl:grid-cols-3">
             <% 3.times do %>
