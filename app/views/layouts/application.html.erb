@@ -32,6 +32,10 @@
           <%= yield %>
         </div>
       </div>
+
+      <div data-controller="modal">
+        <%= turbo_frame_tag "modal" %>
+      </div>
     <% else %>
       <div class="relative container mx-auto pt-24">
         <%= yield %>

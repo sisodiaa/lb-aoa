@@ -14,9 +14,7 @@
     <%= link_to(
       "View Details and Manage", 
       edit_management_membership_path(membership),
-        data: {
-          turbo_frame: "membership-details"
-        },
+      data: { turbo_frame: "modal" },
       class: "py-1 px-3 text-xs font-medium text-gray-600
       bg-white rounded-md border border-gray-200
       hover:bg-gray-100 hover:text-lb-500 focus:z-10

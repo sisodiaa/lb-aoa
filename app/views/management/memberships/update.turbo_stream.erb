@@ -4,12 +4,6 @@
   locals: {status: @status, memberships: @memberships, pagy: @pagy}
 ) %>
 
-<%= turbo_stream.update(
-  "membership-details",
-  partial: "management/memberships/details",
-  locals: {status: @status, membership: @membership}
-) %>
-
 <%= turbo_stream.update "flash-messages" do %>
   <%= flash_messages %>
 <% end %>

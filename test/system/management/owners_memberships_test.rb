@@ -30,39 +30,32 @@ module Management
       visit management_memberships_path(status: "under_review")
 
       within "#main" do
-        assert_selector "#membership-details"
         assert_selector "#under_review_memberships"
-
-        within "#membership-details" do
-          assert_no_selector "form"
-          assert_selector "select[disabled]"
-          assert_selector "input[type='text'][disabled]"
-        end
 
         within "#under_review_memberships" do
           assert_selector ".membership", count: 2
 
           click_on "View Details and Manage", match: :first
         end
+      end
 
-        within "#membership-details" do
-          assert_selector "form"
+      within "turbo-frame#modal[complete]" do
+        within "form##{dom_id(Membership.under_review.first, :details)}" do
           assert_selector "select#membership_transition"
           assert_selector "input#membership_remark"
 
-          within "form" do
-            select "Approve", from: "membership_transition"
-            click_on "Update Membership"
-
-            assert_no_selector "#membership_remark"
-          end
+          select "Approve", from: "membership_transition"
+          click_on "Update Membership"
         end
+      end
 
+      within "#main" do
         within "#under_review_memberships" do
           assert_selector ".membership", count: 1
         end
       end
 
+      assert_no_selector "turbo-frame#modal[complete]"
       assert_selector "[role='toast']", text: "Membership state was successfully updated."
     end
 
@@ -75,23 +68,24 @@ module Management
 
           click_on "View Details and Manage", match: :first
         end
+      end
 
-        within "#membership-details" do
-          within "form" do
-            assert_selector "#membership-details-fields"
-            select "Reject", from: "membership_transition"
-            fill_in "membership_remark", with: "Purchase date is not verifiable"
-            click_on "Update Membership"
-
-            assert_no_selector "#membership-details-fields"
-          end
+      within "turbo-frame#modal[complete]" do
+        within "form##{dom_id(Membership.under_review.first, :details)}" do
+          assert_selector "#membership-details-fields"
+          select "Reject", from: "membership_transition"
+          fill_in "membership_remark", with: "Purchase date is not verifiable"
+          click_on "Update Membership"
         end
+      end
 
+      within "#main" do
         within "#under_review_memberships" do
           assert_selector ".membership", count: 1
         end
       end
 
+      assert_no_selector "turbo-frame#modal[complete]"
       assert_selector "[role='toast']", text: "Membership state was successfully updated."
     end
 
@@ -102,16 +96,18 @@ module Management
         within "#under_review_memberships" do
           click_on "View Details and Manage", match: :first
         end
+      end
 
-        within "#membership-details" do
-          within "form" do
-            select "Reject", from: "membership_transition"
-            click_on "Update Membership"
+      within "turbo-frame#modal[complete]" do
+        within "form##{dom_id(Membership.under_review.first, :details)}" do
+          select "Reject", from: "membership_transition"
+          click_on "Update Membership"
 
-            assert_selector "#error_explanation li", text: "Remark can't be blank"
-          end
+          assert_selector "#error_explanation li", text: "Remark can't be blank"
         end
+      end
 
+      within "#main" do
         within "#under_review_memberships" do
           assert_selector ".membership", count: 2
         end
@@ -127,14 +123,16 @@ module Management
 
           click_on "View Details and Manage", match: :first
         end
+      end
 
-        within "#membership-details" do
-          within "form" do
-            select "Archive", from: "membership_transition"
-            click_on "Update Membership"
-          end
+      within "turbo-frame#modal[complete]" do
+        within "form##{dom_id(Membership.approved.last, :details)}" do
+          select "Archive", from: "membership_transition"
+          click_on "Update Membership"
         end
+      end
 
+      within "#main" do
         within "#approved_memberships" do
           assert_selector ".membership", count: 2
         end
@@ -146,16 +144,15 @@ module Management
     test "do not show transition controls for Rejected membership records" do
       visit management_memberships_path(status: "rejected")
       within "#main" do
-        within "#membership-details" do
-          assert_no_selector "select"
-        end
-
         within "#rejected_memberships" do
           click_on "View Details and Manage", match: :first
         end
+      end
 
-        within "#membership-details" do
+      within "turbo-frame#modal[complete]" do
+        within "form##{dom_id(Membership.rejected.first, :details)}" do
           assert_no_selector "select"
+          assert_selector "h3", text: "Remark"
         end
       end
     end
@@ -163,15 +160,13 @@ module Management
     test "do not show transition controls for Archived membership records" do
       visit management_memberships_path(status: "archived")
       within "#main" do
-        within "#membership-details" do
-          assert_no_selector "select"
-        end
-
         within "#archived_memberships" do
           click_on "View Details and Manage", match: :first
         end
+      end
 
-        within "#membership-details" do
+      within "turbo-frame#modal[complete]" do
+        within "form##{dom_id(Membership.archived.first, :details)}" do
           assert_no_selector "select"
         end
       end
@@ -182,13 +177,17 @@ module Management
 
       visit management_owners_memberships_url(owner)
 
+      assert_no_selector "turbo-frame#modal[complete]"
+
       within "#_memberships" do
         assert_selector ".membership", count: 3
 
         click_on "View Details and Manage", match: :first
       end
 
-      within "#membership-details form" do
+      assert_selector "turbo-frame#modal[complete]"
+
+      within "#modal form" do
         select "Approve", from: "membership_transition"
         click_on "Update Membership"
       end
@@ -205,13 +204,17 @@ module Management
 
       visit management_apartments_memberships_url(apartment)
 
+      assert_no_selector "turbo-frame#modal[complete]"
+
       within "#_memberships" do
         assert_selector ".membership", count: 2
 
         click_on "View Details and Manage", match: :first
       end
 
-      within "#membership-details form" do
+      assert_selector "turbo-frame#modal[complete]"
+
+      within "#modal form" do
         select "Approve", from: "membership_transition"
         click_on "Update Membership"
       end
@@ -221,6 +224,33 @@ module Management
       end
 
       assert_selector "[role='toast']", text: "Membership state was successfully updated."
+    end
+
+    test "close the modal" do
+      visit management_memberships_path(status: "under_review")
+
+      within "#main" do
+        within "#under_review_memberships" do
+          assert_selector ".membership", count: 2
+          click_on "View Details and Manage", match: :first
+        end
+      end
+
+      assert_selector "turbo-frame#modal[complete][src]"
+
+      within "turbo-frame#modal[complete]" do
+        within "form##{dom_id(Membership.under_review.first, :details)}" do
+          click_on "Close"
+        end
+      end
+
+      within "#main" do
+        within "#under_review_memberships" do
+          assert_selector ".membership", count: 2
+        end
+      end
+
+      assert_no_selector "turbo-frame#modal[complete][src]"
     end
   end
 end

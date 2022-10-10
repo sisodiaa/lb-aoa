@@ -77,7 +77,6 @@ module Management
         click_on "View linked memberships"
       end
 
-      assert_selector "#membership-details"
       assert_selector "#_memberships"
     end
   end
