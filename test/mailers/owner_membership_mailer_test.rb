@@ -15,6 +15,8 @@ class OwnerMembershipMailerTest < ActionMailer::TestCase
     assert_equal "Your membership request for Flat 304 in Tower 8 has been rejected", email.subject
     assert_match membership.remark, email.html_part.body.encoded
     assert_match membership.remark, email.text_part.body.encoded
+    assert_match "You are advised to visit <a href=\"http://localhost/owners/dashboard\">dashboard</a>", email.html_part.body.encoded
+    assert_match "http://localhost/owners/dashboard", email.text_part.body.encoded
   end
 
   test "membership transition for approved membership" do
