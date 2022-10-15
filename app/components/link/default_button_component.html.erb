@@ -3,13 +3,17 @@
   class="inline-flex justify-center items-center gap-x-2 
          rounded-lg font-medium text-white <%= @class_name %>"
 >
+  <% if icon? && @icon_position == :left %>
+    <%= icon %>
+  <% end %>
+
   <% if text? %>
     <span>
       <%= text %>
     </span>
   <% end %>
 
-  <% if icon? %>
+  <% if icon? && @icon_position == :right %>
     <%= icon %>
   <% end %>
 </a>

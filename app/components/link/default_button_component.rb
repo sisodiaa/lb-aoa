@@ -3,10 +3,11 @@
 class Link::DefaultButtonComponent < ViewComponent::Base
   attr_reader :size
 
-  def initialize(href: "#", variant: "primary", size: "base")
+  def initialize(href: "#", variant: "primary", size: "base", icon_position: :left)
     @href = href
     @variant = variant
     @size = size
+    @icon_position = icon_position
   end
 
   def before_render
