@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Link::DefaultButtonComponent < ViewComponent::Base
-  attr_reader :size
+  attr_reader :variant, :size
 
   def initialize(href: "#", variant: "primary", size: "base", icon_position: :left)
     @href = href
@@ -25,11 +25,23 @@ class Link::DefaultButtonComponent < ViewComponent::Base
   end
 
   def variant_class
+    return secondary_variant_class if variant == "secondary"
+    return success_variant_class if variant == "success"
     primary_variant_class
   end
 
   def primary_variant_class
     "bg-lb-500 hover:bg-lb-600 active:bg-lb-700 " \
     "shadow-sm shadow-lb-100 hover:shadow-xs hover:shadow-lb-50 active:shadow-none"
+  end
+
+  def secondary_variant_class
+    "bg-blue-700 hover:bg-blue-800 active:bg-blue-900 " \
+    "shadow-sm shadow-blue-300 hover:shadow-xs hover:shadow-blue-100 active:shadow-none"
+  end
+
+  def success_variant_class
+    "bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 " \
+    "shadow-sm shadow-emerald-200 hover:shadow-xs hover:shadow-emerald-100 active:shadow-none"
   end
 end
