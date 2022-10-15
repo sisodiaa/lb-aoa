@@ -2,18 +2,46 @@
   <td class="py-3 px-1 sm:px-4 lg:px-6 text-gray-900">
     <%= property.apartment.tower_number.rjust(2, "0") %>
   </td>
+
   <td class="py-3 px-1 sm:px-4 lg:px-6 text-gray-900">
     <%= property.apartment.flat_number.rjust(2, "0") %>
   </td>
+
   <td class="py-3 px-1 sm:px-4 lg:px-6 text-gray-900">
     <%= property.membership.membership_state.humanize %>
   </td>
+
   <td class="py-3 px-1 sm:px-4 lg:px-6 text-gray-900">
-    <%= link_to "Details", [:owners, property], class: "btn btn--small btn--primary-soft" %>
+    <%= render(Link::DefaultButtonComponent.new(
+      href: owners_property_path(property),
+      variant: "success",
+      size: "small"
+    )) do |c| %>
+      <% c.with_icon do %>
+        <%= render(Icon::Outline::DocumentTextComponent.new(
+          classes: "w-4 h-4 hidden xl:block"
+        )) %>
+      <% end %>
+
+      <% c.with_text.with_content("Details") %>
+    <% end %>
   </td>
+
   <td class="py-3 px-1 sm:px-4 lg:px-6 text-gray-900">
     <% if property.membership.approved? || property.membership.rejected? %>
-      <%= link_to "Edit", edit_owners_property_path(property), class: "btn btn--small btn--secondary" %>
+      <%= render(Link::DefaultButtonComponent.new(
+        href: edit_owners_property_path(property),
+        variant: "secondary",
+        size: "small"
+      )) do |c| %>
+        <% c.with_icon do %>
+          <%= render(Icon::Outline::PencilSquareComponent.new(
+            classes: "w-4 h-4 hidden xl:block"
+          )) %>
+        <% end %>
+
+        <% c.with_text.with_content("Edit") %>
+      <% end %>
     <% end %>
   </td>
 </tr>

@@ -60,11 +60,21 @@
 
         <tr>
           <th scope="row" class="py-4 px-6" colspan="2">
-            <%= link_to(
-              raw("&larr; Go Back"),
-              properties_owners_dashboard_path,
-              class: "btn btn--small btn--primary w-full"
-            )%>
+            <%= render(Link::DefaultButtonComponent.new(
+              href: properties_owners_dashboard_path,
+              variant: "secondary",
+              size: "small"
+            )) do |c| %>
+              <% c.with_icon do %>
+                <%= render(Icon::ArrowLongLeftComponent.new(
+                  view_box: "0 0 20 20",
+                  fill: "currentColor",
+                  classes: "w-4 h-4"
+                )) %>
+              <% end %>
+
+              <% c.with_text.with_content("Go Back") %>
+            <% end %>
           </th>
         </tr>
       </tbody>
