@@ -25,11 +25,18 @@
 
       <tr>
         <th scope="row" class="py-4 px-6" colspan="2">
-          <%= link_to(
-            "Edit Account",
-            edit_owner_registration_path,
-            class: "btn btn--small btn--primary w-full"
-          )%>
+          <%= render(Link::DefaultButtonComponent.new(
+            href: edit_owner_registration_path,
+            size: "small"
+          )) do |c| %>
+            <% c.with_text.with_content("Edit Account") %>
+
+            <% c.with_icon do %>
+              <%= render(Icons::Outline::PencilSquareComponent.new(
+                classes: "w-4 h-4 text-white"
+              )) %>
+            <% end %>
+          <% end %>
         </th>
       </tr>
     </tbody>
