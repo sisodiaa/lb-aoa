@@ -21,12 +21,19 @@
       <%= render properties %>
 
       <tr>
-        <th scope="row" class="py-3 px-1 sm:px-4 lg:px-6" colspan="3">
-          <%= link_to(
-            "Add Property",
-            new_owners_property_path,
-            class: "btn btn--small btn--primary w-full"
-          )%>
+        <th scope="row" class="py-4 px-6" colspan="3">
+          <%= render(Link::DefaultButtonComponent.new(
+            href: new_owners_property_path,
+            size: "small"
+          )) do |c| %>
+            <% c.with_text.with_content("Add Property") %>
+
+            <% c.with_icon do %>
+              <%= render(Icon::Outline::HomeComponent.new(
+                classes: "w-4 h-4 text-white"
+              )) %>
+            <% end %>
+          <% end %>
         </th>
       </tr>
     </tbody>
