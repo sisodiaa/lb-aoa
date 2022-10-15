@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Icons::Outline::PencilSquareComponent < ViewComponent::Base
+class Icon::Outline::PencilSquareComponent < ViewComponent::Base
   def initialize(
     fill: "none",
     view_box: "0 0 24 24",
