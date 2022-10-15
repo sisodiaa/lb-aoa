@@ -9,7 +9,7 @@ class Link::DefaultButtonComponentTest < ViewComponent::TestCase
       component.with_icon { "Icon" }
     end
 
-    assert_selector "a.inline-flex.text-white[href=\"#\"]", text: "Hello\n    \n\n    Icon"
+    assert_selector "a.inline-flex.text-white[href=\"#\"]", text: "Icon\n\n    \n      Hello"
   end
 
   test "that component generates a link button with text only" do
