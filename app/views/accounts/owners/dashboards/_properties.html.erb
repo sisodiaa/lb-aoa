@@ -24,7 +24,7 @@
         <th scope="row" class="py-4 px-6" colspan="3">
           <%= render(Link::DefaultButtonComponent.new(
             href: new_owners_property_path,
-            size: "small"
+            size: :small
           )) do |c| %>
             <% c.with_text.with_content("Add Property") %>
 

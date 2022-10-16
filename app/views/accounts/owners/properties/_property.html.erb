@@ -14,8 +14,8 @@
   <td class="py-3 px-1 sm:px-4 lg:px-6 text-gray-900">
     <%= render(Link::DefaultButtonComponent.new(
       href: owners_property_path(property),
-      variant: "success",
-      size: "small"
+      variant: :success,
+      size: :small
     )) do |c| %>
       <% c.with_icon do %>
         <%= render(Icon::Outline::DocumentTextComponent.new(
@@ -31,8 +31,8 @@
     <% if property.membership.approved? || property.membership.rejected? %>
       <%= render(Link::DefaultButtonComponent.new(
         href: edit_owners_property_path(property),
-        variant: "secondary",
-        size: "small"
+        variant: :secondary,
+        size: :small
       )) do |c| %>
         <% c.with_icon do %>
           <%= render(Icon::Outline::PencilSquareComponent.new(

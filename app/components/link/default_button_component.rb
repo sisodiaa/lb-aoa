@@ -3,7 +3,7 @@
 class Link::DefaultButtonComponent < ViewComponent::Base
   attr_reader :variant, :size, :block
 
-  def initialize(href: "#", variant: "primary", size: "base", icon_position: :left, block: false)
+  def initialize(href: "#", variant: :primary, size: :base, icon_position: :left, block: false)
     @href = href
     @variant = variant
     @size = size
@@ -12,7 +12,7 @@ class Link::DefaultButtonComponent < ViewComponent::Base
   end
 
   def before_render
-    @class_name = [block_class, size_class, variant_class].join(" ")
+    @class_name = [block_class, size_class, variant_class].reject(&:empty?).join(" ")
   end
 
   renders_one :text
@@ -21,18 +21,19 @@ class Link::DefaultButtonComponent < ViewComponent::Base
   private
 
   def block_class
-    "w-full" if block == true
+    return "w-full" if block
+    ""
   end
 
   def size_class
-    return "px-3 py-1.5 text-xs" if size == "small"
+    return "px-3 py-1.5 text-xs" if size == :small
     "px-5 py-2.5 text-sm"
   end
 
   def variant_class
-    return secondary_variant_class if variant == "secondary"
-    return success_variant_class if variant == "success"
-    return error_variant_class if variant == "error"
+    return secondary_variant_class if variant == :secondary
+    return success_variant_class if variant == :success
+    return error_variant_class if variant == :error
     primary_variant_class
   end
 
