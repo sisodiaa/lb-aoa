@@ -2,10 +2,22 @@
   <div class="p-4">
     <%= render partial: "form_edit", locals: { resource: resource, resource_name: resource_name } %>
 
-    <%= link_to(
-      "Cancel",
-      account_owners_dashboard_path,
-      class: "block mt-2 w-full btn btn--normal btn--error"
-    )%>
+    <div class="mt-2">
+      <%= render(Link::DefaultButtonComponent.new(
+        variant: "error",
+        block: true,
+        href: account_owners_dashboard_path
+      )) do |c| %>
+        <% c.with_icon do %>
+          <%= render(Icon::ArrowLongLeftComponent.new(
+            view_box: "0 0 20 20",
+            fill: "currentColor",
+            classes: "w-4 h-4"
+          )) %>
+        <% end %>
+
+        <% c.with_text.with_content("Cancel and Go Back") %>
+      <% end %>
+    </div>
   </div>
 <% end %>
