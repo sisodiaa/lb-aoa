@@ -32,6 +32,7 @@ class Link::DefaultButtonComponent < ViewComponent::Base
   def variant_class
     return secondary_variant_class if variant == "secondary"
     return success_variant_class if variant == "success"
+    return error_variant_class if variant == "error"
     primary_variant_class
   end
 
@@ -48,5 +49,10 @@ class Link::DefaultButtonComponent < ViewComponent::Base
   def success_variant_class
     "bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 " \
     "shadow-sm shadow-emerald-200 hover:shadow-xs hover:shadow-emerald-100 active:shadow-none"
+  end
+
+  def error_variant_class
+    "bg-red-600 hover:bg-red-700 active:bg-red-800 " \
+    "shadow-sm shadow-red-200 hover:shadow-xs hover:shadow-red-100 active:shadow-none"
   end
 end
