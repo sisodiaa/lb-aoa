@@ -31,10 +31,16 @@ class Link::DefaultButtonComponent < ViewComponent::Base
   end
 
   def variant_class
-    return secondary_variant_class if variant == :secondary
-    return success_variant_class if variant == :success
-    return error_variant_class if variant == :error
-    primary_variant_class
+    case variant
+    when :secondary
+      secondary_variant_class
+    when :success
+      success_variant_class
+    when :error
+      error_variant_class
+    else
+      primary_variant_class
+    end
   end
 
   def primary_variant_class
