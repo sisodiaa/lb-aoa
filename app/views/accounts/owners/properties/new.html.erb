@@ -170,7 +170,18 @@
           </div>
         </div>
 
-        <%= form.submit "Create Property Record", class: "btn btn--normal btn--primary w-full" %>
+        <%= render(Button::DefaultButtonComponent.new(
+          type: :submit,
+          block: true
+        )) do |c| %>
+          <% c.with_icon do %>
+            <%= render(Icon::Outline::PencilSquareComponent.new(
+              classes: "w-4 h-4"
+            )) %>
+          <% end %>
+
+          <% c.with_text.with_content("Create Property Record") %>
+        <% end %>
       </div>
     <% end %>
 

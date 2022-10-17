@@ -113,15 +113,17 @@
       <p class="text-sm text-gray-500">We need your current password to confirm your changes</p>
     </div>
 
-    <%= f.button class: "btn btn--normal btn--primary w-full" do %>
-      <span class="inline-block mr-1">Update</span>
+    <%= render(Button::DefaultButtonComponent.new(
+      type: :submit,
+      block: true
+    )) do |c| %>
+      <% c.with_icon do %>
+        <%= render(Icon::Outline::PencilSquareComponent.new(
+          classes: "w-4 h-4"
+        )) %>
+      <% end %>
 
-      <svg
-        class="inline-block w-4 h-4 fill-[none] stroke-current stroke-2"
-        stroke-linecap="round"
-        stroke-linejoin="round">
-        <%= svg_icon("feather-sprite.svg", "edit-3") %>
-      </svg>
+      <% c.with_text.with_content("Update Account") %>
     <% end %>
   </div>
 <% end %>
