@@ -1,10 +1,6 @@
 <%= form_with(
   model: [:owners, profile],
-  id: "edit_profile",
-  data: {
-    controller: "form--submission",
-    action: "turbo:submit-start->form--submission#disableButton"
-  }
+  id: "edit_profile"
 ) do |form| %>
   <div class="space-y-6">
     <% if profile.errors.any? %>
@@ -115,10 +111,7 @@
 
     <%= render(Button::DefaultButtonComponent.new(
       type: :submit,
-      block: true,
-      data: {
-        form__submission_target: "submitButton"
-      }
+      block: true
     )) do |c| %>
       <% c.with_icon do %>
         <%= render(Icon::Outline::PencilSquareComponent.new(
