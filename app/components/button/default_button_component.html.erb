@@ -1,20 +1,26 @@
 <button
   type="<%= @type %>"
-  class="inline-flex justify-center items-center gap-x-1.5 
-         rounded-lg font-medium text-white transition-colors duration-100 <%= @class_name %>"
+  class="group rounded-lg font-medium text-white transition-colors duration-100 <%= @class_name %>"
   <%= tag.attributes data: @data %>
 >
-  <% if icon? && @icon_position == :left %>
-    <%= icon %>
-  <% end %>
+  <div class="inline-flex justify-center items-center gap-x-1.5 group-disabled:hidden">
+    <% if icon? && @icon_position == :left %>
+      <%= icon %>
+    <% end %>
 
-  <% if text? %>
-    <span>
-      <%= text %>
-    </span>
-  <% end %>
+    <% if text? %>
+      <span>
+        <%= text %>
+      </span>
+    <% end %>
 
-  <% if icon? && @icon_position == :right %>
-    <%= icon %>
-  <% end %>
+    <% if icon? && @icon_position == :right %>
+      <%= icon %>
+    <% end %>
+  </div>
+
+  <div class="hidden group-disabled:inline-flex group-disabled:justify-center
+              group-disabled:items-center group-disabled:gap-x-1.5">
+    Processing
+  </div>
 </button>

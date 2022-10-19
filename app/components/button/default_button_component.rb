@@ -52,21 +52,25 @@ class Button::DefaultButtonComponent < ViewComponent::Base
 
   def primary_variant_class
     "bg-lb-500 hover:bg-lb-600 active:bg-lb-700 " \
-    "shadow-sm shadow-lb-100 hover:shadow-xs hover:shadow-lb-50 active:shadow-none"
+    "shadow-sm shadow-lb-100 hover:shadow-xs hover:shadow-lb-50 active:shadow-none " \
+    "disabled:opacity-50 disabled:cursor-not-allowed"
   end
 
   def secondary_variant_class
     "bg-blue-700 hover:bg-blue-800 active:bg-blue-900 " \
-    "shadow-sm shadow-blue-300 hover:shadow-xs hover:shadow-blue-100 active:shadow-none"
+    "shadow-sm shadow-blue-300 hover:shadow-xs hover:shadow-blue-100 active:shadow-none " \
+    "disabled:opacity-50 disabled:cursor-not-allowed"
   end
 
   def success_variant_class
     "bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 " \
-    "shadow-sm shadow-emerald-200 hover:shadow-xs hover:shadow-emerald-100 active:shadow-none"
+    "shadow-sm shadow-emerald-200 hover:shadow-xs hover:shadow-emerald-100 active:shadow-none " \
+    "disabled:opacity-50 disabled:cursor-not-allowed"
   end
 
   def error_variant_class
     "bg-red-600 hover:bg-red-700 active:bg-red-800 " \
-    "shadow-sm shadow-red-200 hover:shadow-xs hover:shadow-red-100 active:shadow-none"
+    "shadow-sm shadow-red-200 hover:shadow-xs hover:shadow-red-100 active:shadow-none " \
+    "disabled:opacity-50 disabled:cursor-not-allowed"
   end
 end

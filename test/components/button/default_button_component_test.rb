@@ -9,7 +9,7 @@ class Button::DefaultButtonComponentTest < ViewComponent::TestCase
       component.with_icon { "Icon" }
     end
 
-    assert_selector "button.inline-flex.text-white[type=\"button\"]", text: "Icon\n\n    \n      Hello"
+    assert_selector "button.group[type=\"button\"] > div.inline-flex", text: "Icon\n\n      \n        Hello"
   end
 
   test "that component generates a button with text only" do
@@ -18,7 +18,7 @@ class Button::DefaultButtonComponentTest < ViewComponent::TestCase
     end
 
     assert_no_selector "button.w-full[type=\"button\"]"
-    assert_selector "button.inline-flex.text-white.px-5.text-sm.bg-lb-500[type=\"button\"]", text: "Hello"
+    assert_selector "button.group[type=\"button\"] > div.inline-flex", text: "Hello"
   end
 
   test "that component generates a button with icon only" do
@@ -26,7 +26,7 @@ class Button::DefaultButtonComponentTest < ViewComponent::TestCase
       c.with_icon { "Icon" }
     end
 
-    assert_selector "button.inline-flex.text-white[type=\"button\"]", text: "Icon"
+    assert_selector "button.group[type=\"button\"] > div.inline-flex", text: "Icon"
   end
 
   test "that component generates a block button" do
