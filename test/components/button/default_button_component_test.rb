@@ -76,4 +76,18 @@ class Button::DefaultButtonComponentTest < ViewComponent::TestCase
 
     assert_selector "button[type=\"submit\"]", text: "Hello"
   end
+
+  test "that component generates a button with data attributes" do
+    render_inline Button::DefaultButtonComponent.new(data: {
+      controller: "form--submission",
+      form__submission_target: "submitButton"
+    }) do |c|
+      c.with_text { "Hello" }
+    end
+
+    assert_selector(
+      "button[data-controller=\"form--submission\"][data-form--submission-target=\"submitButton\"]",
+      text: "Hello"
+    )
+  end
 end

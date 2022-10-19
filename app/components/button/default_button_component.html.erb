@@ -2,6 +2,7 @@
   type="<%= @type %>"
   class="inline-flex justify-center items-center gap-x-1.5 
          rounded-lg font-medium text-white transition-colors duration-100 <%= @class_name %>"
+  <%= tag.attributes data: @data %>
 >
   <% if icon? && @icon_position == :left %>
     <%= icon %>

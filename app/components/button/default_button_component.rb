@@ -3,12 +3,20 @@
 class Button::DefaultButtonComponent < ViewComponent::Base
   attr_reader :type, :variant, :size, :block
 
-  def initialize(type: :button, variant: :primary, size: :base, icon_position: :left, block: false)
+  def initialize(
+    type: :button,
+    variant: :primary,
+    size: :base,
+    icon_position: :left,
+    block: false,
+    data: {}
+  )
     @type = type
     @variant = variant
     @size = size
     @icon_position = icon_position
     @block = block
+    @data = data
   end
 
   def before_render
