@@ -65,9 +65,11 @@ module Accounts
         within "form#edit_profile" do
           fill_in "profile_last_name", with: ""
           click_on "Update Profile"
-        end
+          assert_selector "button[disabled]"
 
-        assert_selector "#error_explanation li", text: "Last name can't be blank"
+          assert_selector "#error_explanation li", text: "Last name can't be blank"
+          assert_no_selector "button[disabled]"
+        end
       end
     end
 
@@ -80,6 +82,7 @@ module Accounts
         within "form#edit_profile" do
           fill_in "profile_last_name", with: "User"
           click_on "Update Profile"
+          assert_selector "button[disabled]"
         end
 
         within "#dashboard-profile" do
