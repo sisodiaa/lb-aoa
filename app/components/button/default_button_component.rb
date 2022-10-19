@@ -21,8 +21,7 @@ class Button::DefaultButtonComponent < ViewComponent::Base
   private
 
   def block_class
-    return "w-full" if block
-    ""
+    block ? "w-full" : ""
   end
 
   def size_class
