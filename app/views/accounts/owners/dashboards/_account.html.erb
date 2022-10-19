@@ -32,8 +32,10 @@
             <% c.with_text.with_content("Edit Account") %>
 
             <% c.with_icon do %>
-              <%= render(Icon::Outline::PencilSquareComponent.new(
-                classes: "w-4 h-4 text-white"
+              <%= render(Icon::Mini::AtSymbolComponent.new(
+                view_box: "0 0 20 20",
+                fill: "currentColor",
+                classes: "w-4 h-4"
               )) %>
             <% end %>
           <% end %>
