@@ -31,7 +31,7 @@ module Management
 
       within "form#search_owners_form" do
         click_on "Search"
-        assert_selector "#error_explanation li", text: "Email can not be blank"
+        assert_selector "#error_explanation li", text: "Email address, First Name, or Last Name is required"
       end
     end
 
@@ -44,7 +44,7 @@ module Management
       end
 
       within "#owners" do
-        assert_text "No record found for not_found@example.com"
+        assert_text "No record(s) found"
       end
     end
 
@@ -78,6 +78,32 @@ module Management
       end
 
       assert_selector "#_memberships"
+    end
+
+    test "that search by first name is case insensitive" do
+      visit management_search_owners_url
+
+      within "form#search_owners_form" do
+        fill_in "first_name", with: "seCond"
+        click_on "Search"
+      end
+
+      within "#owners" do
+        assert_selector ".membership", count: 1
+      end
+    end
+
+    test "that search by last name is case insensitive" do
+      visit management_search_owners_url
+
+      within "form#search_owners_form" do
+        fill_in "last_name", with: "owNer"
+        click_on "Search"
+      end
+
+      within "#owners" do
+        assert_selector ".membership", count: 7
+      end
     end
   end
 end

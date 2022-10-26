@@ -2,9 +2,9 @@
   <div class="mx-auto w-1/2">
     <%= render "form", owners_form: @owners_form  %>
 
-    <% if @owners_form.email.present? %>
+    <% unless @owners_form.details_missing? %>
       <div id="owners" class="mt-8">
-        <%= render(@owners) || "No record found for #{@owners_form.email}" %>
+        <%= render(@owners) || "No record(s) found" %>
       </div>
     <% end %>
   </div>

@@ -19,7 +19,7 @@ module Management
       test "only authenticated admin can access owners search" do
         sign_in @confirmed_board_admin, scope: :admin
 
-        get management_search_owners_path
+        get management_search_owners_path(email: "owner_two@example.com")
         assert_response :success
 
         sign_out :admin
