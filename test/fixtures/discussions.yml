@@ -1,0 +1,14 @@
+rickshaw:
+  subject: e-Rickshaw or Golf carts for residents
+  accessibility_state: unlocked
+  owner: confirmed_linked_owner
+
+speakers:
+  subject: public announcement system for residents
+  accessibility_state: unlocked
+  owner: confirmed_linked_owner
+
+wifi:
+  subject: public wifi for residents
+  accessibility_state: locked
+  owner: confirmed_linked_owner

@@ -314,3 +314,39 @@ elevator_buttons:
     Donec sed odio operae, eu vulputate felis rhoncus.
     Praeterea iter est quasdam res quas ex communi
     </p>
+
+rickshaw:
+  record: rickshaw (Discussion)
+  name: description
+  body: |-
+    <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
+    <br>
+    <p>
+    Cras mattis iudicium purus sit amet fermentum.
+    Donec sed odio operae, eu vulputate felis rhoncus.
+    Praeterea iter est quasdam res quas ex communi
+    </p>
+
+speakers:
+  record: speakers (Discussion)
+  name: description
+  body: |-
+    <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
+    <br>
+    <p>
+    Cras mattis iudicium purus sit amet fermentum.
+    Donec sed odio operae, eu vulputate felis rhoncus.
+    Praeterea iter est quasdam res quas ex communi
+    </p>
+
+wifi:
+  record: wifi (Discussion)
+  name: description
+  body: |-
+    <h1>Ambitioni dedisse scripsisse iudicaretur.</h1>
+    <br>
+    <p>
+    Cras mattis iudicium purus sit amet fermentum.
+    Donec sed odio operae, eu vulputate felis rhoncus.
+    Praeterea iter est quasdam res quas ex communi
+    </p>
