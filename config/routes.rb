@@ -131,6 +131,8 @@ Rails.application.routes.draw do
       get "reviewed", to: "tenders#index", status: "reviewed", on: :collection
     end
 
+    resources :discussions, except: [:edit, :update, :destroy]
+
     namespace :search do
       resources :posts, only: %i[index new] do
         get "results", on: :collection

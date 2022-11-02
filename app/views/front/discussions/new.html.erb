@@ -1,0 +1,74 @@
+<div class="mx-auto w-10/12 sm:w-9/12 md:w-11/12 xl:w-10/12 2xl:w-9/12">
+  <h2 class="mb-4 xl:mb-2 text-xl text-center text-neutral-700">
+    Create New Discussion Topic
+  </h2>
+
+  <%= form_with model: @discussion, id: dom_id(@discussion) do |form| %>
+    <div class="space-y-6">
+      <% if @discussion.errors.any? %>
+        <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
+          <h2 class="font-medium mb-2">
+            <%= pluralize(@discussion.errors.count, "error") %> prohibited this discussion topic from being created
+          </h2>
+
+          <ul role="list" class="list-inside list-disc">
+            <% @discussion.errors.full_messages.each do |message| %>
+              <li class="font-light"><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :subject, class: "block mb-2 text-sm font-medium text-neutral-900" %>
+
+        <div class="relative mt-1">
+          <div class="flex absolute inset-y-0 left-0 items-center pl-3
+                      pointer-events-none text-gray-400">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "type") %>
+            </svg>
+          </div>
+
+          <%= form.text_field(
+            :subject,
+            class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                    w-full p-2.5 pl-10"
+          )%>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= form.label :description, class: "block mb-2 text-sm font-medium text-neutral-900" %>
+
+        <%= form.rich_text_area(
+          :description,
+          data: {
+            controller: "cms--editor",
+            action: "trix-file-accept->cms--editor#disableAccept"
+          },
+          class: "mt-1 border border-gray-300 text-gray-900 text-sm
+                  rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block
+                  w-full p-2.5"
+        )%>
+      </div>
+
+      <%= render(Button::DefaultButtonComponent.new(
+        type: :submit,
+        block: true
+      )) do |c| %>
+        <% c.with_icon do %>
+          <%= render(Icon::Outline::PlusCircleComponent.new(
+            classes: "w-4 h-4"
+          )) %>
+        <% end %>
+
+        <% c.with_text.with_content("Create Discussion Topic") %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
