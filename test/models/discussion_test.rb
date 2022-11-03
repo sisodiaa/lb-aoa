@@ -44,4 +44,24 @@ class DiscussionTest < ActiveSupport::TestCase
     assert_not @locked_discussion.locked?
     assert @locked_discussion.unlocked?
   end
+
+  test "that a discussion token is generate upon creation of a new discussion" do
+    discussion = Discussion.create(
+      subject: "a new discussion thread",
+      description: "<h1><em>Rich text</em> using HTML</h1>",
+      owner: @discussion.owner
+    )
+
+    assert_not_nil discussion.discussion_token, "Discussion Token was not generated"
+  end
+
+  test "that unique discussion token is generated for new discussions" do
+    new_discussion = @discussion.dup
+    assert_not new_discussion.valid?, "Discussion Token is not unique"
+    assert_equal @discussion.to_param, @discussion.discussion_token
+  end
+
+  test "that `to_param` uses `discussion_token`" do
+    assert_equal @discussion.to_param, @discussion.discussion_token, "to_param is not discussion_token"
+  end
 end

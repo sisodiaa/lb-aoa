@@ -8,7 +8,7 @@ module Front
     end
 
     def show
-      @discussion = Discussion.find(params[:id])
+      @discussion = Discussion.find_by(discussion_token: params[:discussion_token])
     end
 
     def new
