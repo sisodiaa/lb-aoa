@@ -5,6 +5,7 @@ module Front
     before_action :authenticate_owner!
 
     def index
+      @discussions = Discussion.all.order(created_at: :desc)
     end
 
     def show

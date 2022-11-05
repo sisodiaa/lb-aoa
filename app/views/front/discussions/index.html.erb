@@ -1,0 +1,20 @@
+<div class="mx-auto w-10/12 sm:w-9/12 md:w-11/12 xl:w-10/12 2xl:w-9/12">
+  <div class="mb-6">
+    <%= render(Link::DefaultButtonComponent.new(
+      href: new_discussion_path,
+      variant: :secondary
+    )) do |c| %>
+      <% c.with_icon do %>
+        <%= render(Icon::Outline::PlusCircleComponent.new(
+          classes: "w-5 h-5"
+        )) %>
+      <% end %>
+
+      <% c.with_text.with_content("Start a new discussion") %>
+    <% end %>
+  </div>
+
+  <div class="p-2.5 space-y-2 bg-blue-50 border border-neutral-50 rounded-lg">
+    <%= render(Discussion::ListItemComponent.with_collection(@discussions)) %>
+  </div>
+</div>

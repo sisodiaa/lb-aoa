@@ -1,0 +1,14 @@
+<%= link_to(
+  @discussion,
+  id: "discussion_#{@discussion.discussion_token}",
+  class: "block p-2 bg-white rounded-lg shadow-sm hover:shadow-md lg:hover:-translate-y-0.5
+          lg:transition-translate duration-100"
+) do %>
+  <h3 class="mb-2 text-lg text-blue-800 leading-tight md:leading-normal">
+    <%= @discussion.subject %>
+  </h3>
+
+  <div class="text-blue-400">
+    <%= @discussion.created_at.strftime("%d %b %y") %>
+  </div>
+<% end %>
