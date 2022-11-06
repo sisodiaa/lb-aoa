@@ -1,6 +1,6 @@
 <%= link_to(
   @discussion,
-  id: "discussion_#{@discussion.discussion_token}",
+  id: dom_id(@discussion),
   class: "block p-2 bg-white rounded-lg shadow-sm hover:shadow-md lg:hover:-translate-y-0.5
           lg:transition-translate duration-100"
 ) do %>

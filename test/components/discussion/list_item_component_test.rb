@@ -7,7 +7,7 @@ class Discussion::ListItemComponentTest < ViewComponent::TestCase
     discussion = discussions(:rickshaw)
     render_inline(Discussion::ListItemComponent.new(discussion: discussion))
     assert_selector(
-      "a#discussion_#{discussion.discussion_token}.block[href=\"/discussions/#{discussion.discussion_token}\"]",
+      "a##{dom_id(discussion)}.block[href=\"/discussions/#{discussion.discussion_token}\"]",
       text: discussion.subject
     )
   end
