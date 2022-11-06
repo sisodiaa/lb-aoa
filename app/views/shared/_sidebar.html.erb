@@ -303,5 +303,46 @@
         </details>
       </li>
     </ul>
+
+    <ul class="pt-4 mt-4 space-y-2 border-t border-gray-200">
+      <li>
+        <details id="forum-details" class="group cursor-pointer">
+          <summary class="list-none flex items-center p-2 w-full text-base font-normal
+                          text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100">
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2 text-gray-500"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "message-square") %>
+            </svg>
+            <span class="flex-1 ml-3 text-left whitespace-nowrap">Forum</span>
+            <svg
+              class="w-5 h-5 fill-[none] stroke-current stroke-2
+                     transition-transform duration-75 group-open:rotate-180"
+              stroke-linecap="round"
+              stroke-linejoin="round">
+              <%= svg_icon("feather-sprite.svg", "chevron-down") %>
+            </svg>
+          </summary>
+
+          <ul class="py-2 space-y-2">
+            <li>
+              <%= link_to(
+                management_discussions_path(page: 1),
+                class: "flex items-center p-2 pl-11 w-full text-base font-normal
+                        text-gray-900 rounded-lg transition duration-75 group
+                        hover:bg-gray-100",
+                data: {
+                  turbo_frame: "main",
+                  turbo_action: "advance"
+                }
+              ) do %>
+                <span class="flex-1 whitespace-nowrap">Discussions</span>
+              <% end %>
+            </li>
+          </ul>
+        </details>
+      </li>
+    </ul>
   </div>
 </aside>

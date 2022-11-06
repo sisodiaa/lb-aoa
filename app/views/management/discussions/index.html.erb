@@ -1,0 +1,14 @@
+<%= turbo_frame_tag "main" do %>
+  <div
+    class="mx-auto w-1/2"
+    data-controller="dashboard--list"
+    data-dashboard--list-target="list"
+    data-dashboard--list-source-value=""
+    data-dashboard--list-item-value="">
+    <%= turbo_frame_tag "discussions" do %>
+      <%= render partial: "management/discussions/list", locals: {
+        discussions: @discussions, pagy: @pagy 
+      } %>
+    <% end %>
+  </div>
+<% end %>
