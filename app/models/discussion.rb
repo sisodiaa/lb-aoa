@@ -32,6 +32,10 @@ class Discussion < ApplicationRecord
     discussion_token
   end
 
+  def toggle_accessibility
+    locked? ? unlock : lock
+  end
+
   private
 
   def set_discussion_token

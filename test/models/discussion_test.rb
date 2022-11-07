@@ -64,4 +64,18 @@ class DiscussionTest < ActiveSupport::TestCase
   test "that `to_param` uses `discussion_token`" do
     assert_equal @discussion.to_param, @discussion.discussion_token, "to_param is not discussion_token"
   end
+
+  test "#toggle_accessibility" do
+    assert @discussion.unlocked?
+    assert_not @discussion.locked?
+    @discussion.toggle_accessibility
+    assert @discussion.locked?
+    assert_not @discussion.unlocked?
+
+    assert @locked_discussion.locked?
+    assert_not @locked_discussion.unlocked?
+    @locked_discussion.toggle_accessibility
+    assert @locked_discussion.unlocked?
+    assert_not @locked_discussion.locked?
+  end
 end
