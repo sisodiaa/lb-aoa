@@ -16,17 +16,17 @@ module CMS
 
     test "classify a post" do
       toggle_visibility_of_a_published_post(@public_post) do
-        assert_selector "input[name='post[visibility_state]'][value='visitors']", visible: false
+        assert_selector "input#post_visibility_state[value='members'][checked='checked']"
         find("label[for='post_visibility_state']").click
-        assert_selector "input[name='post[visibility_state]'][value='members']", visible: false
+        assert_no_selector "input#post_visibility_state[value='members'][checked='checked']"
       end
     end
 
     test "declassify a post" do
       toggle_visibility_of_a_published_post(@private_post) do
-        assert_selector "input[name='post[visibility_state]'][value='members']", visible: false
+        assert_no_selector "input#post_visibility_state[value='members'][checked='checked']"
         find("label[for='post_visibility_state']").click
-        assert_selector "input[name='post[visibility_state]'][value='visitors']", visible: false
+        assert_selector "input#post_visibility_state[value='members'][checked='checked']"
       end
     end
 
