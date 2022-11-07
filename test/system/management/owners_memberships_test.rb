@@ -182,7 +182,10 @@ module Management
       within "#_memberships" do
         assert_selector ".membership", count: 3
 
-        click_on "View Details and Manage", match: :first
+        membership = memberships(:under_review_membership)
+        within("div##{dom_id(membership)}") do
+          click_on "View Details and Manage"
+        end
       end
 
       assert_selector "turbo-frame#modal[complete]"
