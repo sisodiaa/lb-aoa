@@ -10,8 +10,7 @@
     class: "inline-flex gap-x-4 items-center",
     id: dom_id(post, :visibility),
     data: {
-      controller: "cms--visibility-toggle",
-      cms__visibility_toggle_target: "form"
+      controller: "form--submission"
     }
   ) do |form| %>
     <span class="text-sm font-medium text-gray-700">Members Only</span>
@@ -26,7 +25,7 @@
       {
         class: "sr-only peer",
         checked: post.visitors?,
-        data: { action: "cms--visibility-toggle#submit:prevent" }
+        data: { action: "click->form--submission#requestSubmitForm:prevent" }
       },
       "members", "visitors"
     ) %>

@@ -7,9 +7,6 @@ import { application } from "./application"
 import Cms__EditorController from "./cms/editor_controller"
 application.register("cms--editor", Cms__EditorController)
 
-import Cms__VisibilityToggleController from "./cms/visibility_toggle_controller"
-application.register("cms--visibility-toggle", Cms__VisibilityToggleController)
-
 import Dashboard__ListController from "./dashboard/list_controller"
 application.register("dashboard--list", Dashboard__ListController)
 
