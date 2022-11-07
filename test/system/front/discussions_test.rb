@@ -39,5 +39,15 @@ module Front
       assert_selector "div#discussion-description", text: "this is the detailed description"
       assert_selector "[role='toast']", text: "A new discussion topic was successfully created."
     end
+
+    test "listing of discussions" do
+      locked_discussion = discussions(:wifi)
+
+      visit discussions_path
+
+      assert_selector ".discussion", count: 3
+      assert_selector ".discussion svg", count: 1
+      assert_selector "a##{dom_id(locked_discussion)} svg"
+    end
   end
 end

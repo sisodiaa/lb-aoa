@@ -1,10 +1,20 @@
 <%= link_to(
   @discussion,
   id: dom_id(@discussion),
-  class: "block p-2 bg-white rounded-lg shadow-sm hover:shadow-md lg:hover:-translate-y-0.5
+  class: "discussion block p-2 bg-white rounded-lg shadow-sm hover:shadow-md lg:hover:-translate-y-0.5
           lg:transition-translate duration-100"
 ) do %>
-  <h3 class="mb-2 text-lg text-blue-800 leading-tight md:leading-normal">
+  <% if @discussion.locked? %>
+    <%= render(
+      Icon::Mini::LockClosedComponent.new(
+        fill: "currentColor",
+        view_box: "0 0 20 20",
+        classes: "float-left mt-0.5 mr-2 w-5 h-5 p-0.5 border border-amber-300 rounded-full fill-orange-400"
+      )
+    )%>
+  <% end %>
+
+  <h3 class="mb-2 text-lg text-blue-800 leading-tight">
     <%= @discussion.subject %>
   </h3>
 
