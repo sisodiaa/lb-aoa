@@ -25,3 +25,8 @@ en:
      index?: "You can not search unless you have an Approved membership."
      results?: "You can not search unless you have an Approved membership."
      new?: "You can not search unless you have an Approved membership."
+   front/discussion_policy:
+     index?: "You cannot access discussions unless you have an Approved membership."
+     new?: "You cannot create discussion unless you have an Approved membership."
+     create?: "You cannot create discussion unless you have an Approved membership."
+     show?: "You cannot access this discussion unless you have an Approved membership."
