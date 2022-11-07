@@ -30,7 +30,6 @@ module Management
       visit management_discussions_path
 
       discussion = discussions(:rickshaw)
-      puts dom_id(discussion, :accessibility)
 
       within "turbo-frame##{dom_id(discussion, :accessibility)}" do
         within "form##{dom_id(discussion, :form)}" do
