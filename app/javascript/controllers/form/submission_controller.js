@@ -9,4 +9,8 @@ export default class extends Controller {
   activate() {
     this.element.classList.remove("opacity-50", "pointer-events-none");
   }
+
+  requestSubmitForm() {
+    this.element.requestSubmit();
+  }
 }

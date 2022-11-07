@@ -3,4 +3,8 @@
   class="discussion p-2 bg-white rounded-lg shadow border-b border-b-fuchsia-50"
   data-dashboard--list-target="item">
   <h1 class="text-base text-gray-800"><%= discussion.subject %></h1>
+  
+  <%= turbo_frame_tag dom_id(discussion, :accessibility) do %>
+    <%= render partial: "accessibility_toggler", locals: { discussion: discussion } %>
+  <% end %>
 </div>

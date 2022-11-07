@@ -1,0 +1,9 @@
+<%= turbo_stream.update(
+  dom_id(@discussion, :accessibility),
+  partial: "accessibility_toggler",
+  locals: {discussion: @discussion}
+)%>
+
+<%= turbo_stream.update "flash-messages" do %>
+  <%= flash_messages %>
+<% end %>

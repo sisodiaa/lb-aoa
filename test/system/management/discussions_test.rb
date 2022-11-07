@@ -25,5 +25,38 @@ module Management
         assert_selector "li", text: "Discussions", visible: true
       end
     end
+
+    test "lock a post" do
+      visit management_discussions_path
+
+      discussion = discussions(:rickshaw)
+      puts dom_id(discussion, :accessibility)
+
+      within "turbo-frame##{dom_id(discussion, :accessibility)}" do
+        within "form##{dom_id(discussion, :form)}" do
+          assert_no_selector "input##{dom_id(discussion, :accessibility_state)}[value='unlocked'][checked='checked']"
+          find("label[for=\"#{dom_id(discussion, :accessibility_state)}\"]").click
+          assert_selector "input##{dom_id(discussion, :accessibility_state)}[value='unlocked'][checked='checked']"
+        end
+      end
+
+      assert_selector :css, "[role='toast']", text: "Accessibility state was successfully modified."
+    end
+
+    test "unlock a post" do
+      visit management_discussions_path
+
+      discussion = discussions(:wifi)
+
+      within "turbo-frame##{dom_id(discussion, :accessibility)}" do
+        within "form##{dom_id(discussion, :form)}" do
+          assert_selector "input##{dom_id(discussion, :accessibility_state)}[value='unlocked'][checked='checked']"
+          find("label[for=\"#{dom_id(discussion, :accessibility_state)}\"]").click
+          assert_no_selector "input##{dom_id(discussion, :accessibility_state)}[value='unlocked'][checked='checked']"
+        end
+      end
+
+      assert_selector :css, "[role='toast']", text: "Accessibility state was successfully modified."
+    end
   end
 end
