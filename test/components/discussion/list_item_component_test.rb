@@ -27,7 +27,7 @@ class Discussion::ListItemComponentTest < ViewComponent::TestCase
   test "that calendar with date icon is rendered along with date" do
     discussion = discussions(:rickshaw)
     render_inline(Discussion::ListItemComponent.new(discussion: discussion))
-    assert_selector "svg title", text: "Date and Time"
+    assert_selector "svg title", text: "Posted on"
     assert_selector "a##{dom_id(discussion)} p", text: discussion.created_at.strftime("%d %b %y")
   end
 end

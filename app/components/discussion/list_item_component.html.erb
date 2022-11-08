@@ -19,16 +19,7 @@
     <%= @discussion.subject %>
   </h3>
 
-  <div class="inline-flex gap-x-1 items-center text-blue-400">
-    <%= render(
-      Icon::Mini::CalendarDaysComponent.new(
-        fill: "currentColor",
-        view_box: "0 0 20 20",
-        classes: "w-5 h-5"
-      )
-    )%>
-    <p>
-      <%= @discussion.created_at.strftime("%d %b %y") %>
-    </p>
-  </div>
+  <%= render(Discussion::DateTimeComponent.new(title: "Posted on")) do %>
+    <%= @discussion.created_at.strftime("%d %b %y") %>
+  <% end %>
 <% end %>
