@@ -45,7 +45,7 @@ module Front
 
       visit discussions_path
 
-      assert_selector ".discussion", count: 3
+      assert_selector ".discussion", count: 5
       assert_selector ".discussion svg", count: 1
       assert_selector "a##{dom_id(locked_discussion)} svg"
     end
