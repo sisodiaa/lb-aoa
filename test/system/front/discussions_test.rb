@@ -41,13 +41,9 @@ module Front
     end
 
     test "listing of discussions" do
-      locked_discussion = discussions(:wifi)
-
       visit discussions_path
 
       assert_selector ".discussion", count: 5
-      assert_selector ".discussion svg", count: 1
-      assert_selector "a##{dom_id(locked_discussion)} svg"
     end
   end
 end

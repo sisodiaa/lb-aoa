@@ -7,6 +7,7 @@
   <% if @discussion.locked? %>
     <%= render(
       Icon::Mini::LockClosedComponent.new(
+        title: "Locked Discussion",
         fill: "currentColor",
         view_box: "0 0 20 20",
         classes: "float-left mt-0.5 mr-2 w-5 h-5 p-0.5 border border-red-300 rounded-full fill-red-500"
@@ -18,7 +19,16 @@
     <%= @discussion.subject %>
   </h3>
 
-  <div class="text-blue-400">
-    <%= @discussion.created_at.strftime("%d %b %y") %>
+  <div class="inline-flex gap-x-1 items-center text-blue-400">
+    <%= render(
+      Icon::Mini::CalendarDaysComponent.new(
+        fill: "currentColor",
+        view_box: "0 0 20 20",
+        classes: "w-5 h-5"
+      )
+    )%>
+    <p>
+      <%= @discussion.created_at.strftime("%d %b %y") %>
+    </p>
   </div>
 <% end %>

@@ -11,4 +11,23 @@ class Discussion::ListItemComponentTest < ViewComponent::TestCase
       text: discussion.subject
     )
   end
+
+  test "that lock symbol is rendered for locked discussion topics" do
+    discussion = discussions(:wifi)
+    render_inline(Discussion::ListItemComponent.new(discussion: discussion))
+    assert_selector "svg title", text: "Locked Discussion"
+  end
+
+  test "that lock symbol is not rendered for unlocked discussion topics" do
+    discussion = discussions(:rickshaw)
+    render_inline(Discussion::ListItemComponent.new(discussion: discussion))
+    assert_no_selector "svg title", text: "Locked Discussion"
+  end
+
+  test "that calendar with date icon is rendered along with date" do
+    discussion = discussions(:rickshaw)
+    render_inline(Discussion::ListItemComponent.new(discussion: discussion))
+    assert_selector "svg title", text: "Date and Time"
+    assert_selector "a##{dom_id(discussion)} p", text: discussion.created_at.strftime("%d %b %y")
+  end
 end
