@@ -49,7 +49,7 @@ class DiscussionTest < ActiveSupport::TestCase
     discussion = Discussion.create(
       subject: "a new discussion thread",
       description: "<h1><em>Rich text</em> using HTML</h1>",
-      owner: @discussion.owner
+      author: @discussion.author
     )
 
     assert_not_nil discussion.discussion_token, "Discussion Token was not generated"

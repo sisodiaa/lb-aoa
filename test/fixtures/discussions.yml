@@ -1,17 +1,17 @@
 rickshaw:
   subject: e-Rickshaw or Golf carts for residents
   accessibility_state: unlocked
-  owner: confirmed_linked_owner
+  author: confirmed_linked_owner
   discussion_token:  <%= SecureRandom.hex(4) %>
 
 speakers:
   subject: public announcement system for residents
   accessibility_state: unlocked
-  owner: confirmed_linked_owner
+  author: confirmed_linked_owner
   discussion_token:  <%= SecureRandom.hex(4) %>
 
 wifi:
   subject: public wifi for residents
   accessibility_state: locked
-  owner: confirmed_linked_owner
+  author: confirmed_linked_owner
   discussion_token:  <%= SecureRandom.hex(4) %>

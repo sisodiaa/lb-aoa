@@ -1,7 +1,7 @@
 class Discussion < ApplicationRecord
   include AASM
 
-  belongs_to :owner, inverse_of: :discussions
+  belongs_to :author, class_name: "Owner", inverse_of: :discussions, foreign_key: "owner_id"
 
   before_create :set_discussion_token
 
