@@ -47,7 +47,7 @@ module Management
         @model.first_name = ""
 
         assert_equal 7, @model.search.count
-        assert_equal Owner.all.pluck(:id), @model.search.pluck(:id), "Results not found"
+        assert_equal Owner.all.to_a, @model.search.to_a, "Results not found"
       end
     end
   end
