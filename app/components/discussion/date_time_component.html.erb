@@ -1,0 +1,13 @@
+<div class="inline-flex gap-x-1 items-center text-blue-400">
+  <%= render(
+    Icon::Mini::CalendarDaysComponent.new(
+      title: @title,
+      fill: "currentColor",
+      view_box: "0 0 20 20",
+      classes: "w-5 h-5"
+    )
+  )%>
+  <p>
+    <%= content %>
+  </p>
+</div>
