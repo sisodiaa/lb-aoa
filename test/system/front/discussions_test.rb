@@ -35,8 +35,8 @@ module Front
         click_on "Create Discussion Topic"
       end
 
-      assert_selector "h1#discussion-subject", text: "New discussion topic"
-      assert_selector "div#discussion-description", text: "this is the detailed description"
+      assert_selector "h1", text: "New discussion topic"
+      assert_selector "div", text: "this is the detailed description"
       assert_selector "[role='toast']", text: "A new discussion topic was successfully created."
     end
 
@@ -44,6 +44,17 @@ module Front
       visit discussions_path
 
       assert_selector ".discussion", count: 5
+    end
+
+    test "that discussion page has subject, date and author name" do
+      discussion = discussions(:rickshaw)
+      visit discussion_path(discussion)
+
+      within("div##{dom_id(discussion)}") do
+        assert_selector "p", text: discussion.created_at.strftime("%d %b %Y")
+        assert_selector "p", text: "Submitted by Second Dummy Owner"
+        assert_selector "h1", text: discussion.subject
+      end
     end
   end
 end
