@@ -55,6 +55,10 @@ module Front
         assert_selector "p", text: "Submitted by Second Dummy Owner"
         assert_selector "h1", text: discussion.subject
       end
+
+      click_on "Go back to Discussions"
+
+      assert_selector "#discussions-list"
     end
   end
 end

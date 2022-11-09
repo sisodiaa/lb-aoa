@@ -1,4 +1,24 @@
 <div
+  class="block mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12 mb-2"
+>
+  <%= render(Link::DefaultButtonComponent.new(
+    href: discussions_path,
+    variant: :secondary,
+    size: :small
+  )) do |c| %>
+    <% c.with_icon do %>
+      <%= render(Icon::ArrowLongLeftComponent.new(
+        view_box: "0 0 20 20",
+        fill: "currentColor",
+        classes: "w-4 h-4"
+      )) %>
+    <% end %>
+
+    <% c.with_text.with_content("Go back to Discussions") %>
+  <% end %>
+</div>
+
+<div
   id="<%= dom_id(@discussion) %>"
   class="mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12 p-2
          rounded-lg shadow-sm shadow-blue-50 border border-blue-50"
