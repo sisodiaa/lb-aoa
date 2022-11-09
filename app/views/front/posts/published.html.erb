@@ -8,7 +8,6 @@
   <%= render(
     partial: "shared/navigation_controls",
     locals: {
-      frame: "posts",
       pagy: @pagy,
       prev_path: @pagy.prev ? posts_path(page: @pagy.prev) : "#",
       next_path: @pagy.next ? posts_path(page: @pagy.next) : "#"

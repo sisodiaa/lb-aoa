@@ -14,7 +14,16 @@
     <% end %>
   </div>
 
-  <div class="space-y-2">
+  <div id="discussions-list" class="space-y-2 mb-8">
     <%= render(Discussion::ListItemComponent.with_collection(@discussions)) %>
   </div>
+
+  <%= render(
+    partial: "shared/navigation_controls",
+    locals: {
+      pagy: @pagy,
+      prev_path: @pagy.prev ? discussions_path(page: @pagy.prev) : "#",
+      next_path: @pagy.next ? discussions_path(page: @pagy.next) : "#"
+    }
+  )%>
 </div>
