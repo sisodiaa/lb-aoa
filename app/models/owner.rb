@@ -7,6 +7,7 @@ class Owner < ApplicationRecord
   has_many :apartments, through: :properties
 
   has_many :discussions, inverse_of: :author
+  has_many :comments, inverse_of: :author
 
   accepts_nested_attributes_for :profile
   validates :profile, presence: true
