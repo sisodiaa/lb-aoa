@@ -58,7 +58,6 @@ class DiscussionTest < ActiveSupport::TestCase
   test "that unique discussion token is generated for new discussions" do
     new_discussion = @discussion.dup
     assert_not new_discussion.valid?, "Discussion Token is not unique"
-    assert_equal @discussion.to_param, @discussion.discussion_token
   end
 
   test "that `to_param` uses `discussion_token`" do
