@@ -2,7 +2,7 @@
   class="block mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12 mb-2"
 >
   <%= render(Link::DefaultButtonComponent.new(
-    href: discussions_path,
+    href: request.referer || discussions_path,
     variant: :secondary,
     size: :small
   )) do |c| %>
