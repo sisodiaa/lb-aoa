@@ -5,7 +5,10 @@ module Front
     before_action :authenticate_owner!
 
     def index
-      @pagy, @discussions = pagy(Discussion.all.order(created_at: :desc), items: 10)
+      @pagy, @discussions = pagy(
+        Discussion.preload(:comments).order(created_at: :desc),
+        items: 10
+      )
       authorize Discussion, policy_class: Front::DiscussionPolicy
     end
 
