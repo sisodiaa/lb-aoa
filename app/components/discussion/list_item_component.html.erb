@@ -1,7 +1,7 @@
 <%= link_to(
   @discussion,
   id: dom_id(@discussion),
-  class: "discussion block p-2 bg-white rounded-lg shadow-sm shadow-blue-50 border border-blue-50
+  class: "discussion block p-4 pb-2 bg-white rounded-lg shadow-sm shadow-blue-50 border border-blue-50
           hover:shadow hover:shadow-blue-100"
 ) do %>
   <% if @discussion.locked? %>
