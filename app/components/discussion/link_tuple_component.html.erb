@@ -1,0 +1,8 @@
+<%= link_to(
+  @path,
+  class: "inline-flex gap-x-1 p-2 items-center rounded-lg transition-color duration-300 #{@class_name}"
+) do %>
+  <%= icon %>
+
+  <%= text %>
+<% end %>

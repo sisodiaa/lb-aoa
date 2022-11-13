@@ -1,0 +1,69 @@
+<%= render(Discussion::ItemDetailsComponent.new(discussion: @discussion)) do |i| %>
+  <% i.with_metadata_date(class_name: "text-blue-400") do |m| %>
+    <% m.with_icon do %>
+      <%= render(Icon::Mini::CalendarDaysComponent.new(
+        title: "Posted on",
+        fill: "currentColor",
+        view_box: "0 0 20 20",
+        classes: "w-5 h-5"
+      )) %>
+    <% end %>
+
+    <%= m.with_text.with_content(@discussion.created_at.strftime("%d %b %Y")) %>
+  <% end %>
+
+  <% i.with_metadata_author do %>
+    <div class="mb-4 text-sm text-neutral-400">
+      Submitted by <%= @discussion.author.profile.full_name %>
+    </div>
+  <% end %>
+
+  <% i.with_header(render_icon: @discussion.locked?) do |h| %>
+    <% h.with_icon do %>
+      <%= render(
+        Icon::Mini::LockClosedComponent.new(
+          title: "Locked Discussion",
+          fill: "currentColor",
+          view_box: "0 0 20 20",
+          classes: "float-left mt-1.5 mr-2 w-5 h-5 p-0.5 border border-red-300 rounded-full fill-red-500"
+        )
+      )%>
+    <% end %>
+
+    <% h.with_heading(
+      id: dom_id(@discussion, :subject),
+      class_name: "mb-8 subpixel-antialiased font-semibold text-2xl text-blue-800 leading-tight"
+    ) do %>
+      <%= @discussion.subject %>
+    <% end %>
+  <% end %>
+
+  <% i.with_description do %>
+    <div id="<%= dom_id(@discussion, :description) %>" class="break-words mb-6">
+      <%= @discussion.description %>
+    </div>
+  <% end %>
+
+  <% i.with_action(
+    path: discussion_comments_path(@discussion),
+    class_name: "text-blue-400 hover:bg-blue-50 hover:text-blue-800"
+  ) do |a| %>
+    <%= a.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-5 h-5"))) %>
+
+    <% a.with_text do %>
+      <%= @discussion.comments.size %>
+      <%= "comment".pluralize(@discussion.comments.size) %>
+    <% end %>
+  <% end %>
+
+  <% i.with_action(
+    path: new_discussion_comment_path(@discussion),
+    class_name: "text-blue-400 hover:bg-blue-50 hover:text-blue-800"
+  ) do |a| %>
+    <%= a.with_icon.with_content(render(Icon::Outline::ChatBubbleNewComponent.new(classes: "w-5 h-5"))) %>
+
+    <% a.with_text do %>
+      Add Comment
+    <% end %>
+  <% end %>
+<% end %>

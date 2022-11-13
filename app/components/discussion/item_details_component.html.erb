@@ -1,0 +1,19 @@
+<div
+  id="<%= dom_id(@discussion) %>"
+  class="mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12 p-4
+         rounded-lg shadow-sm shadow-blue-50 border border-blue-50"
+>
+  <%= metadata_date %>
+
+  <%= metadata_author %>
+
+  <%= header %>
+
+  <%= description %>
+
+  <div id="<%= dom_id(@discussion, :actions) %>" class="inline-flex gap-x-1">
+    <% actions.each do |action| %>
+      <%= action %>
+    <% end %>
+  </div>
+</div>

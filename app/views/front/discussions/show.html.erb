@@ -18,30 +18,4 @@
   <% end %>
 </div>
 
-<div
-  id="<%= dom_id(@discussion) %>"
-  class="mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12 p-4
-         rounded-lg shadow-sm shadow-blue-50 border border-blue-50"
->
-  <%= render(Discussion::DateTimeComponent.new(title: "Posted on")) do %>
-    <%= @discussion.created_at.strftime("%d %b %Y") %>
-  <% end %>
-
-  <p class="mb-4 text-sm text-neutral-400">
-    Submitted by <%= @discussion.author.profile.full_name %>
-  </p>
-
-  <h1
-    id="<%= dom_id(@discussion, :subject) %>"
-    class="mb-8 subpixel-antialiased font-semibold text-2xl text-blue-800 leading-tight"
-  >
-    <%= @discussion.subject %>
-  </h1>
-
-  <div
-    id="<%= dom_id(@discussion, :description) %>"
-    class="break-words"
-  >
-    <%= @discussion.description %>
-  </div>
-</div>
+<%= render(Discussion::ItemComponent.new(discussion: @discussion)) %>

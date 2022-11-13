@@ -51,8 +51,8 @@ module Front
       visit discussion_path(discussion)
 
       within("div##{dom_id(discussion)}") do
-        assert_selector "p", text: discussion.created_at.strftime("%d %b %Y")
-        assert_selector "p", text: "Submitted by Second Dummy Owner"
+        assert_selector "div", text: discussion.created_at.strftime("%d %b %Y")
+        assert_selector "div", text: "Submitted by Second Dummy Owner"
         assert_selector "h1", text: discussion.subject
       end
 
