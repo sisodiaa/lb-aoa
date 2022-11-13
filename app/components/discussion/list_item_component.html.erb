@@ -4,22 +4,11 @@
   class: "discussion block p-4 pb-2 bg-white rounded-lg shadow-sm shadow-blue-50 border border-blue-50
           hover:shadow hover:shadow-blue-100"
 ) do %>
-  <% if @discussion.locked? %>
-    <%= render(
-      Icon::Mini::LockClosedComponent.new(
-        title: "Locked Discussion",
-        fill: "currentColor",
-        view_box: "0 0 20 20",
-        classes: "float-left mt-0.5 mr-2 w-5 h-5 p-0.5 border border-red-300 rounded-full fill-red-500"
-      )
-    )%>
-  <% end %>
+  <%= header %>
 
-  <h3 class="mb-2 text-lg text-blue-800 leading-tight">
-    <%= @discussion.subject %>
-  </h3>
-
-  <%= render(Discussion::DateTimeComponent.new(title: "Posted on")) do %>
-    <%= @discussion.created_at.strftime("%d %b %y") %>
-  <% end %>
+  <div class="inline-flex gap-x-3">
+    <% metadata.each do |metadatum| %>
+      <%= metadatum %>
+    <% end %>
+  </div>
 <% end %>
