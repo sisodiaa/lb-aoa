@@ -15,7 +15,48 @@
   </div>
 
   <div id="discussions-list" class="space-y-2 mb-8">
-    <%= render(Discussion::ListItemComponent.with_collection(@discussions)) %>
+    <% @discussions.each do |discussion| %>
+      <%= render(Discussion::ListItemComponent.new(discussion: discussion)) do |li| %>
+        <% li.with_header(render_icon: discussion.locked?) do |h| %>
+          <% h.with_icon do %>
+            <%= render(
+              Icon::Mini::LockClosedComponent.new(
+                title: "Locked Discussion",
+                fill: "currentColor",
+                view_box: "0 0 20 20",
+                classes: "float-left mt-0.5 mr-2 w-5 h-5 p-0.5 border border-red-300 rounded-full fill-red-500"
+              )
+            )%>
+          <% end %>
+
+          <% h.with_heading(id: dom_id(discussion, :subject), class_name: "mb-2 text-lg text-blue-800 leading-tight") do %>
+            <%= discussion.subject %>
+          <% end %>
+        <% end %>
+
+        <% li.with_metadatum(class_name: "text-blue-400") do |m| %>
+          <%= m.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-5 h-5"))) %>
+
+          <% m.with_text do %>
+            <%= discussion.comments.size %>
+            <%= "comment".pluralize(discussion.comments.size) %>
+          <% end %>
+        <% end %>
+
+        <% li.with_metadatum(class_name: "text-blue-400") do |m| %>
+          <% m.with_icon do %>
+            <%= render(Icon::Mini::CalendarDaysComponent.new(
+              title: "Posted on",
+              fill: "currentColor",
+              view_box: "0 0 20 20",
+              classes: "w-5 h-5"
+            )) %>
+          <% end %>
+
+          <%= m.with_text.with_content(discussion.created_at.strftime("%d %b %y")) %>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 
   <%= render(

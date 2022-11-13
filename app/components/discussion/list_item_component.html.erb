@@ -6,7 +6,7 @@
 ) do %>
   <%= header %>
 
-  <div class="inline-flex gap-x-3">
+  <div id="<%= dom_id(@discussion, :metadata) %>" class="inline-flex gap-x-3">
     <% metadata.each do |metadatum| %>
       <%= metadatum %>
     <% end %>
