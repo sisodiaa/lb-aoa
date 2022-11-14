@@ -3,7 +3,7 @@ module ActionView::RecordIdentifier
   private :__record_key_for_dom_id
 
   def record_key_for_dom_id(record)
-    if record.instance_of?(Discussion)
+    if record.instance_of?(Discussion) || record.instance_of?(Comment)
       convert_to_model(record).to_param
     else
       __record_key_for_dom_id(record)
