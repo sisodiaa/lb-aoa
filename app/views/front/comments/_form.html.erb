@@ -1,0 +1,44 @@
+<%= form_with model: [@commentable, @comment], id: dom_id(@comment) do |form| %>
+  <div class="space-y-6">
+    <% if @comment.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
+        <h2 class="font-medium mb-2">
+          <%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being added
+        </h2>
+
+        <ul role="list" class="list-inside list-disc">
+          <% @comment.errors.full_messages.each do |message| %>
+            <li class="font-light"><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :content, "Comment", class: "block mb-2 text-sm font-medium text-blue-400" %>
+
+      <%= form.rich_text_area(
+        :content,
+        autofocus: true,
+        data: {
+          controller: "cms--editor",
+          action: "trix-file-accept->cms--editor#disableAccept"
+        }
+      )%>
+    </div>
+
+    <%= render(Button::DefaultButtonComponent.new(
+      type: :submit,
+      variant: :secondary,
+      block: true
+    )) do |c| %>
+      <% c.with_icon do %>
+        <%= render(Icon::Outline::ChatBubbleNewComponent.new(
+          classes: "w-4 h-4"
+        )) %>
+      <% end %>
+
+      <% c.with_text.with_content("Add Comment") %>
+    <% end %>
+  </div>
+<% end %>

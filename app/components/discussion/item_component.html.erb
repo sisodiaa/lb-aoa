@@ -1,4 +1,4 @@
-<%= render(Discussion::ItemDetailsComponent.new(discussion: @discussion)) do |i| %>
+<%= render(Discussion::ItemDetailsComponent.new(discussion: @discussion, view: @view)) do |i| %>
   <% i.with_metadata_date(class_name: "text-blue-400") do |m| %>
     <% m.with_icon do %>
       <%= render(Icon::Mini::CalendarDaysComponent.new(
@@ -39,7 +39,7 @@
   <% end %>
 
   <% i.with_description do %>
-    <div id="<%= dom_id(@discussion, :description) %>" class="break-words mb-6">
+    <div id="<%= dom_id(@discussion, :description) %>" class="break-words <%= @view == :show ? 'mb-6' : '' %>">
       <%= @discussion.description %>
     </div>
   <% end %>
@@ -51,8 +51,8 @@
     <%= a.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-5 h-5"))) %>
 
     <% a.with_text do %>
-      <%= @discussion.comments.size %>
-      <%= "comment".pluralize(@discussion.comments.size) %>
+      <%= @discussion.comments.count %>
+      <%= "comment".pluralize(@discussion.comments.count) %>
     <% end %>
   <% end %>
 

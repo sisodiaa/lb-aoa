@@ -1,0 +1,58 @@
+<div
+  id="<%= dom_id(@commentable, :comments) %>"
+  class="space-y-8 sm:space-y-4 mx-auto mb-2 w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12"
+>
+  <% @comments.each do |comment| %>
+    <%= render(Comment::ListItemComponent.new(comment: comment)) do |li| %>
+      <% li.with_metadatum(class_name: "text-indigo-400 text-sm") do |m| %>
+        <% m.with_icon do %>
+          <%= render(Icon::Outline::UserCircleComponent.new(classes: "w-4 h-4")) %>
+        <% end %>
+
+        <%= m.with_text.with_content(comment.author.profile.full_name) %>
+      <% end %>
+
+      <% li.with_metadatum(class_name: "text-indigo-400 text-sm") do |m| %>
+        <% m.with_icon do %>
+          <%= render(Icon::Mini::CalendarDaysComponent.new(
+            title: "Posted on",
+            fill: "currentColor",
+            view_box: "0 0 20 20",
+            classes: "w-4 h-4"
+          )) %>
+        <% end %>
+
+        <%= m.with_text.with_content(comment.created_at.strftime("%d %b %Y")) %>
+      <% end %>
+
+      <% li.with_comment_content do %>
+        <div id="<%= dom_id(comment, :content) %>" class="break-words mb-6">
+          <%= comment.content %>
+        </div>
+      <% end %>
+
+      <% li.with_action(
+        path: comment_comments_path(comment),
+        class_name: "text-sm text-indigo-400 hover:bg-indigo-100 hover:text-indigo-800"
+      ) do |a| %>
+        <%= a.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-4 h-4"))) %>
+
+        <% a.with_text do %>
+          <%= comment.comments.size %>
+          <%= "comment".pluralize(comment.comments.size) %>
+        <% end %>
+      <% end %>
+
+      <% li.with_action(
+        path: new_comment_comment_path(comment),
+        class_name: "text-sm text-indigo-400 hover:bg-indigo-100 hover:text-indigo-800"
+      ) do |a| %>
+        <%= a.with_icon.with_content(render(Icon::Outline::ChatBubbleNewComponent.new(classes: "w-4 h-4"))) %>
+
+        <% a.with_text do %>
+          Add Comment
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

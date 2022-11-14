@@ -1,7 +1,7 @@
 <div
   id="<%= dom_id(@discussion) %>"
-  class="mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12 p-4
-         rounded-lg shadow-sm shadow-blue-50 border border-blue-50"
+  class="mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12 sm:p-4
+         sm:rounded-lg sm:shadow-sm sm:shadow-blue-50 sm:border sm:border-blue-50"
 >
   <%= metadata_date %>
 
@@ -11,9 +11,11 @@
 
   <%= description %>
 
-  <div id="<%= dom_id(@discussion, :actions) %>" class="inline-flex gap-x-1">
-    <% actions.each do |action| %>
-      <%= action %>
-    <% end %>
-  </div>
+  <% if @view == :show %>
+    <div id="<%= dom_id(@discussion, :actions) %>" class="inline-flex gap-x-1 -ml-2">
+      <% actions.each do |action| %>
+        <%= action %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

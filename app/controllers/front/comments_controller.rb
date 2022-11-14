@@ -3,14 +3,28 @@ module Front
     layout "front"
 
     before_action :authenticate_owner!
-    before_action :set_commentable, only: [:show, :create]
+    before_action :set_commentable, only: [:index, :show, :new, :create]
 
     def index
+      @pagy, @comments = pagy(
+        @commentable
+        .comments
+        .preload(:comments, author: :profile)
+        .with_rich_text_content
+        .order(created_at: :asc),
+        items: 10
+      )
       authorize Comment, policy_class: Front::CommentPolicy
     end
 
     def show
       @comment = @commentable.comments.find_by(comment_token: params[:comment_token])
+      authorize @comment, policy_class: Front::CommentPolicy
+    end
+
+    def new
+      @comment = @commentable.comments.new
+      @comment.author = current_owner
       authorize @comment, policy_class: Front::CommentPolicy
     end
 
@@ -20,8 +34,10 @@ module Front
       authorize @comment, policy_class: Front::CommentPolicy
 
       if @comment.save
-        flash[:success] = "A new comment was successfully created."
+        flash[:success] = "A new comment was successfully posted."
         redirect_to [@commentable, @comment]
+      else
+        render :new, status: :unprocessable_entity
       end
     end
 

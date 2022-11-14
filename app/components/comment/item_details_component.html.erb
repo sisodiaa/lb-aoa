@@ -1,0 +1,21 @@
+<div
+  id="<%= dom_id(@comment) %>"
+  class="mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12 sm:p-4
+         sm:rounded-lg sm:shadow-sm sm:shadow-indigo-50 sm:border sm:border-indigo-50"
+>
+  <div id="<%= dom_id(@comment, :metadata) %>" class="flex flex-wrap justify-between items-center mb-4">
+    <% metadata.each do |metadatum| %>
+      <%= metadatum %>
+    <% end %>
+  </div>
+
+  <%= comment_content %>
+
+  <% if @view == :show %>
+    <div id="<%= dom_id(@comment, :actions) %>" class="inline-flex gap-x-1 -ml-2">
+      <% actions.each do |action| %>
+        <%= action %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -7,7 +7,8 @@ class Discussion::ItemDetailsComponent < ViewComponent::Base
   renders_one :description
   renders_many :actions, Discussion::LinkTupleComponent
 
-  def initialize(discussion:)
+  def initialize(discussion:, view:)
     @discussion = discussion
+    @view = view
   end
 end

@@ -1,0 +1,19 @@
+<div
+  id="<%= dom_id(@comment) %>"
+  class="comment sm:p-4 pb-2 sm:rounded-lg sm:shadow-sm sm:shadow-indigo-50 border-b sm:border border-indigo-50
+          sm:hover:shadow sm:hover:shadow-indigo-100 sm:hover:bg-slate-50"
+>
+  <div id="<%= dom_id(@comment, :metadata) %>" class="flex flex-wrap justify-between items-center mb-4">
+    <% metadata.each do |metadatum| %>
+      <%= metadatum %>
+    <% end %>
+  </div>
+
+  <%= comment_content %>
+
+  <div id="<%= dom_id(@comment, :actions) %>" class="inline-flex gap-x-1 -ml-2">
+    <% actions.each do |action| %>
+      <%= action %>
+    <% end %>
+  </div>
+</div>
