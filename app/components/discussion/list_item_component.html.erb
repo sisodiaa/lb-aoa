@@ -4,9 +4,13 @@
   class: "discussion block p-4 pb-2 bg-white rounded-lg shadow-sm shadow-blue-50 border border-blue-50
           hover:shadow hover:shadow-blue-100"
 ) do %>
+  <p class="mb-2">
+    <%= metadata_activity %>
+  </p>
+
   <%= header %>
 
-  <div id="<%= dom_id(@discussion, :metadata) %>" class="inline-flex gap-x-3">
+  <div id="<%= dom_id(@discussion, :metadata) %>" class="flex sm:inline-flex justify-between gap-x-3 text-sm">
     <% metadata.each do |metadatum| %>
       <%= metadatum %>
     <% end %>

@@ -17,6 +17,17 @@
   <div id="discussions-list" class="space-y-2 mb-8">
     <% @discussions.each do |discussion| %>
       <%= render(Discussion::ListItemComponent.new(discussion: discussion)) do |li| %>
+        <% li.with_metadata_activity(class_name: "text-sm text-blue-400") do |m| %>
+          <%= m.with_icon.with_content(render(Icon::Outline::ActivityComponent.new(
+            stroke_width: 2, 
+            classes: "w-4 h-4"
+          ))) %>
+
+          <% m.with_text do %>
+            Last activity <%= time_ago_in_words(discussion.updated_at) %> ago
+          <% end %>
+        <% end %>
+
         <% li.with_header(render_icon: discussion.locked?) do |h| %>
           <% h.with_icon do %>
             <%= render(
@@ -35,25 +46,25 @@
         <% end %>
 
         <% li.with_metadatum(class_name: "text-blue-400") do |m| %>
-          <%= m.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-5 h-5"))) %>
-
-          <% m.with_text do %>
-            <%= discussion.comments_total %>
-            <%= "comment".pluralize(discussion.comments_total) %>
-          <% end %>
-        <% end %>
-
-        <% li.with_metadatum(class_name: "text-blue-400") do |m| %>
           <% m.with_icon do %>
             <%= render(Icon::Mini::CalendarDaysComponent.new(
               title: "Posted on",
               fill: "currentColor",
               view_box: "0 0 20 20",
-              classes: "w-5 h-5"
+              classes: "w-4 h-4"
             )) %>
           <% end %>
 
           <%= m.with_text.with_content(discussion.created_at.strftime("%d %b %y")) %>
+        <% end %>
+
+        <% li.with_metadatum(class_name: "text-blue-400") do |m| %>
+          <%= m.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-4 h-4"))) %>
+
+          <% m.with_text do %>
+            <%= discussion.comments_total %>
+            <%= "comment".pluralize(discussion.comments_total) %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>
