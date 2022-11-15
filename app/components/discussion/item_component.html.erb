@@ -1,5 +1,13 @@
 <%= render(Discussion::ItemDetailsComponent.new(discussion: @discussion, view: @view)) do |i| %>
-  <% i.with_metadata_date(class_name: "text-blue-400") do |m| %>
+  <% i.with_metadatum(class_name: "text-blue-400") do |m| %>
+    <% m.with_icon do %>
+      <%= render(Icon::Outline::UserCircleComponent.new(classes: "w-5 h-5")) %>
+    <% end %>
+
+    <%= m.with_text.with_content(@discussion.author.profile.full_name) %>
+  <% end %>
+
+  <% i.with_metadatum(class_name: "text-blue-400") do |m| %>
     <% m.with_icon do %>
       <%= render(Icon::Mini::CalendarDaysComponent.new(
         title: "Posted on",
@@ -9,13 +17,7 @@
       )) %>
     <% end %>
 
-    <%= m.with_text.with_content(@discussion.created_at.strftime("%d %b %Y")) %>
-  <% end %>
-
-  <% i.with_metadata_author do %>
-    <div class="mb-4 text-sm text-neutral-400">
-      Submitted by <%= @discussion.author.profile.full_name %>
-    </div>
+    <%= m.with_text.with_content(@discussion.created_at.strftime("%d %b %Y, %I:%M %p")) %>
   <% end %>
 
   <% i.with_header(render_icon: @discussion.locked?) do |h| %>
@@ -32,14 +34,14 @@
 
     <% h.with_heading(
       id: dom_id(@discussion, :subject),
-      class_name: "mb-8 subpixel-antialiased font-semibold text-2xl text-blue-800 leading-tight"
+      class_name: "mb-2 subpixel-antialiased font-semibold text-2xl text-blue-800 leading-tight"
     ) do %>
       <%= @discussion.subject %>
     <% end %>
   <% end %>
 
   <% i.with_description do %>
-    <div id="<%= dom_id(@discussion, :description) %>" class="break-words <%= @view == :show ? 'mb-6' : '' %>">
+    <div id="<%= dom_id(@discussion, :description) %>" class="break-words <%= @view == :show ? 'mb-4' : '' %>">
       <%= @discussion.description %>
     </div>
   <% end %>

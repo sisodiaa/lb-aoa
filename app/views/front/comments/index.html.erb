@@ -22,11 +22,11 @@
           )) %>
         <% end %>
 
-        <%= m.with_text.with_content(comment.created_at.strftime("%d %b %Y")) %>
+        <%= m.with_text.with_content(comment.created_at.strftime("%d %b %Y, %I:%M %p")) %>
       <% end %>
 
       <% li.with_comment_content do %>
-        <div id="<%= dom_id(comment, :content) %>" class="break-words mb-6">
+        <div id="<%= dom_id(comment, :content) %>" class="break-words mb-4">
           <%= comment.content %>
         </div>
       <% end %>

@@ -3,9 +3,11 @@
   class="mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12 sm:p-4
          sm:rounded-lg sm:shadow-sm sm:shadow-blue-50 sm:border sm:border-blue-50"
 >
-  <%= metadata_date %>
-
-  <%= metadata_author %>
+  <div id="<%= dom_id(@discussion, :metadata) %>" class="flex flex-wrap justify-between items-center mb-2 sm:mb-4">
+    <% metadata.each do |metadatum| %>
+      <%= metadatum %>
+    <% end %>
+  </div>
 
   <%= header %>
 

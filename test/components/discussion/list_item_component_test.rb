@@ -7,6 +7,6 @@ class Discussion::ListItemComponentTest < ViewComponent::TestCase
     discussion = discussions(:rickshaw)
     render_inline(Discussion::ListItemComponent.new(discussion: discussion))
     assert_selector "a##{dom_id(discussion)}.block[href=\"/discussions/#{discussion.discussion_token}\"]"
-    assert_selector "div.inline-flex.gap-x-3"
+    assert_selector "div.flex.gap-x-3"
   end
 end
