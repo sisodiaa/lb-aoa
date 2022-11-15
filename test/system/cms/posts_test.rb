@@ -77,8 +77,6 @@ module CMS
     test "show visibility status for published posts" do
       visit cms_posts_url(status: "published", page: 1)
       assert_selector ".visibility-status", count: 5
-      assert_selector ".visibility-status span", count: 4, text: "Members"
-      assert_selector ".visibility-status span", count: 1, text: "Visitors"
     end
 
     private
