@@ -6,7 +6,7 @@ module Front
 
     def index
       @pagy, @discussions = pagy(
-        Discussion.order(created_at: :desc),
+        Discussion.order(updated_at: :desc),
         items: 10
       )
       authorize Discussion, policy_class: Front::DiscussionPolicy
