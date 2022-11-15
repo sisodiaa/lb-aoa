@@ -38,8 +38,8 @@
         <%= a.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-4 h-4"))) %>
 
         <% a.with_text do %>
-          <%= comment.comments.size %>
-          <%= "comment".pluralize(comment.comments.size) %>
+          <%= comment.comments_total %>
+          <%= "comment".pluralize(comment.comments_total) %>
         <% end %>
       <% end %>
 

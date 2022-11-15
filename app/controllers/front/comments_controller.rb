@@ -9,7 +9,7 @@ module Front
       @pagy, @comments = pagy(
         @commentable
         .comments
-        .preload(:comments, author: :profile)
+        .includes(author: :profile)
         .with_rich_text_content
         .order(created_at: :asc),
         items: 10
