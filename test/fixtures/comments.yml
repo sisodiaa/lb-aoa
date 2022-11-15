@@ -2,6 +2,7 @@ rickshaw_comment_one:
   author: owner_six
   commentable: rickshaw (Discussion)
   comment_token: <%= SecureRandom.hex(4) %>
+  comments_total: 1
 
 rickshaw_comment_two:
   author: confirmed_linked_owner
@@ -17,6 +18,7 @@ walking_track_comment_one:
   author: confirmed_linked_owner
   commentable: walking_track (Discussion)
   comment_token: <%= SecureRandom.hex(4) %>
+  comments_total: 1
 
 walking_track_comment_two:
   author: owner_six

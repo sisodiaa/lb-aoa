@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_11_151441) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_15_132908) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -116,6 +116,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_11_151441) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "comment_token", null: false
+    t.integer "comments_total", default: 0, null: false
     t.index ["comment_token"], name: "index_comments_on_comment_token", unique: true
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["owner_id"], name: "index_comments_on_owner_id"
@@ -128,6 +129,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_11_151441) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "discussion_token", null: false
+    t.integer "comments_total", default: 0, null: false
     t.index ["discussion_token"], name: "index_discussions_on_discussion_token", unique: true
     t.index ["owner_id"], name: "index_discussions_on_owner_id"
   end

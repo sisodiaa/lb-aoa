@@ -23,12 +23,14 @@ module Front
     test "that owner creates a new comment for a discussion" do
       sign_in @owner_with_approved_membership, scope: :owner
 
-      assert_difference "Comment.count" do
-        post discussion_comments_path(@discussion), params: {
-          comment: {
-            content: "<h1><em>Rich text</em> using HTML</h1>"
+      assert_difference("@discussion.reload.comments_total") do
+        assert_difference "Comment.count" do
+          post discussion_comments_path(@discussion), params: {
+            comment: {
+              content: "<h1><em>Rich text</em> using HTML</h1>"
+            }
           }
-        }
+        end
       end
 
       assert_redirected_to discussion_comment_path(@discussion, Comment.last)
@@ -39,12 +41,16 @@ module Front
     test "that owner creates a new comment for another comment" do
       sign_in @owner_with_approved_membership, scope: :owner
 
-      assert_difference "Comment.count" do
-        post comment_comments_path(@comment), params: {
-          comment: {
-            content: "<h1><em>Rich text</em> using HTML</h1>"
-          }
-        }
+      assert_difference("@discussion.reload.comments_total") do
+        assert_difference("@comment.reload.comments_total") do
+          assert_difference "Comment.count" do
+            post comment_comments_path(@comment), params: {
+              comment: {
+                content: "<h1><em>Rich text</em> using HTML</h1>"
+              }
+            }
+          end
+        end
       end
 
       assert_redirected_to comment_comment_path(@comment, Comment.last)

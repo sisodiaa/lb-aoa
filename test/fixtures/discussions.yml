@@ -3,6 +3,7 @@ rickshaw:
   accessibility_state: unlocked
   author: confirmed_linked_owner
   discussion_token:  <%= SecureRandom.hex(4) %>
+  comments_total: 3
 
 speakers:
   subject: public announcement system for residents
@@ -22,6 +23,7 @@ walking_track:
   accessibility_state: unlocked
   author: owner_six
   discussion_token:  <%= SecureRandom.hex(4) %>
+  comments_total: 3
 
 pool:
   subject: open air swimming pool

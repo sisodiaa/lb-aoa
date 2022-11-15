@@ -4,6 +4,7 @@ class Comment < ApplicationRecord
   has_many :comments, as: :commentable
 
   before_create :set_comment_token
+  after_save :increment_commentable_comments_total
 
   has_rich_text :content
 
@@ -24,5 +25,10 @@ class Comment < ApplicationRecord
       comment_token = SecureRandom.hex(4)
       break comment_token unless Comment.where(comment_token: comment_token).exists?
     end
+  end
+
+  def increment_commentable_comments_total
+    commentable.comments_total += 1
+    commentable.save!
   end
 end
