@@ -32,6 +32,7 @@
       <% end %>
 
       <% li.with_action(
+        renderable: comment.comments_total > 0,
         path: [@commentable, comment],
         class_name: "text-sm text-indigo-400 hover:bg-indigo-100 hover:text-indigo-800"
       ) do |a| %>

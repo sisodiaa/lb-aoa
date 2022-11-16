@@ -47,6 +47,7 @@
   <% end %>
 
   <% i.with_action(
+    renderable: @discussion.comments_total > 0,
     path: discussion_comments_path(@discussion),
     class_name: "text-blue-400 hover:bg-blue-50 hover:text-blue-800"
   ) do |a| %>
