@@ -32,7 +32,7 @@
       <% end %>
 
       <% li.with_action(
-        path: comment_comments_path(comment),
+        path: [@commentable, comment],
         class_name: "text-sm text-indigo-400 hover:bg-indigo-100 hover:text-indigo-800"
       ) do |a| %>
         <%= a.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-4 h-4"))) %>
