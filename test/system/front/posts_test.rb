@@ -41,12 +41,12 @@ module Front
       authenticated_owner do
         visit posts_url
         assert_selector ".post", count: 6
-        assert_selector ".visibility-status", count: 5
+        assert_selector ".visibility-status"
 
         click_link "Next"
 
         assert_selector ".post", count: 3
-        assert_selector ".visibility-status", count: 3
+        assert_selector ".visibility-status"
       end
     end
 
