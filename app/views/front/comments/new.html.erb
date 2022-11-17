@@ -1,12 +1,31 @@
-<% if @commentable.instance_of?(Discussion) %>
-  <%= render(Discussion::ItemComponent.new(discussion: @commentable, view: :new)) %>
-<% else %>
-  <%= render(Comment::ItemComponent.new(comment: @commentable, view: :new)) %>
-<% end %>
+<div class="my-4 mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12"> 
+  <div class="mb-6">
+    <% if @commentable.instance_of?(Discussion) %>
+      <%= render(Discussion::ItemComponent.new(discussion: @commentable, view: :new)) %>
+    <% else %>
+      <%= render(Comment::ItemComponent.new(comment: @commentable, view: :new)) %>
+    <% end %>
+  </div>
 
-<div
-  class="my-4 mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12 sm:p-4
-         sm:rounded-lg sm:shadow-sm sm:shadow-blue-50 sm:border sm:border-blue-50"
->
-  <%= render "form", commentable: @commentable, comment: @comment %>
+  <%= turbo_frame_tag "#{dom_id(@commentable, :comment_form)}" do %>
+    <div class="mb-6 sm:p-4 sm:rounded-lg sm:shadow-sm sm:shadow-blue-50 sm:border sm:border-blue-50">
+      <%= render "form", commentable: @commentable, comment: @comment %>
+
+      <div class="mt-2">
+        <%= render(Link::DefaultButtonComponent.new(
+          variant: :error,
+          block: true,
+          href: @discussion
+        )) do |c| %>
+          <% c.with_icon do %>
+            <%= render(Icon::Outline::XCircleComponent.new(
+              classes: "w-5 h-5"
+            )) %>
+          <% end %>
+
+          <% c.with_text.with_content("Cancel") %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
 </div>

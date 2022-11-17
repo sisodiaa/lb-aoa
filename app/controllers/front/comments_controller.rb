@@ -34,8 +34,14 @@ module Front
       authorize @comment, policy_class: Front::CommentPolicy
 
       if @comment.save
-        flash[:success] = "A new comment was successfully posted."
-        redirect_to [@commentable, @comment]
+        respond_to do |format|
+          format.turbo_stream { flash.now[:success] = "A new comment was successfully posted." }
+
+          format.html do
+            flash[:success] = "A new comment was successfully posted."
+            redirect_to [@commentable, @comment]
+          end
+        end
       else
         render :new, status: :unprocessable_entity
       end
