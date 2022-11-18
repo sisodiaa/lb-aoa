@@ -46,7 +46,8 @@
     <% li.with_action(
       renderable: @comment.comments_total > 0,
       path: [@commentable, @comment],
-      class_name: "text-sm text-indigo-400 hover:bg-indigo-100 hover:text-indigo-800"
+      class_name: "text-sm text-indigo-400 hover:bg-indigo-100 hover:text-indigo-800",
+      data: { turbo_frame: "_top" }
     ) do |a| %>
       <%= a.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-4 h-4"))) %>
 
@@ -58,7 +59,8 @@
 
     <% li.with_action(
       path: new_comment_comment_path(@comment),
-      class_name: "text-sm text-indigo-400 hover:bg-indigo-100 hover:text-indigo-800"
+      class_name: "text-sm text-indigo-400 hover:bg-indigo-100 hover:text-indigo-800",
+      data: { turbo_frame: "_top" }
     ) do |a| %>
       <%= a.with_icon.with_content(render(Icon::Outline::ChatBubbleNewComponent.new(classes: "w-4 h-4"))) %>
 

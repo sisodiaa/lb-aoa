@@ -27,21 +27,9 @@
   <% end %>
 
   <% i.with_action(
-    renderable: @comment.comments_total > 0,
-    path: comment_comments_path(@comment),
-    class_name: "text-indigo-400 hover:bg-indigo-50 hover:text-indigo-800"
-  ) do |a| %>
-    <%= a.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-5 h-5"))) %>
-
-    <% a.with_text do %>
-      <%= @comment.comments_total %>
-      <%= "comment".pluralize(@comment.comments_total) %>
-    <% end %>
-  <% end %>
-
-  <% i.with_action(
     path: new_comment_comment_path(@comment),
-    class_name: "text-indigo-400 hover:bg-indigo-50 hover:text-indigo-800"
+    class_name: "text-indigo-400 hover:bg-indigo-50 hover:text-indigo-800",
+    data: { turbo_frame: dom_id(@comment, :comment_form) }
   ) do |a| %>
     <%= a.with_icon.with_content(render(Icon::Outline::ChatBubbleNewComponent.new(classes: "w-5 h-5"))) %>
 

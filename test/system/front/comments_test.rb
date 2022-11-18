@@ -31,6 +31,8 @@ module Front
     test "SP - that error is listed if comment's content for a discussion is not present" do
       visit discussion_path(@discussion)
 
+      assert_selector "turbo-frame##{dom_id(@discussion, :comment_form)}", visible: false
+
       within "div##{dom_id(@discussion)}" do
         click_on "Add Comment"
       end
@@ -88,26 +90,25 @@ module Front
       assert_selector "[role='toast']", text: "A new comment was successfully posted."
     end
 
-    test "list all comments of a discussion" do
-      visit discussion_comments_path(@discussion)
-
-      within "turbo-frame##{dom_id(@discussion, :comments)}" do
-        assert_selector ".comment", count: 2
-      end
-    end
-
-    test "that comments are listed below the discussion" do
-      visit discussion_path(@discussion)
-
-      within "turbo-frame##{dom_id(@discussion, :comments)}" do
-        assert_selector ".comment", count: 2
-      end
-    end
-
     test "that error is listed if comment's content for another comment is not present" do
       visit new_comment_comment_path(@comment)
 
       within "form#new_comment" do
+        click_on "Add Comment"
+        assert_selector "#error_explanation li", text: "Content can't be blank"
+      end
+    end
+
+    test "SP - that error is listed if comment's content for another comment is not present" do
+      visit comment_comment_path(@comment, @comments_comment)
+
+      assert_selector "turbo-frame##{dom_id(@comments_comment, :comment_form)}", visible: false
+
+      within "div##{dom_id(@comments_comment)}" do
+        click_on "Add Comment"
+      end
+
+      within "turbo-frame##{dom_id(@comments_comment, :comment_form)} form#new_comment" do
         click_on "Add Comment"
         assert_selector "#error_explanation li", text: "Content can't be blank"
       end
@@ -125,12 +126,76 @@ module Front
       assert_selector "[role='toast']", text: "A new comment was successfully posted."
     end
 
+    test "SP - to add new comment to another comment" do
+      visit comment_comment_path(@comment, @comments_comment)
+
+      assert_selector "turbo-frame##{dom_id(@comments_comment, :comment_form)}", visible: false
+      assert_selector "turbo-frame##{dom_id(@comments_comment, :comments)}", visible: false
+      assert_selector "#comments-total", visible: false
+
+      within "div##{dom_id(@comments_comment)}" do
+        click_on "Add Comment"
+      end
+
+      within "turbo-frame##{dom_id(@comments_comment, :comment_form)} form#new_comment" do
+        find(:xpath, "//trix-editor").set("this is a comment for another comment")
+        click_on "Add Comment"
+      end
+
+      within "turbo-frame##{dom_id(@comments_comment, :comments)}" do
+        assert_selector ".comment", count: 1
+
+        within ".comment:last-child" do
+          assert_selector "div", text: "this is a comment for another comment"
+        end
+      end
+
+      within "#comments-total" do
+        assert_selector "div", text: "1 comment"
+      end
+
+      assert_selector "[role='toast']", text: "A new comment was successfully posted."
+    end
+
     test "list all comments of a comment" do
       visit comment_comments_path(@comment)
 
       within "turbo-frame##{dom_id(@comment, :comments)}" do
         assert_selector ".comment", count: 1
       end
+    end
+
+    test "SP - list all comments of a comment" do
+      visit discussion_comment_path(@discussion, @comment)
+
+      within "turbo-frame##{dom_id(@comment, :comments)}" do
+        assert_selector ".comment", count: 1
+      end
+    end
+
+    test "link of back button for a discussion's comment" do
+      visit discussion_comment_path(@discussion, @comment)
+      assert_selector "a[href=\"/discussions/#{@discussion.to_param}\"]", text: "Back to thread"
+    end
+
+    test "link of back button for a comment's comment" do
+      visit comment_comment_path(@comment, @comments_comment)
+      assert_selector(
+        "a[href=\"/discussions/#{@discussion.to_param}/comments/#{@comment.to_param}\"]",
+        text: "Back to thread"
+      )
+    end
+
+    test "that form is rendered if 'view' is set to 'form'" do
+      visit comment_comment_path(@comment, @comments_comment, view: :form)
+
+      assert_selector "form#new_comment"
+    end
+
+    test "that form is not rendered if 'view' is not set" do
+      visit comment_comment_path(@comment, @comments_comment)
+
+      assert_no_selector "form#new_comment"
     end
   end
 end

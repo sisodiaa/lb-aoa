@@ -1,1 +1,57 @@
-<%= render(Comment::ItemComponent.new(comment: @comment)) %>
+<div class="mx-auto w-10/12 md:w-10/12 lg:w-9/12 xl:w-7/12 2xl:w-6/12 mb-4">
+  <div class="mb-6">
+    <%= render(Link::DefaultButtonComponent.new(
+      href: @commentable.respond_to?(:commentable) ?
+      url_for([@commentable.commentable, @commentable]) : url_for(@commentable),
+      variant: :secondary,
+      size: :small
+    )) do |c| %>
+      <% c.with_icon do %>
+        <%= render(Icon::ArrowLongLeftComponent.new(
+          view_box: "0 0 20 20",
+          fill: "currentColor",
+          classes: "w-4 h-4"
+        )) %>
+      <% end %>
+
+      <% c.with_text.with_content("Back to thread") %>
+    <% end %>
+  </div>
+
+  <div class="mb-8">
+    <%= turbo_frame_tag dom_id(@comment, :show) do %>
+      <%= render(Comment::ItemComponent.new(comment: @comment)) %>
+    <% end %>
+  </div>
+
+  <% if @render_form %>
+  <%= turbo_frame_tag("#{dom_id(@comment, :comment_form)}", src: new_comment_comment_path(@comment)) %>
+  <% else %>
+  <%= turbo_frame_tag "#{dom_id(@comment, :comment_form)}" %>
+  <% end %>
+
+  <%= turbo_frame_tag "comments-total" do %>
+    <%= render Discussion::TextTupleComponent.new(
+      renderable: @comment.comments_total > 0,
+      class_name: "mb-2 px-2 text-indigo-400 text-lg"
+    ) do |c| %>
+      <%= c.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-5 h-5"))) %>
+
+      <% c.with_text do %>
+        <%= @comment.comments_total %>
+        <%= "comment".pluralize(@comment.comments_total) %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= turbo_frame_tag(
+    "#{dom_id(@comment, :comments)}",
+    src: comment_comments_path(@comment),
+    class: "space-y-8 sm:space-y-4",
+    loading: :lazy
+  ) do %>
+    <div class="flex justify-center items-center">
+      <%= render Animation::SpinnerComponent.new %>
+    </div>
+  <% end %>
+</div>

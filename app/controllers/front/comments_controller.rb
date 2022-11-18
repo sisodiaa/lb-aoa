@@ -18,7 +18,9 @@ module Front
     end
 
     def show
+      @render_form = false
       @comment = @commentable.comments.find_by(comment_token: params[:comment_token])
+      @render_form = true if params.has_key?(:view) && params[:view] == "form"
       authorize @comment, policy_class: Front::CommentPolicy
     end
 

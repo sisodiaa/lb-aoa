@@ -6,11 +6,13 @@ module Front
       Warden.test_mode!
 
       @owner = owners(:confirmed_linked_owner)
+      @discussion = discussions(:rickshaw)
       login_as @owner, scope: :owner
     end
 
     teardown do
       logout :owner
+      @discussion = nil
       @owner = nil
       Warden.test_reset!
     end
@@ -59,6 +61,22 @@ module Front
       click_on "Go back to Discussions"
 
       assert_selector "#discussions-list"
+    end
+
+    test "list all comments of a discussion" do
+      visit discussion_comments_path(@discussion)
+
+      within "turbo-frame##{dom_id(@discussion, :comments)}" do
+        assert_selector ".comment", count: 2
+      end
+    end
+
+    test "SP - that comments are listed below the discussion" do
+      visit discussion_path(@discussion)
+
+      within "turbo-frame##{dom_id(@discussion, :comments)}" do
+        assert_selector ".comment", count: 2
+      end
     end
   end
 end
