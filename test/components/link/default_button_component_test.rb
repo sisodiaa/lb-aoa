@@ -12,6 +12,15 @@ class Link::DefaultButtonComponentTest < ViewComponent::TestCase
     assert_selector "a.inline-flex.text-white[href=\"#\"]", text: "Icon\n\n    \n      Hello"
   end
 
+  test "that if renderable is false Link Button will not render" do
+    render_inline(Link::DefaultButtonComponent.new(renderable: false)) do |component|
+      component.with_text { "Hello" }
+      component.with_icon { "Icon" }
+    end
+
+    assert_no_selector "a.inline-flex.text-white[href=\"#\"]"
+  end
+
   test "that component generates a link button with text only" do
     render_inline Link::DefaultButtonComponent.new do |c|
       c.with_text { "Hello" }
