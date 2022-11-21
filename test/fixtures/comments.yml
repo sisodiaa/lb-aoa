@@ -29,3 +29,10 @@ walking_track_comment_three:
   author: owner_six
   commentable: walking_track_comment_one (Comment)
   comment_token: <%= SecureRandom.hex(4) %>
+
+<% 25.times do |t| %>
+rickshaw_comment_<%= t%>:
+  author: owner_six
+  commentable: rickshaw_comment_two (Comment)
+  comment_token: <%= SecureRandom.hex(4) %>
+<% end %>

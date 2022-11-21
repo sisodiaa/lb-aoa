@@ -58,5 +58,24 @@
         <% end %>
       <% end %>
     <% end %>
+
+    <div id="comments-placeholder">
+      <div class="flex justify-center">
+        <%= render(Link::DefaultButtonComponent.new(
+          renderable: @pagy.next,
+          href: url_for([@commentable, :comments, page: @pagy.next]),
+          variant: :secondary,
+          data: { turbo_stream: true }
+        )) do |c| %>
+          <% c.with_icon do %>
+            <%= render(Icon::Outline::PlusCircleComponent.new(
+              classes: "w-5 h-5"
+            )) %>
+          <% end %>
+
+          <% c.with_text.with_content("Load More Comments") %>
+        <% end %>
+      </div>
+    </div>
   <% end %>
 </div>

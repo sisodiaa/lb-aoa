@@ -9,12 +9,13 @@ module Front
       @discussion = discussions(:rickshaw)
       @comment = comments(:rickshaw_comment_one)
       @comments_comment = comments(:rickshaw_comment_three)
+      @comment_with_comments = comments(:rickshaw_comment_two)
       login_as @owner, scope: :owner
     end
 
     teardown do
       logout :owner
-      @comments_comment = @comment = @discussion = nil
+      @comment_with_comments = @comments_comment = @comment = @discussion = nil
       @owner = nil
       Warden.test_reset!
     end
@@ -196,6 +197,23 @@ module Front
       visit comment_comment_path(@comment, @comments_comment)
 
       assert_no_selector "form#new_comment"
+    end
+
+    test "multiple comments" do
+      visit comment_comments_path(@comment_with_comments)
+
+      within "turbo-frame##{dom_id(@comment_with_comments, :comments)}" do
+        assert_selector ".comment", count: 10
+        assert_selector "#comments-placeholder a", text: "Load More Comments"
+        click_on "Load More Comments"
+
+        assert_selector ".comment", count: 20
+        assert_selector "#comments-placeholder a", text: "Load More Comments"
+        click_on "Load More Comments"
+
+        assert_selector ".comment", count: 25
+        assert_no_selector "#comments-placeholder a"
+      end
     end
   end
 end

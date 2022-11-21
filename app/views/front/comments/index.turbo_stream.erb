@@ -1,0 +1,77 @@
+<%= turbo_stream.replace "comments-placeholder" do %>
+  <% @comments.each do |comment| %>
+    <%= render(Comment::ListItemComponent.new(comment: comment)) do |li| %>
+      <% li.with_metadatum(class_name: "text-indigo-400 text-sm") do |m| %>
+        <% m.with_icon do %>
+          <%= render(Icon::Outline::UserCircleComponent.new(classes: "w-4 h-4")) %>
+        <% end %>
+
+        <%= m.with_text.with_content(comment.author.profile.full_name) %>
+      <% end %>
+
+      <% li.with_metadatum(class_name: "text-indigo-400 text-sm") do |m| %>
+        <% m.with_icon do %>
+          <%= render(Icon::Mini::CalendarDaysComponent.new(
+            title: "Posted on",
+            fill: "currentColor",
+            view_box: "0 0 20 20",
+            classes: "w-4 h-4"
+          )) %>
+        <% end %>
+
+        <%= m.with_text.with_content(comment.created_at.strftime("%d %b %Y, %I:%M %p")) %>
+      <% end %>
+
+      <% li.with_comment_content do %>
+        <div id="<%= dom_id(comment, :content) %>" class="break-words mb-4">
+          <%= comment.content %>
+        </div>
+      <% end %>
+
+      <% li.with_action(
+        renderable: comment.comments_total > 0,
+        path: [@commentable, comment],
+        class_name: "text-sm text-indigo-400 hover:bg-indigo-100 hover:text-indigo-800",
+        data: { turbo_frame: "_top" }
+      ) do |a| %>
+        <%= a.with_icon.with_content(render(Icon::Outline::ChatBubblesComponent.new(classes: "w-4 h-4"))) %>
+
+        <% a.with_text do %>
+          <%= comment.comments_total %>
+          <%= "comment".pluralize(comment.comments_total) %>
+        <% end %>
+      <% end %>
+
+      <% li.with_action(
+        path: [@commentable, comment, view: :form],
+        class_name: "text-sm text-indigo-400 hover:bg-indigo-100 hover:text-indigo-800",
+        data: { turbo_frame: "_top" }
+      ) do |a| %>
+        <%= a.with_icon.with_content(render(Icon::Outline::ChatBubbleNewComponent.new(classes: "w-4 h-4"))) %>
+
+        <% a.with_text do %>
+          Add Comment
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <div id="comments-placeholder">
+    <div class="flex justify-center">
+      <%= render(Link::DefaultButtonComponent.new(
+        renderable: @pagy.next,
+        href: url_for([@commentable, :comments, page: @pagy.next]),
+        variant: :secondary,
+        data: { turbo_stream: true }
+      )) do |c| %>
+        <% c.with_icon do %>
+          <%= render(Icon::Outline::PlusCircleComponent.new(
+            classes: "w-5 h-5"
+          )) %>
+        <% end %>
+
+        <% c.with_text.with_content("Load More Comments") %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
