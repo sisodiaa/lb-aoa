@@ -3,7 +3,7 @@
 >
   <div class="mb-6">
     <%= render(Link::DefaultButtonComponent.new(
-      href: request.referer || discussions_path,
+      href: discussions_path,
       variant: :secondary,
       size: :small
     )) do |c| %>
