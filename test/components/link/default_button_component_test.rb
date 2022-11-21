@@ -77,4 +77,17 @@ class Link::DefaultButtonComponentTest < ViewComponent::TestCase
 
     assert_selector "a.bg-red-600[href=\"#\"]", text: "Hello"
   end
+
+  test "that component generates a link button with data attributes" do
+    render_inline Link::DefaultButtonComponent.new(data: {
+      controller: "form--submission", form__submission_target: "submitButton"
+    }) do |c|
+      c.with_text { "Hello" }
+    end
+
+    assert_selector(
+      "a[data-controller=\"form--submission\"][data-form--submission-target=\"submitButton\"]",
+      text: "Hello"
+    )
+  end
 end

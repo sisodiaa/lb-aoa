@@ -3,13 +3,14 @@
 class Link::DefaultButtonComponent < ViewComponent::Base
   attr_reader :variant, :size, :block
 
-  def initialize(href: "#", variant: :primary, size: :base, icon_position: :left, block: false, renderable: true)
+  def initialize(href: "#", variant: :primary, size: :base, icon_position: :left, block: false, renderable: true, data: {})
     @href = href
     @variant = variant
     @size = size
     @icon_position = icon_position
     @block = block
     @renderable = renderable
+    @data = data
   end
 
   def render?
