@@ -31,3 +31,10 @@ pool:
   author: owner_six
   discussion_token:  <%= SecureRandom.hex(4) %>
   created_at: <%= Time.current - 5.day %>
+
+junk:
+  subject: removal of junk from basements
+  accessibility_state: locked
+  author: owner_six
+  discussion_token:  <%= SecureRandom.hex(4) %>
+  comments_total: 3

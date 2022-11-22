@@ -30,6 +30,22 @@ walking_track_comment_three:
   commentable: walking_track_comment_one (Comment)
   comment_token: <%= SecureRandom.hex(4) %>
 
+junk_comment_one:
+  author: confirmed_linked_owner
+  commentable: junk (Discussion)
+  comment_token: <%= SecureRandom.hex(4) %>
+  comments_total: 1
+
+junk_comment_two:
+  author: owner_six
+  commentable: junk (Discussion)
+  comment_token: <%= SecureRandom.hex(4) %>
+
+junk_comment_three:
+  author: owner_six
+  commentable: junk_comment_one (Comment)
+  comment_token: <%= SecureRandom.hex(4) %>
+
 <% 25.times do |t| %>
 rickshaw_comment_<%= t%>:
   author: owner_six

@@ -45,7 +45,7 @@ module Front
     test "listing of discussions" do
       visit discussions_path
 
-      assert_selector ".discussion", count: 5
+      assert_selector ".discussion", count: 6
     end
 
     test "that discussion page has subject, date and author name" do
