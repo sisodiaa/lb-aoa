@@ -32,6 +32,6 @@ en:
      show?: "You cannot access this discussion unless you have an Approved membership."
    front/comment_policy:
      index?: "You cannot access comments unless you have an Approved membership."
-     new?: "You cannot create a comment unless you have an Approved membership."
-     create?: "You cannot create a comment unless you have an Approved membership."
+     new?: "You cannot create a comment because either you do not have an Approved membership or this comment's discussion is locked."
+     create?: "You cannot create a comment because either you do not have an Approved membership or this comment's discussion is locked."
      show?: "You cannot access this comment unless you have an Approved membership."
