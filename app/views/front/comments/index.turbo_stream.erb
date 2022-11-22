@@ -43,6 +43,7 @@
       <% end %>
 
       <% li.with_action(
+        renderable: comment.root_discussion.unlocked?,
         path: [@commentable, comment, view: :form],
         class_name: "text-sm text-indigo-400 hover:bg-indigo-100 hover:text-indigo-800",
         data: { turbo_frame: "_top" }

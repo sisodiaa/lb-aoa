@@ -8,9 +8,11 @@ module Front
       @discussion = discussions(:rickshaw)
       @comment = comments(:rickshaw_comment_one)
       @comments_comment = comments(:rickshaw_comment_three)
+      @descendant_comment_of_a_locked_discussion = comments(:junk_comment_three)
     end
 
     teardown do
+      @descendant_comment_of_a_locked_discussion = nil
       @comments_comment = @comment = @discussion = nil
       @owner_with_approved_membership = @owner_with_under_review_membership = nil
     end
@@ -99,7 +101,47 @@ module Front
       end
 
       assert_redirected_to root_path
-      assert_equal "You cannot create a comment unless you have an Approved membership.", flash[:error]
+      assert_equal(
+        "You cannot create a comment because either you do not have an Approved " \
+        "membership or this comment's discussion is locked.",
+        flash[:error]
+      )
+
+      sign_out :owner
+    end
+
+    test "that comment can not be created for a locked discussion" do
+      sign_in @owner_with_approved_membership, scope: :owner
+
+      assert_difference "Comment.count", 0 do
+        post comment_comments_path(@descendant_comment_of_a_locked_discussion), params: {
+          comment: {
+            content: "<h1><em>Rich text</em> using HTML</h1>"
+          }
+        }
+      end
+
+      assert_redirected_to root_path
+      assert_equal(
+        "You cannot create a comment because either you do not have an Approved " \
+        "membership or this comment's discussion is locked.",
+        flash[:error]
+      )
+
+      sign_out :owner
+    end
+
+    test "that comment creation form will not be accessible for a locked discussion" do
+      sign_in @owner_with_approved_membership, scope: :owner
+
+      get new_comment_comment_path(@descendant_comment_of_a_locked_discussion)
+
+      assert_redirected_to root_path
+      assert_equal(
+        "You cannot create a comment because either you do not have an Approved " \
+        "membership or this comment's discussion is locked.",
+        flash[:error]
+      )
 
       sign_out :owner
     end

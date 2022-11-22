@@ -7,12 +7,13 @@ module Front
 
       @owner = owners(:confirmed_linked_owner)
       @discussion = discussions(:rickshaw)
+      @locked_discussion = discussions(:wifi)
       login_as @owner, scope: :owner
     end
 
     teardown do
       logout :owner
-      @discussion = nil
+      @discussion = @locked_discussion = nil
       @owner = nil
       Warden.test_reset!
     end
@@ -76,6 +77,14 @@ module Front
 
       within "turbo-frame##{dom_id(@discussion, :comments)}" do
         assert_selector ".comment", count: 2
+      end
+    end
+
+    test "that 'Add comment' is not shown if discussion is locked" do
+      visit discussion_path(@locked_discussion)
+
+      within "div##{dom_id(@locked_discussion, :actions)}" do
+        assert_no_selector "a", text: "Add Comment"
       end
     end
   end

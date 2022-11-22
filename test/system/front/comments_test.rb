@@ -7,15 +7,18 @@ module Front
 
       @owner = owners(:confirmed_linked_owner)
       @discussion = discussions(:rickshaw)
+      @locked_discussion = discussions(:junk)
       @comment = comments(:rickshaw_comment_one)
       @comments_comment = comments(:rickshaw_comment_three)
       @comment_with_comments = comments(:rickshaw_comment_two)
+      @comment_of_locked_discussion = comments(:junk_comment_one)
       login_as @owner, scope: :owner
     end
 
     teardown do
       logout :owner
       @comment_with_comments = @comments_comment = @comment = @discussion = nil
+      @comment_of_locked_discussion = @locked_discussion = nil
       @owner = nil
       Warden.test_reset!
     end
@@ -213,6 +216,22 @@ module Front
 
         assert_selector ".comment", count: 25
         assert_no_selector "#comments-placeholder a"
+      end
+    end
+
+    test "comment of a locked discussion is also locked" do
+      visit discussion_comment_path(@locked_discussion, @comment_of_locked_discussion)
+
+      within "div##{dom_id(@comment_of_locked_discussion, :actions)}" do
+        assert_no_selector "a", text: "Add Comment"
+      end
+    end
+
+    test "comments of a locked discussion are also locked" do
+      visit discussion_path(@locked_discussion)
+
+      within "turbo-frame##{dom_id(@locked_discussion, :comments)}" do
+        assert_no_selector "a", text: "Add Comment"
       end
     end
   end
