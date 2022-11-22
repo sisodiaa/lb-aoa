@@ -14,6 +14,11 @@ class Comment < ApplicationRecord
     comment_token
   end
 
+  def root_discussion
+    return commentable if commentable.instance_of?(Discussion)
+    commentable.root_discussion
+  end
+
   private
 
   def set_comment_token

@@ -4,10 +4,13 @@ class CommentTest < ActiveSupport::TestCase
   setup do
     @comment = comments(:rickshaw_comment_one)
     @discussion = discussions(:rickshaw)
+    @locked_discussion = discussions(:junk)
+    @descendant_comment = comments(:junk_comment_three)
   end
 
   teardown do
     @comment = @discussion = nil
+    @descendant_comment = @locked_discussion = nil
   end
 
   test "that comment's content is required" do
@@ -33,5 +36,9 @@ class CommentTest < ActiveSupport::TestCase
 
   test "that `to_param` uses `comment_token`" do
     assert_equal @comment.to_param, @comment.comment_token, "to_param is not comment_token"
+  end
+
+  test "#root_discussion" do
+    assert_equal @locked_discussion, @descendant_comment.root_discussion, "Root discussion is incorrect"
   end
 end
