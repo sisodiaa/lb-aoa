@@ -115,18 +115,21 @@ module Management
     end
 
     test "archiving a membership" do
+      membership = memberships(:membership_six)
       visit management_memberships_path(status: "approved")
 
       within "#main" do
         within "#approved_memberships" do
           assert_selector ".membership", count: 3
 
-          click_on "View Details and Manage", match: :first
+          within "div##{dom_id(membership)}" do
+            click_on "View Details and Manage"
+          end
         end
       end
 
       within "turbo-frame#modal[complete]" do
-        within "form##{dom_id(Membership.approved.last, :details)}" do
+        within "form##{dom_id(membership, :details)}" do
           select "Archive", from: "membership_transition"
           click_on "Update Membership"
         end
@@ -139,6 +142,30 @@ module Management
       end
 
       assert_selector "[role='toast']", text: "Membership state was successfully updated."
+    end
+
+    test "show error when archiving a membership if purchased date is not present" do
+      membership = memberships(:membership_seven)
+      visit management_memberships_path(status: "approved")
+
+      within "#main" do
+        within "#approved_memberships" do
+          assert_selector ".membership", count: 3
+
+          within "div##{dom_id(membership)}" do
+            click_on "View Details and Manage"
+          end
+        end
+      end
+
+      within "turbo-frame#modal[complete]" do
+        within "form##{dom_id(membership, :details)}" do
+          select "Archive", from: "membership_transition"
+          click_on "Update Membership"
+
+          assert_selector "#error_explanation li", text: "Purchase date of the property is not present"
+        end
+      end
     end
 
     test "do not show transition controls for Rejected membership records" do

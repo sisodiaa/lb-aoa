@@ -15,6 +15,8 @@ class Membership < ApplicationRecord
     on: :membership_transition,
     if: -> { rejected? }
 
+  validate :purchased_date, on: :membership_transition, if: -> { archived? }
+
   aasm column: :membership_state, enum: true, no_direct_assignment: true do
     state :under_review, initial: true
     state :approved
@@ -36,6 +38,14 @@ class Membership < ApplicationRecord
 
     event :archive do
       transitions from: :approved, to: :archived
+    end
+  end
+
+  private
+
+  def purchased_date
+    if property.purchased_on.blank?
+      errors.add(:base, "Purchase date of the property is not present")
     end
   end
 end
