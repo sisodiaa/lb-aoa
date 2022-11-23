@@ -48,7 +48,6 @@ property_six:
 
 property_seven:
   property_token:  <%= SecureRandom.hex(4) %>
-  purchased_on: <%= Time.current - 3.years %>
   registered: true
   primary_owner: false
   apartment: apartment_six

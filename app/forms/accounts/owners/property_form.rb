@@ -82,7 +82,6 @@ module Accounts
       validates :property_token, presence: true, on: :update
       validates :tower_number, presence: true
       validates :flat_number, presence: true
-      validates :purchased_on, presence: true
       validate :purchased_on_date_cannot_be_in_the_future
       validate :combination_of_owner_and_apartment_is_unique
       validates :registration, inclusion: {

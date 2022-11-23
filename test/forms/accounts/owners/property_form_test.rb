@@ -31,12 +31,6 @@ module Accounts
         assert_equal ["can't be blank"], @model.errors[:flat_number]
       end
 
-      test "that purchased on date is present" do
-        @model.purchased_on = nil
-        assert_not @model.valid?
-        assert_equal ["can't be blank"], @model.errors[:purchased_on]
-      end
-
       test "that purchased on date should be in past" do
         @model.purchased_on = Time.zone.today + 2.years
         assert_not @model.valid?

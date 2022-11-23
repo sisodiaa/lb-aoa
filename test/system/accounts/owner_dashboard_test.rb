@@ -189,7 +189,6 @@ module Accounts
           fill_in "property_flat_number", with: "2301"
           click_on "Create Property"
 
-          assert_selector "#error_explanation li", text: "Purchased on can't be blank"
           assert_selector "#error_explanation li", text: "Registration status should be either \"Yes\" or \"No\""
           assert_selector "#error_explanation li", text: "Primary ownership status should be either \"Yes\" or \"No\""
         end
