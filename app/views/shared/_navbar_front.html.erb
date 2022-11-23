@@ -67,6 +67,18 @@
           )%>
         </li>
 
+        <% if owner_signed_in? && current_owner.has_approved_membership? %>
+        <li>
+          <%= link_to(
+            "Discussions",
+            discussions_path,
+            class: "block py-2 pr-4 pl-3 text-gray-300 border-b border-gray-100
+                    hover:bg-lb-soft-300 hover:rounded md:hover:bg-transparent
+                    md:border-0 md:hover:text-gray-50 md:p-0"
+          )%>
+        </li>
+        <% end %>
+
         <% if owner_signed_in? %>
           <li class="text-gray-300 hover:text-white">
             <%= button_to(
