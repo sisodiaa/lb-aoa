@@ -233,6 +233,25 @@ module Accounts
       end
     end
 
+    test "show error message if property is already listed by the account holder" do
+      access_property_creation_form_on_dashboard
+
+      within "#dashboard-content" do
+        assert_selector "form#new_property"
+
+        within "form#new_property" do
+          select "25", from: "property_tower_number"
+          fill_in "property_flat_number", with: "1102"
+          fill_in "property_purchased_on", with: Time.zone.today - 6.years
+          choose "property_registration_true"
+          choose "property_primary_ownership_true"
+          click_on "Create Property"
+
+          assert_selector "#error_explanation li", text: "Property already listed by this account"
+        end
+      end
+    end
+
     test "that cancel button is shoen for property creation form on dashboard" do
       access_property_creation_form_on_dashboard
 

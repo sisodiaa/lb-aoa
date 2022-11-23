@@ -84,6 +84,7 @@ module Accounts
       validates :flat_number, presence: true
       validates :purchased_on, presence: true
       validate :purchased_on_date_cannot_be_in_the_future
+      validate :combination_of_owner_and_apartment_is_unique
       validates :registration, inclusion: {
         in: [true, false],
         message: "status should be either \"Yes\" or \"No\""
@@ -97,6 +98,15 @@ module Accounts
 
       def purchased_on_date_cannot_be_in_the_future
         errors.add(:purchased_on, "date is invalid as it is set in future") if purchased_on.try(:future?)
+      end
+
+      def combination_of_owner_and_apartment_is_unique
+        errors.add(:property, "already listed by this account") if combination_of_owner_and_apartment_exists?
+      end
+
+      def combination_of_owner_and_apartment_exists?
+        apartment = Apartment.where(tower_number: tower_number, flat_number: flat_number)
+        apartment.exists? && Property.where(owner_id: owner_id, apartment_id: apartment.first.id).exists?
       end
     end
   end

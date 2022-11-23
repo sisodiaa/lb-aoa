@@ -33,6 +33,22 @@ module Accounts
         end
       end
 
+      test "that an account holder can not link alreadt linked property again" do
+        authenticated_owner do
+          assert_difference "Property.count", 0 do
+            post owners_properties_path, params: {
+              property: {
+                tower_number: "25",
+                flat_number: "1102",
+                purchased_on: Time.current - 6.years,
+                registration: true,
+                primary_ownership: true
+              }
+            }
+          end
+        end
+      end
+
       test "that only owner can access his or her  property record" do
         different_owner = owners(:confirmed_linked_co_owner)
         owners_property = properties(:registered_property)
