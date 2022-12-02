@@ -10,6 +10,6 @@ class Profile < ApplicationRecord
   end
 
   def complete?
-    first_name? && middle_name? && last_name? && phone_number?
+    first_name? && last_name? && phone_number?
   end
 end
