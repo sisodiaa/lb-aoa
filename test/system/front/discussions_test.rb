@@ -43,6 +43,14 @@ module Front
       assert_selector "[role='toast']", text: "A new discussion topic was successfully created."
     end
 
+    test "canceling creation of a discussion" do
+      visit new_discussion_path
+
+      click_on "Cancel and Go Back"
+
+      assert_selector "#discussions-list"
+    end
+
     test "listing of discussions" do
       visit discussions_path
 

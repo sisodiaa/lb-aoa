@@ -3,7 +3,7 @@
     Create New Discussion Topic
   </h2>
 
-  <%= form_with model: @discussion, id: dom_id(@discussion) do |form| %>
+  <%= form_with model: @discussion, id: dom_id(@discussion), class: "mb-2" do |form| %>
     <div class="space-y-6">
       <% if @discussion.errors.any? %>
         <div id="error_explanation" class="bg-red-50 text-red-600 text-sm rounded-lg p-6 mb-6">
@@ -68,5 +68,21 @@
         <% c.with_text.with_content("Create Discussion Topic") %>
       <% end %>
     </div>
+  <% end %>
+
+  <%= render(Link::DefaultButtonComponent.new(
+    href: request.referer || discussions_path,
+    variant: :error,
+    block: true
+  )) do |c| %>
+    <% c.with_icon do %>
+      <%= render(Icon::ArrowLongLeftComponent.new(
+        view_box: "0 0 20 20",
+        fill: "currentColor",
+        classes: "w-4 h-4"
+      )) %>
+    <% end %>
+
+    <% c.with_text.with_content("Cancel and Go Back") %>
   <% end %>
 </div>
