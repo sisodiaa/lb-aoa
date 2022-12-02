@@ -17,10 +17,6 @@ module Accounts
           .order("purchased_on ASC")
       end
 
-      def pundit_user
-        current_owner
-      end
-
       private
 
       def set_profile
