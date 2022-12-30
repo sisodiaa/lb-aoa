@@ -18,7 +18,8 @@ module Management
         assert_emails 1 do
           patch management_membership_path(@membership), params: {
             membership: {
-              transition: "approve"
+              transition: "approve",
+              page: 2 # increemented page number to cover Pagy::OverflowError
             }
           }
         end
@@ -35,7 +36,8 @@ module Management
           patch management_membership_path(@membership), params: {
             membership: {
               transition: "reject",
-              remark: "a test comment for rejection"
+              remark: "a test comment for rejection",
+              page: 1
             }
           }
         end

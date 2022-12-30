@@ -9,14 +9,16 @@ module Management
       @pagy, @memberships = pagy(memberships_list, items: 10)
     end
 
-    def edit; end
+    def edit
+      @page = params[:page]
+    end
 
     def update
       perform_membership_state_transition if membership_params[:transition].present?
       set_admin_remark if membership_params[:transition] == "reject"
 
       if @membership.save(context: :membership_transition)
-        @pagy, @memberships = pagy(memberships_list, items: 10)
+        @pagy, @memberships = paginated_memberships_list
         flash[:success] = "Membership state was successfully updated."
 
         OwnerMembershipMailer
@@ -61,8 +63,14 @@ module Management
       @membership.remark = membership_params[:remark]
     end
 
+    def paginated_memberships_list
+      pagy(memberships_list, items: 10, page: membership_params[:page].to_i)
+    rescue Pagy::OverflowError
+      pagy(memberships_list, items: 10, page: membership_params[:page].to_i - 1)
+    end
+
     def membership_params
-      params.require(:membership).permit(:transition, :remark)
+      params.require(:membership).permit(:transition, :remark, :page)
     end
   end
 end

@@ -13,7 +13,7 @@
     </p>
     <%= link_to(
       "View Details and Manage", 
-      edit_management_membership_path(membership),
+      edit_management_membership_path(membership, page: @pagy.page),
       data: { turbo_frame: "modal" },
       class: "py-1 px-3 text-xs font-medium text-gray-600
       bg-white rounded-md border border-gray-200

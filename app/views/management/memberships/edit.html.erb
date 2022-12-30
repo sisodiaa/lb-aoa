@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "modal" do %>
   <%= render ModalComponent.new do %>
-    <%= render "details", membership: @membership, status: @status %>
+    <%= render "details", membership: @membership, status: @status, page: @page %>
   <% end %>
 <% end %>

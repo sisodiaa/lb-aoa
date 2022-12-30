@@ -160,6 +160,8 @@
 
   <% if status == "under_review" || status == "approved" %>
     <div id="membership-details-fields">
+      <%= form.hidden_field :page, value: page %>
+
       <div class="field mb-4">
         <%= form.label :transition, "Transition to", class: "capitalize text-sm text-gray-400" %>
         <%= form.select(
