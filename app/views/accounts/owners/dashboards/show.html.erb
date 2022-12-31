@@ -150,4 +150,22 @@
     border border-fuchsia-100 rounded-lg">
     <%= turbo_frame_tag "dashboard-content", src: account_owners_dashboard_path %>
   </div>
+  
+  <div class="flex rounded-md mt-6 md:hidden text-center" role="group">
+    <%= link_to(
+      "Posts",
+      posts_path,
+      class: "grow py-2 px-4 text-sm font-medium text-gray-500 bg-transparent rounded-l-lg border border-fuchsia-100 focus:bg-fuchsia-100 focus:text-lb-600"
+    )%>
+    <%= link_to(
+      "Tenders",
+      tenders_path,
+      class: "grow py-2 px-4 text-sm font-medium text-gray-500 bg-transparent border-t border-b border-fuchsia-100 focus:bg-fuchsia-100 focus:text-lb-600"
+    )%>
+    <%= link_to(
+      "Discussions",
+      discussions_path,
+      class: "grow py-2 px-4 text-sm font-medium text-gray-500 bg-transparent rounded-r-lg border border-fuchsia-100 focus:bg-fuchsia-100 focus:text-lb-600"
+    )%>
+  </div>
 </div>
