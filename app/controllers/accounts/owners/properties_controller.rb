@@ -38,7 +38,7 @@ module Accounts
         @property_form = Accounts::Owners::PropertyForm.new(
           tower_number: @property.apartment.tower_number,
           flat_number: @property.apartment.flat_number,
-          purchased_on: @property.purchased_on,
+          purchased_on: @property.purchased_on || "",
           registration: @property.registered,
           primary_ownership: @property.primary_owner
         )
