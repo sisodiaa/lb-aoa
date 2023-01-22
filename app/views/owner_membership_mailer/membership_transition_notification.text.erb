@@ -1,12 +1,14 @@
 Hello <%= @profile.full_name %>,
 
-Your membership request for Flat <%= @apartment.flat_number %> in Tower <%= @apartment.tower_number %> has been <%= @membership.membership_state %>.
+Your membership of LB Website request for Flat <%= @apartment.flat_number %> in Tower <%= @apartment.tower_number %> has been <%= @membership.membership_state %>.
 
 <% if @membership.rejected? %>
 Remark by the Admin for rejecting your request is:
 "<%= @membership.remark %>"
 
 You are advised to visit <%= owners_dashboard_url %> and resubmit this request after filling in correct information. 
+
+This rejection has no bearing on your actual membership of LB AOA, it is just for the website.
 
 <% end %>
 Regards,

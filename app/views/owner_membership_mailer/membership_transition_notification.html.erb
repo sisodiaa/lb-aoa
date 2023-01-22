@@ -4,7 +4,7 @@
   </h3>
 
   <p>
-    Your membership request for Flat <%= @apartment.flat_number %> in Tower <%= @apartment.tower_number %> has been <strong><%= @membership.membership_state %></strong>.
+    Your membership request of LB Website for Flat <%= @apartment.flat_number %> in Tower <%= @apartment.tower_number %> has been <strong><%= @membership.membership_state %></strong>.
   </p>
 
   <% if @membership.rejected? %>
@@ -19,6 +19,10 @@
   <p>
     You are advised to visit <%= link_to "dashboard", owners_dashboard_url %> and resubmit this request after filling in correct information.
   </p><br>
+
+  <p>
+    This rejection has no bearing on your actual membership of LB AOA, it is just for the website.
+  </p>
   <% end %>
   <p>
   Regards,<br>
