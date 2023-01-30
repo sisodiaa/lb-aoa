@@ -12,6 +12,9 @@ class Owner < ApplicationRecord
   accepts_nested_attributes_for :profile
   validates :profile, presence: true
 
+  # Disable owner from changing their email
+  attr_readonly :email
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :trackable, :confirmable,
