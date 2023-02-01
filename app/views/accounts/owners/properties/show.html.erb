@@ -20,14 +20,16 @@
           </td>
         </tr>
 
-        <tr class="border-b">
-          <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
-            Date of Purchase
-          </th>
-          <td class="py-4 px-6 font-medium text-gray-900">
-            <%= @property.purchased_on.strftime("%d %B %Y") %>
-          </td>
-        </tr>
+        <% if @property.purchased_on %>
+          <tr class="border-b">
+            <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
+              Date of Purchase
+            </th>
+            <td class="py-4 px-6 font-medium text-gray-900">
+              <%= @property.purchased_on.strftime("%d %B %Y") %>
+            </td>
+          </tr>
+        <% end %>
 
         <tr class="border-b">
           <th scope="row" class="py-4 px-6 whitespace-nowrap capitalize font-normal">
